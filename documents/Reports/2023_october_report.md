@@ -71,7 +71,7 @@ Reaching these milestones is certainly ambitious, but it's a challenge I want to
 
 [^1]: [DJI Article from March 10th, 2023](https://enterprise-insights.dji.com/blog/march-2023-enterprise-firmware-update)
 
-[^2]: [My Mock-Up](https://github.com/Pierre2103/moonshot-project/tree/main/mockup)
+[^2]: [My Mock-Up](https://github.com/Pierre2103/moonshot-project/tree/main/mockup/overview.png)
 
 [^3]: [Smartify's Website](https://smartify.org/)
 
