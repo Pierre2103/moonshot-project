@@ -69,12 +69,12 @@ Reaching these milestones is certainly ambitious, but it's a challenge I want to
 
 ### Notes
 
-[^1] [DJI Article from March 10th, 2023](https://enterprise-insights.dji.com/blog/march-2023-enterprise-firmware-update)
+[^1]: [DJI Article from March 10th, 2023](https://enterprise-insights.dji.com/blog/march-2023-enterprise-firmware-update)
 
-[^2] [My Mock-Up](https://github.com/Pierre2103/moonshot-project/tree/main/mockup)
+[^2]: [My Mock-Up](https://github.com/Pierre2103/moonshot-project/tree/main/mockup)
 
-[^3] [Smartify's Website](https://smartify.org/)
+[^3]: [Smartify's Website](https://smartify.org/)
 
-[^4] [Shelfie on App Store](https://apps.apple.com/us/app/shelfie-book-tracker/id1229716523?platform=iphone)
+[^4]: [Shelfie on App Store](https://apps.apple.com/us/app/shelfie-book-tracker/id1229716523?platform=iphone)
 
-[^5] [The Verge Article](https://www.theverge.com/2017/4/9/15235686/kobo-acquired-shelfie-app-readers-discounted-ebooks)
+[^5]: [The Verge Article](https://www.theverge.com/2017/4/9/15235686/kobo-acquired-shelfie-app-readers-discounted-ebooks)
