@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.globalDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: auto;
+    background: radial-gradient(circle, #373737 0%,#1e1e1e 60%);
+    // background: radial-gradient(circle, #c8c8c8 0%, #fbfbfb 60%);
+
+    font-family: 'Montserrat', sans-serif;
+
+    .coverContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 33vw;
+
+        .scene {    
+            perspective: 30em;
+            
+            .cover {
+            height: 600px;
+            width: 400px;
+            border-radius: 5px;
+            box-shadow: -4px 18px 51px -19px rgba(145,145,145,0.5);
+            }
+        }
+    }
+
+    .contentContainer {
+        width: 67vw;
+        height: 100vh;
+        // background-color: #de9c9c;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        .navigationBar {
+            display: flex;
+            position: absolute;
+            top: 10vh;
+            justify-content: space-between;
+            align-items: center;
+            height: 75px;
+            width: 55vw;
+            flex-direction: row;
+            // background-color: #6a6a6a;
+            border-top: #fff 3px solid;
+            
+            .navigationBarItem {
+                font-size: 1.7rem;
+                color: #fff;
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .navigationBarItem.active::after {
+                content: '';
+                display: flex;
+                width: 110px;
+                height: 3px;
+                margin: 0 auto;
+                background: #fff;
+                transform: translateY(10px);
+                // transition on the width property
+                transition: width 0.3s ease-in-out;
+
+            }
+        }
+
+        .titleCtn {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            height: 10vh;
+            width: 55vw;
+            margin-top: 10vh;
+
+            h1 {
+                font-size: 3.375rem;
+                font-weight: bold;
+                padding: 10px 50px;
+                color: #fff;
+            }
+        }
+
+        .titleCtn.visible {
+            display: flex;
+        }
+
+        .informations {
+            display: flex;
+            align-items: center;
+            height: 50vh;
+            width: 55vw;
+            flex-direction: column;
+            // background-color: #c8c8c8;
+
+            h3 {
+                color: #fff;
+                font-weight: 500;
+                font-size: 1.565rem;
+            }
+        }
+
+        .summary {
+            display: flex;
+            align-items: center;
+            height: 50vh;
+            width: 55vw;
+            flex-direction: column;
+            // background-color: #c8c8c8;
+
+            h3 {
+                color: #fff;
+                font-weight: 500;
+                font-size: 1.565rem;
+            }
+
+            p {
+                color: #fff;
+                font-weight: 500;
+                font-size: 1.5rem;
+                text-indent: 4rem;
+            }
+        }
+
+        .buy {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50vh;
+            width: 55vw;
+
+            .buttonsGroup {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: row;
+                flex-wrap: wrap;
+
+                a {
+                    width: 300px;
+                    height: 90px;
+                    border-radius: 45px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: #fff;
+                    margin: 25px;
+                    background-size: 175px;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                }
+
+                .buyAmazon {
+                    background-image: url(../../assets/logos/amazonLogo.png);
+                }
+
+                .buyKindle {
+                    background-image: url(../../assets/logos/kindleLogo.png);
+                }
+
+                .buyAudible {
+                    background-image: url(../../assets/logos/audibleLogo.png);
+                }
+
+                .buyFnac {
+                    background-image: url(../../assets/logos/fnacLogo.png);
+                }
+                
+            }
+        }
+
+        .similar {
+            display: flex;
+            align-items: center;
+            height: 65vh;
+            width: 55vw;
+            flex-direction: column;
+            // background-color: #c8c8c8;
+        }
+
+        .buttonsContainer {
+            display: none;
+            justify-content: space-evenly;
+            align-items: center;
+            height: 100px;
+            width: 55vw;
+
+            .button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 80px;
+                width: 300px;
+                border-radius: 40px;
+                color: #fff;
+                font-size: 1.5rem;
+                text-transform: uppercase;
+                border: none;
+                margin: 0 10px;
+            }
+
+            .btn-like{
+                background-color: rgb(67, 106, 179);
+            }
+
+            .btn-collection{
+                background-color: rgb(179, 67, 67);
+            }
+        }
+
+        .buttonsContainer.visible {
+            display: flex;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: flex;
+        }
+    }
+}
+

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #D32F2F;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav a {
+            margin-left: 1rem;
+            color: white;
+            text-decoration: none;
+        }
+
+        .book-container {
+            display: flex;
+            padding: 2rem;
+        }
+
+        .book-container img {
+            max-width: 40%;
+            margin-right: 2rem;
+        }
+
+        .book-details {
+            flex: 1;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+
+        .tabs a {
+            margin-right: 1rem;
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            background-color: #D32F2F;
+            border-radius: 5px;
+        }
+
+        .tabs a.active {
+            background-color: #B71C1C;
+        }
+
+        .like-btn,
+        .add-btn {
+            background-color: #D32F2F;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .add-btn {
+            margin-left: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo">LOGO</div>
+        <nav>
+            <a href="#">Accueil</a>
+            <a href="#">Rechercher</a>
+            <a href="#">Mes Collections</a>
+            <a href="#">Connexion</a>
+        </nav>
+    </div>
+    <div class="book-container">
+        <img src="chemin-vers-votre-image.jpg" alt="Secret Wars">
+        <div class="book-details">
+            <div class="tabs">
+                <a href="#" class="active">Informations</a>
+                <a href="#">Résumé</a>
+                <a href="#">Où l'acheter?</a>
+                <a href="#">Similaires</a>
+            </div>
+            <h1>Secret Wars</h1>
+            <p>Jonathan Hickman, Esad Ribic</p>
+            <!-- ... autres détails du livre ... -->
+            <button class="like-btn">J'aime</button>
+            <button class="add-btn">Ajouter à une Collection</button>
+        </div>
+    </div>
+
+    <script>
+        const likeBtn = document.querySelector('.like-btn');
+        const addBtn = document.querySelector('.add-btn');
+
+        likeBtn.addEventListener('click', () => {
+            likeBtn.classList.toggle('is-active');
+        });
+
+        addBtn.addEventListener('click', () => {
+            addBtn.classList.toggle('is-active');
+        });
+    </script>
+</body>
+
+</html>
