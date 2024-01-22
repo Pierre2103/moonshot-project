@@ -1,0 +1,979 @@
+image,name,author,format,book_depository_stars,price,currency,old_price,isbn,category,img_paths
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5713/9780571334650.jpg,Normal People,Sally Rooney,Paperback,4.0,8.93,$,10.5,9780571334650,Romance,dataset/Romance/0000001.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7864/9781786495259.jpg,Call Me By Your Name,Andre Aciman,Paperback,4.5,5.08,$,10.3,9781786495259,Romance,dataset/Romance/0000002.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7181/9780718157838.jpg,Me Before You,Jojo Moyes,Paperback,4.5,10.47,$,,9780718157838,Romance,dataset/Romance/0000003.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0995/9780099579939.jpg,Fifty Shades of Grey,E. L. James,Paperback,3.5,10.11,$,10.27,9780099579939,Romance,dataset/Romance/0000004.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405911665.jpg,The Husband's Secret,Liane Moriarty,Paperback,4.0,9.33,$,9.99,9781405911665,Romance,dataset/Romance/0000005.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7802/9781780221359.jpg,Gone Girl,Gillian Flynn,Paperback,4.0,9.55,$,10.5,9781780221359,Romance,dataset/Romance/0000006.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3408/9780340896983.jpg,One Day,David Nicholls,Paperback,4.0,8.07,$,11.4,9780340896983,Romance,dataset/Romance/0000007.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405916363.jpg,Big Little Lies,Liane Moriarty,Paperback,4.5,9.55,$,9.8,9781405916363,Romance,dataset/Romance/0000008.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5713/9780571347292.jpg,Normal People,Sally Rooney,Paperback,4.0,19.27,$,,9780571347292,Romance,dataset/Romance/0000009.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0995/9780099579946.jpg,Fifty Shades Freed,E. L. James,Paperback,4.0,10.21,$,10.5,9780099579946,Romance,dataset/Romance/0000010.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5011/9781501161933.jpg,The Seven Husbands of Evelyn Hugo,TAYLOR JENKINS REID,Paperback,4.5,8.49,$,17.0,9781501161933,Romance,dataset/Romance/0000011.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7538/9780753827666.jpg,Gone Girl,Gillian Flynn,Paperback,4.0,9.18,$,11.4,9780753827666,Romance,dataset/Romance/0000012.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0995/9780099579922.jpg,Fifty Shades Darker,E. L. James,Paperback,4.0,10.21,$,10.5,9780099579922,Romance,dataset/Romance/0000013.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5101/9781510107038.jpg,Crooked Kingdom: Collector's Edition,Leigh Bardugo,Hardback,4.5,14.68,$,18.0,9781510107038,Romance,dataset/Romance/0000014.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0075/9780007523160.jpg,Looking For Alaska,John Green,Paperback,4.0,7.74,$,10.3,9780007523160,Romance,dataset/Romance/0000015.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405909075.jpg,After You,Jojo Moyes,Paperback,3.5,9.28,$,10.3,9781405909075,Romance,dataset/Romance/0000016.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4494/9781449456146.jpg,Love & Misadventure,Lang Leav,Paperback,4.0,8.11,$,17.0,9781449456146,Romance,dataset/Romance/0000017.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/8466/9781846689949.jpg,The Dressmaker,Rosalie Ham,Paperback,3.5,8.29,$,11.4,9781846689949,Romance,dataset/Romance/0000018.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7806/9781780622286.jpg,Six of Crows,Leigh Bardugo,Paperback,4.5,8.80,$,10.5,9781780622286,Romance,dataset/Romance/0000019.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4088/9781408857861.jpg,A Court of Thorns and Roses,Sarah J. Maas,Paperback,4.5,9.02,$,10.5,9781408857861,Romance,dataset/Romance/0000020.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3458/9780345803481.jpg,Fifty Shades of Grey,E L James,Paperback,3.5,10.61,$,,9780345803481,Romance,dataset/Romance/0000021.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3458/9780345804044.jpg,Fifty Shades Trilogy,E L James,Paperback,4.0,26.44,$,34.99,9780345804044,Romance,dataset/Romance/0000022.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4402/9780440212560.jpg,Outlander,Diana Gabaldon,Paperback,4.0,11.27,$,,9780440212560,Romance,dataset/Romance/0000023.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/2503/9781250316776.jpg,"Red, White & Royal Blue",Casey Mcquiston,Paperback,4.5,14.10,$,17.0,9781250316776,Romance,dataset/Romance/0000024.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4515/9780451531056.jpg,The Complete Poetry Of Edgar Allan Poe,Edgar Allan Poe,Paperback,4.5,3.98,$,5.0,9780451531056,Romance,dataset/Romance/0000025.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/8532/9781853262715.jpg,Anna Karenina,Leo Tolstoy,Paperback,4.0,5.12,$,,9781853262715,Romance,dataset/Romance/0000026.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/6709/9780670920426.jpg,All That I Am,Anna Funder,Paperback,4.0,9.14,$,11.4,9780670920426,Romance,dataset/Romance/0000027.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7874/9781787473102.jpg,Before We Were Yours,Lisa Wingate,Paperback,4.5,8.27,$,11.4,9781787473102,Romance,dataset/Romance/0000028.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4711/9781471156267.jpg,It Ends With Us,Colleen Hoover,Paperback,4.5,8.76,$,10.3,9781471156267,Romance,dataset/Romance/0000029.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3409/9780340994689.jpg,One Day,David Nicholls,Paperback,4.0,13.30,$,,9780340994689,Romance,dataset/Romance/0000030.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/1018/9781101887486.jpg,Outlander Boxed Set,Diana Gabaldon,Paperback,4.5,52.63,$,,9781101887486,Romance,dataset/Romance/0000031.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0994/9780099464464.jpg,The Time Traveler's Wife,Audrey Niffenegger,Paperback,4.0,10.58,$,11.4,9780099464464,Romance,dataset/Romance/0000032.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1410/9780141043760.jpg,What Alice Forgot,Liane Moriarty,Paperback,4.0,10.44,$,,9780141043760,Romance,dataset/Romance/0000033.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1411/9780141191447.jpg,The Haunting of Hill House,Shirley Jackson,Paperback,4.0,9.11,$,11.4,9780141191447,Romance,dataset/Romance/0000034.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3458/9780345803498.jpg,Fifty Shades Darker,E. L. James,Paperback,4.0,10.69,$,,9780345803498,Romance,dataset/Romance/0000035.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405919463.jpg,Nine Perfect Strangers,Liane Moriarty,Paperback,3.5,9.41,$,11.4,9781405919463,Romance,dataset/Romance/0000036.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/2419/9780241962138.jpg,The Course of Love,Alain de Botton,Paperback,4.0,8.58,$,11.5,9780241962138,Romance,dataset/Romance/0000037.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4091/9781409120537.jpg,Attachments,Rainbow Rowell,Paperback,4.0,7.79,$,11.4,9781409120537,Romance,dataset/Romance/0000038.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7806/9781780622316.jpg,Crooked Kingdom: Collector's Edition,Leigh Bardugo,Paperback,4.5,8.97,$,10.5,9781780622316,Romance,dataset/Romance/0000039.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4494/9781449461072.jpg,Lullabies,Lang Leav,Paperback,4.0,8.92,$,17.0,9781449461072,Romance,dataset/Romance/0000040.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4472/9781447294146.jpg,Uprooted,Naomi Novik,Paperback,4.0,7.54,$,10.3,9781447294146,Romance,dataset/Romance/0000041.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1410/9780141041155.jpg,Perfume,Patrick Süskind,Paperback,4.0,8.70,$,10.3,9780141041155,Romance,dataset/Romance/0000042.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4402/9780440221661.jpg,The Fiery Cross,Diana Gabaldon,Paperback,4.5,12.38,$,,9780440221661,Romance,dataset/Romance/0000043.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405910231.jpg,Bared to You,Sylvia Day,Paperback,4.0,10.32,$,,9781405910231,Romance,dataset/Romance/0000044.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4472/9781447299370.jpg,Our Souls at Night,Kent Haruf,Paperback,4.0,7.22,$,11.4,9781447299370,Romance,dataset/Romance/0000045.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/2419/9780241982273.jpg,One Day in December,Josie Silver,Paperback,4.0,8.94,$,10.3,9780241982273,Romance,dataset/Romance/0000046.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4402/9780440225805.jpg,A Breath of Snow and Ashes,Diana Gabaldon,Paperback,4.5,13.00,$,,9780440225805,Romance,dataset/Romance/0000047.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4063/9781406330335.jpg,The Mortal Instruments 4: City of Fallen Angels,Cassandra Clare,Paperback,4.0,8.62,$,11.5,9781406330335,Romance,dataset/Romance/0000048.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4063/9781406326499.jpg,I'll Give You the Sun,Jandy Nelson,Paperback,4.0,8.47,$,10.5,9781406326499,Romance,dataset/Romance/0000049.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4402/9780440245681.jpg,An Echo in the Bone,Diana Gabaldon,Paperback,4.5,12.14,$,,9780440245681,Romance,dataset/Romance/0000050.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3458/9780345803504.jpg,Fifty Shades Freed,E. L. James,Paperback,4.0,10.83,$,,9780345803504,Romance,dataset/Romance/0000051.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7863/9781786331502.jpg,Daisy Jones and The Six,TAYLOR JENKINS REID,Hardback,4.0,14.67,$,16.0,9781786331502,Romance,dataset/Romance/0000052.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3565/9780356502588.jpg,The First Fifteen Lives of Harry August,Claire North,Paperback,4.0,6.43,$,11.5,9780356502588,Romance,dataset/Romance/0000053.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4711/9781471115035.jpg,Beautiful Disaster,Jamie Mcguire,Paperback,4.0,9.36,$,10.3,9781471115035,Romance,dataset/Romance/0000054.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1411/9780141198965.jpg,Frankenstein,Mary Shelley,Paperback,4.0,6.47,$,7.8,9780141198965,Romance,dataset/Romance/0000055.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5713/9780571334643.jpg,Normal People,Sally Rooney,Hardback,4.0,15.88,$,18.0,9780571334643,Romance,dataset/Romance/0000056.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4402/9780440215622.jpg,Dragon Fly In Amber,Diana Gabaldon,Paperback,4.5,11.39,$,,9780440215622,Romance,dataset/Romance/0000057.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4447/9781444722659.jpg,Daughter of Smoke and Bone,Laini Taylor,Paperback,4.0,8.99,$,11.4,9781444722659,Romance,dataset/Romance/0000058.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3494/9780349414263.jpg,"The Hating Game: 'Warm, witty and wise' The Daily Mail",Sally Thorne,Paperback,4.0,7.86,$,11.4,9780349414263,Romance,dataset/Romance/0000059.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405910279.jpg,Entwined With You,Sylvia Day,Paperback,4.0,9.92,$,10.94,9781405910279,Romance,dataset/Romance/0000060.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7602/9781760290788.jpg,China Rich Girlfriend,Kevin Kwan,Paperback,4.0,5.57,$,10.3,9781760290788,Romance,dataset/Romance/0000061.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5712/9780571258246.jpg,The Remains of the Day,Kazuo Ishiguro,Paperback,4.0,8.83,$,10.3,9780571258246,Romance,dataset/Romance/0000062.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1414/9780141439471.jpg,Frankenstein,Mary Shelley,Paperback,4.0,6.80,$,7.8,9780141439471,Romance,dataset/Romance/0000063.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7181/9780718157845.jpg,The Girl You Left Behind,Jojo Moyes,Paperback,4.0,10.52,$,11.4,9780718157845,Romance,dataset/Romance/0000064.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0081/9780008125417.jpg,The Cosy Teashop in the Castle,Caroline Roberts,Paperback,3.5,5.53,$,10.3,9780008125417,Romance,dataset/Romance/0000065.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4402/9780440217565.jpg,Voyager,Diana Gabaldon,Paperback,4.5,11.85,$,,9780440217565,Romance,dataset/Romance/0000066.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7863/9781786331519.jpg,Daisy Jones and The Six,TAYLOR JENKINS REID,Paperback,4.0,14.54,$,16.0,9781786331519,Romance,dataset/Romance/0000067.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405910255.jpg,Reflected in You,Sylvia Day,Paperback,4.5,9.08,$,10.94,9781405910255,Romance,dataset/Romance/0000068.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4732/9781473221628.jpg,The Left Hand of Darkness,Ursula K. LeGuin,Paperback,4.0,5.00,$,11.4,9781473221628,Romance,dataset/Romance/0000069.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405918497.jpg,Three Wishes,Liane Moriarty,Paperback,4.0,9.14,$,11.4,9781405918497,Romance,dataset/Romance/0000070.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4472/9781447275329.jpg,Essays In Love,Alain de Botton,Paperback,4.0,7.52,$,11.4,9781447275329,Romance,dataset/Romance/0000071.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5712/9780571200733.jpg,The Remains of the Day,Kazuo Ishiguro,Paperback,4.0,7.05,$,7.8,9780571200733,Romance,dataset/Romance/0000072.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476792491.jpg,After We Collided,Anna Todd,Paperback,4.0,14.12,$,18.0,9781476792491,Romance,dataset/Romance/0000073.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405918060.jpg,The Rosie Effect,Graeme Simsion,Paperback,3.5,9.39,$,11.4,9781405918060,Romance,dataset/Romance/0000074.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751571899.jpg,The Next Person You Meet in Heaven,Mitch Albom,Hardback,4.5,11.68,$,20.1,9780751571899,Romance,dataset/Romance/0000075.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1414/9780141439556.jpg,Wuthering Heights,Emily Bronte,Paperback,4.0,6.30,$,,9780141439556,Romance,dataset/Romance/0000076.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3304/9780330463294.jpg,Ross Poldark,Winston Graham,Paperback,4.0,7.63,$,10.3,9780330463294,Romance,dataset/Romance/0000077.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/6196/9781619634442.jpg,A Court of Thorns and Roses,Sarah J. Maas,Hardback,4.5,15.63,$,18.0,9781619634442,Romance,dataset/Romance/0000078.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7823/9781782393849.jpg,Crazy Rich Asians,Kevin Kwan,Paperback,4.0,9.02,$,9.5,9781782393849,Romance,dataset/Romance/0000079.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5098/9781509848621.jpg,The Nightingale,Kristin Hannah,Paperback,4.5,8.24,$,10.3,9781509848621,Romance,dataset/Romance/0000080.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476792484.jpg,After,Anna Todd,Paperback,3.5,14.86,$,18.0,9781476792484,Romance,dataset/Romance/0000081.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/8435/9781843546535.jpg,Call Me By Your Name,Andre Aciman,Paperback,4.5,8.49,$,11.4,9781843546535,Romance,dataset/Romance/0000082.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5947/9781594743344.jpg,Pride And Prejudice And Zombies,Jane Austen,Paperback,3.5,10.95,$,15.0,9781594743344,Romance,dataset/Romance/0000083.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7873/9781787330726.jpg,Warlight,Michael Ondaatje,Paperback,3.5,14.91,$,18.0,9781787330726,Romance,dataset/Romance/0000084.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7812/9781781255452.jpg,The Essex Serpent,Sarah Perry,Paperback,3.5,9.36,$,10.5,9781781255452,Romance,dataset/Romance/0000085.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4494/9781449480127.jpg,The Universe of Us,Lang Leav,Paperback,4.0,10.19,$,17.0,9781449480127,Romance,dataset/Romance/0000086.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5290/9781529003451.jpg,The Seven Sisters,Lucinda Riley,Paperback,4.0,9.70,$,10.5,9781529003451,Romance,dataset/Romance/0000087.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476792507.jpg,After We Fell,Anna Todd,Paperback,4.0,14.16,$,19.1,9781476792507,Romance,dataset/Romance/0000088.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1431/9780143119678.jpg,A Discovery of Witches,Deborah Harkness,Paperback,4.0,10.62,$,,9780143119678,Romance,dataset/Romance/0000089.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0073/9780007306213.jpg,The Thing Around Your Neck,Chimamanda Ngozi Adichie,Paperback,4.0,7.66,$,8.8,9780007306213,Romance,dataset/Romance/0000090.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4447/9781444722703.jpg,Days of Blood and Starlight,Laini Taylor,Paperback,4.0,8.76,$,11.4,9781444722703,Romance,dataset/Romance/0000091.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3304/9780330463355.jpg,Jeremy Poldark,Winston Graham,Paperback,4.0,6.19,$,10.3,9780330463355,Romance,dataset/Romance/0000092.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5011/9781501130700.jpg,Before,Anna Todd,Paperback,4.0,8.28,$,17.0,9781501130700,Romance,dataset/Romance/0000093.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/2413/9780241303979.jpg,The Ministry of Utmost Happiness,Arundhati Roy,Hardback,3.5,31.64,$,,9780241303979,Romance,dataset/Romance/0000094.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4555/9781455508976.jpg,The Lucky One,Nicholas Sparks,Paperback,4.0,8.23,$,9.3,9781455508976,Romance,dataset/Romance/0000095.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1414/9780141439518.jpg,Pride and Prejudice,Jane Austen,Paperback,4.5,6.33,$,,9780141439518,Romance,dataset/Romance/0000096.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0994/9780099448471.jpg,Sputnik Sweetheart,Haruki Murakami,Paperback,4.0,8.99,$,11.4,9780099448471,Romance,dataset/Romance/0000097.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/1018/9781101884249.jpg,Written in My Own Heart's Blood,Diana Gabaldon,Paperback,4.5,12.14,$,,9781101884249,Romance,dataset/Romance/0000098.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7802/9781780228228.jpg,Gone Girl,Gillian Flynn,Paperback,4.0,9.18,$,11.4,9781780228228,Romance,dataset/Romance/0000099.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0994/9780099478447.jpg,The End Of The Affair,Graham Greene,Paperback,4.0,4.56,$,10.3,9780099478447,Romance,dataset/Romance/0000100.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4402/9780440224259.jpg,Drums of Autumn,Diana Gabaldon,Paperback,4.5,11.85,$,,9780440224259,Romance,dataset/Romance/0000101.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405916424.jpg,One with You,Sylvia Day,Paperback,4.0,8.75,$,10.3,9781405916424,Romance,dataset/Romance/0000102.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476753188.jpg,Ugly Love: A Novel,Colleen Hoover,Paperback,4.5,13.83,$,17.0,9781476753188,Romance,dataset/Romance/0000103.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1410/9780141032948.jpg,Giovanni's Room,James Baldwin,Paperback,4.0,7.39,$,10.3,9780141032948,Romance,dataset/Romance/0000104.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1410/9780141041742.jpg,Brooklyn,Colm Toibin,Paperback,3.5,8.70,$,11.4,9780141041742,Romance,dataset/Romance/0000105.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751543261.jpg,The Last Song,Nicholas Sparks,Paperback,4.0,7.88,$,11.4,9780751543261,Romance,dataset/Romance/0000106.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4466/9780446608954.jpg,A Walk to Remember,Nicholas Sparks,Paperback,4.0,7.60,$,8.3,9780446608954,Romance,dataset/Romance/0000107.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751550047.jpg,Two by Two,Nicholas Sparks,Paperback,4.0,9.22,$,11.4,9780751550047,Romance,dataset/Romance/0000108.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405931564.jpg,Big Little Lies,Liane Moriarty,Paperback,4.5,9.92,$,11.4,9781405931564,Romance,dataset/Romance/0000109.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0995/9780099589334.jpg,Pride and Prejudice (Vintage Classics Austen Series),Jane Austen,Paperback,4.5,8.98,$,,9780099589334,Romance,dataset/Romance/0000110.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3304/9780330463331.jpg,Demelza,Winston Graham,Paperback,4.0,6.55,$,10.3,9780330463331,Romance,dataset/Romance/0000111.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3409/9780340961643.jpg,The Last Letter from Your Lover,Jojo Moyes,Paperback,4.0,9.14,$,11.5,9780340961643,Romance,dataset/Romance/0000112.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1414/9780141442464.jpg,The Picture of Dorian Gray,Oscar Wilde,Hardback,4.0,15.10,$,18.0,9780141442464,Romance,dataset/Romance/0000113.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5098/9781509840076.jpg,The Pearl Sister,Lucinda Riley,Paperback,4.5,9.81,$,11.4,9781509840076,Romance,dataset/Romance/0000114.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/2419/9780241955062.jpg,The Hypnotist's Love Story,Liane Moriarty,Paperback,3.5,9.70,$,10.3,9780241955062,Romance,dataset/Romance/0000115.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1431/9780143128168.jpg,Book of Life,Deborah Harkness,Paperback,4.0,10.17,$,,9780143128168,Romance,dataset/Romance/0000116.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4472/9781447278733.jpg,A Column of Fire,Ken Follett,Hardback,4.0,18.95,$,24.0,9781447278733,Romance,dataset/Romance/0000117.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4494/9781449472399.jpg,Memories,Lang Leav,Hardback,4.0,13.54,$,18.0,9781449472399,Romance,dataset/Romance/0000118.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/9821/9781982128401.jpg,After,Anna Todd,Paperback,3.5,9.19,$,10.3,9781982128401,Romance,dataset/Romance/0000119.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5098/9781509859849.jpg,The Lost Flowers of Alice Hart,Holly Ringland,Paperback,4.0,7.98,$,11.4,9781509859849,Romance,dataset/Romance/0000120.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1413/9780141389509.jpg,Dr Jekyll and Mr Hyde,Robert Louis Stevenson,Paperback,4.0,5.88,$,7.8,9780141389509,Romance,dataset/Romance/0000121.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4063/9781406373585.jpg,Tales from the Shadowhunter Academy,Cassandra Clare,Paperback,4.5,8.35,$,11.5,9781406373585,Romance,dataset/Romance/0000122.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3491/9780349140377.jpg,The Little Paris Bookshop,Nina George,Paperback,3.5,8.09,$,11.4,9780349140377,Romance,dataset/Romance/0000123.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4512/9780451228574.jpg,Lover Avenged,J R Ward,Paperback,4.5,9.31,$,,9780451228574,Romance,dataset/Romance/0000124.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4472/9781447297581.jpg,Dark Matter,Blake Crouch,Paperback,4.0,8.05,$,11.5,9781447297581,Romance,dataset/Romance/0000125.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7181/9780718180300.jpg,Nine Perfect Strangers,Liane Moriarty,Paperback,3.5,21.69,$,,9780718180300,Romance,dataset/Romance/0000126.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751542974.jpg,The Best Of Me,Nicholas Sparks,Paperback,4.0,7.70,$,11.4,9780751542974,Romance,dataset/Romance/0000127.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5098/9781509840106.jpg,The Moon Sister,Lucinda Riley,Paperback,4.5,15.80,$,18.0,9781509840106,Romance,dataset/Romance/0000128.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3807/9780380778553.jpg,Rebecca,Daphne du Maurier,Paperback,4.0,7.35,$,8.3,9780380778553,Romance,dataset/Romance/0000129.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0618/9780061854149.jpg,The Bronze Horseman,Paullina Simons,Paperback,4.5,16.44,$,,9780061854149,Romance,dataset/Romance/0000130.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751540475.jpg,The Notebook,Nicholas Sparks,Paperback,4.0,7.50,$,11.4,9780751540475,Romance,dataset/Romance/0000131.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4063/9781406354386.jpg,The Sky Is Everywhere,Jandy Nelson,Paperback,4.0,7.94,$,10.3,9781406354386,Romance,dataset/Romance/0000132.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5751/9780575104044.jpg,Steelheart,Brandon Sanderson,Paperback,4.0,7.91,$,10.3,9780575104044,Romance,dataset/Romance/0000133.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1560/9780156035217.jpg,The Princess Bride,William Goldman,Paperback,4.5,10.27,$,,9780156035217,Romance,dataset/Romance/0000134.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3304/9780330463317.jpg,Bella Poldark,Winston Graham,Paperback,4.5,7.59,$,11.4,9780330463317,Romance,dataset/Romance/0000135.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4494/9781449487768.jpg,Sad Girls,Lang Leav,Paperback,3.5,13.31,$,17.0,9781449487768,Romance,dataset/Romance/0000136.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5011/9781501104008.jpg,After We Collided,Anna Todd,Paperback,4.0,10.11,$,11.4,9781501104008,Romance,dataset/Romance/0000137.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5750/9780575085305.jpg,Graceling,Kristin Cashore,Paperback,4.0,8.57,$,11.4,9780575085305,Romance,dataset/Romance/0000138.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1410/9780141040349.jpg,Pride and Prejudice,Anne Rees Jones,Hardback,4.5,16.14,$,18.0,9780141040349,Romance,dataset/Romance/0000139.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7171/9780717181643.jpg,"Once, Twice, Three Times an Aisling",Sarah Breen,Paperback,5.0,13.70,$,14.66,9780717181643,Romance,dataset/Romance/0000140.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1411/9780141199337.jpg,Dracula,Bram Stoker,Paperback,4.0,7.16,$,7.8,9780141199337,Romance,dataset/Romance/0000141.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405909051.jpg,The One Plus One,Jojo Moyes,Paperback,4.0,10.53,$,,9781405909051,Romance,dataset/Romance/0000142.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425246047.jpg,The Perfect Hope,Nora Roberts,Paperback,4.0,13.54,$,16.0,9780425246047,Romance,dataset/Romance/0000143.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751553932.jpg,The Little Shop of Happy-Ever-After,Jenny Colgan,Paperback,4.0,7.96,$,11.4,9780751553932,Romance,dataset/Romance/0000144.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7171/9780717181599.jpg,The Importance of Being Aisling,Emer McLysaght,Paperback,4.0,13.29,$,14.66,9780717181599,Romance,dataset/Romance/0000145.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4512/9780451235114.jpg,Lover Unleashed,J R Ward,Paperback,4.5,9.01,$,,9780451235114,Romance,dataset/Romance/0000146.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4512/9780451231550.jpg,Lover Mine,J R Ward,Paperback,4.5,9.34,$,,9780451231550,Romance,dataset/Romance/0000147.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/9871/9780987166555.jpg,The Modern Break-Up,Daniel Chidiac,Paperback,4.0,14.07,$,,9780987166555,Romance,dataset/Romance/0000148.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425274262.jpg,Captive Prince,C. S. Pacat,Paperback,4.0,12.65,$,16.0,9780425274262,Romance,dataset/Romance/0000149.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0995/9780099518624.jpg,Revolutionary Road,Richard Yates,Paperback,4.0,5.67,$,12.4,9780099518624,Romance,dataset/Romance/0000150.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1411/9780141199085.jpg,Wuthering Heights,Emily Bronte,Paperback,4.0,6.85,$,7.8,9780141199085,Romance,dataset/Romance/0000151.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5011/9781501106408.jpg,After Ever Happy,Anna Todd,Paperback,4.0,12.74,$,18.0,9781501106408,Romance,dataset/Romance/0000152.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5011/9781501106842.jpg,After Ever Happy,Anna Todd,Paperback,4.0,9.67,$,11.4,9781501106842,Romance,dataset/Romance/0000153.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4472/9781447286035.jpg,The Great Alone,Kristin Hannah,Paperback,4.5,7.56,$,8.3,9781447286035,Romance,dataset/Romance/0000154.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5098/9781509840113.jpg,The Moon Sister,Lucinda Riley,Paperback,4.5,9.98,$,10.5,9781509840113,Romance,dataset/Romance/0000155.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3304/9780330463386.jpg,The Stranger From The Sea,Winston Graham,Paperback,4.0,6.45,$,10.3,9780330463386,Romance,dataset/Romance/0000156.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3304/9780330463379.jpg,The Miller's Dance,Winston Graham,Paperback,4.0,6.05,$,10.3,9780330463379,Romance,dataset/Romance/0000157.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7864/9781786496768.jpg,The Kiss Quotient,Helen Hoang,Paperback,4.0,7.65,$,10.3,9781786496768,Romance,dataset/Romance/0000158.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4447/9781444765502.jpg,Fire After Dark (After Dark Book 1),Sadie Matthews,Paperback,4.0,8.03,$,11.4,9781444765502,Romance,dataset/Romance/0000159.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405926751.jpg,After You,Jojo Moyes,Paperback,3.5,8.36,$,9.5,9781405926751,Romance,dataset/Romance/0000160.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3304/9780330463409.jpg,Warleggan,Winston Graham,Paperback,4.5,6.57,$,11.4,9780330463409,Romance,dataset/Romance/0000161.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3304/9780330463324.jpg,The Black Moon,Winston Graham,Paperback,4.5,6.64,$,10.3,9780330463324,Romance,dataset/Romance/0000162.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3124/9780312426781.jpg,Call Me by Your Name,Andre Aciman,Paperback,4.5,13.32,$,17.0,9780312426781,Romance,dataset/Romance/0000163.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3304/9780330463362.jpg,The Loving Cup,Winston Graham,Paperback,4.5,7.46,$,10.3,9780330463362,Romance,dataset/Romance/0000164.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5039/9781503943377.jpg,Beneath a Scarlet Sky,Mark T. Sullivan,Paperback,4.5,10.70,$,,9781503943377,Romance,dataset/Romance/0000165.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476753164.jpg,Maybe Someday,Colleen Hoover,Paperback,4.5,13.64,$,17.0,9781476753164,Romance,dataset/Romance/0000166.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0995/9780099546184.jpg,The Time Traveler's Wife,Audrey Niffenegger,Paperback,4.0,10.81,$,,9780099546184,Romance,dataset/Romance/0000167.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405924221.jpg,Still Me,Jojo Moyes,Paperback,4.0,9.16,$,9.5,9781405924221,Romance,dataset/Romance/0000168.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3304/9780330463300.jpg,The Angry Tide,Winston Graham,Paperback,4.5,7.38,$,11.4,9780330463300,Romance,dataset/Romance/0000169.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4711/9781471125676.jpg,Slammed,Colleen Hoover,Paperback,4.5,8.53,$,10.3,9781471125676,Romance,dataset/Romance/0000170.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476730097.jpg,Beautiful Bastard,Christina Lauren,Paperback,4.0,8.24,$,11.4,9781476730097,Romance,dataset/Romance/0000171.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/2413/9780241389690.jpg,The Haunting of Hill House,Shirley Jackson,Paperback,4.0,12.51,$,,9780241389690,Romance,dataset/Romance/0000172.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4465/9780446567336.jpg,Dear John,Nicholas Sparks,Paperback,4.0,7.88,$,9.3,9780446567336,Romance,dataset/Romance/0000173.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3304/9780330463348.jpg,The Four Swans,Winston Graham,Paperback,4.5,6.77,$,10.3,9780330463348,Romance,dataset/Romance/0000174.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4736/9781473635487.jpg,The Keeper of Lost Things,Ruth Hogan,Paperback,4.0,9.00,$,11.4,9781473635487,Romance,dataset/Romance/0000175.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3995/9780399579660.jpg,The Ethical Slut,Janet W. Hardy,Paperback,4.0,14.07,$,19.1,9780399579660,Romance,dataset/Romance/0000176.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425273869.jpg,Captivated by You,Sylvia Day,Paperback,4.0,12.11,$,13.0,9780425273869,Romance,dataset/Romance/0000177.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425246030.jpg,The Last Boyfriend,Nora Roberts,Paperback,4.0,13.75,$,16.0,9780425246030,Romance,dataset/Romance/0000178.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4711/9781471154621.jpg,November 9,Colleen Hoover,Paperback,4.5,8.17,$,10.3,9781471154621,Romance,dataset/Romance/0000179.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4736/9781473666764.jpg,Finale,Stephanie Garber,Hardback,4.0,14.60,$,19.1,9781473666764,Romance,dataset/Romance/0000180.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5072/9781507206621.jpg,Snow Falling,Jane Gloriana Villanueva,Paperback,3.5,9.16,$,13.9,9781507206621,Romance,dataset/Romance/0000181.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751564808.jpg,The Summer Seaside Kitchen,Jenny Colgan,Paperback,4.0,8.99,$,11.4,9780751564808,Romance,dataset/Romance/0000182.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7874/9781787460560.jpg,Darker,E.L. James,Paperback,4.0,10.10,$,10.3,9781787460560,Romance,dataset/Romance/0000183.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4410/9780441020423.jpg,Magic Slays,Ilona Andrews,Paperback,4.5,7.11,$,8.3,9780441020423,Romance,dataset/Romance/0000184.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0995/9780099589341.jpg,Sense and Sensibility (Vintage Classics Austen Series),Jane Austen,Paperback,4.0,8.98,$,,9780099589341,Romance,dataset/Romance/0000185.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1414/9780141439563.jpg,Great Expectations,Charles Dickens,Paperback,4.0,7.77,$,12.95,9780141439563,Romance,dataset/Romance/0000186.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4512/9780451238283.jpg,Lover Reborn,J R Ward,Paperback,4.5,9.00,$,,9780451238283,Romance,dataset/Romance/0000187.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1404/9780140449242.jpg,The Brothers Karamazov,Fyodor Dostoyevsky,Paperback,4.5,12.09,$,,9780140449242,Romance,dataset/Romance/0000188.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3494/9780349414966.jpg,Year One,Nora Roberts,Paperback,4.0,5.75,$,10.5,9780349414966,Romance,dataset/Romance/0000189.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405909952.jpg,Billy and Me,Giovanna Fletcher,Paperback,4.0,8.57,$,10.3,9781405909952,Romance,dataset/Romance/0000190.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0073/9780007350964.jpg,Frankenstein,Mary Shelley,Paperback,4.0,3.38,$,3.6,9780007350964,Romance,dataset/Romance/0000191.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7808/9781780896618.jpg,Virgins,Diana Gabaldon,Hardback,4.0,11.51,$,12.9,9781780896618,Romance,dataset/Romance/0000192.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7868/9780786891085.jpg,"Love, Rosie",Cecelia Ahern,Paperback,4.0,8.43,$,,9780786891085,Romance,dataset/Romance/0000193.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/8532/9781853260933.jpg,North and South,Elizabeth Gaskell,Paperback,4.0,3.74,$,,9781853260933,Romance,dataset/Romance/0000194.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1410/9780141040356.jpg,Wuthering Heights,Emily Bronte,Hardback,4.0,15.85,$,22.0,9780141040356,Romance,dataset/Romance/0000195.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0995/9780099589327.jpg,Persuasion (Vintage Classics Austen Series),Jane Austen,Paperback,4.0,8.24,$,8.8,9780099589327,Romance,dataset/Romance/0000196.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4466/9780446618311.jpg,The Choice,Nicholas Sparks,Paperback,4.0,7.80,$,9.3,9780446618311,Romance,dataset/Romance/0000197.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4736/9781473629189.jpg,Legendary,Stephanie Garber,Hardback,4.5,14.48,$,18.0,9781473629189,Romance,dataset/Romance/0000198.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5098/9781509840144.jpg,The Sun Sister,Lucinda Riley,Paperback,0.0,17.99,$,20.1,9781509840144,Romance,dataset/Romance/0000199.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5532/9780553270549.jpg,Silverthorn,Raymond Feist,Paperback,4.0,7.37,$,9.5,9780553270549,Romance,dataset/Romance/0000200.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3125/9780312548070.jpg,Something Blue,Emily Giffin,Paperback,4.0,8.66,$,10.3,9780312548070,Romance,dataset/Romance/0000201.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1414/9780141439846.jpg,Dracula,Bram Stoker,Paperback,4.0,6.91,$,11.95,9780141439846,Romance,dataset/Romance/0000202.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4512/9780451229458.jpg,Envy,J R Ward,Paperback,4.0,8.28,$,8.3,9780451229458,Romance,dataset/Romance/0000203.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3757/9780375759314.jpg,Crossing to Safety,Wallace Stegner,Paperback,4.0,13.88,$,21.1,9780375759314,Romance,dataset/Romance/0000204.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7847/9781784751371.jpg,Outlander,Diana Gabaldon,Paperback,4.0,12.70,$,12.9,9781784751371,Romance,dataset/Romance/0000205.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4091/9781409152125.jpg,Landline,Rainbow Rowell,Paperback,3.5,7.80,$,11.4,9781409152125,Romance,dataset/Romance/0000206.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4512/9780451228215.jpg,Covet,J R Ward,Paperback,4.0,8.32,$,,9780451228215,Romance,dataset/Romance/0000207.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751542998.jpg,Safe Haven,Nicholas Sparks,Paperback,4.0,7.95,$,11.4,9780751542998,Romance,dataset/Romance/0000208.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4732/9781473212046.jpg,Something Wicked This Way Comes,Ray Bradbury,Paperback,4.0,6.99,$,11.4,9781473212046,Romance,dataset/Romance/0000209.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7873/9781787331419.jpg,Frankissstein,Jeanette Winterson,Paperback,4.0,13.45,$,17.0,9781787331419,Romance,dataset/Romance/0000210.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0995/9780099589273.jpg,Emma (Vintage Classics Austen Series),Jane Austen,Paperback,4.0,10.33,$,,9780099589273,Romance,dataset/Romance/0000211.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4514/9780451418807.jpg,Lover at Last,J R Ward,Paperback,4.5,9.17,$,,9780451418807,Romance,dataset/Romance/0000212.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/9370/9781937007584.jpg,Magic Rises,Ilona Andrews,Paperback,4.5,7.27,$,8.3,9781937007584,Romance,dataset/Romance/0000213.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1410/9780141019970.jpg,The History of Love,Nicole Krauss,Paperback,4.0,8.70,$,11.4,9780141019970,Romance,dataset/Romance/0000214.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5290/9781529003468.jpg,The Storm Sister,Lucinda Riley,Paperback,4.5,9.89,$,10.5,9781529003468,Romance,dataset/Romance/0000215.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5529/9780552998765.jpg,Tales Of The City,Armistead Maupin,Paperback,4.0,9.10,$,11.4,9780552998765,Romance,dataset/Romance/0000216.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5750/9780575085138.jpg,Fire,Kristin Cashore,Paperback,4.0,8.56,$,11.4,9780575085138,Romance,dataset/Romance/0000217.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1475/9780147517722.jpg,The All Souls Trilogy Boxed Set,Deborah Harkness,Paperback,4.5,34.61,$,52.0,9780147517722,Romance,dataset/Romance/0000218.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/8440/9781844087198.jpg,The Secret Diaries Of Miss Anne Lister: Vol. 1,Anne Lister,Paperback,4.0,8.91,$,13.9,9781844087198,Romance,dataset/Romance/0000219.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0617/9780061783180.jpg,This Side of the Grave,Jeaniene Frost,Paperback,4.5,6.72,$,8.8,9780061783180,Romance,dataset/Romance/0000220.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5011/9781501104046.jpg,After We Fell,Anna Todd,Paperback,4.0,11.85,$,12.9,9781501104046,Romance,dataset/Romance/0000221.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0994/9780099460879.jpg,I Capture The Castle,Dodie Smith,Paperback,4.0,8.93,$,10.3,9780099460879,Romance,dataset/Romance/0000222.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5527/9780552774413.jpg,I've Got Your Number,Sophie Kinsella,Paperback,4.0,7.80,$,9.5,9780552774413,Romance,dataset/Romance/0000223.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/9438/9781943893171.jpg,Craving,Helen Hardt,Paperback,4.0,10.35,$,12.4,9781943893171,Romance,dataset/Romance/0000224.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4512/9780451219367.jpg,Lover Awakened,J. R. Ward,Paperback,4.5,8.28,$,8.3,9780451219367,Romance,dataset/Romance/0000225.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0992/9780099288473.jpg,The Woman In Black,Susan Hill,Paperback,3.5,8.86,$,11.4,9780099288473,Romance,dataset/Romance/0000226.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0082/9780008224608.jpg,The Light We Lost,Jill Santopolo,Paperback,4.0,7.96,$,10.3,9780008224608,Romance,dataset/Romance/0000227.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5011/9781501193323.jpg,All Your Perfects,Colleen Hoover,Paperback,4.5,10.73,$,16.0,9781501193323,Romance,dataset/Romance/0000228.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1430/9780143039976.jpg,We Have Always Lived in the Castle,Shirley Jackson,Paperback,4.0,13.21,$,21.1,9780143039976,Romance,dataset/Romance/0000229.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425273999.jpg,Kings Rising,C. S. Pacat,Paperback,4.5,13.82,$,16.0,9780425273999,Romance,dataset/Romance/0000230.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0995/9780099589297.jpg,Northanger Abbey (Vintage Classics Austen Series),Jane Austen,Paperback,4.0,8.15,$,8.8,9780099589297,Romance,dataset/Romance/0000231.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1414/9780141439587.jpg,Emma,Jane Austen,Paperback,4.0,6.91,$,,9780141439587,Romance,dataset/Romance/0000232.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3408/9780340895962.jpg,Night Music,Jojo Moyes,Paperback,3.5,8.13,$,11.4,9780340895962,Romance,dataset/Romance/0000233.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0994/9780099478331.jpg,The French Lieutenant's Woman,John Fowles,Paperback,4.0,10.72,$,12.9,9780099478331,Romance,dataset/Romance/0000234.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751552157.jpg,The Cake Shop in the Garden,Carole Matthews,Paperback,4.0,5.26,$,11.4,9780751552157,Romance,dataset/Romance/0000235.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3303/9780330323154.jpg,The Light Years,Elizabeth Jane Howard,Paperback,4.0,9.48,$,11.4,9780330323154,Romance,dataset/Romance/0000236.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4512/9780451229441.jpg,Crave,J R Ward,Paperback,4.0,8.32,$,,9780451229441,Romance,dataset/Romance/0000237.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751543438.jpg,The Lucky One,Nicholas Sparks,Paperback,4.0,5.42,$,11.4,9780751543438,Romance,dataset/Romance/0000238.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7499/9780749959326.jpg,The Collector,Nora Roberts,Paperback,4.0,5.86,$,11.4,9780749959326,Romance,dataset/Romance/0000239.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0620/9780062068620.jpg,The Capture of the Earl of Glencrae,Stephanie Laurens,Paperback,4.0,7.84,$,8.3,9780062068620,Romance,dataset/Romance/0000240.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425274279.jpg,Prince's Gambit,C S Pacat,Paperback,4.5,13.22,$,16.0,9780425274279,Romance,dataset/Romance/0000241.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4732/9781473209350.jpg,Mitosis,Brandon Sanderson,Hardback,4.0,7.64,$,11.4,9781473209350,Romance,dataset/Romance/0000242.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4472/9781447278757.jpg,A Column of Fire,Ken Follett,Paperback,4.0,11.04,$,12.9,9781447278757,Romance,dataset/Romance/0000243.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4512/9780451218049.jpg,Lover Eternal,J. R. Ward,Paperback,4.5,8.19,$,8.3,9780451218049,Romance,dataset/Romance/0000244.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4555/9781455523542.jpg,Safe Haven,Nicholas Sparks,Paperback,4.0,8.19,$,9.3,9781455523542,Romance,dataset/Romance/0000245.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3455/9780345527707.jpg,Smokin' Seventeen,Janet Evanovich,Paperback,4.0,7.71,$,8.8,9780345527707,Romance,dataset/Romance/0000246.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4736/9781473697003.jpg,The Mother-in-Law,Sally Hepworth,Paperback,4.0,7.20,$,10.3,9781473697003,Romance,dataset/Romance/0000247.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751564822.jpg,The Endless Beach,Jenny Colgan,Paperback,4.0,5.75,$,11.4,9780751564822,Romance,dataset/Romance/0000248.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7826/9781782640318.jpg,Redeeming Love,Francine Rivers,Paperback,4.5,8.78,$,11.4,9781782640318,Romance,dataset/Romance/0000249.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4447/9781444766707.jpg,Secrets After Dark (After Dark Book 2),Sadie Matthews,Paperback,4.0,8.06,$,11.4,9781444766707,Romance,dataset/Romance/0000250.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4472/9781447264538.jpg,Gone with the Wind,Margaret Mitchell,Paperback,4.5,11.93,$,13.9,9781447264538,Romance,dataset/Romance/0000251.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5011/9781501100192.jpg,After,Anna Todd,Paperback,3.5,9.91,$,11.4,9781501100192,Romance,dataset/Romance/0000252.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0995/9780099592532.jpg,Fates and Furies,Lauren Groff,Paperback,3.5,9.61,$,11.4,9780099592532,Romance,dataset/Romance/0000253.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/2419/9780241972700.jpg,Brooklyn,Colm Toibin,Paperback,3.5,8.70,$,13.6,9780241972700,Romance,dataset/Romance/0000254.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4494/9781449496364.jpg,Milk and Honey,Rupi Kaur,Hardback,4.0,12.30,$,20.1,9781449496364,Romance,dataset/Romance/0000255.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3409/9780340960387.jpg,The Ship of Brides,Jojo Moyes,Paperback,4.0,9.10,$,11.4,9780340960387,Romance,dataset/Romance/0000256.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/2501/9781250169440.jpg,Call Me by Your Name,Andre Aciman,Paperback,4.5,7.53,$,17.0,9781250169440,Romance,dataset/Romance/0000257.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7864/9781786499639.jpg,The Bride Test,Helen Hoang,Paperback,4.0,7.59,$,10.3,9781786499639,Romance,dataset/Romance/0000258.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/2419/9780241980767.jpg,The Ministry of Utmost Happiness,Arundhati Roy,Paperback,3.5,9.47,$,11.5,9780241980767,Romance,dataset/Romance/0000259.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476743554.jpg,Hopeless,Colleen Hoover,Paperback,4.5,14.83,$,17.0,9781476743554,Romance,dataset/Romance/0000260.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425259870.jpg,Blood Magick,Nora Roberts,Paperback,4.0,14.28,$,17.0,9780425259870,Romance,dataset/Romance/0000261.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5420/9781542016735.jpg,Butterfly in Frost,Sylvia Day,Paperback,4.0,7.17,$,9.99,9781542016735,Romance,dataset/Romance/0000262.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751553918.jpg,Summer at Little Beach Street Bakery,Jenny Colgan,Paperback,4.0,8.09,$,11.5,9780751553918,Romance,dataset/Romance/0000263.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7841/9781784163952.jpg,Surprise Me,Sophie Kinsella,Paperback,3.5,8.27,$,9.5,9781784163952,Romance,dataset/Romance/0000264.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4512/9780451222725.jpg,Lover Enshrined,J. R. Ward,Paperback,4.0,8.56,$,,9780451222725,Romance,dataset/Romance/0000265.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4512/9780451229687.jpg,Lover Revealed,J R Ward,Paperback,4.5,7.55,$,8.3,9780451229687,Romance,dataset/Romance/0000266.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0617/9780061783197.jpg,One Grave at a Time,Jeaniene Frost,Paperback,4.0,6.72,$,8.3,9780061783197,Romance,dataset/Romance/0000267.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5751/9780575104976.jpg,Calamity,Brandon Sanderson,Paperback,4.0,8.80,$,10.3,9780575104976,Romance,dataset/Romance/0000268.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3407/9780340752463.jpg,The Shell Seekers,Rosamunde Pilcher,Paperback,4.0,8.64,$,12.9,9780340752463,Romance,dataset/Romance/0000269.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4410/9780441014897.jpg,Magic Bites,Ilona Andrews,Paperback,4.0,6.92,$,8.3,9780441014897,Romance,dataset/Romance/0000270.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1410/9780141043104.jpg,The Woman Who Stole My Life,Marian Keyes,Paperback,3.5,10.59,$,11.4,9780141043104,Romance,dataset/Romance/0000271.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/9438/9781943893188.jpg,Obsession,Helen Hardt,Paperback,4.5,9.82,$,16.0,9781943893188,Romance,dataset/Romance/0000272.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0992/9780099289982.jpg,The Sound Of Waves,Yukio Mishima,Paperback,4.0,8.80,$,11.4,9780099289982,Romance,dataset/Romance/0000273.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5290/9781529005240.jpg,The Shadow Sister,Lucinda Riley,Paperback,4.5,9.86,$,11.4,9781529005240,Romance,dataset/Romance/0000274.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751539264.jpg,Dear John,Nicholas Sparks,Paperback,4.0,7.80,$,11.41,9780751539264,Romance,dataset/Romance/0000275.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4472/9781447281528.jpg,Ross Poldark,Winston Graham,Paperback,4.0,8.02,$,10.3,9781447281528,Romance,dataset/Romance/0000276.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425240137.jpg,Archangel's Consort,Nalini Singh,Paperback,4.0,7.27,$,8.3,9780425240137,Romance,dataset/Romance/0000277.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4512/9780451222350.jpg,Lover Unbound,J R Ward,Paperback,4.5,8.52,$,,9780451222350,Romance,dataset/Romance/0000278.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3409/9780340980934.jpg,Delirium (Delirium Trilogy 1),Lauren Oliver,Paperback,4.0,8.00,$,11.4,9780340980934,Romance,dataset/Romance/0000279.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3129/9780312993177.jpg,Something Borrowed,Emily Giffin,Paperback,4.0,7.44,$,8.3,9780312993177,Romance,dataset/Romance/0000280.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1414/9780141439686.jpg,Persuasion,Jane Austen,Paperback,4.0,5.77,$,6.2,9780141439686,Romance,dataset/Romance/0000281.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1413/9780141393391.jpg,Frankenstein,Mary Shelley,Hardback,4.0,15.55,$,18.0,9780141393391,Romance,dataset/Romance/0000282.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/9438/9781943893195.jpg,Possession,Helen Hardt,Paperback,4.5,9.82,$,12.4,9781943893195,Romance,dataset/Romance/0000283.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751560268.jpg,Paper Hearts and Summer Kisses,Carole Matthews,Paperback,4.0,5.75,$,11.5,9780751560268,Romance,dataset/Romance/0000284.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0074/9780007498819.jpg,Destined to Play,Indigo Bloome,Paperback,3.0,9.11,$,11.4,9780007498819,Romance,dataset/Romance/0000285.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3455/9780345532763.jpg,"Someday, Someday, Maybe",Lauren Graham,Paperback,3.5,10.73,$,16.0,9780345532763,Romance,dataset/Romance/0000286.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425243916.jpg,Archangel's Blade,Nalini Singh,Paperback,4.5,7.16,$,8.3,9780425243916,Romance,dataset/Romance/0000287.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/8498/9781849831284.jpg,One Perfect Summer,Paige Toon,Paperback,4.0,8.02,$,10.5,9781849831284,Romance,dataset/Romance/0000288.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1414/9780141439549.jpg,Middlemarch,George Eliot,Paperback,4.0,10.03,$,,9780141439549,Romance,dataset/Romance/0000289.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0615/9780061583216.jpg,Destined for an Early Grave,Jeaniene Frost,Paperback,4.5,7.51,$,8.3,9780061583216,Romance,dataset/Romance/0000290.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751550009.jpg,See Me,Nicholas Sparks,Paperback,4.0,9.13,$,11.4,9780751550009,Romance,dataset/Romance/0000291.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4472/9781447257073.jpg,The Italian Girl,Lucinda Riley,Paperback,4.0,9.49,$,10.5,9781447257073,Romance,dataset/Romance/0000292.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4711/9781471169199.jpg,Practical Magic,Alice Hoffman,Paperback,4.0,8.16,$,11.4,9781471169199,Romance,dataset/Romance/0000293.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4514/9780451417060.jpg,The King,J R Ward,Paperback,4.5,9.34,$,,9780451417060,Romance,dataset/Romance/0000294.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425259863.jpg,Shadow Spell,Nora Roberts,Paperback,4.0,14.62,$,15.35,9780425259863,Romance,dataset/Romance/0000295.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425246818.jpg,Angels' Flight,Nalini Singh,Paperback,4.5,7.30,$,8.3,9780425246818,Romance,dataset/Romance/0000296.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4516/9781451600056.jpg,Deep Kiss of Winter,Kresley Cole,Paperback,4.0,6.46,$,7.8,9781451600056,Romance,dataset/Romance/0000297.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3800/9780380018178.jpg,The Thorn Birds,Colleen McCullough,Paperback,4.0,9.43,$,,9780380018178,Romance,dataset/Romance/0000298.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0605/9780060562519.jpg,Devil in Winter,Lisa Kleypas,Paperback,4.0,6.07,$,6.2,9780060562519,Romance,dataset/Romance/0000299.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4472/9781447200871.jpg,The Clockmaker's Daughter,Kate Morton,Paperback,3.5,8.89,$,10.3,9781447200871,Romance,dataset/Romance/0000300.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425263914.jpg,Reflected in You,Sylvia Day,Paperback,4.5,10.59,$,11.4,9780425263914,Romance,dataset/Romance/0000301.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4466/9780446610391.jpg,The Rescue,Nicholas Sparks,Paperback,4.0,8.77,$,9.3,9780446610391,Romance,dataset/Romance/0000302.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4447/9781444775877.jpg,Promises After Dark (After Dark Book 3),Sadie Matthews,Paperback,4.0,6.86,$,11.4,9781444775877,Romance,dataset/Romance/0000303.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3737/9780373776573.jpg,The Darkest Seduction,Gena Showalter,Paperback,4.5,7.35,$,8.3,9780373776573,Romance,dataset/Romance/0000304.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0995/9780099507383.jpg,Atonement,Ian McEwan,Paperback,4.0,9.81,$,10.5,9780099507383,Romance,dataset/Romance/0000305.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751549218.jpg,Little Beach Street Bakery,Jenny Colgan,Paperback,4.0,8.99,$,11.5,9780751549218,Romance,dataset/Romance/0000306.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4516/9781451650051.jpg,Shadow's Claim,Kresley Cole,Paperback,4.5,8.07,$,10.3,9781451650051,Romance,dataset/Romance/0000307.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1410/9780141040370.jpg,Sense and Sensibility,Jane Austen,Hardback,4.0,16.01,$,18.0,9780141040370,Romance,dataset/Romance/0000308.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4402/9780440244394.jpg,Faefever,Karen Marie Moning,Paperback,4.5,6.14,$,7.8,9780440244394,Romance,dataset/Romance/0000309.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0617/9780061783203.jpg,Once Burned,Jeaniene Frost,Paperback,4.0,7.41,$,9.3,9780061783203,Romance,dataset/Romance/0000310.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3125/9780312550059.jpg,The Guardian,Sherrilyn Kenyon,Paperback,4.5,7.29,$,8.3,9780312550059,Romance,dataset/Romance/0000311.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3494/9780349407784.jpg,The Obsession,Nora Roberts,Paperback,4.0,5.94,$,11.5,9780349407784,Romance,dataset/Romance/0000312.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4402/9780440244400.jpg,Dreamfever,Karen Marie Moning,Paperback,4.5,7.85,$,8.3,9780440244400,Romance,dataset/Romance/0000313.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476731537.jpg,Beautiful Stranger,Christina Lauren,Paperback,4.0,8.44,$,11.4,9781476731537,Romance,dataset/Romance/0000314.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1410/9780141040363.jpg,Great Expectations,Charles Dickens,Hardback,4.0,16.45,$,19.1,9780141040363,Romance,dataset/Romance/0000315.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751567762.jpg,Every Breath,Nicholas Sparks,Paperback,4.0,16.04,$,17.0,9780751567762,Romance,dataset/Romance/0000316.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405919982.jpg,The Rosie Effect,Graeme Simsion,Paperback,3.5,8.97,$,9.5,9781405919982,Romance,dataset/Romance/0000317.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7848/9781784870737.jpg,Jane Eyre (Vintage Classics Bronte Series),Charlotte Bronte,Paperback,4.0,10.58,$,,9781784870737,Romance,dataset/Romance/0000318.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4402/9780440240983.jpg,Darkfever,Karen Marie Moning,Paperback,4.0,7.41,$,8.3,9780440240983,Romance,dataset/Romance/0000319.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3303/9780330339957.jpg,Confusion,Elizabeth Jane Howard,Paperback,4.0,5.67,$,11.4,9780330339957,Romance,dataset/Romance/0000320.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1410/9780141046341.jpg,A Tiny Bit Marvellous,Dawn French,Paperback,3.0,9.40,$,11.4,9780141046341,Romance,dataset/Romance/0000321.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4391/9781439136805.jpg,Dreams of a Dark Warrior,Kresley Cole,Paperback,4.5,8.01,$,8.3,9781439136805,Romance,dataset/Romance/0000322.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5521/9780552150828.jpg,Can You Keep A Secret?,Sophie Kinsella,Paperback,4.0,8.20,$,9.5,9780552150828,Romance,dataset/Romance/0000323.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3455/9780345527738.jpg,Explosive Eighteen,Janet Evanovich,Paperback,4.0,7.80,$,9.5,9780345527738,Romance,dataset/Romance/0000324.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425246580.jpg,Archangel's Storm,Nalini Singh,Paperback,4.5,7.16,$,8.3,9780425246580,Romance,dataset/Romance/0000325.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0995/9780099589280.jpg,Mansfield Park (Vintage Classics Austen Series),Jane Austen,Paperback,4.0,10.26,$,,9780099589280,Romance,dataset/Romance/0000326.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1424/9780142422014.jpg,Lola and the Boy Next Door,Stephanie Perkins,Paperback,4.0,9.94,$,11.4,9780142422014,Romance,dataset/Romance/0000327.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3126/9780312605384.jpg,Married by Morning,Lisa Kleypas,Paperback,4.0,7.58,$,8.3,9780312605384,Romance,dataset/Romance/0000328.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405924207.jpg,Still Me,Jojo Moyes,Paperback,4.0,9.88,$,11.4,9781405924207,Romance,dataset/Romance/0000329.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4251/9780425163719.jpg,Holiday in Death,J. D. Robb,Paperback,4.5,7.62,$,8.3,9780425163719,Romance,dataset/Romance/0000330.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1431/9780143124542.jpg,Me Before You,Jojo Moyes,Paperback,4.5,14.68,$,16.0,9780143124542,Romance,dataset/Romance/0000331.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4514/9780451475329.jpg,Blood Kiss,J R Ward,Paperback,4.5,8.18,$,8.3,9780451475329,Romance,dataset/Romance/0000332.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5529/9780552998482.jpg,Chocolat,Joanne Harris,Paperback,4.0,9.88,$,11.4,9780552998482,Romance,dataset/Romance/0000333.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751563160.jpg,On the Other Side,Carrie Hope Fletcher,Paperback,3.5,7.26,$,11.4,9780751563160,Romance,dataset/Romance/0000334.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7857/9781785763601.jpg,Keep the Home Fires Burning,S. Block,Paperback,4.0,7.65,$,8.8,9781785763601,Romance,dataset/Romance/0000335.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3737/9780373775811.jpg,The Darkest Surrender,Gena Showalter,Paperback,4.5,9.01,$,,9780373775811,Romance,dataset/Romance/0000336.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751540574.jpg,The Choice,Nicholas Sparks,Paperback,4.0,5.06,$,11.4,9780751540574,Romance,dataset/Romance/0000337.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3305/9780330534970.jpg,Night Road,Kristin Hannah,Paperback,4.0,6.95,$,11.4,9780330534970,Romance,dataset/Romance/0000338.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7499/9780749955410.jpg,The Next Always,Nora Roberts,Paperback,4.0,8.00,$,11.9,9780749955410,Romance,dataset/Romance/0000339.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4201/9781420111798.jpg,Iron Crowned,Richelle Mead,Paperback,4.0,7.88,$,8.3,9781420111798,Romance,dataset/Romance/0000340.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751553338.jpg,The Best Of Me,Nicholas Sparks,Paperback,4.0,8.32,$,11.4,9780751553338,Romance,dataset/Romance/0000341.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0994/9780099481249.jpg,Enduring Love,Ian McEwan,Paperback,3.5,7.87,$,10.3,9780099481249,Romance,dataset/Romance/0000342.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3303/9780330344814.jpg,Casting Off,Elizabeth Jane Howard,Paperback,4.5,9.87,$,11.4,9780330344814,Romance,dataset/Romance/0000343.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4711/9781471135514.jpg,Maybe Someday,Colleen Hoover,Paperback,4.5,9.71,$,10.3,9781471135514,Romance,dataset/Romance/0000344.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4472/9781447281535.jpg,Demelza,Winston Graham,Paperback,4.0,8.00,$,10.3,9781447281535,Romance,dataset/Romance/0000345.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0072/9780007288380.jpg,I Heart New York,Lindsey Kelk,Paperback,4.0,4.23,$,11.4,9780007288380,Romance,dataset/Romance/0000346.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3123/9780312378028.jpg,The Tea Rose,Jennifer Donnelly,Paperback,4.0,18.61,$,20.1,9780312378028,Romance,dataset/Romance/0000347.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4447/9781444740998.jpg,Between the Lines,Jodi Picoult,Paperback,3.5,7.73,$,9.5,9781444740998,Romance,dataset/Romance/0000348.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751544541.jpg,Welcome To Rosie Hopkins' Sweetshop Of Dreams,Jenny Colgan,Paperback,4.0,9.44,$,11.5,9780751544541,Romance,dataset/Romance/0000349.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751549201.jpg,The Loveliest Chocolate Shop in Paris,Jenny Colgan,Paperback,4.0,8.51,$,11.5,9780751549201,Romance,dataset/Romance/0000350.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4088/9781408862476.jpg,The Improbability of Love,Hannah Rothschild,Paperback,3.5,10.32,$,11.9,9781408862476,Romance,dataset/Romance/0000351.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5290/9781529014990.jpg,The Butterfly Room,Lucinda Riley,Paperback,4.5,15.62,$,18.0,9781529014990,Romance,dataset/Romance/0000352.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4402/9780440240990.jpg,Bloodfever,Karen Marie Moning,Paperback,4.5,7.68,$,8.3,9780440240990,Romance,dataset/Romance/0000353.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476791456.jpg,Confess: A Novel,Colleen Hoover,Paperback,4.0,12.74,$,17.0,9781476791456,Romance,dataset/Romance/0000354.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0992/9780099288893.jpg,The Gormenghast Trilogy,Mervyn Peake,Paperback,4.0,22.49,$,25.2,9780099288893,Romance,dataset/Romance/0000355.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1411/9780141196886.jpg,The Illustrated Dracula,Bram Stoker,Hardback,4.0,19.29,$,,9780141196886,Romance,dataset/Romance/0000356.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3409/9780340960356.jpg,Sheltering Rain,Jojo Moyes,Paperback,3.5,7.73,$,11.4,9780340960356,Romance,dataset/Romance/0000357.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4722/9781472255860.jpg,The Proposal,Jasmine Guillory,Paperback,3.5,8.00,$,11.4,9781472255860,Romance,dataset/Romance/0000358.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3304/9780330490269.jpg,Dirt Music,Tim Winton,Paperback,4.0,10.00,$,12.4,9780330490269,Romance,dataset/Romance/0000359.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4447/9781444715415.jpg,Sweet Sorrow,David Nicholls,Paperback,4.0,18.67,$,20.1,9781444715415,Romance,dataset/Romance/0000360.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4711/9781471133435.jpg,Hopeless,Colleen Hoover,Paperback,4.5,8.06,$,10.3,9781471133435,Romance,dataset/Romance/0000361.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1410/9780141049373.jpg,Hothouse Flower,Lucinda Riley,Paperback,4.0,11.06,$,11.5,9780141049373,Romance,dataset/Romance/0000362.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3408/9780340895931.jpg,Silver Bay,Jojo Moyes,Paperback,3.5,8.27,$,11.4,9780340895931,Romance,dataset/Romance/0000363.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5533/9780553393699.jpg,Outlander,Diana Gabaldon,Paperback,4.0,9.93,$,10.3,9780553393699,Romance,dataset/Romance/0000364.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4472/9781447218425.jpg,The Light Behind The Window,Lucinda Riley,Paperback,4.0,9.00,$,10.5,9781447218425,Romance,dataset/Romance/0000365.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0995/9780099540663.jpg,Anna Karenina (Vintage Classic Russians Series),Leo Tolstoy,Paperback,4.0,12.76,$,,9780099540663,Romance,dataset/Romance/0000366.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425259856.jpg,Dark Witch,Nora Roberts,Paperback,4.0,14.83,$,16.0,9780425259856,Romance,dataset/Romance/0000367.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751552232.jpg,The Seafront Tea Rooms,Vanessa Greene,Paperback,3.5,5.37,$,11.4,9780751552232,Romance,dataset/Romance/0000368.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4472/9781447288442.jpg,The Angel Tree,Lucinda Riley,Paperback,4.0,9.43,$,10.5,9781447288442,Romance,dataset/Romance/0000369.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/8435/9781843547419.jpg,The Cellist of Sarajevo,Steven Galloway,Paperback,4.0,8.33,$,11.4,9781843547419,Romance,dataset/Romance/0000370.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4251/9780425155189.jpg,Rapture in Death,J. D. Robb,Paperback,4.5,7.38,$,8.3,9780425155189,Romance,dataset/Romance/0000371.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5098/9781509825042.jpg,The Love Letter,Lucinda Riley,Paperback,4.0,9.26,$,10.3,9781509825042,Romance,dataset/Romance/0000372.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3737/9780373775491.jpg,The Darkest Secret,Gena Showalter,Paperback,4.5,8.41,$,,9780373775491,Romance,dataset/Romance/0000373.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0620/9780062068606.jpg,Viscount Breckenridge to the Rescue,Stephanie Laurens,Paperback,4.0,7.96,$,8.3,9780062068606,Romance,dataset/Romance/0000374.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515132878.jpg,Face the Fire (Om),Nora Roberts,Paperback,4.0,7.62,$,8.3,9780515132878,Romance,dataset/Romance/0000375.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3126/9780312605391.jpg,Love in the Afternoon,Lisa Kleypas,Paperback,4.0,8.20,$,9.3,9780312605391,Romance,dataset/Romance/0000376.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3303/9780330332507.jpg,Marking Time,Elizabeth Jane Howard,Paperback,4.0,10.62,$,11.4,9780330332507,Romance,dataset/Romance/0000377.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4514/9780451491664.jpg,Archangel's War,Nalini Singh,Paperback,4.5,7.85,$,8.3,9780451491664,Romance,dataset/Romance/0000378.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1411/9780141197692.jpg,Persuasion,Jane Austen,Hardback,4.0,15.58,$,19.1,9780141197692,Romance,dataset/Romance/0000379.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7490/9780749013448.jpg,The Lavender Keeper,Fiona McIntosh,Paperback,4.0,9.43,$,11.4,9780749013448,Romance,dataset/Romance/0000380.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/2419/9780241969557.jpg,The Tea Planter's Wife,Dinah Jefferies,Paperback,4.0,7.54,$,10.5,9780241969557,Romance,dataset/Romance/0000381.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425219713.jpg,Three in Death,J. D. Robb,Paperback,4.5,7.58,$,8.3,9780425219713,Romance,dataset/Romance/0000382.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425243213.jpg,The Next Always,Nora Roberts,Paperback,4.0,15.06,$,16.0,9780425243213,Romance,dataset/Romance/0000383.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425251249.jpg,Archangel's Legion,Nalini Singh,Paperback,4.5,7.62,$,8.3,9780425251249,Romance,dataset/Romance/0000384.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5750/9780575095724.jpg,Angels' Blood,Nalini Singh,Paperback,4.0,11.05,$,12.4,9780575095724,Romance,dataset/Romance/0000385.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0620/9780062068613.jpg,In Pursuit of Eliza Cynster,Stephanie Laurens,Paperback,4.0,7.96,$,8.3,9780062068613,Romance,dataset/Romance/0000386.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3409/9780340961605.jpg,The Horse Dancer,Jojo Moyes,Paperback,4.0,9.48,$,11.4,9780340961605,Romance,dataset/Romance/0000387.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3074/9780307474711.jpg,One Day,David Nicholls,Paperback,4.0,14.23,$,16.0,9780307474711,Romance,dataset/Romance/0000388.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4465/9780446556828.jpg,Ecstasy Unveiled,Larissa Ione,Paperback,4.5,7.88,$,10.3,9780446556828,Romance,dataset/Romance/0000389.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0614/9780061491900.jpg,Just Like Heaven,Julia Quinn,Paperback,4.0,7.64,$,9.3,9780061491900,Romance,dataset/Romance/0000390.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7499/9780749928889.jpg,A Bed Of Roses,Nora Roberts,Paperback,4.0,8.12,$,11.4,9780749928889,Romance,dataset/Romance/0000391.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0617/9780061783166.jpg,Eternal Kiss of Darkness,Jeaniene Frost,Paperback,4.0,7.68,$,8.3,9780061783166,Romance,dataset/Romance/0000392.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751541953.jpg,The Wedding,Nicholas Sparks,Paperback,4.0,7.91,$,11.4,9780751541953,Romance,dataset/Romance/0000393.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5750/9780575095748.jpg,Archangel's Kiss,Nalini Singh,Paperback,4.0,8.63,$,11.4,9780575095748,Romance,dataset/Romance/0000394.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751552249.jpg,The Beachside Guest House,Vanessa Greene,Paperback,4.0,5.23,$,10.5,9780751552249,Romance,dataset/Romance/0000395.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7490/9780749015657.jpg,The French Promise,Fiona McIntosh,Paperback,4.0,9.80,$,10.3,9780749015657,Romance,dataset/Romance/0000396.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4472/9781447229537.jpg,Firefly Lane,Kristin Hannah,Paperback,4.0,9.40,$,11.4,9781447229537,Romance,dataset/Romance/0000397.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0081/9780008126063.jpg,The Cows,Dawn O'Porter,Paperback,4.0,9.75,$,11.4,9780008126063,Romance,dataset/Romance/0000398.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476751405.jpg,Beautiful Player,Christina Lauren,Paperback,4.5,8.75,$,10.3,9781476751405,Romance,dataset/Romance/0000399.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0081/9780008169336.jpg,Don't You Forget About Me,Mhairi McFarlane,Paperback,4.0,8.65,$,10.5,9780008169336,Romance,dataset/Romance/0000400.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4402/9780440246114.jpg,Deeper Than Midnight,Lara Adrian,Paperback,4.5,7.91,$,8.3,9780440246114,Romance,dataset/Romance/0000401.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476712987.jpg,Walking Disaster,Jamie Mcguire,Paperback,4.0,14.21,$,15.0,9781476712987,Romance,dataset/Romance/0000402.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0074/9780007420087.jpg,Dracula,Bram Stoker,Paperback,4.0,5.26,$,,9780007420087,Romance,dataset/Romance/0000403.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1414/9780141439662.jpg,Sense and Sensibility,Jane Austen,Paperback,4.0,6.61,$,6.95,9780141439662,Romance,dataset/Romance/0000404.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/9438/9781943893201.jpg,Melt,Helen Hardt,Paperback,4.5,10.60,$,12.4,9781943893201,Romance,dataset/Romance/0000405.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5527/9780552774390.jpg,Mini Shopaholic,Sophie Kinsella,Paperback,3.5,9.58,$,,9780552774390,Romance,dataset/Romance/0000406.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476776880.jpg,Maybe in Another Life,TAYLOR JENKINS REID,Paperback,4.0,8.69,$,11.4,9781476776880,Romance,dataset/Romance/0000407.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4251/9780425181461.jpg,Seduction in Death,J. D. Robb,Paperback,4.5,7.62,$,8.3,9780425181461,Romance,dataset/Romance/0000408.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4165/9781416509875.jpg,Immortals After Dark #1: A Hunger Like No Other,Kresley Cole,Paperback,4.0,9.64,$,10.3,9781416509875,Romance,dataset/Romance/0000409.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751565300.jpg,The Good Mother,Kim Lock,Paperback,4.0,5.57,$,10.3,9780751565300,Romance,dataset/Romance/0000410.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5011/9781501110344.jpg,November 9,Colleen Hoover,Paperback,4.5,12.31,$,17.0,9781501110344,Romance,dataset/Romance/0000411.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4410/9780441015832.jpg,Magic Burns,Ilona Andrews,Paperback,4.5,7.18,$,8.3,9780441015832,Romance,dataset/Romance/0000412.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0082/9780008212681.jpg,The Cosy Christmas Teashop,Caroline Roberts,Paperback,4.0,5.31,$,11.4,9780008212681,Romance,dataset/Romance/0000413.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405935371.jpg,The House Across the Street,Lesley Pearse,Paperback,4.0,8.63,$,12.4,9781405935371,Romance,dataset/Romance/0000414.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/9219/9781921922299.jpg,The Women in Black: Text Classics,Madeleine St.John,Paperback,4.0,9.92,$,15.0,9781921922299,Romance,dataset/Romance/0000415.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0615/9780061583223.jpg,First Drop of Crimson,Jeaniene Frost,Paperback,4.0,7.73,$,8.3,9780061583223,Romance,dataset/Romance/0000416.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3305/9780330508988.jpg,All Change,Elizabeth Jane Howard,Paperback,4.0,9.63,$,11.4,9780330508988,Romance,dataset/Romance/0000417.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0620/9780062076106.jpg,Twice Tempted,Jeaniene Frost,Paperback,4.5,7.73,$,8.8,9780062076106,Romance,dataset/Romance/0000418.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751541885.jpg,Dear John,Nicholas Sparks,Paperback,4.0,8.13,$,11.4,9780751541885,Romance,dataset/Romance/0000419.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3494/9780349417615.jpg,The Unhoneymooners,Christina Lauren,Paperback,4.0,14.36,$,18.0,9780349417615,Romance,dataset/Romance/0000420.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4402/9780440241485.jpg,Lord John and the Private Matter,Diana Gabaldon,Paperback,3.5,7.62,$,8.3,9780440241485,Romance,dataset/Romance/0000421.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4868/9780486800295.jpg,The Price of Salt,Patricia Highsmith,Paperback,4.0,10.03,$,,9780486800295,Romance,dataset/Romance/0000422.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7653/9780765392039.jpg,Down Among the Sticks and Bones,Seanan McGuire,Hardback,4.0,15.56,$,17.0,9780765392039,Romance,dataset/Romance/0000423.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3162/9780316201643.jpg,S.,J.J Abrams,Hardback,4.0,26.77,$,34.49,9780316201643,Romance,dataset/Romance/0000424.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1410/9780141028675.jpg,The Brightest Star in the Sky,Marian Keyes,Paperback,3.5,11.22,$,11.4,9780141028675,Romance,dataset/Romance/0000425.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4466/9780446618151.jpg,True Believer,Nicholas Sparks,Paperback,4.0,8.65,$,9.3,9780446618151,Romance,dataset/Romance/0000426.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4402/9780440244417.jpg,Shadowfever,Karen Marie Moning,Paperback,4.5,7.98,$,,9780440244417,Romance,dataset/Romance/0000427.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7857/9781785768460.jpg,King of Kings,Wilbur Smith,Hardback,4.5,17.54,$,25.2,9781785768460,Romance,dataset/Romance/0000428.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4522/9780452297548.jpg,Attachments,Rainbow Rowell,Paperback,4.0,12.96,$,15.0,9780452297548,Romance,dataset/Romance/0000429.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0620/9780062068651.jpg,The Taming of Ryder Cavanagh,Stephanie Laurens,Paperback,4.0,7.85,$,8.3,9780062068651,Romance,dataset/Romance/0000430.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/6321/9781632152121.jpg,Sunstone Volume 1,Stjepan Sejic,Paperback,4.5,12.67,$,17.0,9781632152121,Romance,dataset/Romance/0000431.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3494/9780349410890.jpg,Come Sundown,Nora Roberts,Paperback,4.0,7.10,$,9.5,9780349410890,Romance,dataset/Romance/0000432.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515132021.jpg,Heaven and Earth,Nora Roberts,Paperback,4.0,7.59,$,,9780515132021,Romance,dataset/Romance/0000433.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1404/9780140434248.jpg,North and South,Elizabeth Gaskell,Paperback,4.0,7.90,$,,9780140434248,Romance,dataset/Romance/0000434.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751560237.jpg,The Chocolate Lovers' Wedding,Carole Matthews,Paperback,4.5,5.64,$,10.5,9780751560237,Romance,dataset/Romance/0000435.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0628/9780062878342.jpg,Sapphire Flames,Ilona Andrews,Paperback,4.5,7.45,$,7.74,9780062878342,Romance,dataset/Romance/0000436.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3494/9780349422046.jpg,Vendetta in Death,J. D. Robb,Paperback,4.5,15.36,$,17.0,9780349422046,Romance,dataset/Romance/0000437.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/9438/9781943893218.jpg,Burn,Helen Hardt,Paperback,4.5,10.46,$,12.9,9781943893218,Romance,dataset/Romance/0000438.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5011/9781501139239.jpg,The Seven Husbands of Evelyn Hugo,TAYLOR JENKINS REID,Hardback,4.5,21.24,$,27.5,9781501139239,Romance,dataset/Romance/0000439.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751566208.jpg,The Summer of Serendipity,Ali McNamara,Paperback,4.0,5.53,$,11.4,9780751566208,Romance,dataset/Romance/0000440.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4465/9780446570961.jpg,The Last Song,Nicholas Sparks,Paperback,4.0,8.70,$,9.3,9780446570961,Romance,dataset/Romance/0000441.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476754147.jpg,Beautiful Bitch,Christina Lauren,Paperback,4.0,7.47,$,8.8,9781476754147,Romance,dataset/Romance/0000442.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0995/9780099598329.jpg,The Passion,Jeanette Winterson,Paperback,4.0,9.21,$,11.4,9780099598329,Romance,dataset/Romance/0000443.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4711/9781471130533.jpg,This Girl,Colleen Hoover,Paperback,4.0,7.84,$,10.3,9781471130533,Romance,dataset/Romance/0000444.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3494/9780349414980.jpg,Of Blood and Bone,Nora Roberts,Paperback,4.5,17.17,$,,9780349414980,Romance,dataset/Romance/0000445.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4515/9780451530172.jpg,Of Human Bondage,W. Somerset Maugham,Paperback,4.0,7.60,$,,9780451530172,Romance,dataset/Romance/0000446.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4251/9780425178577.jpg,Betrayal in Death,J. D. Robb,Paperback,4.5,7.62,$,8.3,9780425178577,Romance,dataset/Romance/0000447.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/2419/9780241954973.jpg,The Girl on the Cliff,Lucinda Riley,Paperback,4.0,11.01,$,11.5,9780241954973,Romance,dataset/Romance/0000448.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7848/9781784870744.jpg,Wuthering Heights,Emily Bronte,Paperback,4.0,9.32,$,10.3,9781784870744,Romance,dataset/Romance/0000449.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0620/9780062076113.jpg,Up From the Grave,Jeaniene Frost,Paperback,4.5,6.99,$,8.8,9780062076113,Romance,dataset/Romance/0000450.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0619/9780061988226.jpg,The Summer Garden,Paullina Simons,Paperback,4.0,17.40,$,,9780061988226,Romance,dataset/Romance/0000451.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0074/9780007488056.jpg,You Had Me At Hello,Mhairi McFarlane,Paperback,4.0,9.08,$,10.3,9780007488056,Romance,dataset/Romance/0000452.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4711/9781471136726.jpg,Ugly Love,Colleen Hoover,Paperback,4.5,7.46,$,11.4,9781471136726,Romance,dataset/Romance/0000453.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7874/9781787474420.jpg,The Flatshare,Beth O'Leary,Paperback,4.0,16.17,$,17.0,9781787474420,Romance,dataset/Romance/0000454.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5025/9781502541857.jpg,Beautiful Redemption,Jamie Mcguire,Paperback,4.0,18.34,$,,9781502541857,Romance,dataset/Romance/0000455.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4251/9780425186305.jpg,Purity in Death,J. D. Robb,Paperback,4.5,7.62,$,8.3,9780425186305,Romance,dataset/Romance/0000456.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/8217/9780821780770.jpg,Succubus Blues,Richelle Mead,Paperback,4.0,9.35,$,,9780821780770,Romance,dataset/Romance/0000457.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7865/9781786540003.jpg,Passenger,Alexandra Bracken,Paperback,4.0,9.10,$,10.3,9781786540003,Romance,dataset/Romance/0000458.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751544497.jpg,Meet Me At The Cupcake Cafe,Jenny Colgan,Paperback,4.0,9.44,$,11.5,9780751544497,Romance,dataset/Romance/0000459.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4063/9781406381320.jpg,The Mortal Instruments 1: City of Bones,Cassandra Clare,Hardback,4.0,16.28,$,19.1,9781406381320,Romance,dataset/Romance/0000460.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0994/9780099465652.jpg,Venetia,Georgette Heyer,Paperback,4.0,9.71,$,11.4,9780099465652,Romance,dataset/Romance/0000461.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/9438/9781943893225.jpg,Surrender,Helen Hardt,Paperback,4.5,10.46,$,12.9,9781943893225,Romance,dataset/Romance/0000462.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4862/9780486284736.jpg,Pride and Prejudice,Jane Austen,Paperback,4.5,4.93,$,5.0,9780486284736,Romance,dataset/Romance/0000463.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5712/9780571245000.jpg,Nocturnes,Kazuo Ishiguro,Paperback,3.5,9.01,$,11.4,9780571245000,Romance,dataset/Romance/0000464.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5011/9781501128035.jpg,The Unhoneymooners,Christina Lauren,Paperback,4.0,13.82,$,16.0,9781501128035,Romance,dataset/Romance/0000465.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/2419/9780241950364.jpg,Belle,Lesley Pearse,Paperback,4.0,11.11,$,11.4,9780241950364,Romance,dataset/Romance/0000466.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515154139.jpg,Thankless in Death,J D Robb,Paperback,4.5,7.62,$,8.8,9780515154139,Romance,dataset/Romance/0000467.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425250662.jpg,Delusion in Death,J D Robb,Paperback,4.5,7.67,$,8.3,9780425250662,Romance,dataset/Romance/0000468.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5535/9780553582789.jpg,Queen of Swords,Sara Donati,Paperback,4.5,9.68,$,,9780553582789,Romance,dataset/Romance/0000469.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1410/9780141043098.jpg,The Mystery of Mercy Close,Marian Keyes,Paperback,3.5,11.17,$,11.4,9780141043098,Romance,dataset/Romance/0000470.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425251171.jpg,Archangel's Shadows,Nalini Singh,Paperback,4.5,7.74,$,8.3,9780425251171,Romance,dataset/Romance/0000471.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3853/9780385319959.jpg,Outlander,Diana Gabaldon,Paperback,4.0,14.25,$,17.0,9780385319959,Romance,dataset/Romance/0000472.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4514/9780451463852.jpg,Seer of Sevenwaters,Juliet Marillier,Paperback,4.0,8.59,$,,9780451463852,Romance,dataset/Romance/0000473.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476730943.jpg,The Sea of Tranquility,Katja Millay,Paperback,4.5,10.65,$,12.9,9781476730943,Romance,dataset/Romance/0000474.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4472/9781447278771.jpg,A Column of Fire,Ken Follett,Paperback,4.0,10.68,$,,9781447278771,Romance,dataset/Romance/0000475.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/2419/9780241950371.jpg,The Promise,Lesley Pearse,Paperback,4.5,10.86,$,11.4,9780241950371,Romance,dataset/Romance/0000476.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4722/9781472229953.jpg,The Letter,Kathryn Hughes,Paperback,4.0,5.86,$,11.4,9781472229953,Romance,dataset/Romance/0000477.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4165/9781416580959.jpg,Pleasure of a Dark Prince,Kresley Cole,Paperback,4.5,7.89,$,8.3,9781416580959,Romance,dataset/Romance/0000478.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1404/9780140449129.jpg,Madame Bovary,Gustave Flaubert,Paperback,3.5,9.57,$,10.3,9780140449129,Romance,dataset/Romance/0000479.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7499/9780749928865.jpg,Vision In White,Nora Roberts,Paperback,4.0,8.16,$,11.4,9780749928865,Romance,dataset/Romance/0000480.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405918756.jpg,The Break,Marian Keyes,Paperback,4.0,10.65,$,,9781405918756,Romance,dataset/Romance/0000481.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4514/9780451417084.jpg,The Shadows,J R Ward,Paperback,4.5,9.51,$,,9780451417084,Romance,dataset/Romance/0000482.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4410/9780441017027.jpg,Magic Strikes,Ilona Andrews,Paperback,4.5,7.34,$,8.3,9780441017027,Romance,dataset/Romance/0000483.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5535/9780553582796.jpg,Lake in the Clouds,Sara Donati,Paperback,4.5,9.51,$,,9780553582796,Romance,dataset/Romance/0000484.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425267042.jpg,Rush,Maya Banks,Paperback,4.0,12.16,$,,9780425267042,Romance,dataset/Romance/0000485.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515151541.jpg,Samurai Game,Christine Feehan,Paperback,4.5,8.82,$,9.3,9780515151541,Romance,dataset/Romance/0000486.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4746/9781474600897.jpg,The Versions of Us,Laura Barnett,Paperback,3.5,8.36,$,11.5,9781474600897,Romance,dataset/Romance/0000487.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4013/9781401307479.jpg,The Wild Rose,Jennifer Donnelly,Paperback,4.0,16.18,$,,9781401307479,Romance,dataset/Romance/0000488.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3855/9780385534635.jpg,The Night Circus,Erin Morgenstern,Hardback,4.0,21.00,$,30.4,9780385534635,Romance,dataset/Romance/0000489.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751549966.jpg,The Longest Ride,Nicholas Sparks,Paperback,4.0,8.42,$,11.4,9780751549966,Romance,dataset/Romance/0000490.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4410/9780441020867.jpg,Fate's Edge,Ilona Andrews,Paperback,4.0,7.80,$,8.3,9780441020867,Romance,dataset/Romance/0000491.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5535/9780553578553.jpg,Dawn on a Distant Shore,Sara Donati,Paperback,4.0,9.64,$,,9780553578553,Romance,dataset/Romance/0000492.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0623/9780062371935.jpg,Devil's Daughter,Lisa Kleypas,Paperback,4.0,7.46,$,8.3,9780062371935,Romance,dataset/Romance/0000493.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0600/9780060091293.jpg,Secrets of a Summer Night,Lisa Kleypas,Paperback,4.0,6.29,$,,9780060091293,Romance,dataset/Romance/0000494.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4091/9781409180050.jpg,Queenie,Candice Carty-Williams,Hardback,3.5,13.16,$,16.0,9781409180050,Romance,dataset/Romance/0000495.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5535/9780553582772.jpg,Fire Along the Sky,Sara Donati,Paperback,4.5,10.18,$,,9780553582772,Romance,dataset/Romance/0000496.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4091/9781409151487.jpg,This Man,Jodi Ellen Malpas,Paperback,4.0,9.33,$,11.4,9781409151487,Romance,dataset/Romance/0000497.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3737/9780373776986.jpg,Wicked Nights,Gena Showalter,Paperback,4.0,7.86,$,8.3,9780373776986,Romance,dataset/Romance/0000498.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515149562.jpg,Spirit Bound,Christine Feehan,Paperback,4.0,8.38,$,,9780515149562,Romance,dataset/Romance/0000499.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0995/9780099582038.jpg,Sweet Tooth,Ian McEwan,Paperback,3.5,9.92,$,10.3,9780099582038,Romance,dataset/Romance/0000500.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1411/9780141196893.jpg,Middlemarch,George Eliot,Hardback,4.0,18.72,$,,9780141196893,Romance,dataset/Romance/0000501.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3125/9780312546601.jpg,Retribution,Sherrilyn Kenyon,Paperback,4.0,7.53,$,8.3,9780312546601,Romance,dataset/Romance/0000502.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4514/9780451475176.jpg,The Beast,J R Ward,Paperback,4.5,8.43,$,8.8,9780451475176,Romance,dataset/Romance/0000503.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4466/9780446613439.jpg,The Guardian,Nicholas Sparks,Paperback,4.0,8.70,$,9.3,9780446613439,Romance,dataset/Romance/0000504.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/2419/9780241973615.jpg,Perfume,Patrick Süskind,Paperback,4.0,8.78,$,10.3,9780241973615,Romance,dataset/Romance/0000505.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4722/9781472246073.jpg,Look Alive Twenty-Five,Janet Evanovich,Paperback,4.0,16.10,$,17.0,9781472246073,Romance,dataset/Romance/0000506.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4251/9780425183977.jpg,Reunion in Death,J. D. Robb,Paperback,4.5,7.62,$,8.3,9780425183977,Romance,dataset/Romance/0000507.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4410/9780441017805.jpg,On the Edge,Ilona Andrews,Paperback,4.0,7.46,$,8.3,9780441017805,Romance,dataset/Romance/0000508.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751558630.jpg,Letters from Lighthouse Cottage,Ali McNamara,Paperback,4.0,5.46,$,10.3,9780751558630,Romance,dataset/Romance/0000509.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5527/9780552774369.jpg,Twenties Girl,Sophie Kinsella,Paperback,4.0,11.15,$,11.4,9780552774369,Romance,dataset/Romance/0000510.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3455/9780345527769.jpg,Notorious Nineteen,Janet Evanovich,Paperback,4.0,8.04,$,9.5,9780345527769,Romance,dataset/Romance/0000511.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4711/9781471156229.jpg,The Japanese Lover,Isabel Allende,Paperback,4.0,9.08,$,9.5,9781471156229,Romance,dataset/Romance/0000512.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3523/9780352341266.jpg,Black Lace Quickies 1,,Paperback,3.0,5.44,$,6.2,9780352341266,Romance,dataset/Romance/0000513.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751550764.jpg,The Italian Wife,Kate Furnivall,Paperback,4.0,8.42,$,11.4,9780751550764,Romance,dataset/Romance/0000514.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476741185.jpg,Wallbanger,Alice Clayton,Paperback,4.0,9.60,$,12.9,9781476741185,Romance,dataset/Romance/0000515.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3455/9780345519474.jpg,In Bed With A Highlander,Maya Banks,Paperback,4.0,6.20,$,7.8,9780345519474,Romance,dataset/Romance/0000516.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0612/9780061245084.jpg,Halfway to the Grave,Jeaniene Frost,Paperback,4.0,7.71,$,8.3,9780061245084,Romance,dataset/Romance/0000517.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3807/9780380773527.jpg,Dreaming of You,Lisa Kleypas,Paperback,4.0,6.21,$,7.75,9780380773527,Romance,dataset/Romance/0000518.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3125/9780312537920.jpg,No Mercy,Sherrilyn Kenyon,Paperback,4.5,7.72,$,8.3,9780312537920,Romance,dataset/Romance/0000519.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4091/9781409151524.jpg,This Man Confessed,Jodi Ellen Malpas,Paperback,4.5,9.58,$,11.4,9781409151524,Romance,dataset/Romance/0000520.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3455/9780345542892.jpg,Takedown Twenty,Janet Evanovich,Paperback,4.0,8.09,$,9.5,9780345542892,Romance,dataset/Romance/0000521.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4722/9781472255877.jpg,The Wedding Date,Jasmine Guillory,Paperback,3.5,8.12,$,11.4,9781472255877,Romance,dataset/Romance/0000522.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0605/9780060562533.jpg,Scandal in Spring,Lisa Kleypas,Paperback,4.0,6.37,$,,9780060562533,Romance,dataset/Romance/0000523.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4736/9781473674233.jpg,The Family Next Door,Sally Hepworth,Paperback,4.0,8.03,$,11.4,9781473674233,Romance,dataset/Romance/0000524.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4514/9780451414793.jpg,Rapture,J R Ward,Paperback,4.0,8.66,$,,9780451414793,Romance,dataset/Romance/0000525.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4722/9781472266217.jpg,The Bookish Life of Nina Hill,Abbi Waxman,Paperback,4.0,8.64,$,12.4,9781472266217,Romance,dataset/Romance/0000526.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4165/9781416580942.jpg,Immortals After Dark #6: Kiss of a Demon King,Cole,Paperback,4.5,7.88,$,8.3,9781416580942,Romance,dataset/Romance/0000527.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515131222.jpg,Dance upon the Air,Nora Roberts,Paperback,4.0,7.71,$,8.3,9780515131222,Romance,dataset/Romance/0000528.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/9370/9781937007829.jpg,Steel's Edge,Ilona Andrews,Paperback,4.0,7.88,$,8.3,9781937007829,Romance,dataset/Romance/0000529.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0620/9780062072924.jpg,The Sum of all Kisses,Julia Quinn,Paperback,4.0,7.72,$,8.3,9780062072924,Romance,dataset/Romance/0000530.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7873/9781787331402.jpg,Frankissstein,Jeanette Winterson,Hardback,4.0,18.51,$,21.1,9781787331402,Romance,dataset/Romance/0000531.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405909976.jpg,You're the One That I Want,Giovanna Fletcher,Paperback,4.0,9.55,$,10.3,9781405909976,Romance,dataset/Romance/0000532.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5750/9780575095687.jpg,Visions of Heat,Nalini Singh,Paperback,4.0,8.72,$,11.4,9780575095687,Romance,dataset/Romance/0000533.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4514/9780451468109.jpg,Dark Lover,J R Ward,Paperback,4.0,7.83,$,8.3,9780451468109,Romance,dataset/Romance/0000534.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5527/9780552771108.jpg,Can You Keep A Secret?,Sophie Kinsella,Paperback,4.0,9.88,$,11.4,9780552771108,Romance,dataset/Romance/0000535.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425237793.jpg,Play of Passion,Nalini Singh,Paperback,4.5,7.94,$,8.3,9780425237793,Romance,dataset/Romance/0000536.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4515/9780451531353.jpg,The Scarlet Letter,Nathaniel Hawthorne,Paperback,3.5,5.32,$,,9780451531353,Romance,dataset/Romance/0000537.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425250358.jpg,Celebrity in Death,J D Robb,Paperback,4.5,7.62,$,7.7,9780425250358,Romance,dataset/Romance/0000538.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5750/9780575095700.jpg,Caressed by Ice,Nalini Singh,Paperback,4.5,8.98,$,11.4,9780575095700,Romance,dataset/Romance/0000539.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1402/9780140256352.jpg,This Earth of Mankind,Pramoedya Ananta Toer,Paperback,4.5,15.10,$,17.0,9780140256352,Romance,dataset/Romance/0000540.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751573077.jpg,The Paris Seamstress,Natasha Lester,Paperback,4.0,6.77,$,10.3,9780751573077,Romance,dataset/Romance/0000541.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4465/9780446556811.jpg,Sin Undone,Larissa Ione,Paperback,4.5,7.93,$,10.3,9780446556811,Romance,dataset/Romance/0000542.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4165/9781416547037.jpg,Immortals After Dark #3: Wicked Deeds on a Winter's Night,Cole,Paperback,4.5,7.62,$,8.3,9781416547037,Romance,dataset/Romance/0000543.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4514/9780451491640.jpg,Archangel's Prophecy,Nalini Singh,Paperback,4.0,7.62,$,8.8,9780451491640,Romance,dataset/Romance/0000544.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5535/9780553589375.jpg,Kiss of Midnight,Lara Adrian,Paperback,4.0,7.87,$,8.3,9780553589375,Romance,dataset/Romance/0000545.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3129/9780312949419.jpg,Acheron,Sherrilyn Kenyon,Paperback,4.5,10.70,$,,9780312949419,Romance,dataset/Romance/0000546.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515128550.jpg,Heart of the Sea,Nora Roberts,Paperback,4.0,7.67,$,8.3,9780515128550,Romance,dataset/Romance/0000547.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7553/9780755395262.jpg,Shadow of Night,Deborah Harkness,Paperback,4.0,11.75,$,,9780755395262,Romance,dataset/Romance/0000548.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0628/9780062872838.jpg,Fix Her Up,Tessa Bailey,Paperback,3.5,9.83,$,12.4,9780062872838,Romance,dataset/Romance/0000549.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5527/9780552776752.jpg,Sleeping Arrangements,Madeleine Wickham,Paperback,3.5,9.56,$,11.4,9780552776752,Romance,dataset/Romance/0000550.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7181/9780718183189.jpg,Still Me,Jojo Moyes,Hardback,4.0,21.52,$,24.0,9780718183189,Romance,dataset/Romance/0000551.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751550511.jpg,Haven Of Obedience,Marina Anderson,Paperback,3.0,5.59,$,8.12,9780751550511,Romance,dataset/Romance/0000552.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4165/9781416509882.jpg,Immortals After Dark #2: No Rest for the Wicked,Kresley Cole,Paperback,4.5,9.02,$,10.3,9781416509882,Romance,dataset/Romance/0000553.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4736/9781473629202.jpg,Legendary,Stephanie Garber,Paperback,4.5,8.32,$,11.4,9781473629202,Romance,dataset/Romance/0000554.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425242612.jpg,Treachery in Death,J D Robb,Paperback,4.5,7.62,$,8.3,9780425242612,Romance,dataset/Romance/0000555.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0620/9780062072900.jpg,A Night Like This,Julia Quinn,Paperback,4.0,7.67,$,8.3,9780062072900,Romance,dataset/Romance/0000556.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425235447.jpg,Bonds of Justice,Nalini Singh,Paperback,4.0,7.86,$,8.3,9780425235447,Romance,dataset/Romance/0000557.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751539240.jpg,The Lucky One,Nicholas Sparks,Paperback,4.0,8.03,$,11.4,9780751539240,Romance,dataset/Romance/0000558.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4404/9780440423201.jpg,Outlander,Diana Gabaldon,Hardback,4.0,36.95,$,38.0,9780440423201,Romance,dataset/Romance/0000559.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5750/9780575095663.jpg,Slave to Sensation,Nalini Singh,Paperback,4.0,8.75,$,12.4,9780575095663,Romance,dataset/Romance/0000560.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515154146.jpg,Concealed in Death,J D Robb,Paperback,4.5,7.67,$,8.3,9780515154146,Romance,dataset/Romance/0000561.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425236758.jpg,Happy Ever After,Nora Roberts,Paperback,4.0,12.90,$,16.0,9780425236758,Romance,dataset/Romance/0000562.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425204269.jpg,Origin in Death,J. D. Robb,Paperback,4.5,7.58,$,8.3,9780425204269,Romance,dataset/Romance/0000563.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0994/9780099465836.jpg,Devil's Cub,Georgette Heyer,Paperback,4.0,8.96,$,11.4,9780099465836,Romance,dataset/Romance/0000564.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4091/9781409166573.jpg,The Forever House,Veronica Henry,Paperback,4.0,6.50,$,10.3,9781409166573,Romance,dataset/Romance/0000565.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3494/9780349419312.jpg,Fight or Flight,Samantha Young,Paperback,4.0,10.40,$,11.4,9780349419312,Romance,dataset/Romance/0000566.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476725314.jpg,The Marriage Trap,Jennifer Probst,Paperback,4.0,7.47,$,8.3,9781476725314,Romance,dataset/Romance/0000567.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0612/9780061247828.jpg,The Lady Most Likely...,Julia Quinn,Paperback,4.0,7.67,$,8.3,9780061247828,Romance,dataset/Romance/0000568.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4091/9781409151500.jpg,Beneath This Man,Jodi Ellen Malpas,Paperback,4.5,9.61,$,11.4,9781409151500,Romance,dataset/Romance/0000569.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/6321/9781632152299.jpg,Sunstone Volume 2,Stjepan Sejic,Paperback,4.5,10.40,$,17.0,9781632152299,Romance,dataset/Romance/0000570.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0620/9780062021274.jpg,When Beauty Tamed the Beast,Eloisa James,Paperback,4.0,7.72,$,8.3,9780062021274,Romance,dataset/Romance/0000571.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5011/9781501125713.jpg,Maybe Not,Colleen Hoover,Paperback,4.0,8.69,$,10.3,9781501125713,Romance,dataset/Romance/0000572.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3409/9780340960370.jpg,The Peacock Emporium,Jojo Moyes,Paperback,3.5,8.53,$,11.4,9780340960370,Romance,dataset/Romance/0000573.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5712/9780571276004.jpg,A Strangeness in My Mind,Orhan Pamuk,Paperback,4.0,11.55,$,,9780571276004,Romance,dataset/Romance/0000574.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751564778.jpg,Christmas at Little Beach Street Bakery,Jenny Colgan,Paperback,4.0,5.55,$,10.3,9780751564778,Romance,dataset/Romance/0000575.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476755106.jpg,Beautiful Beginning,Christina Lauren,Paperback,4.0,6.66,$,8.8,9781476755106,Romance,dataset/Romance/0000576.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3305/9780330536349.jpg,The Rules of Attraction,Bret Easton Ellis,Paperback,3.5,8.62,$,12.9,9780330536349,Romance,dataset/Romance/0000577.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7499/9780749955212.jpg,The Witness,Nora Roberts,Paperback,4.0,8.96,$,11.4,9780749955212,Romance,dataset/Romance/0000578.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/9438/9781943893232.jpg,Shattered,Helen Hardt,Paperback,4.5,10.60,$,12.9,9781943893232,Romance,dataset/Romance/0000579.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3455/9780345500786.jpg,Sizzle,Julie Garwood,Paperback,4.0,7.71,$,8.3,9780345500786,Romance,dataset/Romance/0000580.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3494/9780349405933.jpg,Bully,Penelope Douglas,Paperback,4.0,7.97,$,11.4,9780349405933,Romance,dataset/Romance/0000581.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425251263.jpg,Archangel's Enigma,Nalini Singh,Paperback,4.5,7.67,$,8.3,9780425251263,Romance,dataset/Romance/0000582.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425270721.jpg,Magic Triumphs,Ilona Andrews,Paperback,4.5,9.34,$,10.5,9780425270721,Romance,dataset/Romance/0000583.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0994/9780099465621.jpg,Arabella,Georgette Heyer,Paperback,4.0,9.52,$,11.4,9780099465621,Romance,dataset/Romance/0000584.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4410/9780441019458.jpg,Bayou Moon,Ilona Andrews,Paperback,4.0,8.66,$,,9780441019458,Romance,dataset/Romance/0000585.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425203002.jpg,Visions in Death,J D Robb,Paperback,4.5,7.67,$,8.3,9780425203002,Romance,dataset/Romance/0000586.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0605/9780060562496.jpg,It Happened One Autumn,Lisa Kleypas,Paperback,4.0,6.41,$,,9780060562496,Romance,dataset/Romance/0000587.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3129/9780312949822.jpg,Tempt Me at Twilight,Lisa Kleypas,Paperback,4.0,8.40,$,8.8,9780312949822,Romance,dataset/Romance/0000588.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5343/9781534300361.jpg,Snotgirl Volume 1: Green Hair Don't Care,Bryan Lee O'Malley,Paperback,3.5,9.31,$,11.4,9781534300361,Romance,dataset/Romance/0000589.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4091/9781409166627.jpg,A Family Recipe,Veronica Henry,Paperback,4.0,5.59,$,10.3,9781409166627,Romance,dataset/Romance/0000590.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4165/9781416576754.jpg,Dark Desires After Dusk,Cole,Paperback,4.5,9.24,$,10.3,9781416576754,Romance,dataset/Romance/0000591.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4251/9780425191583.jpg,Imitation in Death,J. D. Robb,Paperback,4.5,7.62,$,8.3,9780425191583,Romance,dataset/Romance/0000592.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0994/9780099465829.jpg,These Old Shades,Georgette Heyer,Paperback,4.0,9.78,$,11.4,9780099465829,Romance,dataset/Romance/0000593.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4165/9781416547075.jpg,Immortals After Dark #4: Dark Needs At Night's Edge,Cole,Paperback,4.5,7.61,$,8.3,9781416547075,Romance,dataset/Romance/0000594.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751541137.jpg,At First Sight,Nicholas Sparks,Paperback,4.0,7.99,$,11.4,9780751541137,Romance,dataset/Romance/0000595.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515128543.jpg,Tears of the Moon,Nora Roberts,Paperback,4.0,7.73,$,8.04,9780515128543,Romance,dataset/Romance/0000596.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/2500/9781250011862.jpg,Something Borrowed,Emily Giffin,Paperback,4.0,8.33,$,9.3,9781250011862,Romance,dataset/Romance/0000597.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751541397.jpg,Golden Moments,Danielle Steel,Paperback,3.5,7.81,$,11.4,9780751541397,Romance,dataset/Romance/0000598.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3494/9780349421926.jpg,Under Currents,Nora Roberts,Paperback,4.0,16.68,$,17.0,9780349421926,Romance,dataset/Romance/0000599.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/2419/9780241974681.jpg,The Pursuit of Love,Nancy Mitford,Paperback,4.0,7.48,$,11.4,9780241974681,Romance,dataset/Romance/0000600.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425226735.jpg,Branded by Fire,Nalini Singh,Paperback,4.5,7.62,$,8.3,9780425226735,Romance,dataset/Romance/0000601.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0622/9780062289230.jpg,Burn for Me,Ilona Andrews,Paperback,4.5,7.77,$,8.8,9780062289230,Romance,dataset/Romance/0000602.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0995/9780099503927.jpg,Possession,A. S. Byatt,Paperback,4.0,12.41,$,12.9,9780099503927,Romance,dataset/Romance/0000603.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4447/9781444797992.jpg,Half-Blood (The First Covenant Novel),Jennifer L. Armentrout,Paperback,4.0,8.25,$,11.4,9781444797992,Romance,dataset/Romance/0000604.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4251/9780425197950.jpg,Divided In Death,J. D. Robb,Paperback,4.5,7.62,$,8.3,9780425197950,Romance,dataset/Romance/0000605.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/9083/9781908313867.jpg,Red Notebook,Antoine Laurain,Paperback,4.0,8.82,$,11.4,9781908313867,Romance,dataset/Romance/0000606.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1410/9780141047768.jpg,Brooklyn,Colm Toibin,Paperback,3.5,8.92,$,10.3,9780141047768,Romance,dataset/Romance/0000607.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/8129/9780812982336.jpg,THOUSAND AUTUMNS OF JACOBEXP,David Mitchell,Paperback,4.0,9.36,$,,9780812982336,Romance,dataset/Romance/0000608.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751540895.jpg,The Guardian,Nicholas Sparks,Paperback,4.0,8.42,$,11.4,9780751540895,Romance,dataset/Romance/0000609.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/2413/9780241388365.jpg,The Rosie Result,Graeme Simsion,Paperback,4.0,15.64,$,17.0,9780241388365,Romance,dataset/Romance/0000610.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/6709/9780670922659.jpg,Beautiful Ruins,Jess Walter,Paperback,3.5,7.91,$,11.5,9780670922659,Romance,dataset/Romance/0000611.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4514/9780451461520.jpg,Claimed By Shadow,Karen Chance,Paperback,4.0,7.72,$,8.3,9780451461520,Romance,dataset/Romance/0000612.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4472/9781447218432.jpg,The Midnight Rose,Lucinda Riley,Paperback,4.5,10.09,$,11.5,9781447218432,Romance,dataset/Romance/0000613.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/2307/9780230759282.jpg,The Clockmaker's Daughter,Kate Morton,Hardback,3.5,18.62,$,23.0,9780230759282,Romance,dataset/Romance/0000614.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/9438/9781943893256.jpg,Unraveled,Helen Hardt,Paperback,4.5,10.74,$,12.4,9781943893256,Romance,dataset/Romance/0000615.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405922074.jpg,Making It Up As I Go Along,Marian Keyes,Paperback,4.0,9.87,$,11.5,9781405922074,Romance,dataset/Romance/0000616.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7181/9780718180294.jpg,Nine Perfect Strangers,Liane Moriarty,Hardback,3.5,20.34,$,22.5,9780718180294,Romance,dataset/Romance/0000617.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425255131.jpg,Wild Invitation,Nalini Singh,Paperback,4.5,7.69,$,8.3,9780425255131,Romance,dataset/Romance/0000618.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3737/9780373777754.jpg,The Darkest Craving,Gena Showalter,Paperback,4.0,8.62,$,,9780373777754,Romance,dataset/Romance/0000619.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5532/9780553272833.jpg,Brazen Virtue,Nora Roberts,Paperback,4.0,7.70,$,10.3,9780553272833,Romance,dataset/Romance/0000620.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4711/9781471118616.jpg,Fallen Too Far,Abbi Glines,Paperback,4.0,12.51,$,15.0,9781471118616,Romance,dataset/Romance/0000621.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5118/9781511847506.jpg,Beautiful Sacrifice,Jamie Mcguire,Paperback,4.0,18.34,$,,9781511847506,Romance,dataset/Romance/0000622.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4402/9780440245278.jpg,Taken by Midnight,Lara Adrian,Paperback,4.5,7.83,$,8.3,9780440245278,Romance,dataset/Romance/0000623.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4711/9781471138430.jpg,The One We Fell in Love With,Paige Toon,Paperback,4.0,8.88,$,10.5,9781471138430,Romance,dataset/Romance/0000624.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425270684.jpg,Magic Shifts,Ilona Andrews,Paperback,4.5,8.18,$,8.3,9780425270684,Romance,dataset/Romance/0000625.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476755090.jpg,Beautiful Bombshell,Christina Lauren,Paperback,4.0,6.44,$,8.8,9781476755090,Romance,dataset/Romance/0000626.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4736/9781473667761.jpg,How Do You Like Me Now?,Holly Bourne,Paperback,4.0,6.50,$,10.5,9781473667761,Romance,dataset/Romance/0000627.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7553/9780755377800.jpg,The Sunrise,Victoria Hislop,Paperback,3.5,8.32,$,11.4,9780755377800,Romance,dataset/Romance/0000628.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/8475/9781847562777.jpg,Chocolate Shoes and Wedding Blues,Trisha Ashley,Paperback,4.0,10.36,$,12.9,9781847562777,Romance,dataset/Romance/0000629.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7783/9780778303626.jpg,The Darkest Whisper,Gena Showalter,Paperback,4.5,8.83,$,,9780778303626,Romance,dataset/Romance/0000630.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5527/9780552776738.jpg,The Wedding Girl,Madeleine Wickham,Paperback,3.5,9.88,$,11.4,9780552776738,Romance,dataset/Romance/0000631.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4465/9780446547635.jpg,The Best of Me,Nicholas Sparks,Paperback,4.0,8.42,$,11.5,9780446547635,Romance,dataset/Romance/0000632.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0620/9780062068644.jpg,And Then She Fell,Stephanie Laurens,Paperback,4.0,7.89,$,8.3,9780062068644,Romance,dataset/Romance/0000633.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/9848/9781984803528.jpg,Shadow Warrior,Christine Feehan,Paperback,4.0,7.62,$,8.3,9781984803528,Romance,dataset/Romance/0000634.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1987/9780198704447.jpg,The Castle of Otranto,Horace Walpole,Paperback,3.0,4.94,$,6.2,9780198704447,Romance,dataset/Romance/0000635.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/9438/9781943893249.jpg,Twisted,Helen Hardt,Paperback,4.5,14.51,$,,9781943893249,Romance,dataset/Romance/0000636.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425263921.jpg,Entwined with You,Sylvia Day,Paperback,4.0,11.50,$,,9780425263921,Romance,dataset/Romance/0000637.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0994/9780099476375.jpg,The Quiet Gentleman,Georgette Heyer,Paperback,4.0,9.65,$,11.4,9780099476375,Romance,dataset/Romance/0000638.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5905/9781590525135.jpg,Redeeming Love,Francine Rivers,Paperback,4.5,15.44,$,16.0,9781590525135,Romance,dataset/Romance/0000639.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405938204.jpg,"Oh My God, What a Complete Aisling",Emer McLysaght,Paperback,4.0,8.82,$,10.3,9781405938204,Romance,dataset/Romance/0000640.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3737/9780373778911.jpg,The Darkest Touch,Gena Showalter,Paperback,4.5,8.36,$,,9780373778911,Romance,dataset/Romance/0000641.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4711/9781471162589.jpg,Five Years From Now,Paige Toon,Paperback,4.0,7.88,$,10.3,9781471162589,Romance,dataset/Romance/0000642.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515154153.jpg,Festive in Death,J D Robb,Paperback,4.5,8.18,$,8.3,9780515154153,Romance,dataset/Romance/0000643.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0994/9780099478423.jpg,The Heart of the Matter,Graham Greene,Paperback,4.0,9.39,$,10.3,9780099478423,Romance,dataset/Romance/0000644.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515149210.jpg,Ruthless Game,Christine Feehan,Paperback,4.5,8.62,$,9.3,9780515149210,Romance,dataset/Romance/0000645.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5535/9780553589399.jpg,Midnight Awakening,Lara Adrian,Paperback,4.0,7.67,$,8.3,9780553589399,Romance,dataset/Romance/0000646.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515134490.jpg,Guilty Pleasures,Laurell K. Hamilton,Paperback,4.0,7.22,$,8.3,9780515134490,Romance,dataset/Romance/0000647.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515146011.jpg,Nora Roberts Sign of Seven Trilogy Box Set,Nora Roberts,Paperback,4.5,20.14,$,23.0,9780515146011,Romance,dataset/Romance/0000648.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515149333.jpg,Savage Nature,Christine Feehan,Paperback,4.5,7.72,$,8.3,9780515149333,Romance,dataset/Romance/0000649.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515126778.jpg,Jewels of the Sun,Nora Roberts,Paperback,4.0,7.62,$,7.99,9780515126778,Romance,dataset/Romance/0000650.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425244890.jpg,Kiss of Snow,Nalini Singh,Paperback,4.5,8.78,$,,9780425244890,Romance,dataset/Romance/0000651.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4514/9780451466167.jpg,Murder Of Crows,Anne Bishop,Paperback,4.5,8.69,$,9.3,9780451466167,Romance,dataset/Romance/0000652.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4514/9780451467003.jpg,Dreamer's Pool,Juliet Marillier,Paperback,4.0,8.59,$,,9780451467003,Romance,dataset/Romance/0000653.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3494/9780349423586.jpg,Meet Cute,Helena Hunting,Paperback,4.0,8.14,$,10.15,9780349423586,Romance,dataset/Romance/0000654.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425204184.jpg,Survivor in Death,J D Robb,Paperback,4.5,7.67,$,8.3,9780425204184,Romance,dataset/Romance/0000655.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4736/9781473666771.jpg,Finale,Stephanie Garber,Paperback,4.0,14.87,$,,9781473666771,Romance,dataset/Romance/0000656.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3304/9780330477581.jpg,The Distant Hours,Kate Morton,Paperback,4.0,10.11,$,11.4,9780330477581,Romance,dataset/Romance/0000657.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4732/9781473224599.jpg,Archangel's War,Nalini Singh,Paperback,4.5,9.08,$,10.15,9781473224599,Romance,dataset/Romance/0000658.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4402/9780440244448.jpg,Midnight Rising,Lara Adrian,Paperback,4.0,7.72,$,8.3,9780440244448,Romance,dataset/Romance/0000659.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515154634.jpg,Air Bound,Christine Feehan,Paperback,4.5,8.47,$,9.3,9780515154634,Romance,dataset/Romance/0000660.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7783/9780778328063.jpg,1022 Evergreen Place,Debbie Macomber,Paperback,4.0,7.59,$,8.3,9780778328063,Romance,dataset/Romance/0000661.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4465/9780446574495.jpg,Eternal Rider,Larissa Ione,Paperback,4.0,8.41,$,,9780446574495,Romance,dataset/Romance/0000662.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4711/9781471179464.jpg,If You Could Go Anywhere,Paige Toon,Paperback,4.0,8.99,$,10.5,9781471179464,Romance,dataset/Romance/0000663.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0618/9780061852053.jpg,Nine Rules to Break When Romancing a Rake,Sarah MacLean,Paperback,4.0,7.83,$,8.3,9780061852053,Romance,dataset/Romance/0000664.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7181/9780718183196.jpg,Still Me,Jojo Moyes,Paperback,4.0,17.97,$,18.0,9780718183196,Romance,dataset/Romance/0000665.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405917759.jpg,My Sweet Revenge,Jane Fallon,Paperback,4.0,9.64,$,11.4,9781405917759,Romance,dataset/Romance/0000666.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5532/9780553278590.jpg,Sweet Revenge,Nora Roberts,Paperback,4.0,9.09,$,9.3,9780553278590,Romance,dataset/Romance/0000667.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405927079.jpg,The Fifth Letter,Nicola Moriarty,Paperback,3.5,9.43,$,11.4,9781405927079,Romance,dataset/Romance/0000668.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476729091.jpg,The Rosie Project,Graeme Simsion,Paperback,4.0,14.41,$,16.0,9781476729091,Romance,dataset/Romance/0000669.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3494/9780349414164.jpg,The Dressmaker's Secret,Charlotte Betts,Paperback,4.0,5.08,$,11.4,9780349414164,Romance,dataset/Romance/0000670.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751550740.jpg,The Far Side of the Sun,Kate Furnivall,Paperback,3.5,7.56,$,10.8,9780751550740,Romance,dataset/Romance/0000671.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3123/9780312360733.jpg,Wallflower Christmas,Lisa Kleypas,Paperback,4.0,7.01,$,8.3,9780312360733,Romance,dataset/Romance/0000672.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4512/9780451231017.jpg,An Unforgettable Lady,J R Ward,Paperback,4.0,8.00,$,8.3,9780451231017,Romance,dataset/Romance/0000673.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1411/9780141183299.jpg,A Room with a View,E. M. Forster,Paperback,4.0,8.88,$,10.3,9780141183299,Romance,dataset/Romance/0000674.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3494/9780349403946.jpg,Fall From India Place,Samantha Young,Paperback,4.0,4.91,$,9.5,9780349403946,Romance,dataset/Romance/0000675.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/9322/9781932234961.jpg,5 Centimeters Per Second,Makoto Shinkai,Paperback,4.0,16.38,$,20.1,9781932234961,Romance,dataset/Romance/0000676.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425216590.jpg,On The Prowl,Patricia Briggs,Paperback,4.0,7.56,$,8.8,9780425216590,Romance,dataset/Romance/0000677.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4732/9781473224575.jpg,Archangel's Prophecy,Nalini Singh,Paperback,4.0,8.12,$,11.4,9781473224575,Romance,dataset/Romance/0000678.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5751/9780575100077.jpg,Blaze of Memory,Nalini Singh,Paperback,4.0,8.81,$,12.4,9780575100077,Romance,dataset/Romance/0000679.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4402/9780440244509.jpg,Ashes of Midnight,Lara Adrian,Paperback,4.0,7.67,$,8.3,9780440244509,Romance,dataset/Romance/0000680.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/8575/9780857502483.jpg,The Invasion of the Tearling,Erika Johansen,Paperback,4.0,10.56,$,,9780857502483,Romance,dataset/Romance/0000681.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1431/9780143127529.jpg,The Book of Life,Deborah Harkness,Paperback,4.0,17.08,$,18.0,9780143127529,Romance,dataset/Romance/0000682.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751566239.jpg,Daisy's Vintage Cornish Camper Van,Ali McNamara,Paperback,4.0,5.41,$,11.4,9780751566239,Romance,dataset/Romance/0000683.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5098/9781509824755.jpg,The Olive Tree,Lucinda Riley,Paperback,4.0,9.22,$,10.5,9781509824755,Romance,dataset/Romance/0000684.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1413/9780141395203.jpg,Jane Austen: The Complete Works,Jane Austen,Boxed Set,4.5,100.95,$,123.9,9780141395203,Romance,dataset/Romance/0000685.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751552188.jpg,A Place to Call Home,Carole Matthews,Paperback,4.0,5.24,$,9.33,9780751552188,Romance,dataset/Romance/0000686.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405932097.jpg,Truly Madly Guilty,Liane Moriarty,Paperback,3.5,9.90,$,11.4,9781405932097,Romance,dataset/Romance/0000687.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0994/9780099474364.jpg,The Unknown Ajax,Georgette Heyer,Paperback,4.0,10.78,$,12.4,9780099474364,Romance,dataset/Romance/0000688.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7864/9781786492487.jpg,The Good Doctor of Warsaw,Elisabeth Gifford,Paperback,4.5,US$6.11,$,,9781786492487,Romance,dataset/Romance/0000689.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5255/9780525566656.jpg,The Crazy Rich Asians Trilogy Box Set,Kevin Kwan,Paperback,4.5,US$34.07,$,,9780525566656,Romance,dataset/Romance/0000690.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751548259.jpg,The Winter Crown,Elizabeth Chadwick,Paperback,4.0,US$7.23,$,,9780751548259,Romance,dataset/Romance/0000691.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/8435/9781843547136.jpg,Night Train To Lisbon,Pascal Mercier,Paperback,3.5,US$9.48,$,,9781843547136,Romance,dataset/Romance/0000692.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425270707.jpg,Magic Binds,Ilona Andrews,Paperback,4.5,US$7.83,$,,9780425270707,Romance,dataset/Romance/0000693.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4516/9781451683301.jpg,Lothaire,Kresley Cole,Paperback,4.5,US$8.05,$,,9781451683301,Romance,dataset/Romance/0000694.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515148244.jpg,Water Bound,Christine Feehan,Paperback,4.0,US$7.84,$,,9780515148244,Romance,dataset/Romance/0000695.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751558616.jpg,The Little Flower Shop by the Sea,Ali McNamara,Paperback,4.0,US$11.56,$,,9780751558616,Romance,dataset/Romance/0000696.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425267066.jpg,Fever,Maya Banks,Paperback,4.0,US$12.17,$,,9780425267066,Romance,dataset/Romance/0000697.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751552287.jpg,The Secret of Ella and Micha,Jessica Sorensen,Paperback,4.0,US$5.40,$,,9780751552287,Romance,dataset/Romance/0000698.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0624/9780062439611.jpg,99 Percent Mine,Sally Thorne,Paperback,3.5,US$10.67,$,,9780062439611,Romance,dataset/Romance/0000699.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751550337.jpg,Christmas at the Cupcake Cafe,Jenny Colgan,Paperback,4.0,US$9.01,$,,9780751550337,Romance,dataset/Romance/0000700.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5751/9780575113473.jpg,Archangel's Blade,Nalini Singh,Paperback,4.5,US$7.82,$,,9780575113473,Romance,dataset/Romance/0000701.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5011/9781501170621.jpg,Without Merit,Colleen Hoover,Paperback,4.0,US$12.89,$,,9781501170621,Romance,dataset/Romance/0000702.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0623/9780062371874.jpg,Devil in Spring,Lisa Kleypas,Paperback,4.0,US$7.42,$,,9780062371874,Romance,dataset/Romance/0000703.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4472/9781447288947.jpg,Bridget Jones: The Edge of Reason,Helen Fielding,Paperback,3.5,US$8.60,$,,9781447288947,Romance,dataset/Romance/0000704.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3455/9780345519498.jpg,Seduction of a Highland Lass,Maya Banks,Paperback,4.0,US$7.78,$,,9780345519498,Romance,dataset/Romance/0000705.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425267080.jpg,Burn,Maya Banks,Paperback,4.0,US$12.08,$,,9780425267080,Romance,dataset/Romance/0000706.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425223253.jpg,Hostage to Pleasure,Nalini Singh,Paperback,4.0,US$7.79,$,,9780425223253,Romance,dataset/Romance/0000707.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3129/9780312949808.jpg,Mine Till Midnight,Lisa Kleypas,Paperback,4.0,US$7.42,$,,9780312949808,Romance,dataset/Romance/0000708.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/2419/9780241958438.jpg,Rachel's Holiday,Marian Keyes,Paperback,4.0,11.27,$,11.4,9780241958438,Romance,dataset/Romance/0000709.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4466/9780446616898.jpg,You Can't Hide,Karen Rose,Paperback,4.5,8.35,$,,9780446616898,Romance,dataset/Romance/0000710.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7499/9780749929053.jpg,Happy Ever After,Nora Roberts,Paperback,4.0,8.00,$,11.4,9780749929053,Romance,dataset/Romance/0000711.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5750/9780575095779.jpg,Archangel's Consort,Nalini Singh,Paperback,4.0,8.64,$,12.4,9780575095779,Romance,dataset/Romance/0000712.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4466/9780446614474.jpg,I'm Watching You,Karen Rose,Paperback,4.5,8.56,$,,9780446614474,Romance,dataset/Romance/0000713.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425227947.jpg,The Darkest Hour,Maya Banks,Paperback,4.0,7.89,$,8.3,9780425227947,Romance,dataset/Romance/0000714.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0994/9780099474463.jpg,Lady Of Quality,Georgette Heyer,Paperback,4.0,9.45,$,11.4,9780099474463,Romance,dataset/Romance/0000715.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405919166.jpg,Dream a Little Dream,Giovanna Fletcher,Paperback,4.0,9.68,$,11.4,9781405919166,Romance,dataset/Romance/0000716.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515142716.jpg,Nora Roberts Circle Trilogy Box Set,Nora Roberts,Paperback,4.5,22.58,$,24.2,9780515142716,Romance,dataset/Romance/0000717.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4555/9781455599240.jpg,Motorcycle Man,Kristen Ashley,Paperback,4.5,8.38,$,,9781455599240,Romance,dataset/Romance/0000718.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476776903.jpg,One True Loves,TAYLOR JENKINS REID,Paperback,4.0,8.60,$,11.4,9781476776903,Romance,dataset/Romance/0000719.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3455/9780345519511.jpg,Never Love A Highlander,Maya Banks,Paperback,4.0,6.07,$,7.8,9780345519511,Romance,dataset/Romance/0000720.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7847/9781784750251.jpg,Fifty Shades of Grey,E. L. James,Paperback,3.5,7.24,$,10.3,9781784750251,Romance,dataset/Romance/0000721.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3808/9780380811083.jpg,Again the Magic,Lisa Kleypas,Paperback,4.0,6.50,$,,9780380811083,Romance,dataset/Romance/0000722.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4401/9780440164845.jpg,Noble House,James Clavell,Paperback,4.0,12.73,$,,9780440164845,Romance,dataset/Romance/0000723.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751540888.jpg,The Rescue,Nicholas Sparks,Paperback,4.0,8.33,$,11.4,9780751540888,Romance,dataset/Romance/0000724.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3129/9780312934323.jpg,Sins of the Night,Sherrilyn Kenyon,Paperback,4.0,8.29,$,9.3,9780312934323,Romance,dataset/Romance/0000725.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425215685.jpg,Born in Death,J D Robb,Paperback,4.5,7.51,$,8.3,9780425215685,Romance,dataset/Romance/0000726.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751548303.jpg,The Summer Queen,Elizabeth Chadwick,Paperback,4.0,6.36,$,11.4,9780751548303,Romance,dataset/Romance/0000727.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0622/9780062289254.jpg,White Hot,Ilona Andrews,Paperback,4.5,7.02,$,8.8,9780062289254,Romance,dataset/Romance/0000728.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425217542.jpg,Innocent in Death,J D Robb,Paperback,4.5,7.72,$,8.3,9780425217542,Romance,dataset/Romance/0000729.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/1019/9781101987995.jpg,Apprentice in Death,J D Robb,Paperback,4.5,7.42,$,8.8,9781101987995,Romance,dataset/Romance/0000730.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4514/9780451488008.jpg,Archangel's Heart,Nalini Singh,Paperback,4.5,7.62,$,10.3,9780451488008,Romance,dataset/Romance/0000731.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4402/9780440244493.jpg,Veil of Midnight,Lara Adrian,Paperback,4.5,7.67,$,8.3,9780440244493,Romance,dataset/Romance/0000732.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5535/9780553589382.jpg,Kiss of Crimson,Adrian Lara,Paperback,4.0,7.86,$,8.3,9780553589382,Romance,dataset/Romance/0000733.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5098/9781509806294.jpg,Dirty,Kylie Scott,Paperback,4.0,6.54,$,8.8,9781509806294,Romance,dataset/Romance/0000734.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7873/9781787330719.jpg,Warlight,Michael Ondaatje,Hardback,3.5,18.05,$,21.1,9781787330719,Romance,dataset/Romance/0000735.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4091/9781409175421.jpg,The Guilty Wife,Elle Croft,Paperback,4.0,8.36,$,11.4,9781409175421,Romance,dataset/Romance/0000736.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1995/9780199536061.jpg,Anna Karenina,Leo Tolstoy,Paperback,4.0,10.78,$,11.4,9780199536061,Romance,dataset/Romance/0000737.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425241509.jpg,Dragon Bound,Thea Harrison,Paperback,4.0,7.47,$,8.3,9780425241509,Romance,dataset/Romance/0000738.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5535/9780553589917.jpg,The Endless Forest,Sara Donati,Paperback,4.5,16.56,$,17.0,9780553589917,Romance,dataset/Romance/0000739.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1414/9780141439594.jpg,Tess of the D'Urbervilles,Thomas Hardy,Paperback,4.0,8.76,$,,9780141439594,Romance,dataset/Romance/0000740.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4447/9781444778519.jpg,Angelfall,Susan Ee,Paperback,4.0,8.24,$,11.4,9781444778519,Romance,dataset/Romance/0000741.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3129/9780312992439.jpg,Seize the Night,Sherrilyn Kenyon,Paperback,4.5,7.51,$,8.3,9780312992439,Romance,dataset/Romance/0000742.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7841/9781784161170.jpg,Shopaholic to the Rescue,Sophie Kinsella,Paperback,3.5,9.40,$,10.5,9781784161170,Romance,dataset/Romance/0000743.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/2412/9780241295946.jpg,Love is Blind,William Boyd,Paperback,4.0,23.04,$,,9780241295946,Romance,dataset/Romance/0000744.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/6717/9780671737610.jpg,A Kingdom of Dreams,Judith McNaught,Paperback,4.0,9.65,$,10.3,9780671737610,Romance,dataset/Romance/0000745.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3129/9780312934347.jpg,Dark Side of the Moon,Sherrilyn Kenyon,Paperback,4.0,8.20,$,9.3,9780312934347,Romance,dataset/Romance/0000746.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1414/9780141441351.jpg,The Turn of the Screw,Henry James,Paperback,3.5,6.30,$,7.8,9780141441351,Romance,dataset/Romance/0000747.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5098/9781509848508.jpg,World Without End,Ken Follett,Paperback,4.5,12.59,$,12.9,9781509848508,Romance,dataset/Romance/0000748.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3125/9780312550004.jpg,Time Untime,Sherrilyn Kenyon,Paperback,4.0,7.62,$,8.3,9780312550004,Romance,dataset/Romance/0000749.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3129/9780312979973.jpg,Fantasy Lover,Sherrilyn Kenyon,Paperback,4.0,8.09,$,9.3,9780312979973,Romance,dataset/Romance/0000750.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7783/9780778318347.jpg,A Match for Marcus Cynster,Stephanie Laurens,Paperback,4.0,8.38,$,,9780778318347,Romance,dataset/Romance/0000751.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0620/9780062021731.jpg,The Ugly Duchess,Eloisa James,Paperback,3.5,7.62,$,8.3,9780062021731,Romance,dataset/Romance/0000752.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0620/9780062069122.jpg,Rescue Me,Rachel Gibson,Paperback,4.0,8.44,$,,9780062069122,Romance,dataset/Romance/0000753.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1430/9780143039983.jpg,The Haunting of Hill House,Shirley Jackson,Paperback,4.0,12.81,$,20.1,9780143039983,Romance,dataset/Romance/0000754.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4516/9781451664140.jpg,The Lady of the Rivers,Philippa Gregory,Paperback,4.0,9.87,$,,9781451664140,Romance,dataset/Romance/0000755.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0082/9780008275051.jpg,Her Name Was Rose,Claire Allan,Paperback,4.0,3.92,$,10.3,9780008275051,Romance,dataset/Romance/0000756.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751553970.jpg,The Christmas Surprise,Jenny Colgan,Paperback,4.0,8.44,$,10.5,9780751553970,Romance,dataset/Romance/0000757.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3129/9780312979980.jpg,Night Pleasures (Dark-Hunter Novels),Sherrilyn Kenyon,Paperback,4.0,7.51,$,9.3,9780312979980,Romance,dataset/Romance/0000758.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1419/9780141982960.jpg,List of the Lost,Morrissey,Paperback,2.5,7.83,$,10.3,9780141982960,Romance,dataset/Romance/0000759.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/6717/9780671737634.jpg,Something Wonderful,Judith McNaught,Paperback,4.5,8.38,$,,9780671737634,Romance,dataset/Romance/0000760.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425220160.jpg,Mine to Possess,Nalini Singh,Paperback,4.0,7.56,$,8.3,9780425220160,Romance,dataset/Romance/0000761.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4472/9781447226888.jpg,Mrs. Hemingway,Naomi Wood,Paperback,4.0,5.45,$,10.3,9781447226888,Romance,dataset/Romance/0000762.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4711/9781471125027.jpg,Until Friday Night,Abbi Glines,Paperback,4.0,14.16,$,,9781471125027,Romance,dataset/Romance/0000763.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/2412/9780241295922.jpg,Love is Blind,William Boyd,Paperback,4.0,9.48,$,11.5,9780241295922,Romance,dataset/Romance/0000764.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3455/9780345542939.jpg,Top Secret Twenty-One,Janet Evanovich,Paperback,4.0,8.70,$,9.3,9780345542939,Romance,dataset/Romance/0000765.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4512/9780451225009.jpg,The Black Dagger Brotherhood,J R Ward,Paperback,4.5,16.85,$,17.0,9780451225009,Romance,dataset/Romance/0000766.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1411/9780141198842.jpg,Lady Audley's Secret,Mary Elizabeth Braddon,Paperback,4.0,7.96,$,,9780141198842,Romance,dataset/Romance/0000767.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425238196.jpg,No Place To Run,Maya Banks,Paperback,4.5,7.49,$,8.3,9780425238196,Romance,dataset/Romance/0000768.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3494/9780349423401.jpg,The Friend Zone: the most hilarious and heartbreaking romantic comedy of 2019,Abby Jimenez,Paperback,4.0,8.67,$,11.4,9780349423401,Romance,dataset/Romance/0000769.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3129/9780312992422.jpg,Night Play,Sherrilyn Kenyon,Paperback,4.5,8.24,$,9.3,9780312992422,Romance,dataset/Romance/0000770.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/6321/9781632153999.jpg,Sunstone Volume 3,Stjepan Sejic,Paperback,4.5,12.11,$,17.0,9781632153999,Romance,dataset/Romance/0000771.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0994/9780099448426.jpg,Doctor Zhivago (Vintage Classic Russians Series),Boris Pasternak,Paperback,4.0,7.86,$,20.63,9780099448426,Romance,dataset/Romance/0000772.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515155570.jpg,Earth Bound,Christine Feehan,Paperback,4.5,7.62,$,8.3,9780515155570,Romance,dataset/Romance/0000773.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7499/9780749941840.jpg,The Search,Nora Roberts,Paperback,4.0,9.47,$,11.4,9780749941840,Romance,dataset/Romance/0000774.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515149494.jpg,Bullet,Laurell K Hamilton,Paperback,4.0,9.09,$,9.3,9780515149494,Romance,dataset/Romance/0000775.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0622/9780062289278.jpg,Wildfire,Ilona Andrews,Paperback,4.5,7.00,$,8.8,9780062289278,Romance,dataset/Romance/0000776.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7850/9781785035623.jpg,The One,John Marrs,Paperback,4.0,10.00,$,11.4,9781785035623,Romance,dataset/Romance/0000777.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0628/9780062878434.jpg,Diamond Fire,Ilona Andrews,Paperback,4.5,4.78,$,5.0,9780062878434,Romance,dataset/Romance/0000778.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476712840.jpg,After I Do,TAYLOR JENKINS REID,Paperback,4.0,8.71,$,11.4,9781476712840,Romance,dataset/Romance/0000779.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3455/9780345500762.jpg,Fire and Ice,Julie Garwood,Paperback,4.0,8.18,$,8.3,9780345500762,Romance,dataset/Romance/0000780.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0620/9780062068637.jpg,The Lady Risks All,Stephanie Laurens,Paperback,4.0,8.16,$,8.3,9780062068637,Romance,dataset/Romance/0000781.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5751/9780575119499.jpg,Archangel's Storm,Nalini Singh,Paperback,4.5,8.73,$,11.4,9780575119499,Romance,dataset/Romance/0000782.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0072/9780007275700.jpg,Netherland,Joseph O'Neill,Paperback,3.5,9.09,$,11.4,9780007275700,Romance,dataset/Romance/0000783.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3409/9780340960363.jpg,Foreign Fruit,Jojo Moyes,Paperback,3.5,9.53,$,11.4,9780340960363,Romance,dataset/Romance/0000784.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425235898.jpg,Fantasy in Death,J D Robb,Paperback,4.5,7.58,$,8.3,9780425235898,Romance,dataset/Romance/0000785.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751541168.jpg,A Bend In The Road,Nicholas Sparks,Paperback,4.0,8.21,$,11.4,9780751541168,Romance,dataset/Romance/0000786.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3853/9780385335973.jpg,Dragonfly in Amber,Diana Gabaldon,Paperback,4.5,15.36,$,18.0,9780385335973,Romance,dataset/Romance/0000787.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3455/9780345500748.jpg,Shadow Music,Julie Garwood,Paperback,4.0,7.95,$,8.3,9780345500748,Romance,dataset/Romance/0000788.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3129/9780312947057.jpg,Upon the Midnight Clear,Sherrilyn Kenyon,Paperback,4.0,7.26,$,8.3,9780312947057,Romance,dataset/Romance/0000789.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/8604/9781860464959.jpg,Eucalyptus,Murray Bail,Paperback,3.5,9.60,$,11.4,9781860464959,Romance,dataset/Romance/0000790.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425240175.jpg,Hidden Away,Maya Banks,Paperback,4.5,7.48,$,8.8,9780425240175,Romance,dataset/Romance/0000791.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3303/9780330367356.jpg,Bridget Jones: The Edge of Reason,Helen Fielding,Paperback,3.5,8.40,$,10.15,9780330367356,Romance,dataset/Romance/0000792.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4091/9781409127741.jpg,Eighty Days Yellow,Vina Jackson,Paperback,3.0,7.97,$,11.4,9781409127741,Romance,dataset/Romance/0000793.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425226926.jpg,Angels' Blood,Nalini Singh,Paperback,4.0,7.58,$,8.3,9780425226926,Romance,dataset/Romance/0000794.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/9379/9781937994433.jpg,The Complete Tales & Poems of Edgar Allan Poe (Knickerbocker Classics),Edgar Allan Poe,Hardback,4.5,27.03,$,30.9,9781937994433,Romance,dataset/Romance/0000795.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4732/9781473217492.jpg,Archangel's Heart,Nalini Singh,Paperback,4.5,9.00,$,12.9,9781473217492,Romance,dataset/Romance/0000796.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4447/9781444722963.jpg,Pandemonium (Delirium Trilogy 2),Lauren Oliver,Paperback,4.0,13.95,$,,9781444722963,Romance,dataset/Romance/0000797.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3737/9780373777433.jpg,Beauty Awakened,Gena Showalter,Paperback,4.0,8.41,$,,9780373777433,Romance,dataset/Romance/0000798.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476715902.jpg,Slammed,Colleen Hoover,Paperback,4.5,13.79,$,16.0,9781476715902,Romance,dataset/Romance/0000799.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/6848/9780684830681.jpg,Gone with the Wind,Margaret Mitchell,Hardback,4.5,22.75,$,29.3,9780684830681,Romance,dataset/Romance/0000800.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4472/9781447286004.jpg,The Great Alone,Kristin Hannah,Paperback,4.5,19.56,$,,9781447286004,Romance,dataset/Romance/0000801.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0994/9780099474388.jpg,The Nonesuch,Georgette Heyer,Paperback,4.0,9.58,$,11.4,9780099474388,Romance,dataset/Romance/0000802.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5750/9780575075597.jpg,Replay,Ken Grimwood,Paperback,4.0,8.10,$,11.4,9780575075597,Romance,dataset/Romance/0000803.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476761770.jpg,Tangled,Emma Chase,Paperback,4.0,8.33,$,11.4,9781476761770,Romance,dataset/Romance/0000804.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476746555.jpg,Losing Hope,Colleen Hoover,Paperback,4.5,14.44,$,17.0,9781476746555,Romance,dataset/Romance/0000805.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5290/9781529002393.jpg,The Doll Factory,Elizabeth Macneal,Hardback,4.0,12.88,$,16.0,9781529002393,Romance,dataset/Romance/0000806.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3494/9780349400563.jpg,Chaos in Death/Possession in Death,J. D. Robb,Paperback,4.5,7.94,$,11.4,9780349400563,Romance,dataset/Romance/0000807.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3995/9780399583933.jpg,Bound Together,Christine Feehan,Paperback,4.5,8.38,$,,9780399583933,Romance,dataset/Romance/0000808.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751554496.jpg,The Longest Ride,Nicholas Sparks,Paperback,4.0,9.34,$,11.4,9780751554496,Romance,dataset/Romance/0000809.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/6269/9781626924796.jpg,Bloom into You: Vol. 2,Nakatani Nio,Paperback,4.0,8.35,$,12.9,9781626924796,Romance,dataset/Romance/0000810.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7553/9780755355815.jpg,To The Moon And Back,Jill Mansell,Paperback,4.0,8.98,$,11.5,9780755355815,Romance,dataset/Romance/0000811.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4091/9781409117162.jpg,The Legacy,Katherine Webb,Paperback,3.5,9.20,$,11.4,9781409117162,Romance,dataset/Romance/0000812.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4711/9781471152184.jpg,The Japanese Lover,Isabel Allende,Paperback,4.0,24.11,$,,9781471152184,Romance,dataset/Romance/0000813.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3807/9780380709540.jpg,Ramona the Pest,Beverly Cleary,Paperback,4.0,7.28,$,8.3,9780380709540,Romance,dataset/Romance/0000814.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5098/9781509866656.jpg,Recursion,Blake Crouch,Hardback,4.0,14.44,$,18.0,9781509866656,Romance,dataset/Romance/0000815.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0995/9780099554455.jpg,Anil's Ghost,Michael Ondaatje,Paperback,3.5,10.48,$,12.9,9780099554455,Romance,dataset/Romance/0000816.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425237397.jpg,Styx's Storm,Lora Leigh,Paperback,4.0,8.08,$,8.51,9780425237397,Romance,dataset/Romance/0000817.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4447/9781444757521.jpg,Tiger's Destiny,Colleen Houck,Paperback,4.5,9.16,$,11.4,9781444757521,Romance,dataset/Romance/0000818.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3129/9780312947064.jpg,One Silent Night,Sherrilyn Kenyon,Paperback,4.0,8.00,$,9.3,9780312947064,Romance,dataset/Romance/0000819.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/6265/9781626543089.jpg,The Price of Salt,Patricia Highsmith,Paperback,4.0,14.62,$,,9781626543089,Romance,dataset/Romance/0000820.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5751/9780575100053.jpg,Branded by Fire,Nalini Singh,Paperback,4.5,8.78,$,11.4,9780575100053,Romance,dataset/Romance/0000821.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3163/9780316334006.jpg,The Inheritance Trilogy,N K Jemisin,Paperback,4.0,25.19,$,,9780316334006,Romance,dataset/Romance/0000822.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425279007.jpg,Brotherhood in Death,J D Robb,Paperback,4.5,7.62,$,10.3,9780425279007,Romance,dataset/Romance/0000823.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4514/9780451488244.jpg,Archangel's Viper,Nalini Singh,Paperback,4.5,7.62,$,8.8,9780451488244,Romance,dataset/Romance/0000824.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1413/9780141397269.jpg,The Tell-Tale Heart,Edgar Allan Poe,Paperback,4.0,2.81,$,3.84,9780141397269,Romance,dataset/Romance/0000825.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0065/9780006550198.jpg,The Blue Flower,Penelope Fitzgerald,Paperback,3.5,9.40,$,11.4,9780006550198,Romance,dataset/Romance/0000826.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405921220.jpg,Sylvia Day Crossfire Series Four Book Collection,Sylvia Day,Mixed media product,4.5,36.41,$,,9781405921220,Romance,dataset/Romance/0000827.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4447/9781444797954.jpg,Pure (The Second Covenant Novel),Jennifer L. Armentrout,Paperback,4.5,8.28,$,11.4,9781444797954,Romance,dataset/Romance/0000828.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5751/9780575112148.jpg,Archangel's Legion,Nalini Singh,Paperback,4.5,11.04,$,12.9,9780575112148,Romance,dataset/Romance/0000829.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7783/9780778317821.jpg,The Tempting of Thomas Carrick,Stephanie Laurens,Paperback,4.0,8.18,$,,9780778317821,Romance,dataset/Romance/0000830.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4402/9780440234807.jpg,Beyond The Highland Mist,Karen Marie Moning,Paperback,4.0,7.91,$,,9780440234807,Romance,dataset/Romance/0000831.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4091/9781409103462.jpg,The Return Journey,Maeve Binchy,Paperback,4.0,8.40,$,11.4,9781409103462,Romance,dataset/Romance/0000832.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5527/9780552772747.jpg,The Undomestic Goddess,Sophie Kinsella,Paperback,4.0,10.07,$,11.4,9780552772747,Romance,dataset/Romance/0000833.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3853/9780385335980.jpg,Drums of Autumn,Diana Gabaldon,Paperback,4.5,16.74,$,17.99,9780385335980,Romance,dataset/Romance/0000834.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515133875.jpg,Narcissus in Chains,Laurell K Hamilton,Paperback,4.0,10.34,$,,9780515133875,Romance,dataset/Romance/0000835.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5532/9780553264937.jpg,Emily's Quest,L. M. Montgomery,Paperback,4.0,5.30,$,6.7,9780553264937,Romance,dataset/Romance/0000836.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3565/9780356506005.jpg,Burn Bright,Patricia Briggs,Paperback,4.5,7.90,$,11.4,9780356506005,Romance,dataset/Romance/0000837.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3491/9780349142234.jpg,The Little Breton Bistro,Nina George,Paperback,3.5,5.02,$,11.4,9780349142234,Romance,dataset/Romance/0000838.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751548525.jpg,Safe Haven,Nicholas Sparks,Paperback,4.0,8.31,$,11.4,9780751548525,Romance,dataset/Romance/0000839.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4555/9781455520633.jpg,Longest Ride,Nicholas Sparks,Paperback,4.0,8.03,$,8.3,9781455520633,Romance,dataset/Romance/0000840.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1431/9780143122357.jpg,The Haunting of Hill House,Shirley Jackson,Hardback,4.0,15.56,$,18.0,9780143122357,Romance,dataset/Romance/0000841.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405912419.jpg,Gabriel's Inferno,Sylvain Reynard,Paperback,4.0,10.96,$,11.4,9781405912419,Romance,dataset/Romance/0000842.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7490/9780749015572.jpg,The Wild Girl,Kate Forsyth,Paperback,4.0,9.89,$,10.8,9780749015572,Romance,dataset/Romance/0000843.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4642/9781464201257.jpg,Unnatural Habits,Kerry Greenwood,Paperback,4.0,14.92,$,,9781464201257,Romance,dataset/Romance/0000844.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/6700/9780670025596.jpg,The Book of Life,Deborah Harkness,Hardback,4.0,22.58,$,29.9,9780670025596,Romance,dataset/Romance/0000845.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515148978.jpg,Flirt,Laurell K Hamilton,Paperback,3.5,8.00,$,9.3,9780515148978,Romance,dataset/Romance/0000846.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/9438/9781943893034.jpg,Calendar Girl: Volume One,Audrey Carlan,Paperback,4.0,11.44,$,16.0,9781943893034,Romance,dataset/Romance/0000847.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3129/9780312946869.jpg,Devil May Cry,Sherrilyn Kenyon,Paperback,4.5,8.35,$,9.3,9780312946869,Romance,dataset/Romance/0000848.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405919180.jpg,Always With Love,Giovanna Fletcher,Paperback,4.0,8.83,$,10.3,9781405919180,Romance,dataset/Romance/0000849.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405912983.jpg,On Dublin Street,Samantha Young,Paperback,4.0,10.49,$,,9781405912983,Romance,dataset/Romance/0000850.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5098/9781509892839.jpg,Crudo,Olivia Laing,Hardback,3.5,11.24,$,17.0,9781509892839,Romance,dataset/Romance/0000851.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3494/9780349421865.jpg,Josh and Hazel's Guide to Not Dating,Christina Lauren,Paperback,4.0,12.66,$,17.0,9780349421865,Romance,dataset/Romance/0000852.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/6321/9781632156099.jpg,Sunstone Volume 4,Stjepan Sejic,Paperback,4.5,13.65,$,17.0,9781632156099,Romance,dataset/Romance/0000853.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/2501/9781250161574.jpg,Leverage in Death,J D Robb,Paperback,4.5,8.49,$,9.5,9781250161574,Romance,dataset/Romance/0000854.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7848/9781784870751.jpg,The Tenant of Wildfell Hall,Anne Brontë,Paperback,4.0,10.76,$,,9781784870751,Romance,dataset/Romance/0000855.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751551877.jpg,A Walk To Remember,Nicholas Sparks,Paperback,4.0,7.73,$,11.4,9780751551877,Romance,dataset/Romance/0000856.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425256299.jpg,Fire Touched,Patricia Briggs,Paperback,4.5,7.22,$,8.3,9780425256299,Romance,dataset/Romance/0000857.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/6717/9780671776800.jpg,Paradise,Judith McNaught,Paperback,4.5,9.89,$,,9780671776800,Romance,dataset/Romance/0000858.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1411/9780141187785.jpg,The Go-between,L. P. Hartley,Paperback,4.0,10.23,$,12.4,9780141187785,Romance,dataset/Romance/0000859.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1410/9780141040332.jpg,Tess of the D'Urbervilles,Thomas Hardy,Hardback,4.0,17.30,$,18.0,9780141040332,Romance,dataset/Romance/0000860.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515146370.jpg,Blood Noir,Laurell K. Hamilton,Paperback,4.0,9.50,$,,9780515146370,Romance,dataset/Romance/0000861.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0074/9780007488063.jpg,Here's Looking At You,Mhairi McFarlane,Paperback,4.0,9.81,$,11.4,9780007488063,Romance,dataset/Romance/0000862.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515139754.jpg,Incubus Dreams,Laurell K Hamilton,Paperback,4.0,10.73,$,,9780515139754,Romance,dataset/Romance/0000863.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425246108.jpg,Whispers In The Dark,Maya Banks,Paperback,4.5,7.94,$,8.8,9780425246108,Romance,dataset/Romance/0000864.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4555/9781455582877.jpg,The Notebook,Nicholas Sparks,Paperback,4.0,7.84,$,9.3,9781455582877,Romance,dataset/Romance/0000865.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3494/9780349417561.jpg,Love and Other Words,Christina Lauren,Paperback,4.0,8.36,$,11.4,9780349417561,Romance,dataset/Romance/0000866.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/2638/9780263888263.jpg,The Macgregor Brides,Nora Roberts,Paperback,4.0,9.59,$,12.4,9780263888263,Romance,dataset/Romance/0000867.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425250860.jpg,Echoes At Dawn,Maya Banks,Paperback,4.5,7.36,$,8.8,9780425250860,Romance,dataset/Romance/0000868.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0621/9780062100207.jpg,Under a Vampire Moon,Lynsay Sands,Paperback,4.0,8.11,$,8.3,9780062100207,Romance,dataset/Romance/0000869.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4466/9780446616904.jpg,Count to Ten,Karen Rose,Paperback,4.5,9.36,$,,9780446616904,Romance,dataset/Romance/0000870.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3807/9780380794560.jpg,Devil's Bride,Stephanie Laurens,Paperback,4.0,7.74,$,8.3,9780380794560,Romance,dataset/Romance/0000871.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5098/9781509808687.jpg,Warleggan,Winston Graham,Paperback,4.5,7.76,$,11.4,9781509808687,Romance,dataset/Romance/0000872.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0995/9780099541240.jpg,Doctor Zhivago (Vintage Classic Russians Series),Boris Pasternak,Paperback,4.0,11.33,$,11.4,9780099541240,Romance,dataset/Romance/0000873.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425233382.jpg,Something about You,Julie James,Paperback,4.0,7.42,$,8.3,9780425233382,Romance,dataset/Romance/0000874.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3454/9780345423870.jpg,Candy,Luke Davies,Paperback,4.0,13.95,$,16.0,9780345423870,Romance,dataset/Romance/0000875.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5098/9781509848492.jpg,The Pillars of the Earth,Ken Follett,Paperback,4.5,12.08,$,12.4,9781509848492,Romance,dataset/Romance/0000876.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7181/9780718189341.jpg,You'll Never See Me Again,Lesley Pearse,Paperback,4.5,16.92,$,17.0,9780718189341,Romance,dataset/Romance/0000877.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4711/9781471120022.jpg,Forever Too Far,Abbi Glines,Paperback,4.0,12.62,$,15.0,9781471120022,Romance,dataset/Romance/0000878.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3494/9780349403786.jpg,The Liar,Nora Roberts,Paperback,4.0,9.67,$,11.4,9780349403786,Romance,dataset/Romance/0000879.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0994/9780099476436.jpg,Masqueraders,Georgette Heyer,Paperback,4.0,9.58,$,11.4,9780099476436,Romance,dataset/Romance/0000880.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3732/9780373281596.jpg,The Macgregor Brides,Nora Roberts,Paperback,4.0,7.86,$,8.3,9780373281596,Romance,dataset/Romance/0000881.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0607/9780060773755.jpg,A Quick Bite,Lynsay Sands,Paperback,4.0,7.64,$,8.3,9780060773755,Romance,dataset/Romance/0000882.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4091/9781409166405.jpg,The Protector,Jodi Ellen Malpas,Paperback,4.0,8.15,$,11.4,9781409166405,Romance,dataset/Romance/0000883.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5751/9780575100008.jpg,Mine to Possess,Nalini Singh,Paperback,4.0,8.71,$,12.9,9780575100008,Romance,dataset/Romance/0000884.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425278895.jpg,Obsession in Death,J D Robb,Paperback,4.5,7.62,$,,9780425278895,Romance,dataset/Romance/0000885.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3995/9780399587269.jpg,Lake Silence,Anne Bishop,Paperback,4.5,8.31,$,8.8,9780399587269,Romance,dataset/Romance/0000886.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3129/9780312949815.jpg,Seduce ME at Sunrise,Lisa Kleypas,Paperback,4.0,7.67,$,8.3,9780312949815,Romance,dataset/Romance/0000887.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/9876/9780987622334.jpg,The Summer Palace and Other Stories,C S Pacat,Paperback,4.5,11.04,$,,9780987622334,Romance,dataset/Romance/0000888.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4711/9781471132995.jpg,The Taming of the Queen,Philippa Gregory,Paperback,4.0,9.79,$,11.4,9781471132995,Romance,dataset/Romance/0000889.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/2419/9780241966570.jpg,And the Ass Saw the Angel,Nick Cave,Paperback,4.0,9.22,$,11.4,9780241966570,Romance,dataset/Romance/0000890.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4512/9780451209948.jpg,Fear of Flying,Erica Jong,Paperback,3.5,9.25,$,9.3,9780451209948,Romance,dataset/Romance/0000891.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425242667.jpg,Storm's Heart,Thea Harrison,Paperback,4.0,8.24,$,8.8,9780425242667,Romance,dataset/Romance/0000892.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425246955.jpg,About That Night,Julie James,Paperback,4.0,7.41,$,8.3,9780425246955,Romance,dataset/Romance/0000893.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7352/9780735220690.jpg,Eleanor Oliphant Is Completely Fine,Gail Honeyman,Paperback,4.5,13.47,$,16.0,9780735220690,Romance,dataset/Romance/0000894.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0998/9780099800408.jpg,Possession,A. S. Byatt,Paperback,4.0,12.52,$,12.9,9780099800408,Romance,dataset/Romance/0000895.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7499/9780749958121.jpg,Whiskey Beach,Nora Roberts,Paperback,4.0,9.47,$,10.5,9780749958121,Romance,dataset/Romance/0000896.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4402/9780440246411.jpg,Iced,Karen Marie Moning,Paperback,4.0,8.14,$,8.8,9780440246411,Romance,dataset/Romance/0000897.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425251096.jpg,Tangle of Need,Nalini Singh,Paperback,4.0,8.50,$,,9780425251096,Romance,dataset/Romance/0000898.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4767/9781476740324.jpg,Ten Tiny Breaths,K. A. Tucker,Paperback,4.0,8.43,$,11.4,9781476740324,Romance,dataset/Romance/0000899.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425233368.jpg,Archangel's Kiss,Nalini Singh,Paperback,4.0,7.86,$,8.3,9780425233368,Romance,dataset/Romance/0000900.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515139402.jpg,Red Lily,Nora Roberts,Paperback,4.0,7.62,$,8.3,9780515139402,Romance,dataset/Romance/0000901.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0995/9780099539148.jpg,Summer of Love,Katie Fforde,Paperback,4.0,10.03,$,11.4,9780099539148,Romance,dataset/Romance/0000902.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0074/9780007481583.jpg,How to Fall in Love,Cecelia Ahern,Paperback,4.0,7.78,$,9.5,9780007481583,Romance,dataset/Romance/0000903.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4555/9781455599226.jpg,Law Man,Kristen Ashley,Paperback,4.5,7.72,$,8.3,9781455599226,Romance,dataset/Romance/0000904.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1410/9780141046082.jpg,Remember Me,Lesley Pearse,Paperback,4.5,10.96,$,11.4,9780141046082,Romance,dataset/Romance/0000905.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5527/9780552778527.jpg,Wedding Night,Sophie Kinsella,Paperback,3.5,9.58,$,,9780552778527,Romance,dataset/Romance/0000906.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425212066.jpg,J.D. Robb Box Set,J D Robb,Paperback,4.5,22.23,$,24.2,9780425212066,Romance,dataset/Romance/0000907.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/2419/9780241961520.jpg,Survivor,Lesley Pearse,Paperback,4.5,10.16,$,10.3,9780241961520,Romance,dataset/Romance/0000908.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425243954.jpg,Lawe's Justice,Lora Leigh,Paperback,4.0,8.20,$,8.49,9780425243954,Romance,dataset/Romance/0000909.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0616/9780061626838.jpg,A Duke of Her Own,Eloisa James,Paperback,4.0,7.74,$,8.3,9780061626838,Romance,dataset/Romance/0000910.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3123/9780312360801.jpg,First Grave on the Right,Darynda Jones,Paperback,4.0,8.77,$,9.3,9780312360801,Romance,dataset/Romance/0000911.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/8572/9780857207593.jpg,The King's Curse,Philippa Gregory,Paperback,4.0,8.70,$,,9780857207593,Romance,dataset/Romance/0000912.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5532/9780553285789.jpg,Public Secrets,Nora Roberts,Paperback,4.0,8.27,$,,9780553285789,Romance,dataset/Romance/0000913.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5290/9781529013948.jpg,The Great Alone,Kristin Hannah,Paperback,4.5,8.78,$,8.8,9781529013948,Romance,dataset/Romance/0000914.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1414/9780141439808.jpg,Mansfield Park,Jane Austen,Paperback,4.0,8.06,$,,9780141439808,Romance,dataset/Romance/0000915.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5535/9780553593389.jpg,Trust Me On This,Jennifer Crusie,Paperback,3.5,7.42,$,9.3,9780553593389,Romance,dataset/Romance/0000916.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0994/9780099468080.jpg,The Corinthian,Georgette Heyer,Paperback,4.0,9.32,$,11.4,9780099468080,Romance,dataset/Romance/0000917.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4512/9780451235138.jpg,The Ideal Man,Julie Garwood,Paperback,4.0,7.41,$,8.8,9780451235138,Romance,dataset/Romance/0000918.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0614/9780061474323.jpg,Born to Bite,Lynsay Sands,Paperback,4.0,7.73,$,8.3,9780061474323,Romance,dataset/Romance/0000919.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0620/9780062076083.jpg,Bound by Flames,Jeaniene Frost,Paperback,4.0,7.93,$,8.8,9780062076083,Romance,dataset/Romance/0000920.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4402/9780440237563.jpg,The Immortal Highlander,Karen Marie Moning,Paperback,4.5,6.95,$,7.8,9780440237563,Romance,dataset/Romance/0000921.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425234907.jpg,Big Jack,J D Robb,Paperback,4.0,7.42,$,8.3,9780425234907,Romance,dataset/Romance/0000922.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4391/9781439147979.jpg,Spider's Bite,Jennifer Estep,Paperback,4.0,8.14,$,8.3,9781439147979,Romance,dataset/Romance/0000923.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0615/9780061579097.jpg,Nothing But Trouble,Rachel Gibson,Paperback,4.0,8.23,$,8.3,9780061579097,Romance,dataset/Romance/0000924.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751540420.jpg,The Russian Concubine,Kate Furnivall,Paperback,3.5,10.41,$,12.4,9780751540420,Romance,dataset/Romance/0000925.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425228944.jpg,Promises in Death,J D Robb,Paperback,4.5,7.58,$,8.3,9780425228944,Romance,dataset/Romance/0000926.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3737/9780373778447.jpg,Burning Dawn,Gena Showalter,Paperback,4.5,8.41,$,,9780373778447,Romance,dataset/Romance/0000927.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7864/9781786487414.jpg,The Stranger Diaries,Elly Griffiths,Paperback,4.0,5.80,$,10.3,9781786487414,Romance,dataset/Romance/0000928.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/2412/9780241251331.jpg,Lady Susan,Jane Austen,Paperback,3.5,2.91,$,,9780241251331,Romance,dataset/Romance/0000929.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4514/9780451475206.jpg,The Chosen,J. R. Ward,Paperback,4.5,10.04,$,,9780451475206,Romance,dataset/Romance/0000930.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/2500/9781250029898.jpg,Styxx,Sherrilyn Kenyon,Paperback,4.5,11.93,$,,9781250029898,Romance,dataset/Romance/0000931.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4402/9780440237556.jpg,The Dark Highlander,Karen Marie Moning,Paperback,4.5,7.79,$,8.3,9780440237556,Romance,dataset/Romance/0000932.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515156133.jpg,Shadow Rider,Christine Feehan,Paperback,4.0,7.83,$,8.3,9780515156133,Romance,dataset/Romance/0000933.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515148053.jpg,Skin Trade,Laurell K Hamilton,Paperback,4.0,10.04,$,,9780515148053,Romance,dataset/Romance/0000934.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1411/9780141197708.jpg,Mansfield Park,Jane Austen,Hardback,4.0,17.14,$,18.0,9780141197708,Romance,dataset/Romance/0000935.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4447/9781444798029.jpg,Sentinel (The Fifth Covenant Novel),Jennifer L. Armentrout,Paperback,4.5,8.11,$,11.4,9781444798029,Romance,dataset/Romance/0000936.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4736/9781473685864.jpg,The Single Ladies of Jacaranda Retirement Village,Joanna Nell,Paperback,4.0,7.82,$,11.4,9781473685864,Romance,dataset/Romance/0000937.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4515/9780451528612.jpg,Anna Karenina,Leo Tolstoy,Paperback,4.0,7.99,$,,9780451528612,Romance,dataset/Romance/0000938.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5122/9781512284133.jpg,Beautiful Burn,Jamie Mcguire,Paperback,4.0,18.34,$,,9781512284133,Romance,dataset/Romance/0000939.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0994/9780099476351.jpg,Sprig Muslin,Georgette Heyer,Paperback,4.0,9.45,$,11.4,9780099476351,Romance,dataset/Romance/0000940.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4091/9781409155669.jpg,One Night: Promised,Jodi Ellen Malpas,Paperback,4.0,8.31,$,11.4,9781409155669,Romance,dataset/Romance/0000941.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751560329.jpg,Million Love Songs,Carole Matthews,Paperback,4.0,5.66,$,11.4,9780751560329,Romance,dataset/Romance/0000942.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/7847/9781784708351.jpg,Warlight,Michael Ondaatje,Paperback,3.5,8.73,$,9.5,9781784708351,Romance,dataset/Romance/0000943.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5751/9780575100114.jpg,Play of Passion,Nalini Singh,Paperback,4.5,8.73,$,12.4,9780575100114,Romance,dataset/Romance/0000944.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0082/9780008236816.jpg,I Heart Forever,Lindsey Kelk,Paperback,4.5,4.89,$,10.3,9780008236816,Romance,dataset/Romance/0000945.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425239780.jpg,Navarro's Promise,Lora Leigh,Paperback,4.0,7.33,$,8.8,9780425239780,Romance,dataset/Romance/0000946.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7499/9780749928919.jpg,Born In Shame,Nora Roberts,Paperback,4.0,5.06,$,11.4,9780749928919,Romance,dataset/Romance/0000947.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425226933.jpg,Salvation in Death,J D Robb,Paperback,4.5,7.62,$,8.3,9780425226933,Romance,dataset/Romance/0000948.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7499/9780749928919.jpg,Born In Shame,Nora Roberts,Paperback,4.0,5.06,$,11.4,9780749928919,Romance,dataset/Romance/0000949.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4514/9780451490148.jpg,Vengeance Road,Christine Feehan,Paperback,4.0,8.38,$,,9780451490148,Romance,dataset/Romance/0000950.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3455/9780345543011.jpg,Turbo Twenty-Three,Janet Evanovich,Paperback,4.0,7.97,$,8.8,9780345543011,Romance,dataset/Romance/0000951.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/6717/9780671742553.jpg,Almost Heaven,Judith McNaught,Paperback,4.5,10.16,$,10.3,9780671742553,Romance,dataset/Romance/0000952.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/0623/9780062371850.jpg,Marrying Winterbourne,Lisa Kleypas,Paperback,4.0,8.38,$,,9780062371850,Romance,dataset/Romance/0000953.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3494/9780349417868.jpg,Dark in Death,J. D. Robb,Paperback,4.5,16.15,$,,9780349417868,Romance,dataset/Romance/0000954.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4722/9781472210753.jpg,The Missing Wife: The Unputdownable Bestseller,Sheila O'Flanagan,Paperback,4.0,9.40,$,11.4,9781472210753,Romance,dataset/Romance/0000955.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4711/9781471132810.jpg,Losing Hope,Colleen Hoover,Paperback,4.5,9.44,$,12.9,9781471132810,Romance,dataset/Romance/0000956.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7515/9780751563207.jpg,All That She Can See,Carrie Hope Fletcher,Paperback,3.5,5.27,$,11.5,9780751563207,Romance,dataset/Romance/0000957.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4514/9780451419071.jpg,Reap the Wind: A Cassie Palmer Novel Volume 7,Karen Chance,Paperback,4.0,8.78,$,,9780451419071,Romance,dataset/Romance/0000958.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4514/9780451474506.jpg,Etched In Bone,Anne Bishop,Paperback,4.5,9.45,$,10.3,9780451474506,Romance,dataset/Romance/0000959.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3129/9780312938819.jpg,The Dream-Hunter,Sherrilyn Kenyon,Paperback,4.0,8.17,$,8.8,9780312938819,Romance,dataset/Romance/0000960.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4091/9781409117919.jpg,Minding Frankie,Maeve Binchy,Paperback,4.0,10.11,$,12.9,9781409117919,Romance,dataset/Romance/0000961.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/6717/9780671776091.jpg,"Whitney, My Love",McNaught,Paperback,4.0,11.13,$,,9780671776091,Romance,dataset/Romance/0000962.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4059/9781405912358.jpg,The Stranger I Married,Sylvia Day,Paperback,4.0,8.74,$,10.3,9781405912358,Romance,dataset/Romance/0000963.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515150643.jpg,Vision in White,Nora Roberts,Paperback,4.0,7.47,$,8.3,9780515150643,Romance,dataset/Romance/0000964.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3305/9780330533706.jpg,One Summer,David Baldacci,Paperback,3.5,8.05,$,11.4,9780330533706,Romance,dataset/Romance/0000965.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5750/9780575085565.jpg,Grave Secret,Charlaine Harris,Paperback,4.0,8.40,$,11.4,9780575085565,Romance,dataset/Romance/0000966.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5751/9780575100091.jpg,Bonds of Justice,Nalini Singh,Paperback,4.0,8.71,$,12.4,9780575100091,Romance,dataset/Romance/0000967.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5011/9781501152870.jpg,Nothing More,Anna Todd,Paperback,3.5,8.16,$,11.4,9781501152870,Romance,dataset/Romance/0000968.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5151/9780515155549.jpg,Viper Game,Christine Feehan,Paperback,4.0,8.54,$,9.3,9780515155549,Romance,dataset/Romance/0000969.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5751/9780575100039.jpg,Hostage to Pleasure,Nalini Singh,Paperback,4.0,9.23,$,12.9,9780575100039,Romance,dataset/Romance/0000970.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/4252/9780425259252.jpg,The Autumn Bride,Anne Gracie,Paperback,4.0,7.42,$,8.3,9780425259252,Romance,dataset/Romance/0000971.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5527/9780552778541.jpg,Shopaholic to the Stars,Sophie Kinsella,Paperback,3.5,8.51,$,9.5,9780552778541,Romance,dataset/Romance/0000972.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/6323/9781632367051.jpg,Wotakoi: Love Is Hard For Otaku 2,Fujita,Paperback,4.5,14.28,$,18.0,9781632367051,Romance,dataset/Romance/0000973.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/5527/9780552772761.jpg,Remember Me?,Sophie Kinsella,Paperback,4.0,10.20,$,11.4,9780552772761,Romance,dataset/Romance/0000974.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3808/9780380811076.jpg,Worth Any Price,Lisa Kleypas,Paperback,4.0,6.34,$,,9780380811076,Romance,dataset/Romance/0000975.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5559/9781555977887.jpg,Her Body and Other Parties,Carmen Maria Machado,Paperback,4.0,13.79,$,16.0,9781555977887,Romance,dataset/Romance/0000976.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/3494/9780349407883.jpg,Island of Glass,Nora Roberts,Paperback,4.0,5.16,$,9.5,9780349407883,Romance,dataset/Romance/0000977.jpg
+https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/7434/9780743476287.jpg,The Twilight Before Christmas,Christine Feehan,Paperback,4.0,8.80,$,9.02,9780743476287,Romance,dataset/Romance/0000978.jpg

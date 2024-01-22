@@ -11,7 +11,7 @@ function BookDetail() {
     useEffect(() => {
         async function fetchBook() {
             // Utilisez l'ID pour récupérer les détails du livre
-            const response = await fetch(`http://192.168.1.64:5001/books/${id}`);
+            const response = await fetch(`http://localhost:5001/books/${id}`);
             const data = await response.json();
             // Faites quelque chose avec les données, par exemple les mettre dans un état
             setBook(data);
