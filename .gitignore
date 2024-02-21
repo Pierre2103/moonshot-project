@@ -6,6 +6,15 @@ frontend/node_modules/
 backend/package-lock.json
 frontend/package-lock.json
 
+data/not_proccessed_data/
+
+data/processed_data/processed_DS1.csv
+data/processed_data/processed_DS2.csv
+data/processed_data/processed_DS3.csv
+data/processed_data/processed_DS4.csv
+data/processed_data/processed_DS5.csv
+data/processed_data/processed_DS6.csv
+
 *.log
 
 .cache/
@@ -21,3 +30,4 @@ frontend/.env
 documents/obsolete/*
 *.bak
 
+obsidian/.obsidian/
