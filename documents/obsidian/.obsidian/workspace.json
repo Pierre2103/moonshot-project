@@ -1,0 +1,162 @@
+{
+  "main": {
+    "id": "358f6a0c11560424",
+    "type": "split",
+    "children": [
+      {
+        "id": "c7adbef7426613f7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "921877285e08724f",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "img/colors_AI.png"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "60b45d1323d0039d",
+    "type": "split",
+    "children": [
+      {
+        "id": "1848993fe61013d7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6534d10f2f1df812",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "54c44e34a86994e3",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "47309b6fe2c0a018",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "89ff6c2c3cfa1f94",
+    "type": "split",
+    "children": [
+      {
+        "id": "59b4640dcc6c8579",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2dc8a30986579b87",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "img/colors_AI.png",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "df61dd5482bdd767",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "img/colors_AI.png",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "61ff11e7bf220bbf",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "9da625855140fd30",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "img/colors_AI.png"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "obsidian-excalidraw-plugin:Create new drawing": false,
+      "mermaid-tools:Open Mermaid Toolbar": false
+    }
+  },
+  "active": "921877285e08724f",
+  "lastOpenFiles": [
+    "img/text_AI.png",
+    "img/objects_AI.png",
+    "img/colors_AI.png",
+    "POC - To Do List.md",
+    "File Structure.md",
+    "img/cicd.png",
+    "img/image.png",
+    "image.png",
+    "img"
+  ]
+}

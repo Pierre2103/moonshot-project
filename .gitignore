@@ -1,19 +1,14 @@
 .vscode/
 
-backend/node_modules/
-frontend/node_modules/
+code/backend/venv/
 
-backend/package-lock.json
-frontend/package-lock.json
+code/frontend/ridizi/node_modules/
+code/frontend/ridizi/package-lock.json
 
-data/not_proccessed_data/
+code/frontend/ridizi/firebaseConfig.jsx
 
-data/processed_data/processed_DS1.csv
-data/processed_data/processed_DS2.csv
-data/processed_data/processed_DS3.csv
-data/processed_data/processed_DS4.csv
-data/processed_data/processed_DS5.csv
-data/processed_data/processed_DS6.csv
+code/archives/data/
+code/archives/datasets_archives.zip
 
 *.log
 
