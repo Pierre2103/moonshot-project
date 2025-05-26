@@ -7,6 +7,8 @@ from api.barcode import barcode_api
 from api.admin import admin_api
 from api.users import users_api 
 from api.book import bp as book_api
+from api.collections import collections_api
+from api.workers import register_worker, workers_api
 import os
 import json
 from utils.db_models import SessionLocal, AppLog
@@ -59,6 +61,21 @@ app.register_blueprint(barcode_api)
 app.register_blueprint(admin_api)
 app.register_blueprint(users_api, url_prefix="/admin/api")
 app.register_blueprint(book_api)
+app.register_blueprint(collections_api)
+app.register_blueprint(workers_api)
+
+
+# Register workers
+register_worker(
+    "book_worker",
+    start_cmd=["python", "worker.py"],
+    script_path=os.path.join(os.path.dirname(__file__), "worker.py"),
+)
+register_worker(
+    "merge_collection_worker",
+    start_cmd=["python", "merge_collection_worker.py"],
+    script_path=os.path.join(os.path.dirname(__file__), "merge_collection_worker.py"),
+)
 
 
 # === LANCEMENT DU SERVEUR ===

@@ -4,11 +4,17 @@ import { Camera } from 'lucide-react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { useRouter } from 'expo-router';
+import { useFocusEffect } from '@react-navigation/native';
+
+const API_BASE_URL = 'http://192.168.14.162:5001';
 
 export default function HomeScreen() {
   const [username, setUsername] = useState<string>('');
   const [inputUsername, setInputUsername] = useState<string>('');
   const [checkingUser, setCheckingUser] = useState(false);
+  const [collections, setCollections] = useState<any[]>([]);
+  const [recentlyScanned, setRecentlyScanned] = useState<any[]>([]);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -16,6 +22,16 @@ export default function HomeScreen() {
       if (name) setUsername(name);
     });
   }, []);
+
+  useEffect(() => {
+    if (!username) return;
+    axios.get(`${API_BASE_URL}/api/collections/${username}`)
+      .then(res => setCollections(res.data))
+      .catch(() => setCollections([]));
+    axios.get(`${API_BASE_URL}/api/recently_scanned/${username}`)
+      .then(res => setRecentlyScanned(res.data))
+      .catch(() => setRecentlyScanned([]));
+  }, [username]);
 
   const handleValidate = async () => {
     if (!inputUsername.trim()) {
@@ -44,6 +60,16 @@ export default function HomeScreen() {
     // Navigate to camera tab and trigger scan immediately
     router.push({ pathname: '/(tabs)/camera', params: { autoScan: '1' } });
   };
+
+  // Remove duplicates from recentlyScanned (by ISBN)
+  const uniqueRecentlyScanned = [];
+  const seenIsbns = new Set();
+  for (const book of recentlyScanned) {
+    if (!seenIsbns.has(book.isbn)) {
+      uniqueRecentlyScanned.push(book);
+      seenIsbns.add(book.isbn);
+    }
+  }
 
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -101,54 +127,51 @@ export default function HomeScreen() {
         <>
           <Text style={styles.sectionTitle}>Your collections:</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalScroll}>
-            <View style={styles.collectionItem}>
-              <View style={styles.collectionSquare} />
-              <Text style={styles.collectionLabel}>Liked</Text>
-            </View>
-            <View style={styles.collectionItem}>
-              <View style={styles.collectionSquare} />
-              <Text style={styles.collectionLabel}>Comics</Text>
-            </View>
-            <View style={styles.collectionItem}>
-              <View style={styles.collectionSquare} />
-              <Text style={styles.collectionLabel}>Science</Text>
-            </View>
-            <View style={styles.collectionItem}>
-              <View style={styles.collectionSquare} />
-              <Text style={styles.collectionLabel}>History</Text>
-            </View>
-            <View style={styles.collectionItem}>
-              <View style={styles.collectionSquare} />
-              <Text style={styles.collectionLabel}>Fantasy</Text>
-            </View>
+            {collections.length === 0 ? (
+              <Text style={{ color: '#888', marginTop: 12 }}>No collections yet.</Text>
+            ) : (
+              collections.map((col) => (
+                <TouchableOpacity
+                  key={col.id}
+                  style={styles.collectionItem}
+                  onPress={() => router.push({ pathname: '/(tabs)/collectiondetails', params: { collectionId: col.id, collectionName: col.name } })}
+                >
+                  <View style={styles.collectionSquare}>
+                    <Text style={styles.collectionIcon}>{col.icon}</Text>
+                  </View>
+                  <Text style={styles.collectionLabel}>{col.name}</Text>
+                </TouchableOpacity>
+              ))
+            )}
           </ScrollView>
-
           {/* Divider */}
           <View style={styles.divider} />
 
           {/* Recently Scanned */}
           <Text style={styles.sectionTitle}>Recently Scanned:</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalScroll}>
-            <View style={styles.recentItem}>
-              <View style={styles.recentRect} />
-              <Text style={styles.recentLabel}>Harry potter</Text>
-            </View>
-            <View style={styles.recentItem}>
-              <View style={styles.recentRect} />
-              <Text style={styles.recentLabel}>Spider-Man</Text>
-            </View>
-            <View style={styles.recentItem}>
-              <View style={styles.recentRect} />
-              <Text style={styles.recentLabel}>C# for beginners</Text>
-            </View>
-            <View style={styles.recentItem}>
-              <View style={styles.recentRect} />
-              <Text style={styles.recentLabel}>Dune</Text>
-            </View>
-            <View style={styles.recentItem}>
-              <View style={styles.recentRect} />
-              <Text style={styles.recentLabel}>The Hobbit</Text>
-            </View>
+            {uniqueRecentlyScanned.length === 0 ? (
+              <Text style={{ color: '#888', marginTop: 12 }}>No scans yet.</Text>
+            ) : (
+              uniqueRecentlyScanned.map((book) => (
+                <TouchableOpacity
+                  key={book.isbn}
+                  style={styles.recentItem}
+                  onPress={() => router.push({ pathname: '/(tabs)/bookdetails', params: { isbn: book.isbn } })}
+                >
+                  <View style={styles.recentRect}>
+                    {book.cover_url ? (
+                      <Image
+                        source={{ uri: book.cover_url.startsWith('http') ? book.cover_url : `${API_BASE_URL}${book.cover_url}` }}
+                        style={styles.recentImage}
+                        resizeMode="cover"
+                      />
+                    ) : null}
+                  </View>
+                  <Text style={styles.recentLabel} numberOfLines={2}>{book.title}</Text>
+                </TouchableOpacity>
+              ))
+            )}
           </ScrollView>
         </>
       ) : null}
@@ -247,38 +270,54 @@ const styles = StyleSheet.create({
   },
   collectionItem: {
     alignItems: 'center',
-    marginRight: 18,
-    width: 90,
+    marginRight: 22,
+    width: 110,
   },
   collectionSquare: {
-    width: 70,
-    height: 70,
+    width: 90,
+    height: 90,
     backgroundColor: '#fafafa',
     borderColor: '#bbb',
     borderWidth: 1,
-    borderRadius: 10,
-    marginBottom: 8,
+    borderRadius: 16,
+    marginBottom: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  collectionIcon: {
+    fontSize: 48,
+    textAlign: 'center',
   },
   collectionLabel: {
-    fontSize: 15,
+    fontSize: 18,
     textAlign: 'center',
+    fontWeight: '600',
   },
   recentItem: {
     alignItems: 'center',
-    marginRight: 18,
-    width: 120,
+    marginRight: 22,
+    width: 140,
   },
   recentRect: {
-    width: 70,
-    height: 100,
+    width: 90,
+    height: 130,
     backgroundColor: '#fafafa',
     borderColor: '#bbb',
     borderWidth: 1,
-    borderRadius: 10,
-    marginBottom: 8,
+    borderRadius: 16,
+    marginBottom: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
+  },
+  recentImage: {
+    width: 90,
+    height: 130,
+    borderRadius: 16,
   },
   recentLabel: {
-    fontSize: 14,
+    fontSize: 16,
     textAlign: 'center',
+    fontWeight: '500',
   },
 });

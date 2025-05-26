@@ -14,6 +14,10 @@ WORKER_PROCESSES = {
         "script": "worker.py",
         "process": None
     },
+    "merge_collection_worker": {  # <-- Add this block
+        "script": "merge_collection_worker.py",
+        "process": None
+    },
     # Ajoute d'autres workers ici si besoin
 }
 

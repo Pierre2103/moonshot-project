@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Heart, Plus, ArrowLeft } from 'lucide-react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import AddModal from '../../components/Collection/AddModal';
 
 const API_BASE_URL = 'http://192.168.14.162:5001';
 
@@ -11,20 +14,88 @@ export default function BookDetails() {
   const isbn = params.isbn as string;
   const [book, setBook] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [collections, setCollections] = useState<any[]>([]);
+  const [collectionsLoading, setCollectionsLoading] = useState(false);
+  const [adding, setAdding] = useState(false);
+  const [username, setUsername] = useState<string>("");
 
   useEffect(() => {
     if (!isbn) return;
     setLoading(true);
     fetch(`${API_BASE_URL}/api/book/${isbn}`)
       .then(res => res.json())
-      .then(data => {
-        setBook(data);
-      })
-      .catch((err) => {
-        setBook(null);
-      })
+      .then(data => setBook(data))
+      .catch(() => setBook(null))
       .finally(() => setLoading(false));
   }, [isbn]);
+
+  useEffect(() => {
+    AsyncStorage.getItem('ridizi_username').then(name => {
+      if (name) setUsername(name);
+    });
+  }, []);
+
+  const fetchCollections = async () => {
+    if (!username) return;
+    setCollectionsLoading(true);
+    try {
+      const res = await axios.get(`${API_BASE_URL}/api/collections/${username}`);
+      setCollections(res.data);
+    } catch {
+      setCollections([]);
+    }
+    setCollectionsLoading(false);
+  };
+
+  const handleAddToCollection = () => {
+    fetchCollections();
+    setModalVisible(true);
+  };
+
+  const handleSelectCollection = async (collection: any) => {
+    setAdding(true);
+    try {
+      await axios.post(`${API_BASE_URL}/api/collections/${username}/${collection.id}/add`, { isbn });
+      Alert.alert('Success', `Book added to "${collection.name}"`);
+      setModalVisible(false);
+    } catch {
+      Alert.alert('Error', 'Could not add book to collection.');
+    }
+    setAdding(false);
+  };
+
+  const handleCreateCollection = async (name: string, icon: string) => {
+    setAdding(true);
+    try {
+      const res = await axios.post(`${API_BASE_URL}/api/collections/${username}`, { name, icon });
+      setCollections([...collections, res.data]);
+      setModalVisible(false);
+      Alert.alert('Success', 'Collection created!');
+    } catch {
+      Alert.alert('Error', 'Could not create collection.');
+    }
+    setAdding(false);
+  };
+
+  const handleLike = async () => {
+    if (!username) return;
+    setAdding(true);
+    try {
+      // Find or create "Like" collection
+      let likeCol = collections.find(c => c.name.toLowerCase() === "like" || c.name.toLowerCase() === "liked");
+      if (!likeCol) {
+        const res = await axios.post(`${API_BASE_URL}/api/collections/${username}`, { name: "Like", icon: "❤️" });
+        likeCol = res.data;
+        setCollections([...collections, likeCol]);
+      }
+      await axios.post(`${API_BASE_URL}/api/collections/${username}/${likeCol.id}/add`, { isbn });
+      Alert.alert('Success', 'Book added to Like collection!');
+    } catch {
+      Alert.alert('Error', 'Could not like book.');
+    }
+    setAdding(false);
+  };
 
   if (loading) {
     return (
@@ -73,11 +144,11 @@ export default function BookDetails() {
 
       {/* Add to collection & Like */}
       <View style={styles.actionRow}>
-        <TouchableOpacity style={styles.actionBtn}>
+        <TouchableOpacity style={styles.actionBtn} onPress={handleAddToCollection}>
           <Plus size={22} color="#007AFF" />
           <Text style={styles.actionText}>Add to collection</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.actionBtn}>
+        <TouchableOpacity style={styles.actionBtn} onPress={handleLike}>
           <Heart size={22} color="#007AFF" />
           <Text style={styles.actionText}>Like</Text>
         </TouchableOpacity>
@@ -136,6 +207,16 @@ export default function BookDetails() {
           </View>
         )}
       </View>
+
+      {/* Add to collection Modal */}
+      <AddModal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        collections={collections}
+        onSelectCollection={handleSelectCollection}
+        onCreateCollection={handleCreateCollection}
+        loading={adding}
+      />
     </ScrollView>
   );
 }
