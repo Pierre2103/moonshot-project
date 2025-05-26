@@ -1,0 +1,43 @@
+{
+  "name": "ridizi",
+  "version": "1.0.0",
+  "main": "expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@expo-google-fonts/montserrat": "^0.2.3",
+    "@expo/metro-runtime": "~3.2.1",
+    "@fontsource/montserrat": "^5.0.18",
+    "@mui/icons-material": "^5.15.20",
+    "@mui/material": "^5.15.20",
+    "@react-navigation/native": "^6.1.17",
+    "@react-navigation/stack": "^6.3.29",
+    "expo": "~51.0.14",
+    "expo-app-loading": "^2.1.1",
+    "expo-camera": "~15.0.11",
+    "expo-font": "^12.0.7",
+    "expo-status-bar": "~1.12.1",
+    "firebase": "^10.12.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-native": "0.74.2",
+    "react-native-gesture-handler": "^2.17.1",
+    "react-native-paper": "^5.12.3",
+    "react-native-safe-area-context": "4.10.1",
+    "react-native-screens": "3.31.1",
+    "react-native-vector-icons": "^10.1.0",
+    "react-native-web": "~0.19.10",
+    "react-qr-barcode-scanner": "^1.0.6",
+    "sass": "^1.77.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0"
+  },
+  "private": true
+}

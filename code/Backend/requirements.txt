@@ -1,0 +1,7 @@
+flask
+faiss-cpu
+torch
+sentence-transformers
+torchvision
+Pillow
+tqdm

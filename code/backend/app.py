@@ -1,38 +1,63 @@
-from flask import Flask, request, jsonify
+# === app.py ===
+from flask import Flask
 from flask_cors import CORS
-import csv
+from transformers import CLIPProcessor, CLIPModel
+from api.match import create_match_api  # import ton blueprint factory
+from api.barcode import barcode_api
+from api.admin import admin_api
+import os
+import json
+from utils.db_models import SessionLocal, AppLog
 
-app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+# === CONFIGURATION ===
+DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
+INDEX_FILE = os.path.join(DATA_DIR, "index.faiss")
+NAMES_FILE = os.path.join(DATA_DIR, "image_names.json")
+METADATA_FILE = os.path.join(DATA_DIR, "metadata.json")
+device = "cpu"
 
-def search_book_by_isbn(isbn, file_path):
+def log_app(level, message, context=None):
     try:
-        with open(file_path, 'r', encoding='utf-8') as csvfile:
-            csv_reader = csv.DictReader(csvfile)
-            
-            for row in csv_reader:
-                if isbn == row['ISBN']:
-                    return row
-            return None
-    except FileNotFoundError:
-        return {"error": f"The file {file_path} was not found."}
+        session = SessionLocal()
+        app_log = AppLog(level=level, message=message, context=context)
+        session.add(app_log)
+        session.commit()
+        session.close()
     except Exception as e:
-        return {"error": str(e)}
+        print(f"[LOGGING ERROR] {e}: {level} - {message}")
 
-@app.route('/search', methods=['GET'])
-def search():
-    isbn = request.args.get('isbn')
-    if not isbn:
-        return jsonify({"error": "ISBN not provided"}), 400
-    
-    csv_file_path = 'FINAL_DATASET.csv'
-    result = search_book_by_isbn(isbn, csv_file_path)
-    
-    if result:
-        return jsonify(result)
-    else:
-        return jsonify({"error": "Book not found"}), 404
+# === ÉTAPE 1 : Chargement du modèle CLIP ===
+print("🔍 Étape 1: Chargement du modèle CLIP...")
+log_app("INFO", "Démarrage : Chargement du modèle CLIP")
+model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32").to(device)
+processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
+print("✅ Modèle CLIP chargé.")
+log_app("SUCCESS", "Modèle CLIP chargé")
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5008, debug=True)
+# === ÉTAPE 2 : Chargement des fichiers metadata ===
+print("📦 Étape 2: Chargement des fichiers FAISS et metadata...")
+log_app("INFO", "Chargement des fichiers FAISS et metadata")
 
+metadata = {}
+if os.path.exists(METADATA_FILE):
+    with open(METADATA_FILE, "r") as f:
+        metadata = json.load(f)
+print(f"✅ Metadata chargés: {len(metadata)} entrées")
+log_app("SUCCESS", f"Metadata chargés: {len(metadata)} entrées")
+
+# === INIT DE L'APP FLASK ===
+app = Flask(__name__)
+CORS(app)
+
+# === ENREGISTREMENT DES BLUEPRINTS ===
+print("🔧 Enregistrement des blueprints...")
+log_app("INFO", "Enregistrement des blueprints")
+app.register_blueprint(create_match_api(model, processor, device, INDEX_FILE, NAMES_FILE, metadata))
+app.register_blueprint(barcode_api)
+app.register_blueprint(admin_api)
+
+# === LANCEMENT DU SERVEUR ===
+if __name__ == "__main__":
+    print("🚀 Lancement du serveur Flask sur http://0.0.0.0:5001")
+    log_app("SUCCESS", "Lancement du serveur Flask sur http://0.0.0.0:5001")
+    app.run(host="0.0.0.0", port=5001, debug=True)

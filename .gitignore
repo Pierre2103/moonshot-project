@@ -1,11 +1,9 @@
 .vscode/
 
-code/backend/venv/
-
-code/frontend/ridizi/node_modules/
-code/frontend/ridizi/package-lock.json
-
-code/frontend/ridizi/firebaseConfig.jsx
+code/Backend/admin-ui/node_modules/
+code/Backend/data/covers/
+code/Frontend/node_modules/
+code/VirtualEnv/
 
 code/archives/data/
 code/archives/datasets_archives.zip
