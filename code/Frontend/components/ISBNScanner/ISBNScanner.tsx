@@ -74,11 +74,6 @@ export default function ISBNScanner() {
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
       
-      <View style={styles.header}>
-        <Book color={colors.primary} size={24} />
-        <Text style={styles.headerTitle}>ISBN Scanner</Text>
-      </View>
-      
       {toast && (
         <View style={[styles.toast, { backgroundColor: toast.color }]}>
           <Text style={styles.toastText}>{toast.message}</Text>
@@ -120,6 +115,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
+    padding: 0, // Remove padding
   },
   header: {
     flexDirection: 'row',
@@ -143,10 +139,15 @@ const styles = StyleSheet.create({
   },
   cameraContainer: {
     flex: 1,
-    overflow: 'hidden',
+    width: '100%',
+    alignSelf: 'stretch',
+    backgroundColor: 'black',
   },
   camera: {
     flex: 1,
+    width: '100%',
+    alignSelf: 'stretch',
+    aspectRatio: 3/4, // or 9/16 for portrait, adjust as needed
   },
   instructionText: {
     position: 'absolute',
@@ -200,6 +201,8 @@ const styles = StyleSheet.create({
     padding: 16,
     alignItems: 'center',
     zIndex: 20,
+    width: '90%',
+    marginHorizontal: '5%',
   },
   toastText: {
     color: 'white',

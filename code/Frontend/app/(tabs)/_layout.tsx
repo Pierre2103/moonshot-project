@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { Camera, Scan, Home } from 'lucide-react-native';
+import { Camera, Scan, Home, User } from 'lucide-react-native';
 
 export default function TabLayout() {
   return (
@@ -19,22 +19,28 @@ export default function TabLayout() {
       <Tabs.Screen
         name="camera"
         options={{
-          title: 'Camera',
+          title: 'Scan',
           tabBarIcon: ({ size, color }) => <Camera size={size} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="isbnscan"
-        options={{
-          title: 'ISBN Scanner',
-          tabBarIcon: ({ size, color }) => <Scan size={size} color={color} />,
+          href: { pathname: '/(tabs)/camera', params: { autoScan: '1' } },
         }}
       />
       <Tabs.Screen
         name="profile"
         options={{
           title: 'Profile',
-          tabBarIcon: ({ size, color }) => <Home size={size} color={color} />, // Replace with a profile icon if available
+          tabBarIcon: ({ size, color }) => <User size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="isbnscan"
+        options={{
+          href: null, // Hide from tab bar
+        }}
+      />
+      <Tabs.Screen
+        name="bookdetails"
+        options={{
+          href: null, // Hide from tab bar
         }}
       />
     </Tabs>

@@ -18,6 +18,7 @@ import { Camera, ChevronRight } from 'lucide-react-native'
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { colors, spacing } from '../ISBNScanner/styles'
+import { useRouter, useLocalSearchParams } from 'expo-router'
 
 export default function CameraScreen() {
   const [image, setImage] = useState<string | null>(null)
@@ -27,6 +28,8 @@ export default function CameraScreen() {
   const [username, setUsername] = useState<string>("")
   const [showAlternatives, setShowAlternatives] = useState(false)
   const altListScrollRef = useRef<ScrollView>(null);
+  const router = useRouter();
+  const params = useLocalSearchParams();
 
   // PanResponder for swipe right gesture on alternatives
   const panResponder = React.useMemo(() =>
@@ -87,10 +90,12 @@ export default function CameraScreen() {
       const response = await axios.post(`${API_BASE_URL}/match`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
+      console.log("CameraScreen /match API response:", response.data); // <-- Debug log
       setMatch({
         ...response.data,
         authors: response.data.authors.join(', '),
         coverUrl: `${API_BASE_URL}${response.data.cover_url}`,
+        isbn: response.data.filename ? response.data.filename.replace(/\.[^/.]+$/, "") : "", // Extract ISBN from filename
       })
       // Record the scan for the user if username is provided
       const uname = usedUsername ?? username;
@@ -116,6 +121,13 @@ export default function CameraScreen() {
     if (typeof score !== 'number') return '-';
     return `${Math.round((1 - score) * 100)}%`;
   };
+
+  React.useEffect(() => {
+    if (params.autoScan === '1') {
+      pickImage();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params.autoScan]);
 
   return (
     <View style={styles.container}>
@@ -155,7 +167,17 @@ export default function CameraScreen() {
               <Text style={styles.accuracyText}>Accuracy: {getAccuracy(match.score)}</Text>
               <Text style={styles.title}>{match.title}</Text>
               <Text style={styles.authors}>{match.authors}</Text>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  const isbnToSend = match.isbn;
+                  console.log("Navigating to bookdetails with ISBN:", isbnToSend); // Debug log
+                  if (isbnToSend && typeof isbnToSend === "string" && isbnToSend.trim() !== "") {
+                    router.push({ pathname: '/(tabs)/bookdetails', params: { isbn: isbnToSend } });
+                  } else {
+                    Alert.alert("No ISBN found for this book.");
+                  }
+                }}
+              >
                 <Text style={styles.seeMore}>See more</Text>
               </TouchableOpacity>
             </View>
@@ -167,20 +189,34 @@ export default function CameraScreen() {
               </TouchableOpacity>
               <Text style={styles.notGoodBookHeader}>Not the good book</Text>
               <View style={styles.altListBox}>
-                {match.alternatives && match.alternatives.slice(0, 5).map((alt: any, idx: number) => (
-                  <TouchableOpacity key={idx} style={styles.altListRow}>
-                    <Image
-                      source={{ uri: `${API_BASE_URL}${alt.cover_url}` }}
-                      style={styles.altListImage}
-                    />
-                    <View style={styles.altListInfo}>
-                      <Text style={styles.altListTitle}>{alt.title}</Text>
-                      <Text style={styles.altListAuthors}>{alt.authors.join(', ')}</Text>
-                      <Text style={styles.altListAccuracy}>Accuracy: {getAccuracy(alt.score)}</Text>
-                    </View>
-                    <ChevronRight size={28} color="#888" />
-                  </TouchableOpacity>
-                ))}
+                {match.alternatives && match.alternatives.slice(0, 5).map((alt: any, idx: number) => {
+                  // Extract ISBN from filename (remove extension)
+                  const altIsbn = alt.filename ? alt.filename.replace(/\.[^/.]+$/, "") : "";
+                  return (
+                    <TouchableOpacity
+                      key={idx}
+                      style={styles.altListRow}
+                      onPress={() => {
+                        if (altIsbn) {
+                          router.push({ pathname: '/(tabs)/bookdetails', params: { isbn: altIsbn } });
+                        } else {
+                          Alert.alert("No ISBN found for this book.");
+                        }
+                      }}
+                    >
+                      <Image
+                        source={{ uri: `${API_BASE_URL}${alt.cover_url}` }}
+                        style={styles.altListImage}
+                      />
+                      <View style={styles.altListInfo}>
+                        <Text style={styles.altListTitle}>{alt.title}</Text>
+                        <Text style={styles.altListAuthors}>{alt.authors.join(', ')}</Text>
+                        <Text style={styles.altListAccuracy}>Accuracy: {getAccuracy(alt.score)}</Text>
+                      </View>
+                      <ChevronRight size={28} color="#888" />
+                    </TouchableOpacity>
+                  );
+                })}
               </View>
             </View>
           )
@@ -197,7 +233,10 @@ export default function CameraScreen() {
               ) : null}
             </TouchableOpacity>
             {showAlternatives && (
-              <TouchableOpacity style={styles.addBookTextContainer}>
+              <TouchableOpacity
+                style={styles.addBookTextContainer}
+                onPress={() => router.push('/(tabs)/isbnscan')}
+              >
                 <Text style={styles.addBookText}>Add new book to dataset.</Text>
               </TouchableOpacity>
             )}
