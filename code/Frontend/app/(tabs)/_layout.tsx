@@ -30,6 +30,13 @@ export default function TabLayout() {
           tabBarIcon: ({ size, color }) => <Scan size={size} color={color} />,
         }}
       />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({ size, color }) => <Home size={size} color={color} />, // Replace with a profile icon if available
+        }}
+      />
     </Tabs>
   );
 }

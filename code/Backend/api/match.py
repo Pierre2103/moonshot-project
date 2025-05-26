@@ -38,13 +38,15 @@ def create_match_api(model, processor, device, index_path=INDEX_PATH, names_path
     def match_cover():
         log_app("INFO", "Requête reçue sur /match")
 
+        username = request.form.get("username")  # Get username from form-data if present
+
         if "image" not in request.files:
             log_app("ERROR", "Aucun fichier image trouvé dans la requête")
             log_scan(
                 isbn=None,
                 status="error",
                 message="Aucun fichier image trouvé dans la requête",
-                extra={"request_info": "image match"}
+                extra={"request_info": "image match", "username": username}
             )
             return jsonify({"error": "No image uploaded"}), 400
 
@@ -69,7 +71,7 @@ def create_match_api(model, processor, device, index_path=INDEX_PATH, names_path
             with open(str(names_path), "r") as f:
                 image_names = json.load(f)
 
-            D, I = index.search(np.array([embedding]), k=4)
+            D, I = index.search(np.array([embedding]), k=6)  # Return 6 results now
             indices = I[0]
             distances = D[0]
 
@@ -97,12 +99,12 @@ def create_match_api(model, processor, device, index_path=INDEX_PATH, names_path
                     isbn=None,
                     status="not_found",
                     message="Aucun livre trouvé",
-                    extra={"request_info": "image match"}
+                    extra={"request_info": "image match", "username": username}
                 )
                 return jsonify({"error": "No valid book matches found"}), 404
 
             top_match = suggestions[0]      # Best match
-            alternatives = suggestions[1:]
+            alternatives = suggestions[1:]  # Up to 4 alternatives
 
             log_app("SUCCESS", f"Match trouvé : {top_match['title']} (score={top_match['score']})")
 
@@ -110,17 +112,22 @@ def create_match_api(model, processor, device, index_path=INDEX_PATH, names_path
                 isbn=top_match["filename"].split('.')[0],
                 status="success",
                 message="Scan couverture",
-                extra={"request_info": "image match", "details": {"top_match": top_match, "alternatives": alternatives}}
+                extra={"request_info": "image match", "details": {"top_match": top_match, "alternatives": alternatives}, "username": username}
             )
 
-            return jsonify({
+            # Include username in response if provided
+            response_data = {
                 "filename": top_match["filename"],
                 "score": top_match["score"],
                 "title": top_match["title"],
                 "authors": top_match["authors"],
                 "cover_url": top_match["cover_url"],
                 "alternatives": alternatives
-            })
+            }
+            if username:
+                response_data["username"] = username
+
+            return jsonify(response_data)
 
         except UnidentifiedImageError:
             log_app("ERROR", "Fichier illisible (format image invalide)")
@@ -128,7 +135,7 @@ def create_match_api(model, processor, device, index_path=INDEX_PATH, names_path
                 isbn=None,
                 status="error",
                 message="Fichier illisible (format image invalide)",
-                extra={"request_info": "image match"}
+                extra={"request_info": "image match", "username": username}
             )
             return jsonify({"error": "Unreadable image format"}), 400
 
@@ -138,7 +145,7 @@ def create_match_api(model, processor, device, index_path=INDEX_PATH, names_path
                 isbn=None,
                 status="error",
                 message=f"Erreur serveur : {str(e)}",
-                extra={"request_info": "image match"}
+                extra={"request_info": "image match", "username": username}
             )
             return jsonify({"error": f"Internal error: {str(e)}"}), 500
 

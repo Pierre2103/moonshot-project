@@ -5,6 +5,7 @@ from transformers import CLIPProcessor, CLIPModel
 from api.match import create_match_api  # import ton blueprint factory
 from api.barcode import barcode_api
 from api.admin import admin_api
+from api.users import users_api  # Assurez-vous d'importer le blueprint des utilisateurs
 import os
 import json
 from utils.db_models import SessionLocal, AppLog
@@ -55,6 +56,8 @@ log_app("INFO", "Enregistrement des blueprints")
 app.register_blueprint(create_match_api(model, processor, device, INDEX_FILE, NAMES_FILE, metadata))
 app.register_blueprint(barcode_api)
 app.register_blueprint(admin_api)
+app.register_blueprint(users_api, url_prefix="/admin/api")
+
 
 # === LANCEMENT DU SERVEUR ===
 if __name__ == "__main__":
