@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from sqlalchemy.exc import IntegrityError
-from utils.db_models import SessionLocal, User, UserScan
+from sqlalchemy import desc
+from utils.db_models import SessionLocal, User, UserScan, Book
 from datetime import datetime
 
 users_api = Blueprint("users_api", __name__)
@@ -70,3 +71,59 @@ def delete_user_scans(username):
     session.commit()
     session.close()
     return jsonify({"message": "All scan history deleted"}), 200
+
+@users_api.route("/recently_scanned/<username>", methods=["GET"])
+def get_recently_scanned(username):
+    session = SessionLocal()
+    try:
+        user = session.query(User).filter_by(username=username).first()
+        if not user:
+            print(f"User '{username}' not found in database")
+            return jsonify([]), 200
+
+        print(f"User '{username}' found with ID: {user.id}")
+
+        # First, get all user scans regardless of book existence
+        user_scans = session.query(UserScan).filter(
+            UserScan.user_id == user.id
+        ).order_by(desc(UserScan.timestamp)).all()
+
+        print(f"Found {len(user_scans)} scans for user '{username}'")
+
+        if not user_scans:
+            return jsonify([]), 200
+
+        result = []
+        for scan in user_scans:
+            print(f"Processing scan: ISBN={scan.isbn}, timestamp={scan.timestamp}")
+            
+            # Try to find the book
+            book = session.query(Book).filter_by(isbn=scan.isbn).first()
+            
+            if book:
+                result.append({
+                    "isbn": book.isbn,
+                    "title": book.title,
+                    "authors": book.authors,
+                    "cover_url": book.cover_url,
+                    "timestamp": scan.timestamp.isoformat() if scan.timestamp else None
+                })
+                print(f"Added book: {book.title}")
+            else:
+                # Book not found in database, but we still want to show the scan
+                result.append({
+                    "isbn": scan.isbn,
+                    "title": f"Book {scan.isbn}",
+                    "authors": "Unknown",
+                    "cover_url": None,
+                    "timestamp": scan.timestamp.isoformat() if scan.timestamp else None
+                })
+                print(f"Book with ISBN {scan.isbn} not found in Book table")
+
+        print(f"Returning {len(result)} results")
+        return jsonify(result), 200
+    except Exception as e:
+        print(f"Error in get_recently_scanned: {e}")
+        return jsonify({"error": str(e)}), 500
+    finally:
+        session.close()

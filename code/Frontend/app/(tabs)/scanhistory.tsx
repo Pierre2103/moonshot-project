@@ -52,7 +52,7 @@ export default function ScanHistory() {
             if (!username) return;
             
             try {
-              await axios.delete(`${API_BASE_URL}/admin/api/user_scans/${username}`);
+              await axios.delete(`${API_BASE_URL}/api/user_scans/${username}`);
               setBooks([]);
             } catch (error) {
               Alert.alert('Error', 'Could not clear history');

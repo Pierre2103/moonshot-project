@@ -3,7 +3,7 @@ import os
 import time
 import json
 import requests
-from utils.db_models import SessionLocal, PendingBook, Book, AppLog
+from utils.db_models import SessionLocal, PendingBook, Book, AppLog, ScanLog
 from setup.build_index import add_to_index
 
 # Directories and constants
@@ -142,6 +142,13 @@ def upsert_book(session, metadata: dict) -> None:
     session.merge(book_obj)
     print(f"[SUCCESS] DB upsert for ISBN13: {metadata.get('isbn13')}")
 
+def log_scan(isbn, status, message, extra=None):
+    session = SessionLocal()
+    scan_log = ScanLog(isbn=isbn, status=status, message=message, extra=extra)
+    session.add(scan_log)
+    session.commit()
+    session.close()
+
 def process_pending_books() -> None:
     while True:
         with SessionLocal() as session:
@@ -184,11 +191,19 @@ def process_pending_books() -> None:
                         log_app("ERROR", f"Indexing failed for {isbn10}: {e}")
 
                     try:
-                        upsert_book(session, meta)
+                        # Save book to database
+                        session.add(book)
                         session.commit()
-                        session.delete(entry)
-                        session.commit()
-                        log_app("SUCCESS", f"Completed processing for {isbn13}")
+                        
+                        # Log successful addition
+                        log_scan(
+                            isbn=book.isbn,
+                            status="success", 
+                            message=f"Book added to database: {book.title}",
+                            extra={"source": "worker", "action": "book_added"}
+                        )
+                        
+                        print(f"✅ Book added: {book.title}")
                     except Exception as e:
                         session.rollback()
                         log_app("ERROR", f"DB upsert/delete failed for {isbn13}: {e}")

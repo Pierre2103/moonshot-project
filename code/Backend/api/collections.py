@@ -1,8 +1,20 @@
 from flask import Blueprint, request, jsonify
-from utils.db_models import SessionLocal, User, Collection, CollectionBook, UserScan, Book
+from utils.db_models import SessionLocal, User, Collection, CollectionBook, UserScan, Book, AppLog
 import random
+from datetime import datetime
 
 collections_api = Blueprint("collections", __name__)
+
+def log_app(level, message, context=None):
+    """Log application events for collection tracking"""
+    try:
+        session = SessionLocal()
+        app_log = AppLog(level=level, message=message, context=context)
+        session.add(app_log)
+        session.commit()
+        session.close()
+    except Exception as e:
+        print(f"[LOGGING ERROR] {e}: {level} - {message}")
 
 @collections_api.route("/api/collections/<username>", methods=["GET"])
 def get_collections(username):
@@ -31,9 +43,20 @@ def create_collection(username):
     if not user:
         session.close()
         return jsonify({"error": "User not found"}), 404
+    
     collection = Collection(name=name, owner=user.id, icon=icon)
     session.add(collection)
     session.commit()
+    
+    # Log collection creation for daily statistics
+    log_app("SUCCESS", f"Collection created: '{name}' by user {username}", {
+        "collection_id": collection.id,
+        "collection_name": name,
+        "username": username,
+        "user_id": user.id,
+        "action": "collection_created"
+    })
+    
     result = {"id": collection.id, "name": collection.name, "icon": collection.icon}
     session.close()
     return jsonify(result), 201
@@ -160,10 +183,22 @@ def delete_collection(username, collection_id):
         session.close()
         return jsonify({"error": "Collection not found"}), 404
     
+    collection_name = collection.name
+    
     # Delete all books in collection first
     session.query(CollectionBook).filter_by(collection_id=collection_id).delete()
     # Delete the collection
     session.delete(collection)
     session.commit()
+    
+    # Log collection deletion
+    log_app("INFO", f"Collection deleted: '{collection_name}' by user {username}", {
+        "collection_id": collection_id,
+        "collection_name": collection_name,
+        "username": username,
+        "user_id": user.id,
+        "action": "collection_deleted"
+    })
+    
     session.close()
     return jsonify({"message": "Collection deleted"}), 200
