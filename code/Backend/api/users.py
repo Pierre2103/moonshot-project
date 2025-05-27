@@ -56,3 +56,17 @@ def add_user_scan():
         return jsonify({"error": "Scan already exists"}), 409
     finally:
         session.close()
+
+@users_api.route("/user_scans/<username>", methods=["DELETE"])
+def delete_user_scans(username):
+    session = SessionLocal()
+    user = session.query(User).filter_by(username=username).first()
+    if not user:
+        session.close()
+        return jsonify({"error": "User not found"}), 404
+
+    # Delete all scans for this user
+    session.query(UserScan).filter_by(user_id=user.id).delete()
+    session.commit()
+    session.close()
+    return jsonify({"message": "All scan history deleted"}), 200

@@ -3,8 +3,7 @@ import { View, TextInput, FlatList, Text, TouchableOpacity, Image, StyleSheet, A
 import axios from "axios";
 import { useRouter } from "expo-router";
 import { X } from "lucide-react-native";
-
-const API_BASE_URL = "http://192.168.14.162:5001";
+import { API_BASE_URL } from "../../config/api";
 
 export default function Searchbar({ cameraButton, setBlockScroll }: { cameraButton?: React.ReactNode, setBlockScroll?: (v: boolean) => void }) {
   const [query, setQuery] = useState("");
@@ -102,7 +101,12 @@ export default function Searchbar({ cameraButton, setBlockScroll }: { cameraButt
                   setFocused(false);
                   setShowResults(false);
                   Keyboard.dismiss();
-                  router.push({ pathname: '/(tabs)/bookdetails', params: { isbn: item.isbn } });
+                  router.push({ 
+                    pathname: '/(tabs)/bookdetails', 
+                    params: { 
+                      isbn: item.isbn
+                    } 
+                  });
                 }}
               >
                 {item.cover_url ? (

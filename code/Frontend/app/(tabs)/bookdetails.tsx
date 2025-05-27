@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
-import { Heart, Plus, ArrowLeft } from 'lucide-react-native';
+import { Heart, Plus } from 'lucide-react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import AddModal from '../../components/Collection/AddModal';
-import { globalEvents } from '../../utils/eventBus'; // adjust path if needed
-
-const API_BASE_URL = 'http://192.168.14.162:5001';
+import { globalEvents } from '../../utils/eventBus';
+import { API_BASE_URL } from '../../config/api';
+import BackButton from '../../components/common/BackButton';
 
 export default function BookDetails() {
   const router = useRouter();
@@ -124,7 +124,6 @@ export default function BookDetails() {
 
   return (
     <View style={styles.scrollContainer}>
-      {/* Logo */}
       <View style={styles.logoContainer}>
         <Image
           source={require('../../assets/images/logo.png')}
@@ -133,89 +132,84 @@ export default function BookDetails() {
         />
       </View>
 
-      {/* Go Back Button */}
-      <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-        <ArrowLeft size={22} color="#007AFF" />
-        <Text style={styles.backButtonText}>Go back</Text>
-      </TouchableOpacity>
+      <BackButton />
 
+      <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
+        {/* Cover */}
+        {book.cover_url && (
+          <Image
+            source={{ uri: book.cover_url.startsWith('http') ? book.cover_url : `${API_BASE_URL}${book.cover_url}` }}
+            style={styles.cover}
+            resizeMode="cover"
+          />
+        )}
 
-    <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
-      {/* Cover */}
-      {book.cover_url && (
-        <Image
-          source={{ uri: book.cover_url.startsWith('http') ? book.cover_url : `${API_BASE_URL}${book.cover_url}` }}
-          style={styles.cover}
-          resizeMode="cover"
-        />
-      )}
-
-      {/* Add to collection & Like */}
-      <View style={styles.actionRow}>
-        <TouchableOpacity style={styles.actionBtn} onPress={handleAddToCollection}>
-          <Plus size={22} color="#007AFF" />
-          <Text style={styles.actionText}>Add to collection</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.actionBtn} onPress={handleLike}>
-          <Heart size={22} color="#007AFF" />
-          <Text style={styles.actionText}>Like</Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* Title */}
-      {book.title && (
-        <Text style={styles.title}>{book.title}</Text>
-      )}
-
-      {/* Authors */}
-      {book.authors && (
-        <Text style={styles.authors}>{Array.isArray(book.authors) ? book.authors.join(', ') : book.authors}</Text>
-      )}
-
-      {/* Description */}
-      {book.description && (
-        <Text style={styles.description}>{book.description}</Text>
-      )}
-
-      {/* Genres */}
-      {book.genres && Array.isArray(book.genres) && book.genres.length > 0 && (
-        <View style={styles.genresRow}>
-          {book.genres.map((genre: string, idx: number) => (
-            <View key={idx} style={styles.genreChip}>
-              <Text style={styles.genreText}>{genre}</Text>
-            </View>
-          ))}
+        {/* Add to collection & Like */}
+        <View style={styles.actionRow}>
+          <TouchableOpacity style={styles.actionBtn} onPress={handleAddToCollection}>
+            <Plus size={22} color="#007AFF" />
+            <Text style={styles.actionText}>Add to collection</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.actionBtn} onPress={handleLike}>
+            <Heart size={22} color="#007AFF" />
+            <Text style={styles.actionText}>Like</Text>
+          </TouchableOpacity>
         </View>
-      )}
 
-      {/* Publisher, Page Number, Date, ISBN */}
-      <View style={styles.infoRow}>
-        {book.publisher && (
-          <View style={styles.infoBox}>
-            <Text style={styles.infoLabel}>Publisher</Text>
-            <Text style={styles.infoValue}>{book.publisher}</Text>
+        {/* Title */}
+        {book.title && (
+          <Text style={styles.title}>{book.title}</Text>
+        )}
+
+        {/* Authors */}
+        {book.authors && (
+          <Text style={styles.authors}>{Array.isArray(book.authors) ? book.authors.join(', ') : book.authors}</Text>
+        )}
+
+        {/* Description */}
+        {book.description && (
+          <Text style={styles.description}>{book.description}</Text>
+        )}
+
+        {/* Genres */}
+        {book.genres && Array.isArray(book.genres) && book.genres.length > 0 && (
+          <View style={styles.genresRow}>
+            {book.genres.map((genre: string, idx: number) => (
+              <View key={idx} style={styles.genreChip}>
+                <Text style={styles.genreText}>{genre}</Text>
+              </View>
+            ))}
           </View>
         )}
-        {book.pages && (
-          <View style={styles.infoBox}>
-            <Text style={styles.infoLabel}>Pages</Text>
-            <Text style={styles.infoValue}>{book.pages}</Text>
-          </View>
-        )}
-        {book.publication_date && (
-          <View style={styles.infoBox}>
-            <Text style={styles.infoLabel}>Published</Text>
-            <Text style={styles.infoValue}>{book.publication_date}</Text>
-          </View>
-        )}
-        {book.isbn && (
-          <View style={styles.infoBox}>
-            <Text style={styles.infoLabel}>ISBN</Text>
-            <Text style={styles.infoValue}>{book.isbn}</Text>
-          </View>
-        )}
-      </View>
-    </ScrollView>
+
+        {/* Publisher, Page Number, Date, ISBN */}
+        <View style={styles.infoRow}>
+          {book.publisher && (
+            <View style={styles.infoBox}>
+              <Text style={styles.infoLabel}>Publisher</Text>
+              <Text style={styles.infoValue}>{book.publisher}</Text>
+            </View>
+          )}
+          {book.pages && (
+            <View style={styles.infoBox}>
+              <Text style={styles.infoLabel}>Pages</Text>
+              <Text style={styles.infoValue}>{book.pages}</Text>
+            </View>
+          )}
+          {book.publication_date && (
+            <View style={styles.infoBox}>
+              <Text style={styles.infoLabel}>Published</Text>
+              <Text style={styles.infoValue}>{book.publication_date}</Text>
+            </View>
+          )}
+          {book.isbn && (
+            <View style={styles.infoBox}>
+              <Text style={styles.infoLabel}>ISBN</Text>
+              <Text style={styles.infoValue}>{book.isbn}</Text>
+            </View>
+          )}
+        </View>
+      </ScrollView>
 
       {/* Add to collection Modal */}
       <AddModal

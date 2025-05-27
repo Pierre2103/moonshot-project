@@ -62,7 +62,7 @@ def scan_barcode():
     if existing_book:
         isbn_to_insert = existing_book.isbn
 
-    # Vérifie s’il est déjà en attente
+    # Vérifie s'il est déjà en attente
     already_pending = session.query(PendingBook).filter_by(isbn=isbn_to_insert).first()
     if already_pending:
         log_app("INFO", "Livre déjà en attente de validation", {"isbn": isbn_to_insert})
@@ -75,22 +75,22 @@ def scan_barcode():
             "already_in_queue": True
         }), 200
 
-    # Ajout en file d’attente
-    if session.query(PendingBook).filter_by(isbn=isbn_to_insert).first() is None:
+    # Ajout en file d'attente - remove the duplicate check since we already checked above
+    try:
         pending = PendingBook(isbn=isbn_to_insert)
         session.add(pending)
         session.commit()
-        log_app("SUCCESS", "Livre ajouté à la file d’attente", {"isbn": isbn_to_insert})
+        log_app("SUCCESS", "Livre ajouté à la file d'attente", {"isbn": isbn_to_insert})
         log_scan(isbn_to_insert, "success", "Book added to pending")
         response_message = {
-            "message": "📬 Livre ajouté à la file d’attente.",
+            "message": "📬 Livre ajouté à la file d'attente.",
             "isbn": isbn_to_insert,
             "already_in_dataset": False,
             "already_in_queue": False
         }
-    else:
-        log_app("INFO", "Livre déjà en attente de validation (double check)", {"isbn": isbn_to_insert})
-        log_scan(isbn_to_insert, "pending", "Book already in queue")
+    except Exception as e:
+        session.rollback()
+        log_app("ERROR", f"Failed to add book to pending queue: {e}", {"isbn": isbn_to_insert})
         response_message = {
             "message": "⏳ Ce livre est déjà en attente de validation.",
             "isbn": isbn_to_insert,
@@ -100,3 +100,27 @@ def scan_barcode():
 
     session.close()
     return jsonify(response_message), 200
+
+@barcode_api.route("/worker-errors", methods=["GET"])
+def get_worker_errors():
+    """Check for books that failed processing in the worker"""
+    session: Session = SessionLocal()
+    
+    # Get books that are stuck (failed processing)
+    stuck_books = session.query(PendingBook).filter_by(stucked=True).all()
+    
+    errors = []
+    for book in stuck_books:
+        errors.append({
+            "isbn": book.isbn,
+            "message": f"Failed to process book {book.isbn}"
+        })
+        # Remove the stuck book from queue after reporting
+        session.delete(book)
+    
+    if errors:
+        session.commit()
+        log_app("INFO", f"Reported {len(errors)} worker errors to frontend")
+    
+    session.close()
+    return jsonify({"errors": errors}), 200

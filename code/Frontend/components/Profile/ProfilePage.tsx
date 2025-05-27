@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ChevronRight } from 'lucide-react-native';
-import { globalEvents } from '../../utils/eventBus'; // adjust path if needed
+import { globalEvents } from '../../utils/eventBus';
+import { useRouter } from 'expo-router';
 
 export default function ProfilePage() {
+  const router = useRouter();
   const [username, setUsername] = useState('');
 
   useEffect(() => {
@@ -20,9 +22,21 @@ export default function ProfilePage() {
     globalEvents.emit('reloadHome'); // Notify main menu to reload
   };
 
-  // Placeholder navigation handlers
   const handleNavigate = (page: string) => {
-    // TODO: Implement navigation
+    switch (page) {
+      case 'collections':
+        router.push('/(tabs)/collections');
+        break;
+      case 'scanHistory':
+        router.push('/(tabs)/scanhistory');
+        break;
+      case 'addBook':
+        router.push('/(tabs)/isbnscan');
+        break;
+      default:
+        // TODO: Implement other navigation
+        break;
+    }
   };
 
   return (
@@ -63,8 +77,8 @@ export default function ProfilePage() {
           <Text style={styles.buttonText}>Scan History</Text>
           <ChevronRight size={22} color="#888" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => handleNavigate('booksAdded')}>
-          <Text style={styles.buttonText}>Books Added</Text>
+        <TouchableOpacity style={styles.button} onPress={() => handleNavigate('addBook')}>
+          <Text style={styles.buttonText}>Add New Book</Text>
           <ChevronRight size={22} color="#888" />
         </TouchableOpacity>
       </View>

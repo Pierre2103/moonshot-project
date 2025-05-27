@@ -3,13 +3,17 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # === CONFIG ===
-DB_USER = os.getenv("DB_USER", "root")
-DB_PASS = os.getenv("DB_PASS", "rootroot")
-DB_HOST = os.getenv("DB_HOST", "localhost")
-DB_PORT = os.getenv("DB_PORT", "3306")
-DB_NAME = os.getenv("DB_NAME", "bookmatcher")
+DB_USER = os.getenv("DB_USER")
+DB_PASS = os.getenv("DB_PASS")
+DB_HOST = os.getenv("DB_HOST")
+DB_PORT = os.getenv("DB_PORT")
+DB_NAME = os.getenv("DB_NAME")
+
 
 DATABASE_URL = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
@@ -42,7 +46,7 @@ class PendingBook(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     isbn = Column(String(20), unique=True, nullable=False)
-    auto_process = Column(Boolean, default=False)
+    stucked = Column(Boolean, default=False)
 
 # === TABLE scan_logs ===
 class ScanLog(Base):
@@ -116,6 +120,32 @@ def log_app(level, message, context=None):
 def init_db():
     Base.metadata.create_all(bind=engine)
 
+def add_missing_columns():
+    """Add missing columns to existing tables"""
+    with engine.connect() as conn:
+        try:
+            # Drop auto_process column if it exists
+            conn.execute("ALTER TABLE pending_books DROP COLUMN auto_process")
+            print("✅ Removed auto_process column")
+        except Exception as e:
+            if "doesn't exist" in str(e) or "Can't DROP" in str(e):
+                print("⚠️ auto_process column doesn't exist")
+            else:
+                print(f"❌ Error removing auto_process: {e}")
+        
+        try:
+            # Add stucked column if it doesn't exist
+            conn.execute("ALTER TABLE pending_books ADD COLUMN stucked BOOLEAN DEFAULT FALSE")
+            print("✅ Added stucked column")
+        except Exception as e:
+            if "Duplicate column name" in str(e):
+                print("⚠️ stucked column already exists")
+            else:
+                print(f"❌ Error adding stucked: {e}")
+        
+        conn.commit()
+
 if __name__ == "__main__":
     init_db()
+    add_missing_columns()
     print("✅ Base de données initialisée avec succès.")

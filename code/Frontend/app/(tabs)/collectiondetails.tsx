@@ -4,8 +4,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { List, Grid2X2, Grid3X3, ArrowLeft } from "lucide-react-native";
+import { API_BASE_URL } from "../../config/api";
+import BackButton from "../../components/common/BackButton";
+import { useFocusEffect } from "@react-navigation/native";
 
-const API_BASE_URL = "http://192.168.14.162:5001";
 const LAYOUT_KEY = "collection_layout_preference";
 
 export default function CollectionDetails() {
@@ -126,9 +128,14 @@ export default function CollectionDetails() {
     }
   };
 
+  useFocusEffect(
+    useCallback(() => {
+      reloadBooks();
+    }, [reloadBooks])
+  );
+
   return (
     <View style={styles.container}>
-      {/* Logo */}
       <View style={styles.logoContainer}>
         <Image
           source={require('../../assets/images/logo.png')}
@@ -136,11 +143,9 @@ export default function CollectionDetails() {
           resizeMode="contain"
         />
       </View>
-      {/* Go Back Button */}
-      <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-        <ArrowLeft size={22} color="#007AFF" />
-        <Text style={styles.backButtonText}>Go back</Text>
-      </TouchableOpacity>
+      
+      <BackButton />
+
       {/* Title and layout buttons */}
       <View style={styles.headerRow}>
         <Text style={styles.title}>{collectionName || "Collection"}</Text>

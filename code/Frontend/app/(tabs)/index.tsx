@@ -7,8 +7,8 @@ import { useRouter } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
 import { globalEvents } from '../../utils/eventBus';
 import Searchbar from '../../components/Searchbar/Searchbar';
-
-const API_BASE_URL = 'http://192.168.14.162:5001';
+import AddModal from '../../components/Collection/AddModal';
+import { API_BASE_URL } from '../../config/api';
 
 export default function HomeScreen() {
   const [username, setUsername] = useState<string>('');
@@ -16,6 +16,8 @@ export default function HomeScreen() {
   const [checkingUser, setCheckingUser] = useState(false);
   const [collections, setCollections] = useState<any[]>([]);
   const [recentlyScanned, setRecentlyScanned] = useState<any[]>([]);
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [addModalLoading, setAddModalLoading] = useState(false);
   const router = useRouter();
   const scrollRef = useRef<ScrollView>(null);
   const [blockScroll, setBlockScroll] = useState(false);
@@ -91,6 +93,23 @@ export default function HomeScreen() {
     router.push({ pathname: '/(tabs)/camera', params: { autoScan: '1' } });
   };
 
+  const handleCreateCollection = async (name: string, icon: string) => {
+    if (!username) return;
+    
+    setAddModalLoading(true);
+    try {
+      await axios.post(`${API_BASE_URL}/api/collections/${username}`, {
+        name: name,
+        icon: icon
+      });
+      setShowAddModal(false);
+      fetchUsernameAndData(); // Reload data
+    } catch (error) {
+      Alert.alert('Error', 'Could not create collection');
+    }
+    setAddModalLoading(false);
+  };
+
   return (
     <View style={styles.scrollContainer}>
       {/* Logo */}
@@ -138,44 +157,75 @@ export default function HomeScreen() {
       )}
 
       {/* Divider */}
-      <View style={styles.divider} />
+      {username && (collections.length > 0 || uniqueRecentlyScanned.length > 0) && <View style={styles.divider} />}
 
       {/* Collections */}
-      {username ? (
+      {username && (collections.length > 0 || uniqueRecentlyScanned.length > 0) ? (
         <>
-          <Text style={styles.sectionTitle}>Your collections:</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalScroll}>
+          {collections.length > 0 && <Text style={styles.sectionTitle}>Your collections:</Text>}
+          <ScrollView 
+            horizontal 
+            showsHorizontalScrollIndicator={false} 
+            style={styles.horizontalScroll}
+            scrollEnabled={collections.length > 0}
+          >
             {collections.length === 0 ? (
-              <Text style={{ color: '#888', marginTop: 12 }}>No collections yet.</Text>
-            ) : (
-              collections.map((col) => (
-                <TouchableOpacity
-                  key={col.id}
-                  style={styles.collectionItem}
-                  onPress={() => router.push({ pathname: '/(tabs)/collectiondetails', params: { collectionId: col.id, collectionName: col.name } })}
-                >
-                  <View style={styles.collectionSquare}>
-                    <Text style={styles.collectionIcon}>{col.icon}</Text>
-                  </View>
-                  <Text style={styles.collectionLabel}>{col.name}</Text>
+              <View style={styles.noCollectionsContainer}>
+                <Text style={styles.noCollectionsTitle}>Create Your First Collection!</Text>
+                <Text style={styles.noCollectionsSubtitle}>Organize your books by genre, mood, or any way you like</Text>
+                <TouchableOpacity style={styles.createCollectionButton} onPress={() => setShowAddModal(true)}>
+                  <Text style={styles.createCollectionButtonText}>Create Collection</Text>
                 </TouchableOpacity>
-              ))
+              </View>
+            ) : (
+              <>
+                {collections.map((col) => (
+                  <TouchableOpacity
+                    key={col.id}
+                    style={styles.collectionItem}
+                    onPress={() => router.push({ 
+                      pathname: '/(tabs)/collectiondetails', 
+                      params: { 
+                        collectionId: col.id, 
+                        collectionName: col.name
+                      } 
+                    })}
+                  >
+                    <View style={styles.collectionSquare}>
+                      <Text style={styles.collectionIcon}>{col.icon}</Text>
+                    </View>
+                    <Text style={styles.collectionLabel}>{col.name}</Text>
+                  </TouchableOpacity>
+                ))}
+              </>
             )}
           </ScrollView>
           {/* Divider */}
           <View style={styles.divider} />
 
           {/* Recently Scanned */}
-          <Text style={styles.sectionTitle}>Recently Scanned:</Text>
+          {uniqueRecentlyScanned.length > 0 && <Text style={styles.sectionTitle}>Recently Scanned:</Text>}
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalScroll}>
             {uniqueRecentlyScanned.length === 0 ? (
-              <Text style={{ color: '#888', marginTop: 12 }}>No scans yet.</Text>
+              <View style={styles.noScansContainer}>
+                <Text style={styles.noScansTitle}>Start Scanning Books!</Text>
+                <Text style={styles.noScansSubtitle}>Discover and organize your favorite books</Text>
+                <TouchableOpacity style={styles.scanButton} onPress={handleCameraPress}>
+                  <Camera size={20} color="#fff" />
+                  <Text style={styles.scanButtonText}>Scan Your First Book</Text>
+                </TouchableOpacity>
+              </View>
             ) : (
               uniqueRecentlyScanned.map((book) => (
                 <TouchableOpacity
                   key={book.isbn}
                   style={styles.recentItem}
-                  onPress={() => router.push({ pathname: '/(tabs)/bookdetails', params: { isbn: book.isbn } })}
+                  onPress={() => router.push({ 
+                    pathname: '/(tabs)/bookdetails', 
+                    params: { 
+                      isbn: book.isbn
+                    } 
+                  })}
                 >
                   <View style={styles.recentRect}>
                     {book.cover_url ? (
@@ -193,6 +243,16 @@ export default function HomeScreen() {
           </ScrollView>
         </>
       ) : null}
+
+      {/* Add Collection Modal */}
+      <AddModal
+        visible={showAddModal}
+        onClose={() => setShowAddModal(false)}
+        collections={[]}
+        onSelectCollection={() => {}}
+        onCreateCollection={handleCreateCollection}
+        loading={addModalLoading}
+      />
     </View>
   );
 }
@@ -337,5 +397,70 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
     fontWeight: '500',
+  },
+  noScansContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 40,
+    paddingHorizontal: 20,
+    width: '100%',
+  },
+  noScansTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  noScansSubtitle: {
+    fontSize: 16,
+    color: '#666',
+    marginBottom: 24,
+    textAlign: 'center',
+  },
+  scanButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#007AFF',
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 12,
+    gap: 8,
+  },
+  scanButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  noCollectionsContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 40,
+    paddingHorizontal: 20,
+    width: '80%',
+  },
+  noCollectionsTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  noCollectionsSubtitle: {
+    fontSize: 16,
+    color: '#666',
+    marginBottom: 24,
+    textAlign: 'center',
+  },
+  createCollectionButton: {
+    backgroundColor: '#007AFF',
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 12,
+  },
+  createCollectionButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
   },
 });

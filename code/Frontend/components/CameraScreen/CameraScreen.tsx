@@ -19,6 +19,7 @@ import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { colors, spacing } from '../ISBNScanner/styles'
 import { useRouter, useLocalSearchParams } from 'expo-router'
+import { API_BASE_URL } from '../../config/api'
 
 export default function CameraScreen() {
   const [image, setImage] = useState<string | null>(null)
@@ -45,8 +46,6 @@ export default function CameraScreen() {
       },
     }), [showAlternatives]
   );
-
-  const API_BASE_URL = 'http://192.168.14.162:5001'
 
   const pickImage = async () => {
     try {
@@ -169,9 +168,14 @@ export default function CameraScreen() {
               <TouchableOpacity
                 onPress={() => {
                   const isbnToSend = match.isbn;
-                  console.log("Navigating to bookdetails with ISBN:", isbnToSend); // Debug log
+                  console.log("Navigating to bookdetails with ISBN:", isbnToSend);
                   if (isbnToSend && typeof isbnToSend === "string" && isbnToSend.trim() !== "") {
-                    router.push({ pathname: '/(tabs)/bookdetails', params: { isbn: isbnToSend } });
+                    router.push({ 
+                      pathname: '/(tabs)/bookdetails', 
+                      params: { 
+                        isbn: isbnToSend
+                      } 
+                    });
                   } else {
                     Alert.alert("No ISBN found for this book.");
                   }
@@ -189,7 +193,6 @@ export default function CameraScreen() {
               <Text style={styles.notGoodBookHeader}>Similar results:</Text>
               <ScrollView style={styles.altListBox}>
                 {match.alternatives && match.alternatives.slice(0, 5).map((alt: any, idx: number) => {
-                  // Extract ISBN from filename (remove extension)
                   const altIsbn = alt.filename ? alt.filename.replace(/\.[^/.]+$/, "") : "";
                   return (
                     <TouchableOpacity
@@ -197,7 +200,12 @@ export default function CameraScreen() {
                       style={styles.altListRow}
                       onPress={() => {
                         if (altIsbn) {
-                          router.push({ pathname: '/(tabs)/bookdetails', params: { isbn: altIsbn } });
+                          router.push({ 
+                            pathname: '/(tabs)/bookdetails', 
+                            params: { 
+                              isbn: altIsbn
+                            } 
+                          });
                         } else {
                           Alert.alert("No ISBN found for this book.");
                         }

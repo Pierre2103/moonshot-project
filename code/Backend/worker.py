@@ -12,7 +12,7 @@ COVERS_DIR = os.path.join(BASE_DIR, "data/covers")
 DATA_DIR = os.path.abspath(os.path.join(BASE_DIR, "data"))
 INDEX_PATH = os.path.join(DATA_DIR, "index.faiss")
 NAMES_PATH = os.path.join(DATA_DIR, "image_names.json")
-CHECK_INTERVAL = 5  # seconds between queue polls
+CHECK_INTERVAL = 2  # seconds between queue polls
 
 # Amazon CDN URL patterns for ISBN-10 (ASIN)
 AMAZON_COVER_PATTERNS = [
@@ -145,7 +145,7 @@ def upsert_book(session, metadata: dict) -> None:
 def process_pending_books() -> None:
     while True:
         with SessionLocal() as session:
-            pendings = session.query(PendingBook).all()
+            pendings = session.query(PendingBook).filter_by(stucked=False).all()
             if not pendings:
                 time.sleep(CHECK_INTERVAL)
             else:
@@ -157,9 +157,19 @@ def process_pending_books() -> None:
                         log_app("SUCCESS", f"Fetched metadata for {isbn13}")
                     except Exception as e:
                         log_app("ERROR", f"Metadata fetch failed for {isbn13}: {e}")
+                        entry.stucked = True
+                        session.commit()
                         continue
 
                     isbn10 = meta.get("isbn")
+                    
+                    # Skip processing if no ISBN-10 is available
+                    if not isbn10:
+                        log_app("WARNING", f"No ISBN-10 found for {isbn13}, marking as stuck")
+                        entry.stucked = True
+                        session.commit()
+                        continue
+                    
                     try:
                         cover_path = download_cover(isbn10, isbn13, cover_url=meta.get("cover_url"), google_id=meta.get("google_id"))
                         if cover_path:

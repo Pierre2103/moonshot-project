@@ -120,3 +120,50 @@ def remove_book_from_collection(collection_id, isbn):
     session.commit()
     session.close()
     return jsonify({"message": "Book removed from collection"}), 200
+
+@collections_api.route("/api/collections/<username>/<int:collection_id>", methods=["PUT"])
+def update_collection(username, collection_id):
+    data = request.json
+    name = data.get("name")
+    icon = data.get("icon")
+    if not name or not icon:
+        return jsonify({"error": "Missing name or icon"}), 400
+    
+    session = SessionLocal()
+    user = session.query(User).filter_by(username=username).first()
+    if not user:
+        session.close()
+        return jsonify({"error": "User not found"}), 404
+    
+    collection = session.query(Collection).filter_by(id=collection_id, owner=user.id).first()
+    if not collection:
+        session.close()
+        return jsonify({"error": "Collection not found"}), 404
+    
+    collection.name = name
+    collection.icon = icon
+    session.commit()
+    result = {"id": collection.id, "name": collection.name, "icon": collection.icon}
+    session.close()
+    return jsonify(result)
+
+@collections_api.route("/api/collections/<username>/<int:collection_id>", methods=["DELETE"])
+def delete_collection(username, collection_id):
+    session = SessionLocal()
+    user = session.query(User).filter_by(username=username).first()
+    if not user:
+        session.close()
+        return jsonify({"error": "User not found"}), 404
+    
+    collection = session.query(Collection).filter_by(id=collection_id, owner=user.id).first()
+    if not collection:
+        session.close()
+        return jsonify({"error": "Collection not found"}), 404
+    
+    # Delete all books in collection first
+    session.query(CollectionBook).filter_by(collection_id=collection_id).delete()
+    # Delete the collection
+    session.delete(collection)
+    session.commit()
+    session.close()
+    return jsonify({"message": "Collection deleted"}), 200

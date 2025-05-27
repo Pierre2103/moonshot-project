@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, Platform } from 'react-native';
 import { CameraView } from 'expo-camera';
 import { StatusBar } from 'expo-status-bar';
 import { Book } from 'lucide-react-native';
+import { API_BASE_URL } from '../../config/api';
 
 import ScannerOverlay from './ScannerOverlay';
 import ScannedBooksList from './ScannedBooksList';
@@ -11,6 +12,7 @@ import { useScanner } from './hooks/useScanner';
 import { colors, spacing } from './styles';
 
 const TOAST_DURATION = 2000;
+const ERROR_CHECK_INTERVAL = 5000; // Check for errors every 5 seconds
 
 export default function ISBNScanner() {
   const { 
@@ -32,7 +34,7 @@ export default function ISBNScanner() {
     setRecentlyScanned(data);
 
     try {
-      const response = await fetch('http://192.168.14.162:5001/barcode', {
+      const response = await fetch(`${API_BASE_URL}/barcode`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ isbn: data }),
@@ -57,6 +59,32 @@ export default function ISBNScanner() {
     setTimeout(() => setRecentlyScanned(null), 2000);
     originalHandleBarCodeScanned({ data });
   };
+
+  // Add useEffect to periodically check for worker errors
+  useEffect(() => {
+    const checkWorkerErrors = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/worker-errors`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data.errors && data.errors.length > 0) {
+            // Show error toast for the first error
+            const error = data.errors[0];
+            setToast({ 
+              color: '#FF3B30', 
+              message: `Erreur: impossible de traiter le livre ${error.isbn}` 
+            });
+            setTimeout(() => setToast(null), TOAST_DURATION);
+          }
+        }
+      } catch (error) {
+        console.error('Error checking worker status:', error);
+      }
+    };
+
+    const interval = setInterval(checkWorkerErrors, ERROR_CHECK_INTERVAL);
+    return () => clearInterval(interval);
+  }, []);
 
   if (!permission) {
     return (
