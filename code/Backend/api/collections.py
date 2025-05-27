@@ -108,3 +108,15 @@ def get_books_in_collection(collection_id):
     ]
     session.close()
     return jsonify(result)
+
+@collections_api.route("/api/collections/<int:collection_id>/books/<isbn>", methods=["DELETE"])
+def remove_book_from_collection(collection_id, isbn):
+    session = SessionLocal()
+    cb = session.query(CollectionBook).filter_by(collection_id=collection_id, isbn=isbn).first()
+    if not cb:
+        session.close()
+        return jsonify({"error": "Book not in collection"}), 404
+    session.delete(cb)
+    session.commit()
+    session.close()
+    return jsonify({"message": "Book removed from collection"}), 200

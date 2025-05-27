@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, ActivityIndicator, Dimensions } from "react-native";
+import React, { useEffect, useState, useCallback } from "react";
+import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, ActivityIndicator, Dimensions, ActionSheetIOS, Alert, Platform, Modal } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -16,6 +16,10 @@ export default function CollectionDetails() {
   const [books, setBooks] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [layout, setLayout] = useState<"list" | "grid2" | "grid3">("grid2");
+  const [showMoveModal, setShowMoveModal] = useState(false);
+  const [selectedBook, setSelectedBook] = useState<any>(null);
+  const [collections, setCollections] = useState<any[]>([]);
+  const [moving, setMoving] = useState(false);
 
   useEffect(() => {
     AsyncStorage.getItem(LAYOUT_KEY).then(val => {
@@ -23,7 +27,8 @@ export default function CollectionDetails() {
     });
   }, []);
 
-  useEffect(() => {
+  // Helper to reload books
+  const reloadBooks = useCallback(() => {
     if (!collectionId) return;
     setLoading(true);
     axios.get(`${API_BASE_URL}/api/collections/${collectionId}/books`)
@@ -31,6 +36,21 @@ export default function CollectionDetails() {
       .catch(() => setBooks([]))
       .finally(() => setLoading(false));
   }, [collectionId]);
+
+  useEffect(() => {
+    reloadBooks();
+  }, [reloadBooks]);
+
+  // Fetch collections for move modal
+  useEffect(() => {
+    if (!showMoveModal) return;
+    AsyncStorage.getItem('ridizi_username').then(username => {
+      if (!username) return;
+      axios.get(`${API_BASE_URL}/api/collections/${username}`)
+        .then(res => setCollections(res.data.filter((c: any) => c.id != collectionId)))
+        .catch(() => setCollections([]));
+    });
+  }, [showMoveModal, collectionId]);
 
   const handleLayoutChange = (newLayout: "list" | "grid2" | "grid3") => {
     setLayout(newLayout);
@@ -43,6 +63,67 @@ export default function CollectionDetails() {
     if (layout === "list") return screenWidth;
     if (layout === "grid2") return (screenWidth - 16) / 2;
     return (screenWidth - 24) / 3;
+  };
+
+  // Remove book from collection
+  const handleRemove = async (book: any) => {
+    setLoading(true);
+    try {
+      await axios.delete(`${API_BASE_URL}/api/collections/${collectionId}/books/${book.isbn}`);
+      reloadBooks();
+    } catch {
+      Alert.alert("Error", "Could not remove book.");
+      setLoading(false);
+    }
+  };
+
+  // Move book to another collection
+  const handleMove = async (targetCollectionId: number) => {
+    if (!selectedBook) return;
+    setMoving(true);
+    try {
+      const username = await AsyncStorage.getItem('ridizi_username');
+      if (!username) throw new Error("No username found");
+      await axios.post(`${API_BASE_URL}/api/collections/${username}/${targetCollectionId}/add`, { isbn: selectedBook.isbn });
+      await axios.delete(`${API_BASE_URL}/api/collections/${collectionId}/books/${selectedBook.isbn}`);
+      setShowMoveModal(false);
+      setSelectedBook(null);
+      reloadBooks();
+    } catch {
+      Alert.alert("Error", "Could not move book.");
+    }
+    setMoving(false);
+  };
+
+  // Show action sheet on long press
+  const handleLongPress = (book: any) => {
+    if (Platform.OS === "ios") {
+      ActionSheetIOS.showActionSheetWithOptions(
+        {
+          options: ["Cancel", "Move to another collection", "Remove from this collection"],
+          destructiveButtonIndex: 2,
+          cancelButtonIndex: 0,
+        },
+        (buttonIndex) => {
+          if (buttonIndex === 1) {
+            setSelectedBook(book);
+            setShowMoveModal(true);
+          } else if (buttonIndex === 2) {
+            handleRemove(book);
+          }
+        }
+      );
+    } else {
+      Alert.alert(
+        "Book actions",
+        book.title,
+        [
+          { text: "Move to another collection", onPress: () => { setSelectedBook(book); setShowMoveModal(true); } },
+          { text: "Remove from this collection", style: "destructive", onPress: () => handleRemove(book) },
+          { text: "Cancel", style: "cancel" }
+        ]
+      );
+    }
   };
 
   return (
@@ -98,6 +179,8 @@ export default function CollectionDetails() {
                 layout === "list" && { flexDirection: "row", alignItems: "center" }
               ]}
               onPress={() => router.push({ pathname: '/(tabs)/bookdetails', params: { isbn: item.isbn } })}
+              onLongPress={() => handleLongPress(item)}
+              delayLongPress={350}
             >
               <Image
                 source={{ uri: item.cover_url?.startsWith("http") ? item.cover_url : `${API_BASE_URL}${item.cover_url}` }}
@@ -116,19 +199,52 @@ export default function CollectionDetails() {
           )}
         />
       )}
+
+      {/* Move Modal */}
+      <Modal visible={showMoveModal} transparent animationType="slide" onRequestClose={() => setShowMoveModal(false)}>
+        <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.2)", justifyContent: "center", alignItems: "center" }}>
+          <View style={{ backgroundColor: "#fff", borderRadius: 16, padding: 20, width: 320 }}>
+            <Text style={{ fontWeight: "bold", fontSize: 18, marginBottom: 16 }}>Move to collection</Text>
+            {collections.length === 0 ? (
+              <Text style={{ color: "#888" }}>No other collections available.</Text>
+            ) : (
+              collections.map((col: any) => (
+                <TouchableOpacity
+                  key={col.id}
+                  style={{ flexDirection: "row", alignItems: "center", paddingVertical: 10 }}
+                  onPress={() => handleMove(col.id)}
+                  disabled={moving}
+                >
+                  <Text style={{ fontSize: 28, marginRight: 12 }}>{col.icon}</Text>
+                  <Text style={{ fontSize: 16 }}>{col.name}</Text>
+                </TouchableOpacity>
+              ))
+            )}
+            <TouchableOpacity style={{ marginTop: 18, alignSelf: "center" }} onPress={() => setShowMoveModal(false)}>
+              <Text style={{ color: "#007AFF", fontSize: 16, fontWeight: "600" }}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff", paddingHorizontal: 20, paddingTop: 48 },
+  container: { 
+    paddingHorizontal: 20,
+    paddingTop: 64, // margin from notch
+    backgroundColor: '#fff',
+    flexGrow: 1,
+  },
   logoContainer: {
     alignItems: 'center',
-    marginBottom: 8,
+    marginBottom: 20,
   },
   logoImage: {
-    width: 180,
-    height: 70,
+    width: 200,
+    height: 90,
+    marginBottom: 0,
   },
   backButton: {
     flexDirection: 'row',

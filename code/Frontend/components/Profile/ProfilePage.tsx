@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ChevronRight } from 'lucide-react-native';
+import { globalEvents } from '../../utils/eventBus'; // adjust path if needed
 
 export default function ProfilePage() {
   const [username, setUsername] = useState('');
@@ -16,6 +17,7 @@ export default function ProfilePage() {
   const handleUsernameChange = async (value: string) => {
     setUsername(value);
     await AsyncStorage.setItem('ridizi_username', value);
+    globalEvents.emit('reloadHome'); // Notify main menu to reload
   };
 
   // Placeholder navigation handlers
@@ -24,7 +26,7 @@ export default function ProfilePage() {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <View style={styles.container}>
       {/* Logo */}
       <View style={styles.logoContainer}>
         <Image
@@ -49,6 +51,8 @@ export default function ProfilePage() {
         />
       </View>
 
+
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={{ flex: 1 }}>
       {/* Section: Main actions */}
       <View style={styles.section}>
         <TouchableOpacity style={styles.button} onPress={() => handleNavigate('collections')}>
@@ -88,10 +92,11 @@ export default function ProfilePage() {
           <ChevronRight size={22} color="#bbb" />
         </TouchableOpacity>
       </View>
+    </ScrollView>
 
       {/* Version */}
       <Text style={styles.version}>Ridizi Version 0.1.2</Text>
-    </ScrollView>
+    </View>
   );
 }
 
@@ -174,9 +179,10 @@ const styles = StyleSheet.create({
     color: '#bbb',
   },
   version: {
-    marginTop: 32,
     fontSize: 13,
     color: '#888',
     textAlign: 'center',
+    marginBottom: 20,
+    paddingTop: 10,
   },
 });

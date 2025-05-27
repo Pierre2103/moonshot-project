@@ -9,6 +9,7 @@ from api.users import users_api
 from api.book import bp as book_api
 from api.collections import collections_api
 from api.workers import register_worker, workers_api
+from api.search import search_api
 import os
 import json
 from utils.db_models import SessionLocal, AppLog
@@ -63,6 +64,7 @@ app.register_blueprint(users_api, url_prefix="/admin/api")
 app.register_blueprint(book_api)
 app.register_blueprint(collections_api)
 app.register_blueprint(workers_api)
+app.register_blueprint(search_api)
 
 
 # Register workers

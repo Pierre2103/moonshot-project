@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, ScrollView, Alert } from 'react-native';
 import { Camera } from 'lucide-react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { useRouter } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
+import { globalEvents } from '../../utils/eventBus';
+import Searchbar from '../../components/Searchbar/Searchbar';
 
 const API_BASE_URL = 'http://192.168.14.162:5001';
 
@@ -14,24 +16,52 @@ export default function HomeScreen() {
   const [checkingUser, setCheckingUser] = useState(false);
   const [collections, setCollections] = useState<any[]>([]);
   const [recentlyScanned, setRecentlyScanned] = useState<any[]>([]);
-
   const router = useRouter();
+  const scrollRef = useRef<ScrollView>(null);
+  const [blockScroll, setBlockScroll] = useState(false);
 
-  useEffect(() => {
-    AsyncStorage.getItem('ridizi_username').then(name => {
-      if (name) setUsername(name);
-    });
+  // Fetch username and data
+  const fetchUsernameAndData = useCallback(async () => {
+    const name = await AsyncStorage.getItem('ridizi_username');
+    if (name) setUsername(name);
+    if (name) {
+      try {
+        const [colRes, scanRes] = await Promise.all([
+          axios.get(`${API_BASE_URL}/api/collections/${name}`),
+          axios.get(`${API_BASE_URL}/api/recently_scanned/${name}`)
+        ]);
+        setCollections(colRes.data);
+        setRecentlyScanned(scanRes.data);
+      } catch {
+        setCollections([]);
+        setRecentlyScanned([]);
+      }
+    } else {
+      setCollections([]);
+      setRecentlyScanned([]);
+    }
   }, []);
 
-  useEffect(() => {
-    if (!username) return;
-    axios.get(`${API_BASE_URL}/api/collections/${username}`)
-      .then(res => setCollections(res.data))
-      .catch(() => setCollections([]));
-    axios.get(`${API_BASE_URL}/api/recently_scanned/${username}`)
-      .then(res => setRecentlyScanned(res.data))
-      .catch(() => setRecentlyScanned([]));
-  }, [username]);
+  // Reload on focus
+  useFocusEffect(
+    useCallback(() => {
+      fetchUsernameAndData();
+      // Listen for global events (username/collections change)
+      const reload = () => fetchUsernameAndData();
+      globalEvents.on('reloadHome', reload);
+      return () => globalEvents.off('reloadHome', reload);
+    }, [fetchUsernameAndData])
+  );
+
+  // Remove duplicates from recentlyScanned (by ISBN)
+  const uniqueRecentlyScanned = [];
+  const seenIsbns = new Set();
+  for (const book of recentlyScanned) {
+    if (!seenIsbns.has(book.isbn)) {
+      uniqueRecentlyScanned.push(book);
+      seenIsbns.add(book.isbn);
+    }
+  }
 
   const handleValidate = async () => {
     if (!inputUsername.trim()) {
@@ -41,14 +71,14 @@ export default function HomeScreen() {
     setCheckingUser(true);
     const uname = inputUsername.trim();
     try {
-      // Try to create user directly, ignore 409 error if user already exists
-      await axios.post('http://192.168.14.162:5001/admin/api/users', { username: uname })
+      await axios.post(`${API_BASE_URL}/admin/api/users`, { username: uname })
         .catch(err => {
           if (!(err.response && err.response.status === 409)) throw err;
         });
       await AsyncStorage.setItem('ridizi_username', uname);
       setUsername(uname);
       setInputUsername('');
+      globalEvents.emit('reloadHome');
     } catch (err) {
       Alert.alert('Error', 'Unable to create or check user.');
     } finally {
@@ -61,18 +91,8 @@ export default function HomeScreen() {
     router.push({ pathname: '/(tabs)/camera', params: { autoScan: '1' } });
   };
 
-  // Remove duplicates from recentlyScanned (by ISBN)
-  const uniqueRecentlyScanned = [];
-  const seenIsbns = new Set();
-  for (const book of recentlyScanned) {
-    if (!seenIsbns.has(book.isbn)) {
-      uniqueRecentlyScanned.push(book);
-      seenIsbns.add(book.isbn);
-    }
-  }
-
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
+    <View style={styles.scrollContainer}>
       {/* Logo */}
       <View style={styles.logoContainer}>
         <Image
@@ -83,19 +103,17 @@ export default function HomeScreen() {
       </View>
 
       {/* Search Bar with Camera Icon */}
-      <View style={styles.searchContainer}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Search..."
-          placeholderTextColor="#888"
-        />
-        <TouchableOpacity
-          style={styles.cameraButton}
-          onPress={handleCameraPress}
-        >
-          <Camera size={32} color="#333" />
-        </TouchableOpacity>
-      </View>
+      <Searchbar
+        cameraButton={
+          <TouchableOpacity
+            style={styles.cameraButton}
+            onPress={handleCameraPress}
+          >
+            <Camera size={32} color="#333" />
+          </TouchableOpacity>
+        }
+        setBlockScroll={setBlockScroll}
+      />
 
       {/* Welcome Message */}
       <Text style={styles.welcomeText}>
@@ -175,7 +193,7 @@ export default function HomeScreen() {
           </ScrollView>
         </>
       ) : null}
-    </ScrollView>
+    </View>
   );
 }
 

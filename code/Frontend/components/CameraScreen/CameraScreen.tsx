@@ -140,9 +140,8 @@ export default function CameraScreen() {
         />
       </View>
 
-      <ScrollView
-        contentContainerStyle={{ paddingBottom: 120, paddingTop: 110 }}
-        showsVerticalScrollIndicator={false}
+      <View
+        style={{ paddingBottom: 120, paddingTop: 110 }}
       >
         {/* Before scanning */}
         {!image && !match && !loading && (
@@ -155,7 +154,7 @@ export default function CameraScreen() {
         {loading && (
           <View style={styles.centeredContent}>
             <ActivityIndicator size="large" color={colors.primary} />
-            <Text style={styles.loadingText}>Analyse en cours...</Text>
+            <Text style={styles.loadingText}>Please Wait...</Text>
           </View>
         )}
 
@@ -187,8 +186,8 @@ export default function CameraScreen() {
               <TouchableOpacity style={styles.backButton} onPress={() => setShowAlternatives(false)}>
                 <Text style={styles.backButtonText}>← Back to main result</Text>
               </TouchableOpacity>
-              <Text style={styles.notGoodBookHeader}>Not the good book</Text>
-              <View style={styles.altListBox}>
+              <Text style={styles.notGoodBookHeader}>Similar results:</Text>
+              <ScrollView style={styles.altListBox}>
                 {match.alternatives && match.alternatives.slice(0, 5).map((alt: any, idx: number) => {
                   // Extract ISBN from filename (remove extension)
                   const altIsbn = alt.filename ? alt.filename.replace(/\.[^/.]+$/, "") : "";
@@ -217,11 +216,11 @@ export default function CameraScreen() {
                     </TouchableOpacity>
                   );
                 })}
-              </View>
+              </ScrollView>
             </View>
           )
         )}
-      </ScrollView>
+      </View>
 
       {/* Fixed scan button and related texts */}
       <View style={styles.fixedBottom}>
@@ -396,6 +395,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 8,
     marginBottom: 16,
+    maxHeight: 400,
   },
   altListRow: {
     flexDirection: 'row',

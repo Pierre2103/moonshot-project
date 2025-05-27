@@ -1,18 +1,23 @@
 {
   "expo": {
-    "name": "bolt-expo-nativewind",
-    "slug": "bolt-expo-nativewind",
+    "name": "Ridizi",
+    "slug": "Ridizi",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/logo.png",
+    "splash": {
+      "image": "./assets/images/icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "NSCameraUsageDescription": "Cette application nécessite l'accès à la caméra pour prendre des photos de livres.",
-        "NSPhotoLibraryUsageDescription": "Cette application nécessite l'accès à votre photothèque pour sélectionner des images."
+        "NSCameraUsageDescription": "This app requires access to your camera to take photos.",
+        "NSPhotoLibraryUsageDescription": "This app requires access to your photo library to save and retrieve images."
       }
     },
     "android": {

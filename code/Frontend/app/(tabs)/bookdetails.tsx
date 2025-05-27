@@ -5,6 +5,7 @@ import { Heart, Plus, ArrowLeft } from 'lucide-react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import AddModal from '../../components/Collection/AddModal';
+import { globalEvents } from '../../utils/eventBus'; // adjust path if needed
 
 const API_BASE_URL = 'http://192.168.14.162:5001';
 
@@ -59,6 +60,7 @@ export default function BookDetails() {
       await axios.post(`${API_BASE_URL}/api/collections/${username}/${collection.id}/add`, { isbn });
       Alert.alert('Success', `Book added to "${collection.name}"`);
       setModalVisible(false);
+      globalEvents.emit('reloadHome'); // Refresh home/collections
     } catch {
       Alert.alert('Error', 'Could not add book to collection.');
     }
@@ -72,6 +74,7 @@ export default function BookDetails() {
       setCollections([...collections, res.data]);
       setModalVisible(false);
       Alert.alert('Success', 'Collection created!');
+      globalEvents.emit('reloadHome'); // Refresh home/collections
     } catch {
       Alert.alert('Error', 'Could not create collection.');
     }
@@ -82,15 +85,18 @@ export default function BookDetails() {
     if (!username) return;
     setAdding(true);
     try {
-      // Find or create "Like" collection
-      let likeCol = collections.find(c => c.name.toLowerCase() === "like" || c.name.toLowerCase() === "liked");
+      const res = await axios.get(`${API_BASE_URL}/api/collections/${username}`);
+      const allCollections = res.data || [];
+      let likeCol = allCollections.find(
+        (c: any) => c.name && c.name.trim().toLowerCase() === "like"
+      );
       if (!likeCol) {
-        const res = await axios.post(`${API_BASE_URL}/api/collections/${username}`, { name: "Like", icon: "❤️" });
-        likeCol = res.data;
-        setCollections([...collections, likeCol]);
+        const createRes = await axios.post(`${API_BASE_URL}/api/collections/${username}`, { name: "Like", icon: "❤️" });
+        likeCol = createRes.data;
       }
       await axios.post(`${API_BASE_URL}/api/collections/${username}/${likeCol.id}/add`, { isbn });
       Alert.alert('Success', 'Book added to Like collection!');
+      globalEvents.emit('reloadHome'); // Refresh home/collections
     } catch {
       Alert.alert('Error', 'Could not like book.');
     }
@@ -117,7 +123,7 @@ export default function BookDetails() {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
+    <View style={styles.scrollContainer}>
       {/* Logo */}
       <View style={styles.logoContainer}>
         <Image
@@ -133,6 +139,8 @@ export default function BookDetails() {
         <Text style={styles.backButtonText}>Go back</Text>
       </TouchableOpacity>
 
+
+    <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
       {/* Cover */}
       {book.cover_url && (
         <Image
@@ -207,6 +215,7 @@ export default function BookDetails() {
           </View>
         )}
       </View>
+    </ScrollView>
 
       {/* Add to collection Modal */}
       <AddModal
@@ -217,7 +226,7 @@ export default function BookDetails() {
         onCreateCollection={handleCreateCollection}
         loading={adding}
       />
-    </ScrollView>
+    </View>
   );
 }
 
@@ -229,9 +238,13 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     alignItems: 'center',
   },
+  contentContainer: {
+    paddingBottom: 150,
+    alignItems: 'center',
+    marginTop: 20,
+  },
   logoContainer: {
     alignItems: 'center',
-    marginBottom: 20,
   },
   logoImage: {
     width: 200,
