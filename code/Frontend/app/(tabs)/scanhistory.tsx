@@ -12,6 +12,7 @@ export default function ScanHistory() {
   const router = useRouter();
   const [books, setBooks] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [imageErrors, setImageErrors] = useState<{[key: string]: boolean}>({});
 
   const loadScanHistory = useCallback(async () => {
     const username = await AsyncStorage.getItem('ridizi_username');
@@ -62,6 +63,10 @@ export default function ScanHistory() {
     );
   };
 
+  const handleImageError = (isbn: string) => {
+    setImageErrors(prev => ({ ...prev, [isbn]: true }));
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
@@ -102,9 +107,14 @@ export default function ScanHistory() {
               onPress={() => router.push({ pathname: '/(tabs)/bookdetails', params: { isbn: item.isbn } })}
             >
               <Image
-                source={{ uri: item.cover_url?.startsWith("http") ? item.cover_url : `${API_BASE_URL}${item.cover_url}` }}
+                source={{ 
+                  uri: imageErrors[item.isbn] && item.cover_url && item.cover_url.trim() && item.cover_url.startsWith("http")
+                    ? item.cover_url 
+                    : `${API_BASE_URL}/cover/${item.isbn}.jpg`
+                }}
                 style={styles.bookImage}
                 resizeMode="cover"
+                onError={() => handleImageError(item.isbn)}
               />
               <View style={styles.bookInfo}>
                 <Text style={styles.bookTitle} numberOfLines={2}>{item.title}</Text>

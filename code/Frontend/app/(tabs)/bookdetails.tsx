@@ -20,6 +20,7 @@ export default function BookDetails() {
   const [collectionsLoading, setCollectionsLoading] = useState(false);
   const [adding, setAdding] = useState(false);
   const [username, setUsername] = useState<string>("");
+  const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
     if (!isbn) return;
@@ -103,6 +104,10 @@ export default function BookDetails() {
     setAdding(false);
   };
 
+  const handleImageError = () => {
+    setImageError(true);
+  };
+
   if (loading) {
     return (
       <View style={styles.centered}>
@@ -136,11 +141,16 @@ export default function BookDetails() {
 
       <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
         {/* Cover */}
-        {book.cover_url && (
+        {(book.cover_url || book.isbn) && (
           <Image
-            source={{ uri: book.cover_url.startsWith('http') ? book.cover_url : `${API_BASE_URL}${book.cover_url}` }}
+            source={{ 
+              uri: imageError && book.cover_url && book.cover_url.trim() && book.cover_url.startsWith('http')
+                ? book.cover_url 
+                : `${API_BASE_URL}/cover/${book.isbn}.jpg`
+            }}
             style={styles.cover}
             resizeMode="cover"
+            onError={handleImageError}
           />
         )}
 

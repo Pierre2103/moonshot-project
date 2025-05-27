@@ -22,6 +22,7 @@ export default function CollectionDetails() {
   const [selectedBook, setSelectedBook] = useState<any>(null);
   const [collections, setCollections] = useState<any[]>([]);
   const [moving, setMoving] = useState(false);
+  const [imageErrors, setImageErrors] = useState<{[key: string]: boolean}>({});
 
   useEffect(() => {
     AsyncStorage.getItem(LAYOUT_KEY).then(val => {
@@ -128,6 +129,10 @@ export default function CollectionDetails() {
     }
   };
 
+  const handleImageError = (isbn: string) => {
+    setImageErrors(prev => ({ ...prev, [isbn]: true }));
+  };
+
   useFocusEffect(
     useCallback(() => {
       reloadBooks();
@@ -188,9 +193,14 @@ export default function CollectionDetails() {
               delayLongPress={350}
             >
               <Image
-                source={{ uri: item.cover_url?.startsWith("http") ? item.cover_url : `${API_BASE_URL}${item.cover_url}` }}
+                source={{ 
+                  uri: imageErrors[item.isbn] && item.cover_url && item.cover_url.trim() && item.cover_url.startsWith("http")
+                    ? item.cover_url 
+                    : `${API_BASE_URL}/cover/${item.isbn}.jpg`
+                }}
                 style={layout === "list" ? styles.bookImageList : styles.bookImageGrid}
                 resizeMode="cover"
+                onError={() => handleImageError(item.isbn)}
               />
               <View style={layout === "list" ? styles.bookInfoList : styles.bookInfoGrid}>
                 <Text style={styles.bookTitle} numberOfLines={2}>{item.title}</Text>

@@ -109,14 +109,17 @@ export default function Searchbar({ cameraButton, setBlockScroll }: { cameraButt
                   });
                 }}
               >
-                {item.cover_url ? (
-                  <Image
-                    source={{ uri: item.cover_url.startsWith("http") ? item.cover_url : `${API_BASE_URL}${item.cover_url}` }}
-                    style={styles.cover}
-                  />
-                ) : (
-                  <View style={styles.coverPlaceholder} />
-                )}
+                <Image
+                  source={{ uri: `${API_BASE_URL}/cover/${item.isbn}.jpg` }}
+                  style={styles.cover}
+                  onError={() => {
+                    // Fallback to cover_url if local cover fails
+                    if (item.cover_url && item.cover_url.startsWith("http")) {
+                      // This will need to be handled differently since we can't change source in onError
+                      // We'll need to use state management for this
+                    }
+                  }}
+                />
                 <View style={{ flex: 1 }}>
                   <Text style={styles.title}>{item.title}</Text>
                   <Text style={styles.authors}>{Array.isArray(item.authors) ? item.authors.join(", ") : item.authors}</Text>

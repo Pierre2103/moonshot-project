@@ -21,6 +21,7 @@ export default function HomeScreen() {
   const router = useRouter();
   const scrollRef = useRef<ScrollView>(null);
   const [blockScroll, setBlockScroll] = useState(false);
+  const [imageErrors, setImageErrors] = useState<{[key: string]: boolean}>({});
 
   // Fetch username and data
   const fetchUsernameAndData = useCallback(async () => {
@@ -108,6 +109,10 @@ export default function HomeScreen() {
       Alert.alert('Error', 'Could not create collection');
     }
     setAddModalLoading(false);
+  };
+
+  const handleImageError = (isbn: string) => {
+    setImageErrors(prev => ({ ...prev, [isbn]: true }));
   };
 
   return (
@@ -228,13 +233,16 @@ export default function HomeScreen() {
                   })}
                 >
                   <View style={styles.recentRect}>
-                    {book.cover_url ? (
-                      <Image
-                        source={{ uri: book.cover_url.startsWith('http') ? book.cover_url : `${API_BASE_URL}${book.cover_url}` }}
-                        style={styles.recentImage}
-                        resizeMode="cover"
-                      />
-                    ) : null}
+                    <Image
+                      source={{ 
+                        uri: imageErrors[book.isbn] && book.cover_url && book.cover_url.trim() && book.cover_url.startsWith('http')
+                          ? book.cover_url 
+                          : `${API_BASE_URL}/cover/${book.isbn}.jpg`
+                      }}
+                      style={styles.recentImage}
+                      resizeMode="cover"
+                      onError={() => handleImageError(book.isbn)}
+                    />
                   </View>
                   <Text style={styles.recentLabel} numberOfLines={2}>{book.title}</Text>
                 </TouchableOpacity>
