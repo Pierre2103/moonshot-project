@@ -1,43 +1,36 @@
 const path = require('path');
 
-// Load .env from root directory
-require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
+// Load .env from root directory (correct path)
+require('dotenv').config({ path: path.resolve(__dirname, '../../../.env') });
 
 export default {
   expo: {
-    name: "moonshot-project",
-    slug: "moonshot-project",
-    version: "1.0.0",
-    orientation: "portrait",
-    icon: "./assets/images/icon.png",
-    scheme: "myapp",
-    userInterfaceStyle: "light",
+    name: 'moonshot-frontend',
+    slug: 'moonshot-frontend',
+    version: '1.0.0',
+    orientation: 'portrait',
+    icon: './assets/icon.png',
+    userInterfaceStyle: 'light',
     splash: {
-      image: "./assets/images/icon.png",
-      resizeMode: "contain",
-      backgroundColor: "#ffffff"
+      image: './assets/splash.png',
+      resizeMode: 'contain',
+      backgroundColor: '#ffffff'
     },
-    assetBundlePatterns: ["**/*"],
+    assetBundlePatterns: ['**/*'],
     ios: {
       supportsTablet: true
     },
     android: {
       adaptiveIcon: {
-        foregroundImage: "./assets/images/adaptive-icon.png",
-        backgroundColor: "#ffffff"
+        foregroundImage: './assets/adaptive-icon.png',
+        backgroundColor: '#ffffff'
       }
     },
     web: {
-      bundler: "metro",
-      output: "static",
-      favicon: "./assets/images/favicon.png"
-    },
-    plugins: ["expo-router"],
-    experiments: {
-      typedRoutes: true
+      favicon: './assets/favicon.png'
     },
     extra: {
-      apiUrl: process.env.EXPO_PUBLIC_API_URL,
-    },
-  },
+      SERVER_URL: process.env.SERVER_URL,
+    }
+  }
 };

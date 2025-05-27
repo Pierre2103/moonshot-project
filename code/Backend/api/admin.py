@@ -229,5 +229,9 @@ def testing_random_cover():
     cover_path = os.path.join(covers_dir, f"{isbn}.jpg")
     if not os.path.exists(cover_path):
         return jsonify({"error": "Aucune couverture trouvée pour cet ISBN"}), 404
-    url = f"/cover/{isbn}.jpg"
+    
+    # Construire l'URL exactement comme le frontend : ${API_BASE_URL}/cover/${isbn}.jpg
+    from flask import request
+    server_url = request.url_root.rstrip('/')  # Récupère l'URL de base du serveur
+    url = f"{server_url}/cover/{isbn}.jpg"
     return jsonify({"isbn": isbn, "url": url})
