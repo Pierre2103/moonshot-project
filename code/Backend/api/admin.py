@@ -2,13 +2,24 @@ from flask import Blueprint, jsonify, request, send_file, url_for
 from utils.db_models import SessionLocal, Book, PendingBook, ScanLog, AppLog, DailyStats, calculate_daily_stats, User, UserScan
 import datetime
 import os
-from sqlalchemy import func
+from sqlalchemy import func, text
 import subprocess
 import random
 import glob
 from datetime import date, timedelta
 
 admin_api = Blueprint("admin_api", __name__)
+
+def log_app(level, message, context=None):
+    """Log application events"""
+    try:
+        session = SessionLocal()
+        app_log = AppLog(level=level, message=message, context=context)
+        session.add(app_log)
+        session.commit()
+        session.close()
+    except Exception as e:
+        print(f"[LOGGING ERROR] {e}: {level} - {message}")
 
 WORKER_PROCESSES = {
     "book_worker": {
@@ -428,3 +439,367 @@ def today_details():
         "active_users": active_users_details,
         "collections": collections_details
     })
+
+@admin_api.route("/admin/api/analytics/overview", methods=["GET"])
+def analytics_overview():
+    """Get overview analytics for the complete dataset"""
+    session = SessionLocal()
+    try:
+        # Basic metrics
+        total_books = session.query(Book).count()
+        total_authors = session.query(func.count(func.distinct(Book.authors))).scalar()
+        total_publishers = session.query(func.count(func.distinct(Book.publisher))).filter(Book.publisher.isnot(None)).scalar()
+        total_languages = session.query(func.count(func.distinct(Book.language_code))).filter(Book.language_code.isnot(None)).scalar()
+        
+        # Date range
+        oldest_book = session.query(func.min(Book.publication_date)).scalar()
+        newest_book = session.query(func.max(Book.publication_date)).scalar()
+        
+        # Total pages
+        total_pages = session.query(func.sum(Book.pages)).filter(Book.pages.isnot(None)).scalar() or 0
+        
+        return jsonify({
+            "total_books": total_books,
+            "total_authors": total_authors,
+            "total_publishers": total_publishers,
+            "total_languages": total_languages,
+            "oldest_book": oldest_book,
+            "newest_book": newest_book,
+            "total_pages": total_pages
+        })
+    finally:
+        session.close()
+
+@admin_api.route("/admin/api/analytics/timeline", methods=["GET"])
+def analytics_timeline():
+    """Get publication timeline data"""
+    session = SessionLocal()
+    try:
+        # Books by publication year
+        timeline_data = session.execute(text("""
+            SELECT 
+                SUBSTRING(publication_date, -4) as year,
+                COUNT(*) as count
+            FROM books 
+            WHERE publication_date IS NOT NULL 
+            AND publication_date REGEXP '[0-9]{4}$'
+            GROUP BY year
+            ORDER BY year
+        """)).fetchall()
+        
+        return jsonify([
+            {"year": row[0], "count": row[1]} 
+            for row in timeline_data
+        ])
+    finally:
+        session.close()
+
+@admin_api.route("/admin/api/analytics/authors", methods=["GET"])
+def analytics_authors():
+    """Get top authors data"""
+    limit = request.args.get("limit", 20, type=int)
+    session = SessionLocal()
+    try:
+        # Get all books with authors
+        books_with_authors = session.query(Book.authors).filter(
+            Book.authors.isnot(None),
+            Book.authors != '[]',
+            Book.authors != ''
+        ).all()
+        
+        # Parse authors and count occurrences
+        author_counts = {}
+        
+        for book_authors in books_with_authors:
+            authors_field = book_authors[0]
+            if not authors_field:
+                continue
+                
+            try:
+                # Check if it's already a list (parsed JSON)
+                if isinstance(authors_field, list):
+                    authors_list = authors_field
+                # If it's a string, try to parse as JSON array
+                elif isinstance(authors_field, str):
+                    if authors_field.startswith('[') and authors_field.endswith(']'):
+                        import json
+                        authors_list = json.loads(authors_field)
+                    else:
+                        # Single author as string
+                        authors_list = [authors_field]
+                else:
+                    # Skip unknown types
+                    continue
+                    
+                # Process the authors list
+                for author in authors_list:
+                    if author and str(author).strip():
+                        clean_author = str(author).strip()
+                        author_counts[clean_author] = author_counts.get(clean_author, 0) + 1
+                        
+            except Exception as e:
+                # If all parsing fails, try to convert to string and use as single author
+                try:
+                    clean_author = str(authors_field).strip()
+                    if clean_author and clean_author != '[]':
+                        author_counts[clean_author] = author_counts.get(clean_author, 0) + 1
+                except:
+                    continue
+        
+        # Sort by count and limit results
+        sorted_authors = sorted(author_counts.items(), key=lambda x: x[1], reverse=True)[:limit]
+        
+        return jsonify([
+            {"author": author, "book_count": count} 
+            for author, count in sorted_authors
+        ])
+    finally:
+        session.close()
+
+@admin_api.route("/admin/api/analytics/languages", methods=["GET"])
+def analytics_languages():
+    """Get language distribution"""
+    session = SessionLocal()
+    try:
+        languages_data = session.query(
+            Book.language_code,
+            func.count(Book.isbn).label('count')
+        ).filter(
+            Book.language_code.isnot(None)
+        ).group_by(Book.language_code).order_by(func.count(Book.isbn).desc()).all()
+        
+        return jsonify([
+            {"language": row[0], "count": row[1]} 
+            for row in languages_data
+        ])
+    finally:
+        session.close()
+
+@admin_api.route("/admin/api/analytics/publishers", methods=["GET"])
+def analytics_publishers():
+    """Get top publishers data"""
+    limit = request.args.get("limit", 20, type=int)
+    session = SessionLocal()
+    try:
+        publishers_data = session.query(
+            Book.publisher,
+            func.count(Book.isbn).label('count')
+        ).filter(
+            Book.publisher.isnot(None)
+        ).group_by(Book.publisher).order_by(func.count(Book.isbn).desc()).limit(limit).all()
+        
+        return jsonify([
+            {"publisher": row[0], "count": row[1]} 
+            for row in publishers_data
+        ])
+    finally:
+        session.close()
+
+@admin_api.route("/admin/api/analytics/pages", methods=["GET"])
+def analytics_pages():
+    """Get page distribution data"""
+    session = SessionLocal()
+    try:
+        # Page statistics
+        page_stats = session.query(
+            func.min(Book.pages).label('min_pages'),
+            func.max(Book.pages).label('max_pages'),
+            func.avg(Book.pages).label('avg_pages'),
+            func.count(Book.pages).label('books_with_pages')
+        ).filter(Book.pages.isnot(None)).first()
+        
+        # Page distribution by ranges - Fixed to be compatible with ONLY_FULL_GROUP_BY
+        page_ranges = session.execute(text("""
+            SELECT 
+                page_range,
+                COUNT(*) as count
+            FROM (
+                SELECT 
+                    CASE 
+                        WHEN pages < 100 THEN '< 100'
+                        WHEN pages < 200 THEN '100-199'
+                        WHEN pages < 300 THEN '200-299'
+                        WHEN pages < 400 THEN '300-399'
+                        WHEN pages < 500 THEN '400-499'
+                        ELSE '500+'
+                    END as page_range,
+                    CASE 
+                        WHEN pages < 100 THEN 1
+                        WHEN pages < 200 THEN 2
+                        WHEN pages < 300 THEN 3
+                        WHEN pages < 400 THEN 4
+                        WHEN pages < 500 THEN 5
+                        ELSE 6
+                    END as sort_order
+                FROM books 
+                WHERE pages IS NOT NULL
+            ) as page_groups
+            GROUP BY page_range, sort_order
+            ORDER BY sort_order
+        """)).fetchall()
+        
+        return jsonify({
+            "stats": {
+                "min_pages": page_stats[0],
+                "max_pages": page_stats[1],
+                "avg_pages": round(page_stats[2], 1) if page_stats[2] else 0,
+                "books_with_pages": page_stats[3]
+            },
+            "distribution": [
+                {"range": row[0], "count": row[1]} 
+                for row in page_ranges
+            ]
+        })
+    finally:
+        session.close()
+
+@admin_api.route("/admin/api/analytics/metadata-coverage", methods=["GET"])
+def analytics_metadata_coverage():
+    """Get metadata coverage statistics"""
+    session = SessionLocal()
+    try:
+        total_books = session.query(Book).count()
+        
+        coverage_data = {
+            "title": session.query(Book).filter(Book.title.isnot(None)).count(),
+            "authors": session.query(Book).filter(Book.authors.isnot(None), Book.authors != '[]').count(),
+            "isbn13": session.query(Book).filter(Book.isbn13.isnot(None)).count(),
+            "pages": session.query(Book).filter(Book.pages.isnot(None)).count(),
+            "publication_date": session.query(Book).filter(Book.publication_date.isnot(None)).count(),
+            "publisher": session.query(Book).filter(Book.publisher.isnot(None)).count(),
+            "language_code": session.query(Book).filter(Book.language_code.isnot(None)).count(),
+            "cover_url": session.query(Book).filter(Book.cover_url.isnot(None)).count(),
+            "description": session.query(Book).filter(Book.description.isnot(None), Book.description != '').count(),
+            "genres": session.query(Book).filter(Book.genres.isnot(None), Book.genres != '[]').count(),
+        }
+        
+        # Calculate percentages
+        coverage_percentages = {
+            key: round((value / total_books) * 100, 1) if total_books > 0 else 0
+            for key, value in coverage_data.items()
+        }
+        
+        return jsonify({
+            "total_books": total_books,
+            "coverage_counts": coverage_data,
+            "coverage_percentages": coverage_percentages
+        })
+    finally:
+        session.close()
+
+@admin_api.route("/admin/api/analytics/calculate", methods=["POST"])
+def calculate_analytics():
+    """Trigger analytics calculation and caching"""
+    try:
+        # Here you could implement caching logic if needed
+        # For now, we'll just return a success message since the data is calculated on-demand
+        
+        log_app("INFO", "Analytics calculation triggered manually")
+        return jsonify({
+            "message": "Analytics calculated successfully",
+            "timestamp": datetime.datetime.now().isoformat()
+        })
+    except Exception as e:
+        log_app("ERROR", f"Failed to calculate analytics: {e}")
+        return jsonify({"error": "Failed to calculate analytics"}), 500
+
+@admin_api.route("/admin/api/analytics/genres", methods=["GET"])
+def analytics_genres():
+    """Get genre distribution for word cloud"""
+    session = SessionLocal()
+    try:
+        # Get all books with genres
+        books_with_genres = session.query(Book.genres).filter(
+            Book.genres.isnot(None),
+            Book.genres != '[]',
+            Book.genres != ''
+        ).all()
+        
+        # Parse genres and count occurrences
+        genre_counts = {}
+        
+        for book_genres in books_with_genres:
+            genres_field = book_genres[0]
+            if not genres_field:
+                continue
+                
+            try:
+                # Check if it's already a list (parsed JSON)
+                if isinstance(genres_field, list):
+                    genres_list = genres_field
+                # If it's a string, try to parse as JSON array
+                elif isinstance(genres_field, str):
+                    if genres_field.startswith('[') and genres_field.endswith(']'):
+                        import json
+                        genres_list = json.loads(genres_field)
+                    else:
+                        # Single genre as string
+                        genres_list = [genres_field]
+                else:
+                    # Skip unknown types
+                    continue
+                    
+                # Process the genres list
+                for genre in genres_list:
+                    if genre and str(genre).strip():
+                        clean_genre = str(genre).strip()
+                        genre_counts[clean_genre] = genre_counts.get(clean_genre, 0) + 1
+                        
+            except Exception as e:
+                # If all parsing fails, try to convert to string and use as single genre
+                try:
+                    clean_genre = str(genres_field).strip()
+                    if clean_genre and clean_genre != '[]':
+                        genre_counts[clean_genre] = genre_counts.get(clean_genre, 0) + 1
+                except:
+                    continue
+        
+        # Sort by count and return all genres for word cloud
+        sorted_genres = sorted(genre_counts.items(), key=lambda x: x[1], reverse=True)
+        
+        return jsonify([
+            {"text": genre, "value": count} 
+            for genre, count in sorted_genres
+            if count > 1  # Filter out very rare genres
+        ])
+    finally:
+        session.close()
+
+@admin_api.route("/admin/api/analytics/publication-heatmap", methods=["GET"])
+def analytics_publication_heatmap():
+    """Get publication date heatmap data"""
+    session = SessionLocal()
+    try:
+        # Get publication dates grouped by year and month
+        heatmap_data = session.execute(text("""
+            SELECT 
+                SUBSTRING(publication_date, -4) as year,
+                CASE 
+                    WHEN publication_date REGEXP '^[0-9]{4}-[0-9]{2}' THEN 
+                        CAST(SUBSTRING(publication_date, 6, 2) AS UNSIGNED)
+                    ELSE NULL
+                END as month,
+                COUNT(*) as count
+            FROM books 
+            WHERE publication_date IS NOT NULL 
+            AND publication_date REGEXP '[0-9]{4}$'
+            AND publication_date REGEXP '^[0-9]{4}'
+            GROUP BY year, month
+            HAVING year IS NOT NULL AND month IS NOT NULL
+            ORDER BY year, month
+        """)).fetchall()
+        
+        # Transform data for heatmap
+        result = []
+        for row in heatmap_data:
+            year, month, count = row
+            if year and month and 1 <= month <= 12:
+                result.append({
+                    "year": int(year),
+                    "month": int(month) - 1,  # 0-indexed for heatmap
+                    "count": count
+                })
+        
+        return jsonify(result)
+    finally:
+        session.close()
