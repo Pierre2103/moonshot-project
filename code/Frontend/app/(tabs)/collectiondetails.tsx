@@ -180,7 +180,7 @@ export default function CollectionDetails() {
           key={layout + numColumns}
           numColumns={numColumns}
           keyExtractor={item => item.isbn}
-          contentContainerStyle={{ paddingBottom: 32, paddingTop: 8 }}
+          contentContainerStyle={{ paddingBottom: 192, paddingTop: 8 }}
           renderItem={({ item }) => (
             <TouchableOpacity
               style={[

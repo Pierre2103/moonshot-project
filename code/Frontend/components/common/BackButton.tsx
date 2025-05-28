@@ -8,7 +8,7 @@ interface BackButtonProps {
   textStyle?: any;
 }
 
-export default function BackButton({ customStyle, textStyle }: BackButtonProps) {
+export default function BackButton({ customStyle, textStyle}: BackButtonProps) {
   const router = useRouter();
 
   return (

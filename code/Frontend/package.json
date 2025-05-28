@@ -33,6 +33,7 @@
     "expo-web-browser": "~14.1.6",
     "lucide-react-native": "^0.475.0",
     "react": "19.0.0",
+    "react-app-rewired": "^2.2.1",
     "react-dom": "19.0.0",
     "react-native": "0.79.2",
     "react-native-gesture-handler": "~2.24.0",

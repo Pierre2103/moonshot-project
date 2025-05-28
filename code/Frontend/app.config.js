@@ -1,18 +1,18 @@
 const path = require('path');
 
 // Load .env from root directory (correct path)
-require('dotenv').config({ path: path.resolve(__dirname, '../../../.env') });
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
 export default {
   expo: {
-    name: 'moonshot-frontend',
-    slug: 'moonshot-frontend',
+    name: 'Ridizi',
+    slug: 'Ridizi',
     version: '1.0.0',
     orientation: 'portrait',
-    icon: './assets/icon.png',
+    icon: './assets/images/icon.png',
     userInterfaceStyle: 'light',
     splash: {
-      image: './assets/splash.png',
+      image: './assets/images/icon.png',
       resizeMode: 'contain',
       backgroundColor: '#ffffff'
     },

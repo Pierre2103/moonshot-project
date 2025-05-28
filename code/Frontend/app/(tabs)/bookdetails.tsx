@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
+import React, { useEffect, useState, useRef } from 'react';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, Alert, Animated } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Heart, Plus } from 'lucide-react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -21,6 +21,9 @@ export default function BookDetails() {
   const [adding, setAdding] = useState(false);
   const [username, setUsername] = useState<string>("");
   const [imageError, setImageError] = useState(false);
+  const [liked, setLiked] = useState(false);
+  const [likeCollectionId, setLikeCollectionId] = useState<number | null>(null);
+  const scaleAnim = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
     if (!isbn) return;
@@ -37,6 +40,34 @@ export default function BookDetails() {
       if (name) setUsername(name);
     });
   }, []);
+
+  // Vérifie si le livre est déjà dans la collection Like
+  useEffect(() => {
+    const checkLiked = async () => {
+      if (!username || !isbn) return;
+      try {
+        const res = await axios.get(`${API_BASE_URL}/api/collections/${username}`);
+        const allCollections = res.data || [];
+        const likeCol = allCollections.find(
+          (c: any) => c.name && c.name.trim().toLowerCase() === "like"
+        );
+        if (likeCol) {
+          setLikeCollectionId(likeCol.id);
+          // Vérifie si le livre est dans la collection Like
+          const booksRes = await axios.get(`${API_BASE_URL}/api/collections/${likeCol.id}/books`);
+          const isLiked = booksRes.data.some((b: any) => b.isbn === isbn);
+          setLiked(isLiked);
+        } else {
+          setLikeCollectionId(null);
+          setLiked(false);
+        }
+      } catch {
+        setLiked(false);
+        setLikeCollectionId(null);
+      }
+    };
+    checkLiked();
+  }, [username, isbn, adding]);
 
   const fetchCollections = async () => {
     if (!username) return;
@@ -85,21 +116,35 @@ export default function BookDetails() {
   const handleLike = async () => {
     if (!username) return;
     setAdding(true);
+    // Animation: scale up then down
+    Animated.sequence([
+      Animated.timing(scaleAnim, { toValue: 1.25, duration: 120, useNativeDriver: true }),
+      Animated.timing(scaleAnim, { toValue: 1, duration: 120, useNativeDriver: true }),
+    ]).start();
     try {
-      const res = await axios.get(`${API_BASE_URL}/api/collections/${username}`);
-      const allCollections = res.data || [];
-      let likeCol = allCollections.find(
-        (c: any) => c.name && c.name.trim().toLowerCase() === "like"
-      );
-      if (!likeCol) {
-        const createRes = await axios.post(`${API_BASE_URL}/api/collections/${username}`, { name: "Like", icon: "❤️" });
-        likeCol = createRes.data;
+      if (liked && likeCollectionId) {
+        // Si déjà liké, on retire le livre de la collection Like
+        await axios.delete(`${API_BASE_URL}/api/collections/${likeCollectionId}/books/${isbn}`);
+        setLiked(false);
+        globalEvents.emit('reloadHome');
+      } else {
+        // Ajoute à la collection Like (comme avant)
+        const res = await axios.get(`${API_BASE_URL}/api/collections/${username}`);
+        const allCollections = res.data || [];
+        let likeCol = allCollections.find(
+          (c: any) => c.name && c.name.trim().toLowerCase() === "like"
+        );
+        if (!likeCol) {
+          const createRes = await axios.post(`${API_BASE_URL}/api/collections/${username}`, { name: "Like", icon: "❤️" });
+          likeCol = createRes.data;
+        }
+        await axios.post(`${API_BASE_URL}/api/collections/${username}/${likeCol.id}/add`, { isbn });
+        setLiked(true);
+        setLikeCollectionId(likeCol.id);
+        globalEvents.emit('reloadHome');
       }
-      await axios.post(`${API_BASE_URL}/api/collections/${username}/${likeCol.id}/add`, { isbn });
-      Alert.alert('Success', 'Book added to Like collection!');
-      globalEvents.emit('reloadHome'); // Refresh home/collections
     } catch {
-      Alert.alert('Error', 'Could not like book.');
+      Alert.alert('Error', liked ? 'Could not remove book from Like.' : 'Could not like book.');
     }
     setAdding(false);
   };
@@ -160,10 +205,12 @@ export default function BookDetails() {
             <Plus size={22} color="#007AFF" />
             <Text style={styles.actionText}>Add to collection</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.actionBtn} onPress={handleLike}>
-            <Heart size={22} color="#007AFF" />
-            <Text style={styles.actionText}>Like</Text>
-          </TouchableOpacity>
+          <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
+            <TouchableOpacity style={styles.actionBtn} onPress={handleLike} disabled={adding}>
+              <Heart size={22} color="#007AFF" {...(liked ? { fill: "#007AFF" } : {})} />
+              <Text style={styles.actionText}>{liked ? "Liked" : "Like"}</Text>
+            </TouchableOpacity>
+          </Animated.View>
         </View>
 
         {/* Title */}
@@ -289,6 +336,8 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 14,
     marginHorizontal: 4,
+    minWidth: 100,
+    justifyContent: 'center',
   },
   actionText: {
     color: '#007AFF',
