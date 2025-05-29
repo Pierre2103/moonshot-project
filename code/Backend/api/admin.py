@@ -803,3 +803,174 @@ def analytics_publication_heatmap():
         return jsonify(result)
     finally:
         session.close()
+
+@admin_api.route("/admin/api/testing/add_isbn", methods=["POST"])
+def add_test_isbn():
+    data = request.get_json()
+    isbn = data.get("isbn")
+    if not isbn:
+        return jsonify({"error": "Missing ISBN"}), 400
+    session = SessionLocal()
+    # Only add if not present
+    exists = session.query(Book).filter_by(isbn13=isbn).first()
+    if not exists:
+        book = Book(isbn=isbn[-10:], isbn13=isbn, title="Test Book", authors="Test Author", publisher="Test Publisher")
+        session.add(book)
+        session.commit()
+    session.close()
+    return jsonify({"message": f"ISBN {isbn} ensured in database."})
+
+@admin_api.route("/admin/api/testing/delete_isbn/<isbn>", methods=["DELETE"])
+def delete_test_isbn(isbn):
+    session = SessionLocal()
+    session.query(Book).filter_by(isbn13=isbn).delete()
+    session.query(Book).filter_by(isbn=isbn[-10:]).delete()
+    session.commit()
+    session.close()
+    return jsonify({"message": f"ISBN {isbn} deleted from database."})
+
+@admin_api.route("/admin/api/users", methods=["POST"])
+def admin_create_user():
+    """Admin endpoint to create users for testing"""
+    data = request.get_json()
+    username = data.get("username")
+    if not username or not username.strip():
+        return jsonify({"error": "Username is required"}), 400
+
+    session = SessionLocal()
+    try:
+        user = User(username=username.strip())
+        session.add(user)
+        session.commit()
+        return jsonify({"id": user.id, "username": user.username}), 201
+    except Exception as e:
+        session.rollback()
+        if "Duplicate entry" in str(e) or "UNIQUE constraint" in str(e):
+            return jsonify({"error": "Username already exists"}), 409
+        return jsonify({"error": str(e)}), 500
+    finally:
+        session.close()
+
+@admin_api.route("/admin/api/users", methods=["GET"])
+def admin_list_users():
+    """Admin endpoint to list all users"""
+    session = SessionLocal()
+    users = session.query(User).all()
+    result = [{"id": u.id, "username": u.username} for u in users]
+    session.close()
+    return jsonify(result)
+
+@admin_api.route("/admin/api/users/<username>", methods=["DELETE"])
+def admin_delete_user(username):
+    """Admin endpoint to delete users"""
+    session = SessionLocal()
+    try:
+        user = session.query(User).filter_by(username=username).first()
+        if not user:
+            return jsonify({"error": "User not found"}), 404
+
+        # Delete all collections and their books for this user
+        from utils.db_models import Collection, CollectionBook
+        collections = session.query(Collection).filter_by(owner=user.id).all()
+        for collection in collections:
+            # Delete all books in this collection
+            session.query(CollectionBook).filter_by(collection_id=collection.id).delete()
+            # Delete the collection itself
+            session.delete(collection)
+
+        # Delete user scans
+        session.query(UserScan).filter_by(user_id=user.id).delete()
+        # Delete user
+        session.delete(user)
+        session.commit()
+        return jsonify({"message": f"User '{username}' deleted."}), 200
+    finally:
+        session.close()
+
+@admin_api.route("/admin/api/user_scans", methods=["POST"])
+def admin_add_user_scan():
+    """Admin endpoint to add user scans for testing"""
+    data = request.get_json()
+    username = data.get("username")
+    isbn = data.get("isbn")
+    if not username or not isbn:
+        return jsonify({"error": "username and isbn are required"}), 400
+
+    session = SessionLocal()
+    try:
+        user = session.query(User).filter_by(username=username).first()
+        if not user:
+            return jsonify({"error": "User not found"}), 404
+
+        # Check if scan already exists
+        existing_scan = session.query(UserScan).filter_by(user_id=user.id, isbn=isbn).first()
+        if existing_scan:
+            return jsonify({"error": "Scan already exists"}), 409
+
+        scan = UserScan(user_id=user.id, isbn=isbn, timestamp=datetime.datetime.utcnow())
+        session.add(scan)
+        session.commit()
+        return jsonify({"success": True}), 201
+    finally:
+        session.close()
+
+@admin_api.route("/admin/api/user_scans/<username>", methods=["DELETE"])
+def admin_delete_user_scans(username):
+    """Admin endpoint to delete all scans for a user"""
+    session = SessionLocal()
+    try:
+        user = session.query(User).filter_by(username=username).first()
+        if not user:
+            return jsonify({"error": "User not found"}), 404
+
+        # Delete all scans for this user
+        session.query(UserScan).filter_by(user_id=user.id).delete()
+        session.commit()
+        return jsonify({"message": "All scan history deleted"}), 200
+    finally:
+        session.close()
+
+@admin_api.route("/admin/api/recently_scanned/<username>", methods=["GET"])
+def admin_get_recently_scanned(username):
+    """Admin endpoint to get recently scanned books for a user"""
+    session = SessionLocal()
+    try:
+        user = session.query(User).filter_by(username=username).first()
+        if not user:
+            return jsonify([]), 200
+
+        # Get all user scans
+        user_scans = session.query(UserScan).filter(
+            UserScan.user_id == user.id
+        ).order_by(UserScan.timestamp.desc()).all()
+
+        if not user_scans:
+            return jsonify([]), 200
+
+        result = []
+        for scan in user_scans:
+            book = session.query(Book).filter_by(isbn=scan.isbn).first()
+            
+            if book:
+                result.append({
+                    "isbn": book.isbn,
+                    "title": book.title,
+                    "authors": book.authors,
+                    "cover_url": book.cover_url,
+                    "timestamp": scan.timestamp.isoformat() if scan.timestamp else None
+                })
+            else:
+                # Book not found in database, but we still want to show the scan
+                result.append({
+                    "isbn": scan.isbn,
+                    "title": f"Book {scan.isbn}",
+                    "authors": "Unknown",
+                    "cover_url": None,
+                    "timestamp": scan.timestamp.isoformat() if scan.timestamp else None
+                })
+
+        return jsonify(result), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        session.close()

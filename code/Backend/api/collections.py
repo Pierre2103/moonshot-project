@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from utils.db_models import SessionLocal, User, Collection, CollectionBook, UserScan, Book, AppLog
+from sqlalchemy.exc import IntegrityError
 import random
 from datetime import datetime
 
@@ -80,9 +81,14 @@ def add_book_to_collection(username, collection_id):
         return jsonify({"message": "Book already in collection"}), 200
     cb = CollectionBook(collection_id=collection_id, isbn=isbn)
     session.add(cb)
-    session.commit()
-    session.close()
-    return jsonify({"message": "Book added to collection"}), 201
+    try:
+        session.commit()
+        session.close()
+        return jsonify({"message": "Book added to collection"}), 201
+    except IntegrityError:
+        session.rollback()
+        session.close()
+        return jsonify({"error": "Book does not exist in database"}), 400
 
 @collections_api.route("/api/recently_scanned/<username>", methods=["GET"])
 def get_recently_scanned(username):
@@ -202,3 +208,8 @@ def delete_collection(username, collection_id):
     
     session.close()
     return jsonify({"message": "Collection deleted"}), 200
+
+@collections_api.route("/api/collections/<username>/<int:collection_id>/add_invalid", methods=["POST"])
+def add_book_to_collection_invalid(username, collection_id):
+    # Always return a JSON error for testing
+    return jsonify({"error": "Invalid collection"}), 404

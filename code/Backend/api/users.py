@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import desc
-from utils.db_models import SessionLocal, User, UserScan, Book
+from utils.db_models import SessionLocal, User, UserScan, Book, Collection, CollectionBook
 from datetime import datetime
 
 users_api = Blueprint("users_api", __name__)
@@ -127,3 +127,27 @@ def get_recently_scanned(username):
         return jsonify({"error": str(e)}), 500
     finally:
         session.close()
+
+@users_api.route("/users/<username>", methods=["DELETE"])
+def delete_user(username):
+    session = SessionLocal()
+    user = session.query(User).filter_by(username=username).first()
+    if not user:
+        session.close()
+        return jsonify({"error": "User not found"}), 404
+
+    # Delete all collections and their books for this user
+    collections = session.query(Collection).filter_by(owner=user.id).all()
+    for collection in collections:
+        # Delete all books in this collection
+        session.query(CollectionBook).filter_by(collection_id=collection.id).delete()
+        # Delete the collection itself
+        session.delete(collection)
+
+    # Delete user scans
+    session.query(UserScan).filter_by(user_id=user.id).delete()
+    # Delete user
+    session.delete(user)
+    session.commit()
+    session.close()
+    return jsonify({"message": f"User '{username}' deleted."}), 200
