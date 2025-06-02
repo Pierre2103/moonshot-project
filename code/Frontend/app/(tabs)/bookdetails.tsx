@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, Alert, Animated } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, Alert, Animated, Linking } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Heart, Plus } from 'lucide-react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -153,6 +153,15 @@ export default function BookDetails() {
     setImageError(true);
   };
 
+  const handleAmazonRedirect = () => {
+    if (book?.isbn) {
+      const amazonUrl = `https://www.amazon.fr/dp/${book.isbn}`;
+      Linking.openURL(amazonUrl).catch(() => {
+        Alert.alert('Error', 'Could not open Amazon link.');
+      });
+    }
+  };
+
   if (loading) {
     return (
       <View style={styles.centered}>
@@ -266,6 +275,18 @@ export default function BookDetails() {
             </View>
           )}
         </View>
+
+        {/* Amazon Redirect Button */}
+        {book.isbn && (
+          <TouchableOpacity style={styles.amazonButton} onPress={handleAmazonRedirect}>
+            <Image
+              source={require('../../assets/images/amazon_logo.png')}
+              style={styles.amazonLogoImage}
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
+        )}
+
       </ScrollView>
 
       {/* Add to collection Modal */}
@@ -433,5 +454,33 @@ const styles = StyleSheet.create({
     color: '#007AFF',
     fontWeight: '600',
     fontSize: 16,
+  },
+  amazonButton: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 8,
+    borderWidth: 2,
+    borderColor: '#f19e38',
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 8,
+    marginBottom: 20,
+    minWidth: 120,
+    height: 50,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  amazonLogoImage: {
+    width: 80,
+    height: 25,
+  },
+  amazonText: {
+    color: '#FFFFFF',
+    fontSize: 14,
+    fontWeight: '600',
   },
 });
