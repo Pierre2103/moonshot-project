@@ -1,25 +1,46 @@
 """
 Collections API
 
-Manages user book collections - allows users to create, update, and organize
-their personal book collections. Each collection has a name, icon, and belongs
-to a specific user.
-
-Key features:
-- Auto-create users when needed
-- CRUD operations for collections
-- Add/remove books from collections
-- Collection sharing and management
+Manages user book collections with robust error handling for database lock timeouts.
+Auto-creates users when needed and provides CRUD operations for collections.
 """
 
 from flask import Blueprint, request, jsonify
 from utils.db_models import SessionLocal, User, Collection, CollectionBook, UserScan, Book, AppLog
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import IntegrityError, OperationalError, TimeoutError
 import random
+import time
 from datetime import datetime
 from urllib.parse import unquote
 
 collections_api = Blueprint("collections", __name__)
+
+
+def retry_db_operation(operation, max_retries: int = 3, base_delay: float = 0.1):
+    """
+    Retry database operations with exponential backoff for lock timeout handling.
+    
+    Args:
+        operation: Function to execute (should handle session management)
+        max_retries: Maximum number of retry attempts
+        base_delay: Base delay in seconds (doubles each retry)
+        
+    Returns:
+        Result from operation function
+        
+    Raises:
+        OperationalError/TimeoutError: If all retries are exhausted
+    """
+    for attempt in range(max_retries):
+        try:
+            return operation()
+        except (OperationalError, TimeoutError) as e:
+            if attempt == max_retries - 1:
+                raise e
+            # Exponential backoff with jitter
+            delay = base_delay * (2 ** attempt) + random.uniform(0, 0.1)
+            time.sleep(delay)
+    return None
 
 
 def log_app(level: str, message: str, context: dict = None) -> None:
@@ -56,11 +77,13 @@ def get_collections(username):
     username = unquote(username)
     session = SessionLocal()
     
+    # Find user by username
     user = session.query(User).filter_by(username=username).first()
     if not user:
         session.close()
         return jsonify([]), 200  # Return empty array instead of 404 for better UX
     
+    # Get all collections owned by this user
     collections = session.query(Collection).filter_by(owner=user.id).all()
     result = [
         {"id": c.id, "name": c.name, "icon": c.icon}
@@ -73,19 +96,20 @@ def get_collections(username):
 @collections_api.route("/api/collections/<username>", methods=["POST"])
 def create_collection(username):
     """
-    Create a new collection for a user.
-    
+    Create a new collection for a user with retry mechanism.
     Auto-creates the user if they don't exist yet.
     
     Args:
         username: URL-encoded username
         
     Expected JSON payload:
-        {"name": "My Books", "icon": "book"}
+        {"name": "My Books", "icon": "📚"}
         
     Returns:
         201: Created collection with id, name, and icon
         400: Missing name or icon
+        503: Database timeout after retries
+        500: Unexpected error
     """
     username = unquote(username)
     data = request.json
@@ -95,38 +119,55 @@ def create_collection(username):
     if not name or not icon:
         return jsonify({"error": "Missing name or icon"}), 400
     
-    session = SessionLocal()
+    def db_operation():
+        """Database operation with proper session management."""
+        session = SessionLocal()
+        try:
+            # Get or create user
+            user = session.query(User).filter_by(username=username).first()
+            if not user:
+                user = User(username=username)
+                session.add(user)
+                session.commit()
+            
+            # Create collection
+            collection = Collection(name=name, owner=user.id, icon=icon)
+            session.add(collection)
+            session.commit()
+            
+            # Log collection creation for daily statistics
+            log_app("SUCCESS", f"Collection created: '{name}' by user {username}", {
+                "collection_id": collection.id,
+                "collection_name": name,
+                "username": username,
+                "user_id": user.id,
+                "action": "collection_created"
+            })
+            
+            result = {"id": collection.id, "name": collection.name, "icon": collection.icon}
+            return {"result": result, "status": 201}
+            
+        except (OperationalError, TimeoutError) as e:
+            session.rollback()
+            if "Lock wait timeout" in str(e) or "timeout" in str(e).lower():
+                raise e  # Let retry mechanism handle it
+            return {"error": f"Database error: {str(e)}", "status": 500}
+        finally:
+            session.close()
     
-    # Get or create user
-    user = session.query(User).filter_by(username=username).first()
-    if not user:
-        user = User(username=username)
-        session.add(user)
-        session.commit()
-    
-    # Create collection
-    collection = Collection(name=name, owner=user.id, icon=icon)
-    session.add(collection)
-    session.commit()
-    
-    # Log collection creation for daily statistics
-    log_app("SUCCESS", f"Collection created: '{name}' by user {username}", {
-        "collection_id": collection.id,
-        "collection_name": name,
-        "username": username,
-        "user_id": user.id,
-        "action": "collection_created"
-    })
-    
-    result = {"id": collection.id, "name": collection.name, "icon": collection.icon}
-    session.close()
-    return jsonify(result), 201
+    try:
+        response = retry_db_operation(db_operation, max_retries=3)
+        return jsonify(response["result"]), response["status"]
+    except (OperationalError, TimeoutError) as e:
+        return jsonify({"error": f"Database timeout after retries: {str(e)}"}), 503
+    except Exception as e:
+        return jsonify({"error": f"Unexpected error: {str(e)}"}), 500
 
 
 @collections_api.route("/api/collections/<username>/<int:collection_id>/add", methods=["POST"])
 def add_book_to_collection(username, collection_id):
     """
-    Add a book to a specific collection.
+    Add a book to a specific collection with retry mechanism for lock timeouts.
     
     Args:
         username: URL-encoded username
@@ -140,6 +181,8 @@ def add_book_to_collection(username, collection_id):
         200: Book already in collection
         400: Missing ISBN or book doesn't exist in database
         404: User or collection not found
+        503: Database timeout after retries
+        500: Unexpected error
     """
     username = unquote(username)
     data = request.json
@@ -148,35 +191,48 @@ def add_book_to_collection(username, collection_id):
     if not isbn:
         return jsonify({"error": "Missing ISBN"}), 400
     
-    session = SessionLocal()
-    
-    # Verify user and collection ownership
-    user = session.query(User).filter_by(username=username).first()
-    collection = session.query(Collection).filter_by(id=collection_id, owner=user.id).first() if user else None
-    
-    if not user or not collection:
-        session.close()
-        return jsonify({"error": "User or collection not found"}), 404
-    
-    # Check if book is already in collection
-    exists = session.query(CollectionBook).filter_by(collection_id=collection_id, isbn=isbn).first()
-    if exists:
-        session.close()
-        return jsonify({"message": "Book already in collection"}), 200
-    
-    # Add book to collection
-    cb = CollectionBook(collection_id=collection_id, isbn=isbn)
-    session.add(cb)
+    def db_operation():
+        """Database operation with proper error handling and session management."""
+        session = SessionLocal()
+        try:
+            # Verify user and collection ownership
+            user = session.query(User).filter_by(username=username).first()
+            collection = session.query(Collection).filter_by(id=collection_id, owner=user.id).first() if user else None
+            
+            if not user or not collection:
+                return {"error": "User or collection not found", "status": 404}
+            
+            # Check if book is already in collection
+            exists = session.query(CollectionBook).filter_by(collection_id=collection_id, isbn=isbn).first()
+            if exists:
+                return {"message": "Book already in collection", "status": 200}
+            
+            # Add book to collection
+            cb = CollectionBook(collection_id=collection_id, isbn=isbn)
+            session.add(cb)
+            session.commit()
+            
+            return {"message": "Book added to collection", "status": 201}
+            
+        except IntegrityError:
+            # Foreign key constraint violation - book doesn't exist in database
+            session.rollback()
+            return {"error": "Book does not exist in database", "status": 400}
+        except (OperationalError, TimeoutError) as e:
+            session.rollback()
+            if "Lock wait timeout" in str(e) or "timeout" in str(e).lower():
+                raise e  # Let retry mechanism handle it
+            return {"error": f"Database error: {str(e)}", "status": 500}
+        finally:
+            session.close()
     
     try:
-        session.commit()
-        session.close()
-        return jsonify({"message": "Book added to collection"}), 201
-    except IntegrityError:
-        # Foreign key constraint violation - book doesn't exist in database
-        session.rollback()
-        session.close()
-        return jsonify({"error": "Book does not exist in database"}), 400
+        response = retry_db_operation(db_operation, max_retries=3)
+        return jsonify({"message": response["message"]} if "message" in response else {"error": response["error"]}), response["status"]
+    except (OperationalError, TimeoutError) as e:
+        return jsonify({"error": f"Database timeout after retries: {str(e)}"}), 503
+    except Exception as e:
+        return jsonify({"error": f"Unexpected error: {str(e)}"}), 500
 
 
 @collections_api.route("/api/collections/<int:collection_id>/books", methods=["GET"])
@@ -217,7 +273,7 @@ def get_books_in_collection(collection_id):
 @collections_api.route("/api/collections/<int:collection_id>/books/<isbn>", methods=["DELETE"])
 def remove_book_from_collection(collection_id, isbn):
     """
-    Remove a book from a collection.
+    Remove a book from a collection with retry mechanism.
     
     Args:
         collection_id: Collection ID
@@ -226,36 +282,56 @@ def remove_book_from_collection(collection_id, isbn):
     Returns:
         200: Book removed successfully
         404: Book not in collection
+        503: Database timeout after retries
+        500: Unexpected error
     """
-    session = SessionLocal()
+    def db_operation():
+        """Database operation with proper session management."""
+        session = SessionLocal()
+        try:
+            cb = session.query(CollectionBook).filter_by(collection_id=collection_id, isbn=isbn).first()
+            if not cb:
+                return {"error": "Book not in collection", "status": 404}
+            
+            session.delete(cb)
+            session.commit()
+            return {"message": "Book removed from collection", "status": 200}
+            
+        except (OperationalError, TimeoutError) as e:
+            session.rollback()
+            if "Lock wait timeout" in str(e) or "timeout" in str(e).lower():
+                raise e  # Let retry mechanism handle it
+            return {"error": f"Database error: {str(e)}", "status": 500}
+        finally:
+            session.close()
     
-    cb = session.query(CollectionBook).filter_by(collection_id=collection_id, isbn=isbn).first()
-    if not cb:
-        session.close()
-        return jsonify({"error": "Book not in collection"}), 404
-    
-    session.delete(cb)
-    session.commit()
-    session.close()
-    return jsonify({"message": "Book removed from collection"}), 200
+    try:
+        response = retry_db_operation(db_operation, max_retries=3)
+        return jsonify({"message": response["message"]} if "message" in response else {"error": response["error"]}), response["status"]
+    except (OperationalError, TimeoutError) as e:
+        return jsonify({"error": f"Database timeout after retries: {str(e)}"}), 503
+    except Exception as e:
+        return jsonify({"error": f"Unexpected error: {str(e)}"}), 500
 
 
 @collections_api.route("/api/collections/<username>/<int:collection_id>", methods=["PUT"])
 def update_collection(username, collection_id):
     """
-    Update collection name and icon.
+    Update collection name and icon with retry mechanism.
     
     Args:
         username: URL-encoded username
         collection_id: Collection ID
         
     Expected JSON payload:
-        {"name": "Updated Name", "icon": "updated_icon"}
+        {"name": "Updated Name", "icon": "📖"}
         
     Returns:
         200: Updated collection data
         400: Missing name or icon
         404: User or collection not found
+        503: Database timeout after retries
+        500: Unexpected error
     """
     username = unquote(username)
     data = request.json
@@ -265,33 +341,48 @@ def update_collection(username, collection_id):
     if not name or not icon:
         return jsonify({"error": "Missing name or icon"}), 400
     
-    session = SessionLocal()
+    def db_operation():
+        """Database operation with proper session management."""
+        session = SessionLocal()
+        try:
+            # Verify user and collection ownership
+            user = session.query(User).filter_by(username=username).first()
+            if not user:
+                return {"error": "User not found", "status": 404}
+            
+            collection = session.query(Collection).filter_by(id=collection_id, owner=user.id).first()
+            if not collection:
+                return {"error": "Collection not found", "status": 404}
+            
+            # Update collection
+            collection.name = name
+            collection.icon = icon
+            session.commit()
+            
+            result = {"id": collection.id, "name": collection.name, "icon": collection.icon}
+            return {"result": result, "status": 200}
+            
+        except (OperationalError, TimeoutError) as e:
+            session.rollback()
+            if "Lock wait timeout" in str(e) or "timeout" in str(e).lower():
+                raise e  # Let retry mechanism handle it
+            return {"error": f"Database error: {str(e)}", "status": 500}
+        finally:
+            session.close()
     
-    # Verify user and collection ownership
-    user = session.query(User).filter_by(username=username).first()
-    if not user:
-        session.close()
-        return jsonify({"error": "User not found"}), 404
-    
-    collection = session.query(Collection).filter_by(id=collection_id, owner=user.id).first()
-    if not collection:
-        session.close()
-        return jsonify({"error": "Collection not found"}), 404
-    
-    # Update collection
-    collection.name = name
-    collection.icon = icon
-    session.commit()
-    
-    result = {"id": collection.id, "name": collection.name, "icon": collection.icon}
-    session.close()
-    return jsonify(result)
+    try:
+        response = retry_db_operation(db_operation, max_retries=3)
+        return jsonify(response["result"] if "result" in response else {"error": response["error"]}), response["status"]
+    except (OperationalError, TimeoutError) as e:
+        return jsonify({"error": f"Database timeout after retries: {str(e)}"}), 503
+    except Exception as e:
+        return jsonify({"error": f"Unexpected error: {str(e)}"}), 500
 
 
 @collections_api.route("/api/collections/<username>/<int:collection_id>", methods=["DELETE"])
 def delete_collection(username, collection_id):
     """
-    Delete a collection and all its books.
+    Delete a collection and all its books with retry mechanism.
     
     Args:
         username: URL-encoded username
@@ -300,48 +391,65 @@ def delete_collection(username, collection_id):
     Returns:
         200: Collection deleted successfully
         404: User or collection not found
+        503: Database timeout after retries
+        500: Unexpected error
     """
     username = unquote(username)
-    session = SessionLocal()
     
-    # Verify user and collection ownership
-    user = session.query(User).filter_by(username=username).first()
-    if not user:
-        session.close()
-        return jsonify({"error": "User not found"}), 404
+    def db_operation():
+        """Database operation with proper session management."""
+        session = SessionLocal()
+        try:
+            # Verify user and collection ownership
+            user = session.query(User).filter_by(username=username).first()
+            if not user:
+                return {"error": "User not found", "status": 404}
+            
+            collection = session.query(Collection).filter_by(id=collection_id, owner=user.id).first()
+            if not collection:
+                return {"error": "Collection not found", "status": 404}
+            
+            collection_name = collection.name
+            
+            # Delete all books in collection first (cascade delete)
+            session.query(CollectionBook).filter_by(collection_id=collection_id).delete()
+            
+            # Delete the collection itself
+            session.delete(collection)
+            session.commit()
+            
+            # Log collection deletion for analytics
+            log_app("INFO", f"Collection deleted: '{collection_name}' by user {username}", {
+                "collection_id": collection_id,
+                "collection_name": collection_name,
+                "username": username,
+                "user_id": user.id,
+                "action": "collection_deleted"
+            })
+            
+            return {"message": "Collection deleted", "status": 200}
+            
+        except (OperationalError, TimeoutError) as e:
+            session.rollback()
+            if "Lock wait timeout" in str(e) or "timeout" in str(e).lower():
+                raise e  # Let retry mechanism handle it
+            return {"error": f"Database error: {str(e)}", "status": 500}
+        finally:
+            session.close()
     
-    collection = session.query(Collection).filter_by(id=collection_id, owner=user.id).first()
-    if not collection:
-        session.close()
-        return jsonify({"error": "Collection not found"}), 404
-    
-    collection_name = collection.name
-    
-    # Delete all books in collection first (cascade delete)
-    session.query(CollectionBook).filter_by(collection_id=collection_id).delete()
-    
-    # Delete the collection itself
-    session.delete(collection)
-    session.commit()
-    
-    # Log collection deletion for analytics
-    log_app("INFO", f"Collection deleted: '{collection_name}' by user {username}", {
-        "collection_id": collection_id,
-        "collection_name": collection_name,
-        "username": username,
-        "user_id": user.id,
-        "action": "collection_deleted"
-    })
-    
-    session.close()
-    return jsonify({"message": "Collection deleted"}), 200
+    try:
+        response = retry_db_operation(db_operation, max_retries=3)
+        return jsonify({"message": response["message"]}), response["status"]
+    except (OperationalError, TimeoutError) as e:
+        return jsonify({"error": f"Database timeout after retries: {str(e)}"}), 503
+    except Exception as e:
+        return jsonify({"error": f"Unexpected error: {str(e)}"}), 500
 
 
 @collections_api.route("/api/collections/<username>/<int:collection_id>/add_invalid", methods=["POST"])
 def add_book_to_collection_invalid(username, collection_id):
     """
     Test endpoint that always returns an error.
-    
     Used for testing error handling in the frontend.
     
     Returns:

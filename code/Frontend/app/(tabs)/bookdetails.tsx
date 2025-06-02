@@ -1,5 +1,32 @@
+/**
+ * Book Details Screen
+ * 
+ * Comprehensive book information display with collection management.
+ * Shows detailed metadata, cover images, and provides actions for
+ * organizing books into collections.
+ * 
+ * Key Features:
+ * - Complete book metadata display (title, authors, description, etc.)
+ * - High-quality cover image with fallback handling
+ * - Collection management (add to collections, like functionality)
+ * - Amazon redirect for book purchasing
+ * - Genre/category display with visual chips
+ * - Publication information and book statistics
+ * - Animated like button with visual feedback
+ * - Real-time collection synchronization
+ * 
+ * Navigation Sources:
+ * - Search results
+ * - Recently scanned books
+ * - Collection book lists
+ * - Barcode/camera scanning
+ */
+
 import React, { useEffect, useState, useRef } from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, Alert, Animated, Linking } from 'react-native';
+import { 
+  View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, 
+  ActivityIndicator, Alert, Animated, Linking 
+} from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Heart, Plus } from 'lucide-react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -9,51 +36,130 @@ import { globalEvents } from '../../utils/eventBus';
 import { API_BASE_URL } from '../../config/api';
 import BackButton from '../../components/common/BackButton';
 
+// ============================================================================
+// TYPE DEFINITIONS
+// ============================================================================
+
+/**
+ * Complete book data structure from API
+ */
+interface BookDetails {
+  isbn: string;
+  isbn13?: string;
+  title: string;
+  authors: string | string[];
+  description?: string;
+  genres?: string[];
+  pages?: number;
+  publication_date?: string;
+  publisher?: string;
+  language_code?: string;
+  cover_url?: string;
+  external_links?: string[];
+  average_rating?: number;
+  ratings_count?: number;
+}
+
+/**
+ * Collection data for modal display
+ */
+interface Collection {
+  id: number;
+  name: string;
+  icon: string;
+}
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+
 export default function BookDetails() {
+  // ----------------------------------------------------------------------------
+  // NAVIGATION AND PARAMS
+  // ----------------------------------------------------------------------------
+  
   const router = useRouter();
   const params = useLocalSearchParams();
   const isbn = params.isbn as string;
-  const [book, setBook] = useState<any>(null);
+
+  // ----------------------------------------------------------------------------
+  // STATE MANAGEMENT
+  // ----------------------------------------------------------------------------
+  
+  // Book data state
+  const [book, setBook] = useState<BookDetails | null>(null);
   const [loading, setLoading] = useState(true);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [collections, setCollections] = useState<any[]>([]);
-  const [collectionsLoading, setCollectionsLoading] = useState(false);
-  const [adding, setAdding] = useState(false);
+  
+  // User and collections state
   const [username, setUsername] = useState<string>("");
-  const [imageError, setImageError] = useState(false);
+  const [collections, setCollections] = useState<Collection[]>([]);
+  
+  // Like functionality state
   const [liked, setLiked] = useState(false);
   const [likeCollectionId, setLikeCollectionId] = useState<number | null>(null);
+  
+  // Modal and UI state
+  const [modalVisible, setModalVisible] = useState(false);
+  const [collectionsLoading, setCollectionsLoading] = useState(false);
+  const [adding, setAdding] = useState(false);
+  const [imageError, setImageError] = useState(false);
+  
+  // Animation refs
   const scaleAnim = useRef(new Animated.Value(1)).current;
 
+  // ----------------------------------------------------------------------------
+  // DATA FETCHING
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Fetch book details from API by ISBN.
+   * Handles both ISBN-10 and ISBN-13 formats.
+   */
   useEffect(() => {
     if (!isbn) return;
+    
     setLoading(true);
     fetch(`${API_BASE_URL}/api/book/${isbn}`)
       .then(res => res.json())
       .then(data => setBook(data))
-      .catch(() => setBook(null))
+      .catch(error => {
+        console.error('Error fetching book details:', error);
+        setBook(null);
+      })
       .finally(() => setLoading(false));
   }, [isbn]);
 
+  /**
+   * Load username from storage on component mount.
+   */
   useEffect(() => {
     AsyncStorage.getItem('ridizi_username').then(name => {
       if (name) setUsername(name);
     });
   }, []);
 
-  // Vérifie si le livre est déjà dans la collection Like
+  /**
+   * Check if book is already in user's "Like" collection.
+   * Auto-creates Like collection if it doesn't exist.
+   */
   useEffect(() => {
-    const checkLiked = async () => {
+    const checkLiked = async (): Promise<void> => {
       if (!username || !isbn) return;
+      
       try {
+        // Get all user collections
         const res = await axios.get(`${API_BASE_URL}/api/collections/${username}`);
         const allCollections = res.data || [];
+        
+        // Find the "Like" collection (case-insensitive)
         const likeCol = allCollections.find(
           (c: any) => c.name && c.name.trim().toLowerCase() === "like"
         );
+        
         if (likeCol) {
           setLikeCollectionId(likeCol.id);
-          // Vérifie si le livre est dans la collection Like
+          
+          // Check if current book is in Like collection
           const booksRes = await axios.get(`${API_BASE_URL}/api/collections/${likeCol.id}/books`);
           const isLiked = booksRes.data.some((b: any) => b.isbn === isbn);
           setLiked(isLiked);
@@ -61,99 +167,171 @@ export default function BookDetails() {
           setLikeCollectionId(null);
           setLiked(false);
         }
-      } catch {
+      } catch (error) {
+        console.error('Error checking like status:', error);
         setLiked(false);
         setLikeCollectionId(null);
       }
     };
+    
     checkLiked();
-  }, [username, isbn, adding]);
+  }, [username, isbn, adding]); // Re-check when adding state changes
 
-  const fetchCollections = async () => {
+  /**
+   * Fetch user collections for the add-to-collection modal.
+   */
+  const fetchCollections = async (): Promise<void> => {
     if (!username) return;
+    
     setCollectionsLoading(true);
     try {
       const res = await axios.get(`${API_BASE_URL}/api/collections/${username}`);
-      setCollections(res.data);
-    } catch {
+      setCollections(res.data || []);
+    } catch (error) {
+      console.error('Error fetching collections:', error);
       setCollections([]);
     }
     setCollectionsLoading(false);
   };
 
-  const handleAddToCollection = () => {
+  // ----------------------------------------------------------------------------
+  // EVENT HANDLERS
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Open the add-to-collection modal and load collections.
+   */
+  const handleAddToCollection = (): void => {
     fetchCollections();
     setModalVisible(true);
   };
 
-  const handleSelectCollection = async (collection: any) => {
+  /**
+   * Add book to selected collection.
+   * Shows success message and refreshes related screens.
+   */
+  const handleSelectCollection = async (collection: Collection): Promise<void> => {
     setAdding(true);
     try {
-      await axios.post(`${API_BASE_URL}/api/collections/${username}/${collection.id}/add`, { isbn });
+      await axios.post(
+        `${API_BASE_URL}/api/collections/${username}/${collection.id}/add`, 
+        { isbn }
+      );
+      
       Alert.alert('Success', `Book added to "${collection.name}"`);
       setModalVisible(false);
       globalEvents.emit('reloadHome'); // Refresh home/collections
-    } catch {
+    } catch (error) {
+      console.error('Error adding book to collection:', error);
       Alert.alert('Error', 'Could not add book to collection.');
     }
     setAdding(false);
   };
 
-  const handleCreateCollection = async (name: string, icon: string) => {
+  /**
+   * Create new collection and optionally add book to it.
+   */
+  const handleCreateCollection = async (name: string, icon: string): Promise<void> => {
     setAdding(true);
     try {
-      const res = await axios.post(`${API_BASE_URL}/api/collections/${username}`, { name, icon });
+      const res = await axios.post(`${API_BASE_URL}/api/collections/${username}`, { 
+        name, 
+        icon 
+      });
+      
       setCollections([...collections, res.data]);
       setModalVisible(false);
       Alert.alert('Success', 'Collection created!');
       globalEvents.emit('reloadHome'); // Refresh home/collections
-    } catch {
+    } catch (error) {
+      console.error('Error creating collection:', error);
       Alert.alert('Error', 'Could not create collection.');
     }
     setAdding(false);
   };
 
-  const handleLike = async () => {
+  /**
+   * Handle like/unlike functionality with animation.
+   * Auto-creates "Like" collection if it doesn't exist.
+   */
+  const handleLike = async (): Promise<void> => {
     if (!username) return;
+    
     setAdding(true);
-    // Animation: scale up then down
+    
+    // Animate like button (scale up then down)
     Animated.sequence([
-      Animated.timing(scaleAnim, { toValue: 1.25, duration: 120, useNativeDriver: true }),
-      Animated.timing(scaleAnim, { toValue: 1, duration: 120, useNativeDriver: true }),
+      Animated.timing(scaleAnim, { 
+        toValue: 1.25, 
+        duration: 120, 
+        useNativeDriver: true 
+      }),
+      Animated.timing(scaleAnim, { 
+        toValue: 1, 
+        duration: 120, 
+        useNativeDriver: true 
+      }),
     ]).start();
+    
     try {
       if (liked && likeCollectionId) {
-        // Si déjà liké, on retire le livre de la collection Like
-        await axios.delete(`${API_BASE_URL}/api/collections/${likeCollectionId}/books/${isbn}`);
+        // Remove from Like collection
+        await axios.delete(
+          `${API_BASE_URL}/api/collections/${likeCollectionId}/books/${isbn}`
+        );
         setLiked(false);
         globalEvents.emit('reloadHome');
       } else {
-        // Ajoute à la collection Like (comme avant)
+        // Add to Like collection (create if needed)
         const res = await axios.get(`${API_BASE_URL}/api/collections/${username}`);
         const allCollections = res.data || [];
+        
         let likeCol = allCollections.find(
           (c: any) => c.name && c.name.trim().toLowerCase() === "like"
         );
+        
         if (!likeCol) {
-          const createRes = await axios.post(`${API_BASE_URL}/api/collections/${username}`, { name: "Like", icon: "❤️" });
+          // Create Like collection
+          const createRes = await axios.post(
+            `${API_BASE_URL}/api/collections/${username}`, 
+            { name: "Like", icon: "❤️" }
+          );
           likeCol = createRes.data;
         }
-        await axios.post(`${API_BASE_URL}/api/collections/${username}/${likeCol.id}/add`, { isbn });
+        
+        // Add book to Like collection
+        await axios.post(
+          `${API_BASE_URL}/api/collections/${username}/${likeCol.id}/add`, 
+          { isbn }
+        );
+        
         setLiked(true);
         setLikeCollectionId(likeCol.id);
         globalEvents.emit('reloadHome');
       }
-    } catch {
-      Alert.alert('Error', liked ? 'Could not remove book from Like.' : 'Could not like book.');
+    } catch (error) {
+      console.error('Error handling like:', error);
+      Alert.alert(
+        'Error', 
+        liked ? 'Could not remove book from Like.' : 'Could not like book.'
+      );
     }
     setAdding(false);
   };
 
-  const handleImageError = () => {
+  /**
+   * Handle cover image loading errors.
+   * Enables fallback to alternative image sources.
+   */
+  const handleImageError = (): void => {
     setImageError(true);
   };
 
-  const handleAmazonRedirect = () => {
+  /**
+   * Open Amazon page for book purchase.
+   * Uses ISBN to construct Amazon URL.
+   */
+  const handleAmazonRedirect = (): void => {
     if (book?.isbn) {
       const amazonUrl = `https://www.amazon.fr/dp/${book.isbn}`;
       Linking.openURL(amazonUrl).catch(() => {
@@ -161,6 +339,37 @@ export default function BookDetails() {
       });
     }
   };
+
+  // ----------------------------------------------------------------------------
+  // RENDER HELPERS
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Format authors for display.
+   * Handles both string and array formats from API.
+   */
+  const formatAuthors = (authors: string | string[]): string => {
+    if (Array.isArray(authors)) {
+      return authors.join(', ');
+    }
+    return authors || 'Unknown Author';
+  };
+
+  /**
+   * Determine which cover image to display.
+   * Uses fallback logic for image sources.
+   */
+  const getCoverImageSource = () => {
+    if (imageError && book?.cover_url && 
+        book.cover_url.trim() && book.cover_url.startsWith('http')) {
+      return { uri: book.cover_url };
+    }
+    return { uri: `${API_BASE_URL}/cover/${book?.isbn}.jpg` };
+  };
+
+  // ----------------------------------------------------------------------------
+  // LOADING AND ERROR STATES
+  // ----------------------------------------------------------------------------
 
   if (loading) {
     return (
@@ -170,7 +379,7 @@ export default function BookDetails() {
     );
   }
 
-  if (!book || book.error) {
+  if (!book || (book as any).error) {
     return (
       <View style={styles.centered}>
         <Text style={styles.errorText}>Book not found.</Text>
@@ -181,8 +390,13 @@ export default function BookDetails() {
     );
   }
 
+  // ----------------------------------------------------------------------------
+  // MAIN RENDER
+  // ----------------------------------------------------------------------------
+
   return (
     <View style={styles.scrollContainer}>
+      {/* App Logo */}
       <View style={styles.logoContainer}>
         <Image
           source={require('../../assets/images/logo.png')}
@@ -191,45 +405,58 @@ export default function BookDetails() {
         />
       </View>
 
+      {/* Back Navigation */}
       <BackButton />
 
-      <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
-        {/* Cover */}
+      <ScrollView 
+        contentContainerStyle={styles.contentContainer} 
+        showsVerticalScrollIndicator={false}
+      >
+        {/* Book Cover */}
         {(book.cover_url || book.isbn) && (
           <Image
-            source={{ 
-              uri: imageError && book.cover_url && book.cover_url.trim() && book.cover_url.startsWith('http')
-                ? book.cover_url 
-                : `${API_BASE_URL}/cover/${book.isbn}.jpg`
-            }}
+            source={getCoverImageSource()}
             style={styles.cover}
             resizeMode="cover"
             onError={handleImageError}
           />
         )}
 
-        {/* Add to collection & Like */}
+        {/* Action Buttons Row */}
         <View style={styles.actionRow}>
           <TouchableOpacity style={styles.actionBtn} onPress={handleAddToCollection}>
             <Plus size={22} color="#007AFF" />
             <Text style={styles.actionText}>Add to collection</Text>
           </TouchableOpacity>
+          
           <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
-            <TouchableOpacity style={styles.actionBtn} onPress={handleLike} disabled={adding}>
-              <Heart size={22} color="#007AFF" {...(liked ? { fill: "#007AFF" } : {})} />
-              <Text style={styles.actionText}>{liked ? "Liked" : "Like"}</Text>
+            <TouchableOpacity 
+              style={styles.actionBtn} 
+              onPress={handleLike} 
+              disabled={adding}
+            >
+              <Heart 
+                size={22} 
+                color="#007AFF" 
+                {...(liked ? { fill: "#007AFF" } : {})} 
+              />
+              <Text style={styles.actionText}>
+                {liked ? "Liked" : "Like"}
+              </Text>
             </TouchableOpacity>
           </Animated.View>
         </View>
 
-        {/* Title */}
+        {/* Book Title */}
         {book.title && (
           <Text style={styles.title}>{book.title}</Text>
         )}
 
         {/* Authors */}
         {book.authors && (
-          <Text style={styles.authors}>{Array.isArray(book.authors) ? book.authors.join(', ') : book.authors}</Text>
+          <Text style={styles.authors}>
+            {formatAuthors(book.authors)}
+          </Text>
         )}
 
         {/* Description */}
@@ -237,7 +464,7 @@ export default function BookDetails() {
           <Text style={styles.description}>{book.description}</Text>
         )}
 
-        {/* Genres */}
+        {/* Genre Tags */}
         {book.genres && Array.isArray(book.genres) && book.genres.length > 0 && (
           <View style={styles.genresRow}>
             {book.genres.map((genre: string, idx: number) => (
@@ -248,7 +475,7 @@ export default function BookDetails() {
           </View>
         )}
 
-        {/* Publisher, Page Number, Date, ISBN */}
+        {/* Book Information Grid */}
         <View style={styles.infoRow}>
           {book.publisher && (
             <View style={styles.infoBox}>
@@ -276,7 +503,7 @@ export default function BookDetails() {
           )}
         </View>
 
-        {/* Amazon Redirect Button */}
+        {/* Amazon Purchase Button */}
         {book.isbn && (
           <TouchableOpacity style={styles.amazonButton} onPress={handleAmazonRedirect}>
             <Image
@@ -286,10 +513,9 @@ export default function BookDetails() {
             />
           </TouchableOpacity>
         )}
-
       </ScrollView>
 
-      {/* Add to collection Modal */}
+      {/* Add to Collection Modal */}
       <AddModal
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
@@ -302,10 +528,15 @@ export default function BookDetails() {
   );
 }
 
+// ============================================================================
+// STYLES
+// ============================================================================
+
 const styles = StyleSheet.create({
+  // Container styles
   scrollContainer: {
     paddingHorizontal: 20,
-    paddingTop: 64, // margin from notch
+    paddingTop: 64, // Account for status bar and notch
     backgroundColor: '#fff',
     flexGrow: 1,
     alignItems: 'center',
@@ -315,6 +546,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 20,
   },
+  
+  // Logo section
   logoContainer: {
     alignItems: 'center',
   },
@@ -323,19 +556,8 @@ const styles = StyleSheet.create({
     height: 90,
     marginBottom: 0,
   },
-  backButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'flex-start',
-    marginBottom: 16,
-    marginTop: 2,
-  },
-  backButtonText: {
-    color: '#007AFF',
-    fontSize: 16,
-    marginLeft: 6,
-    fontWeight: '500',
-  },
+  
+  // Book cover
   cover: {
     width: 180,
     height: 270,
@@ -343,6 +565,8 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     backgroundColor: '#eee',
   },
+  
+  // Action buttons
   actionRow: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -366,6 +590,8 @@ const styles = StyleSheet.create({
     marginLeft: 6,
     fontSize: 15,
   },
+  
+  // Book information
   title: {
     fontSize: 22,
     fontWeight: 'bold',
@@ -385,6 +611,8 @@ const styles = StyleSheet.create({
     marginBottom: 14,
     textAlign: 'center',
   },
+  
+  // Genre display
   genresRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -404,6 +632,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
   },
+  
+  // Information grid
   infoRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -432,6 +662,8 @@ const styles = StyleSheet.create({
     color: '#222',
     fontWeight: '600',
   },
+  
+  // Error and loading states
   centered: {
     flex: 1,
     alignItems: 'center',
@@ -455,6 +687,8 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 16,
   },
+  
+  // Amazon integration
   amazonButton: {
     backgroundColor: '#FFFFFF',
     borderRadius: 8,
@@ -477,10 +711,5 @@ const styles = StyleSheet.create({
   amazonLogoImage: {
     width: 80,
     height: 25,
-  },
-  amazonText: {
-    color: '#FFFFFF',
-    fontSize: 14,
-    fontWeight: '600',
   },
 });

@@ -1,3 +1,32 @@
+/**
+ * ISBN Scanner Component
+ * 
+ * Comprehensive barcode scanning interface for book ISBN recognition.
+ * Provides real-time barcode detection with queue management integration.
+ * 
+ * Key Features:
+ * - EAN-13 barcode format recognition (standard for books)
+ * - Real-time duplicate detection and prevention
+ * - Backend queue integration for book processing
+ * - Visual feedback with toast notifications
+ * - Scanner overlay with animated targeting
+ * - Scanned books history management
+ * - Worker error monitoring and user feedback
+ * - Permission-based camera access
+ * 
+ * Integration Points:
+ * - Backend `/barcode` API for ISBN submission
+ * - Book processing queue system
+ * - Dataset validation and duplicate checking
+ * - Worker error monitoring system
+ * 
+ * Technical Notes:
+ * - Uses Expo Camera for barcode detection
+ * - Implements scanning cooldown to prevent duplicates
+ * - Monitors backend processing errors
+ * - Provides accessible UI feedback
+ */
+
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, Platform } from 'react-native';
 import { CameraView } from 'expo-camera';
@@ -11,10 +40,50 @@ import PermissionRequest from './PermissionRequest';
 import { useScanner } from './hooks/useScanner';
 import { colors, spacing } from './styles';
 
+// ============================================================================
+// CONSTANTS
+// ============================================================================
+
+/**
+ * Duration for toast notification display (in milliseconds)
+ */
 const TOAST_DURATION = 2000;
-const ERROR_CHECK_INTERVAL = 5000; // Check for errors every 5 seconds
+
+/**
+ * Interval for checking backend worker errors (in milliseconds)
+ */
+const ERROR_CHECK_INTERVAL = 5000;
+
+// ============================================================================
+// TYPE DEFINITIONS
+// ============================================================================
+
+/**
+ * Toast notification structure for user feedback
+ */
+interface ToastNotification {
+  color: string;
+  message: string;
+}
+
+/**
+ * Barcode scan event data from Expo Camera
+ */
+interface BarcodeScanEvent {
+  data: string;
+  type?: string;
+}
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
 
 export default function ISBNScanner() {
+  // ----------------------------------------------------------------------------
+  // HOOKS AND STATE MANAGEMENT
+  // ----------------------------------------------------------------------------
+  
+  // Scanner functionality from custom hook
   const { 
     permission,
     requestPermission,
@@ -24,16 +93,31 @@ export default function ISBNScanner() {
     handleBarCodeScanned: originalHandleBarCodeScanned,
   } = useScanner();
 
-  const [toast, setToast] = useState<{ color: string; message: string } | null>(null);
+  // Local component state
+  const [toast, setToast] = useState<ToastNotification | null>(null);
   const [recentlyScanned, setRecentlyScanned] = useState<string | null>(null);
 
-  const handleBarCodeScanned = async ({ data }) => {
+  // ----------------------------------------------------------------------------
+  // BARCODE PROCESSING
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Handle barcode scan events with duplicate prevention and backend integration.
+   * Processes scanned ISBN and provides user feedback based on backend response.
+   * 
+   * @param {BarcodeScanEvent} scanEvent - The barcode scan event from camera
+   */
+  const handleBarCodeScanned = async ({ data }: BarcodeScanEvent): Promise<void> => {
+    // Prevent duplicate processing
     if (scannedISBNs.includes(data) || recentlyScanned === data) {
       return;
     }
+    
+    // Set cooldown period for this ISBN
     setRecentlyScanned(data);
 
     try {
+      // Submit ISBN to backend processing queue
       const response = await fetch(`${API_BASE_URL}/barcode`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -42,27 +126,54 @@ export default function ISBNScanner() {
 
       if (response.ok) {
         const res = await response.json();
-        // Gestion des cas de réponse
+        
+        // Provide user feedback based on backend response
         if (res.already_in_dataset) {
-          setToast({ color: '#FF3B30', message: `livre ${data} déjà présent dans le dataset.` });
+          setToast({ 
+            color: '#FF3B30', 
+            message: `livre ${data} déjà présent dans le dataset.` 
+          });
         } else if (res.already_in_queue) {
-          setToast({ color: '#FFA500', message: `livre ${data} déjà dans la liste d'attente` });
+          setToast({ 
+            color: '#FFA500', 
+            message: `livre ${data} déjà dans la liste d'attente` 
+          });
         } else {
-          setToast({ color: '#4BB543', message: `livre ${data} ajouté a la liste d'attente` });
+          setToast({ 
+            color: '#4BB543', 
+            message: `livre ${data} ajouté a la liste d'attente` 
+          });
         }
+        
+        // Auto-hide toast after duration
         setTimeout(() => setToast(null), TOAST_DURATION);
       }
     } catch (error) {
       console.error('Erreur lors de l\'envoi de l\'ISBN:', error);
+      // Could add error toast here for network failures
     }
 
+    // Clear cooldown after delay
     setTimeout(() => setRecentlyScanned(null), 2000);
+    
+    // Update local scanned list
     originalHandleBarCodeScanned({ data });
   };
 
-  // Add useEffect to periodically check for worker errors
+  // ----------------------------------------------------------------------------
+  // ERROR MONITORING
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Monitor backend worker for processing errors.
+   * Provides user feedback when book processing fails.
+   */
   useEffect(() => {
-    const checkWorkerErrors = async () => {
+    /**
+     * Check for worker processing errors and notify user.
+     * Polls the backend error endpoint periodically.
+     */
+    const checkWorkerErrors = async (): Promise<void> => {
       try {
         const response = await fetch(`${API_BASE_URL}/worker-errors`);
         if (response.ok) {
@@ -82,10 +193,18 @@ export default function ISBNScanner() {
       }
     };
 
+    // Set up periodic error checking
     const interval = setInterval(checkWorkerErrors, ERROR_CHECK_INTERVAL);
     return () => clearInterval(interval);
   }, []);
 
+  // ----------------------------------------------------------------------------
+  // RENDER CONDITIONS
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Loading state while checking camera permissions
+   */
   if (!permission) {
     return (
       <SafeAreaView style={styles.container}>
@@ -94,27 +213,36 @@ export default function ISBNScanner() {
     );
   }
 
+  /**
+   * Permission request state when camera access is denied
+   */
   if (!permission.granted) {
     return <PermissionRequest onRequestPermission={requestPermission} />;
   }
+
+  // ----------------------------------------------------------------------------
+  // MAIN RENDER
+  // ----------------------------------------------------------------------------
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
       
+      {/* Toast Notification Overlay */}
       {toast && (
         <View style={[styles.toast, { backgroundColor: toast.color }]}>
           <Text style={styles.toastText}>{toast.message}</Text>
         </View>
       )}
 
+      {/* Scanner Mode - Active Camera View */}
       {isScanning ? (
         <View style={styles.cameraContainer}>
           <CameraView
             style={styles.camera}
             onBarcodeScanned={handleBarCodeScanned}
             barcodeScannerSettings={{
-              barcodeTypes: ['ean13'],
+              barcodeTypes: ['ean13'], // Focus on book barcode format
             }}
           >
             <ScannerOverlay />
@@ -124,6 +252,7 @@ export default function ISBNScanner() {
           </Text>
         </View>
       ) : (
+        /* Results Mode - Scanned Books List */
         <View style={styles.resultsContainer}>
           <ScannedBooksList scannedISBNs={scannedISBNs} />
           
@@ -139,32 +268,27 @@ export default function ISBNScanner() {
   );
 }
 
+// ============================================================================
+// STYLES
+// ============================================================================
+
 const styles = StyleSheet.create({
+  // Main container
   container: {
     flex: 1,
     backgroundColor: colors.background,
-    padding: 0, // Remove padding
+    padding: 0, // Full-screen camera view
   },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: spacing.medium,
-    backgroundColor: colors.cardBackground,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: colors.text,
-    marginLeft: spacing.small,
-  },
+  
+  // Loading state
   loadingText: {
     textAlign: 'center',
     marginTop: 100,
     fontSize: 16,
     color: colors.text,
   },
+  
+  // Camera scanning interface
   cameraContainer: {
     flex: 1,
     width: '100%',
@@ -175,7 +299,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     alignSelf: 'stretch',
-    aspectRatio: 3/4, // or 9/16 for portrait, adjust as needed
+    aspectRatio: 3/4, // Optimized for barcode scanning
   },
   instructionText: {
     position: 'absolute',
@@ -189,6 +313,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
   },
+  
+  // Results and controls
   resultsContainer: {
     flex: 1,
     padding: spacing.medium,
@@ -220,6 +346,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
   },
+  
+  // Toast notifications
   toast: {
     position: 'absolute',
     top: 60,

@@ -1,5 +1,33 @@
+/**
+ * Home Screen - Main Dashboard
+ * 
+ * Central hub of the book scanning application providing:
+ * - User authentication and onboarding
+ * - Quick access to scanning functionality
+ * - Collections overview and management
+ * - Recently scanned books display
+ * - Search functionality integration
+ * 
+ * Key Features:
+ * - Username validation and creation
+ * - Dynamic content based on user state
+ * - Horizontal scrolling collections and books
+ * - Real-time data refresh on focus
+ * - Onboarding experience for new users
+ * - Global event system integration
+ * 
+ * Navigation:
+ * - Camera scanning (auto-trigger)
+ * - Book details pages
+ * - Collection detail pages
+ * - Profile management
+ */
+
 import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, ScrollView, Alert } from 'react-native';
+import { 
+  View, Text, StyleSheet, TextInput, TouchableOpacity, Image, 
+  ScrollView, Alert 
+} from 'react-native';
 import { Camera } from 'lucide-react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
@@ -10,91 +38,188 @@ import Searchbar from '../../components/Searchbar/Searchbar';
 import AddModal from '../../components/Collection/AddModal';
 import { API_BASE_URL } from '../../config/api';
 
+// ============================================================================
+// TYPE DEFINITIONS
+// ============================================================================
+
+/**
+ * Collection data structure from API
+ */
+interface Collection {
+  id: number;
+  name: string;
+  icon: string;
+  book_count?: number;
+}
+
+/**
+ * Recently scanned book data structure
+ */
+interface RecentBook {
+  isbn: string;
+  title: string;
+  authors: string | string[];
+  cover_url?: string;
+  timestamp?: string;
+}
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+
 export default function HomeScreen() {
+  // ----------------------------------------------------------------------------
+  // STATE MANAGEMENT
+  // ----------------------------------------------------------------------------
+  
+  // User authentication state
   const [username, setUsername] = useState<string>('');
   const [inputUsername, setInputUsername] = useState<string>('');
   const [checkingUser, setCheckingUser] = useState(false);
-  const [collections, setCollections] = useState<any[]>([]);
-  const [recentlyScanned, setRecentlyScanned] = useState<any[]>([]);
+  
+  // Data state
+  const [collections, setCollections] = useState<Collection[]>([]);
+  const [recentlyScanned, setRecentlyScanned] = useState<RecentBook[]>([]);
+  
+  // UI state
   const [showAddModal, setShowAddModal] = useState(false);
   const [addModalLoading, setAddModalLoading] = useState(false);
-  const router = useRouter();
-  const scrollRef = useRef<ScrollView>(null);
   const [blockScroll, setBlockScroll] = useState(false);
   const [imageErrors, setImageErrors] = useState<{[key: string]: boolean}>({});
+  
+  // Refs
+  const router = useRouter();
+  const scrollRef = useRef<ScrollView>(null);
 
-  // Fetch username and data
-  const fetchUsernameAndData = useCallback(async () => {
-    const name = await AsyncStorage.getItem('ridizi_username');
-    if (name) setUsername(name);
-    if (name) {
-      try {
+  // ----------------------------------------------------------------------------
+  // DATA FETCHING
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Fetch username from storage and load user data.
+   * Executes concurrent API calls for better performance.
+   */
+  const fetchUsernameAndData = useCallback(async (): Promise<void> => {
+    try {
+      // Get stored username
+      const name = await AsyncStorage.getItem('ridizi_username');
+      if (name) {
+        setUsername(name);
+        
+        // Fetch user data concurrently
         const [colRes, scanRes] = await Promise.all([
           axios.get(`${API_BASE_URL}/api/collections/${name}`),
           axios.get(`${API_BASE_URL}/api/recently_scanned/${name}`)
         ]);
-        setCollections(colRes.data);
-        setRecentlyScanned(scanRes.data);
-      } catch {
+        
+        setCollections(colRes.data || []);
+        setRecentlyScanned(scanRes.data || []);
+      } else {
+        // No username stored, reset data
         setCollections([]);
         setRecentlyScanned([]);
       }
-    } else {
+    } catch (error) {
+      console.error('Error fetching user data:', error);
       setCollections([]);
       setRecentlyScanned([]);
     }
   }, []);
 
-  // Reload on focus
+  // ----------------------------------------------------------------------------
+  // LIFECYCLE HOOKS
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Reload data when screen comes into focus.
+   * Sets up global event listeners for data refresh.
+   */
   useFocusEffect(
     useCallback(() => {
       fetchUsernameAndData();
+      
       // Listen for global events (username/collections change)
       const reload = () => fetchUsernameAndData();
       globalEvents.on('reloadHome', reload);
+      
       return () => globalEvents.off('reloadHome', reload);
     }, [fetchUsernameAndData])
   );
 
-  // Remove duplicates from recentlyScanned (by ISBN)
-  const uniqueRecentlyScanned = [];
-  const seenIsbns = new Set();
-  for (const book of recentlyScanned) {
-    if (!seenIsbns.has(book.isbn)) {
-      uniqueRecentlyScanned.push(book);
-      seenIsbns.add(book.isbn);
-    }
-  }
+  // ----------------------------------------------------------------------------
+  // DATA PROCESSING
+  // ----------------------------------------------------------------------------
 
-  const handleValidate = async () => {
+  /**
+   * Remove duplicate books from recently scanned list.
+   * Uses ISBN as unique identifier.
+   */
+  const uniqueRecentlyScanned = (() => {
+    const unique: RecentBook[] = [];
+    const seenIsbns = new Set<string>();
+    
+    for (const book of recentlyScanned) {
+      if (!seenIsbns.has(book.isbn)) {
+        unique.push(book);
+        seenIsbns.add(book.isbn);
+      }
+    }
+    
+    return unique;
+  })();
+
+  // ----------------------------------------------------------------------------
+  // EVENT HANDLERS
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Handle username validation and account creation.
+   * Creates user account on backend if doesn't exist.
+   */
+  const handleValidate = async (): Promise<void> => {
     if (!inputUsername.trim()) {
-      Alert.alert('Please enter a username');
+      Alert.alert('Error', 'Please enter a username');
       return;
     }
+
     setCheckingUser(true);
     const uname = inputUsername.trim();
+    
     try {
+      // Attempt to create user (409 if already exists, which is fine)
       await axios.post(`${API_BASE_URL}/admin/api/users`, { username: uname })
         .catch(err => {
           if (!(err.response && err.response.status === 409)) throw err;
         });
+      
+      // Store username and update state
       await AsyncStorage.setItem('ridizi_username', uname);
       setUsername(uname);
       setInputUsername('');
+      
+      // Trigger global reload
       globalEvents.emit('reloadHome');
     } catch (err) {
+      console.error('Error validating user:', err);
       Alert.alert('Error', 'Unable to create or check user.');
     } finally {
       setCheckingUser(false);
     }
   };
 
-  const handleCameraPress = async () => {
-    // Navigate to camera tab and trigger scan immediately
+  /**
+   * Navigate to camera screen with auto-scan enabled.
+   * Triggers immediate barcode scanning on navigation.
+   */
+  const handleCameraPress = async (): Promise<void> => {
     router.push({ pathname: '/(tabs)/camera', params: { autoScan: '1' } });
   };
 
-  const handleCreateCollection = async (name: string, icon: string) => {
+  /**
+   * Handle collection creation from the modal.
+   * Refreshes data after successful creation.
+   */
+  const handleCreateCollection = async (name: string, icon: string): Promise<void> => {
     if (!username) return;
     
     setAddModalLoading(true);
@@ -103,21 +228,186 @@ export default function HomeScreen() {
         name: name,
         icon: icon
       });
+      
       setShowAddModal(false);
       fetchUsernameAndData(); // Reload data
     } catch (error) {
+      console.error('Error creating collection:', error);
       Alert.alert('Error', 'Could not create collection');
     }
     setAddModalLoading(false);
   };
 
-  const handleImageError = (isbn: string) => {
+  /**
+   * Handle image loading errors for book covers.
+   * Falls back to alternative cover sources.
+   */
+  const handleImageError = (isbn: string): void => {
     setImageErrors(prev => ({ ...prev, [isbn]: true }));
   };
 
+  // ----------------------------------------------------------------------------
+  // RENDER HELPERS
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Render the welcome section with user greeting or onboarding
+   */
+  const renderWelcomeSection = () => (
+    <>
+      <Text style={styles.welcomeText}>
+        {username ? `Hello, ${username}` : 'Welcome!'}
+      </Text>
+
+      {/* Username input for new users */}
+      {!username && (
+        <View style={styles.usernameInputSection}>
+          <TextInput
+            style={styles.usernameInput}
+            placeholder="Enter your username"
+            value={inputUsername}
+            onChangeText={setInputUsername}
+            autoCapitalize="none"
+            editable={!checkingUser}
+          />
+          <TouchableOpacity 
+            style={styles.validateButton} 
+            onPress={handleValidate} 
+            disabled={checkingUser}
+          >
+            <Text style={styles.validateButtonText}>
+              {checkingUser ? 'Validating...' : 'Validate'}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      )}
+    </>
+  );
+
+  /**
+   * Render collections section with create option for new users
+   */
+  const renderCollectionsSection = () => {
+    if (!username || uniqueRecentlyScanned.length === 0) return null;
+
+    return (
+      <>
+        <Text style={styles.sectionTitle}>Your collections:</Text>
+        <ScrollView 
+          horizontal 
+          showsHorizontalScrollIndicator={false} 
+          style={styles.horizontalScroll}
+          scrollEnabled={collections.length > 0}
+        >
+          {collections.length === 0 ? (
+            // Onboarding for collections
+            <View style={styles.noCollectionsContainer}>
+              <Text style={styles.noCollectionsTitle}>Create Your First Collection!</Text>
+              <Text style={styles.noCollectionsSubtitle}>
+                Organize your books by genre, mood, or any way you like
+              </Text>
+              <TouchableOpacity 
+                style={styles.createCollectionButton} 
+                onPress={() => setShowAddModal(true)}
+              >
+                <Text style={styles.createCollectionButtonText}>Create Collection</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            // Existing collections
+            collections.map((col) => (
+              <TouchableOpacity
+                key={col.id}
+                style={styles.collectionItem}
+                onPress={() => router.push({ 
+                  pathname: '/(tabs)/collectiondetails', 
+                  params: { 
+                    collectionId: col.id, 
+                    collectionName: col.name
+                  } 
+                })}
+              >
+                <View style={styles.collectionSquare}>
+                  <Text style={styles.collectionIcon}>{col.icon}</Text>
+                </View>
+                <Text style={styles.collectionLabel}>{col.name}</Text>
+              </TouchableOpacity>
+            ))
+          )}
+        </ScrollView>
+        <View style={styles.divider} />
+      </>
+    );
+  };
+
+  /**
+   * Render recently scanned books section with onboarding
+   */
+  const renderRecentlyScannedSection = () => {
+    if (!username) return null;
+
+    return (
+      <>
+        <Text style={styles.sectionTitle}>Recently Scanned:</Text>
+        <ScrollView 
+          horizontal 
+          showsHorizontalScrollIndicator={false} 
+          style={styles.horizontalScroll}
+        >
+          {uniqueRecentlyScanned.length === 0 ? (
+            // Onboarding for scanning
+            <View style={styles.noScansContainer}>
+              <Text style={styles.noScansTitle}>Start Scanning Books!</Text>
+              <Text style={styles.noScansSubtitle}>
+                Discover and organize your favorite books
+              </Text>
+              <TouchableOpacity style={styles.scanButton} onPress={handleCameraPress}>
+                <Camera size={20} color="#fff" />
+                <Text style={styles.scanButtonText}>Scan Your First Book</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            // Recently scanned books
+            uniqueRecentlyScanned.map((book) => (
+              <TouchableOpacity
+                key={book.isbn}
+                style={styles.recentItem}
+                onPress={() => router.push({ 
+                  pathname: '/(tabs)/bookdetails', 
+                  params: { isbn: book.isbn } 
+                })}
+              >
+                <View style={styles.recentRect}>
+                  <Image
+                    source={{ 
+                      uri: imageErrors[book.isbn] && book.cover_url && 
+                           book.cover_url.trim() && book.cover_url.startsWith('http')
+                        ? book.cover_url 
+                        : `${API_BASE_URL}/cover/${book.isbn}.jpg`
+                    }}
+                    style={styles.recentImage}
+                    resizeMode="cover"
+                    onError={() => handleImageError(book.isbn)}
+                  />
+                </View>
+                <Text style={styles.recentLabel} numberOfLines={2}>
+                  {book.title}
+                </Text>
+              </TouchableOpacity>
+            ))
+          )}
+        </ScrollView>
+      </>
+    );
+  };
+
+  // ----------------------------------------------------------------------------
+  // MAIN RENDER
+  // ----------------------------------------------------------------------------
+
   return (
     <View style={styles.scrollContainer}>
-      {/* Logo */}
+      {/* App Logo */}
       <View style={styles.logoContainer}>
         <Image
           source={require('../../assets/images/logo.png')}
@@ -126,7 +416,7 @@ export default function HomeScreen() {
         />
       </View>
 
-      {/* Search Bar with Camera Icon */}
+      {/* Search Bar with Integrated Camera Button */}
       <Searchbar
         cameraButton={
           <TouchableOpacity
@@ -139,124 +429,21 @@ export default function HomeScreen() {
         setBlockScroll={setBlockScroll}
       />
 
-      {/* Welcome Message */}
-      <Text style={styles.welcomeText}>
-        {username ? `Hello, ${username}` : 'Welcome!'}
-      </Text>
+      {/* Welcome Section */}
+      {renderWelcomeSection()}
 
-      {/* Username input if not set */}
-      {!username && (
-        <View style={styles.usernameInputSection}>
-          <TextInput
-            style={styles.usernameInput}
-            placeholder="Enter your username"
-            value={inputUsername}
-            onChangeText={setInputUsername}
-            autoCapitalize="none"
-            editable={!checkingUser}
-          />
-          <TouchableOpacity style={styles.validateButton} onPress={handleValidate} disabled={checkingUser}>
-            <Text style={styles.validateButtonText}>{checkingUser ? 'Validating...' : 'Validate'}</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-
-      {/* Divider */}
-      {username && uniqueRecentlyScanned.length > 0 && <View style={styles.divider} />}
-
-      {/* Collections */}
+      {/* Content Divider */}
       {username && uniqueRecentlyScanned.length > 0 && (
-        <>
-          <Text style={styles.sectionTitle}>Your collections:</Text>
-          <ScrollView 
-            horizontal 
-            showsHorizontalScrollIndicator={false} 
-            style={styles.horizontalScroll}
-            scrollEnabled={collections.length > 0}
-          >
-            {collections.length === 0 ? (
-              <View style={styles.noCollectionsContainer}>
-                <Text style={styles.noCollectionsTitle}>Create Your First Collection!</Text>
-                <Text style={styles.noCollectionsSubtitle}>Organize your books by genre, mood, or any way you like</Text>
-                <TouchableOpacity style={styles.createCollectionButton} onPress={() => setShowAddModal(true)}>
-                  <Text style={styles.createCollectionButtonText}>Create Collection</Text>
-                </TouchableOpacity>
-              </View>
-            ) : (
-              <>
-                {collections.map((col) => (
-                  <TouchableOpacity
-                    key={col.id}
-                    style={styles.collectionItem}
-                    onPress={() => router.push({ 
-                      pathname: '/(tabs)/collectiondetails', 
-                      params: { 
-                        collectionId: col.id, 
-                        collectionName: col.name
-                      } 
-                    })}
-                  >
-                    <View style={styles.collectionSquare}>
-                      <Text style={styles.collectionIcon}>{col.icon}</Text>
-                    </View>
-                    <Text style={styles.collectionLabel}>{col.name}</Text>
-                  </TouchableOpacity>
-                ))}
-              </>
-            )}
-          </ScrollView>
-          {/* Divider */}
-          <View style={styles.divider} />
-        </>
+        <View style={styles.divider} />
       )}
 
-      {/* Recently Scanned */}
-      {username && (
-        <>
-          <Text style={styles.sectionTitle}>Recently Scanned:</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalScroll}>
-            {uniqueRecentlyScanned.length === 0 ? (
-              <View style={styles.noScansContainer}>
-                <Text style={styles.noScansTitle}>Start Scanning Books!</Text>
-                <Text style={styles.noScansSubtitle}>Discover and organize your favorite books</Text>
-                <TouchableOpacity style={styles.scanButton} onPress={handleCameraPress}>
-                  <Camera size={20} color="#fff" />
-                  <Text style={styles.scanButtonText}>Scan Your First Book</Text>
-                </TouchableOpacity>
-              </View>
-            ) : (
-              uniqueRecentlyScanned.map((book) => (
-                <TouchableOpacity
-                  key={book.isbn}
-                  style={styles.recentItem}
-                  onPress={() => router.push({ 
-                    pathname: '/(tabs)/bookdetails', 
-                    params: { 
-                      isbn: book.isbn
-                    } 
-                  })}
-                >
-                  <View style={styles.recentRect}>
-                    <Image
-                      source={{ 
-                        uri: imageErrors[book.isbn] && book.cover_url && book.cover_url.trim() && book.cover_url.startsWith('http')
-                          ? book.cover_url 
-                          : `${API_BASE_URL}/cover/${book.isbn}.jpg`
-                      }}
-                      style={styles.recentImage}
-                      resizeMode="cover"
-                      onError={() => handleImageError(book.isbn)}
-                    />
-                  </View>
-                  <Text style={styles.recentLabel} numberOfLines={2}>{book.title}</Text>
-                </TouchableOpacity>
-              ))
-            )}
-          </ScrollView>
-        </>
-      )}
+      {/* Collections Section */}
+      {renderCollectionsSection()}
 
-      {/* Add Collection Modal */}
+      {/* Recently Scanned Section */}
+      {renderRecentlyScannedSection()}
+
+      {/* Collection Creation Modal */}
       <AddModal
         visible={showAddModal}
         onClose={() => setShowAddModal(false)}
@@ -269,13 +456,20 @@ export default function HomeScreen() {
   );
 }
 
+// ============================================================================
+// STYLES
+// ============================================================================
+
 const styles = StyleSheet.create({
+  // Container styles
   scrollContainer: {
     paddingHorizontal: 20,
-    paddingTop: 64, // margin from notch
+    paddingTop: 64, // Account for status bar and notch
     backgroundColor: '#fff',
     flexGrow: 1,
   },
+  
+  // Logo section
   logoContainer: {
     alignItems: 'center',
     marginBottom: 20,
@@ -285,22 +479,8 @@ const styles = StyleSheet.create({
     height: 90,
     marginBottom: 0,
   },
-  searchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 24,
-    marginTop: 8,
-  },
-  searchInput: {
-    flex: 1,
-    height: 48,
-    borderColor: '#bbb',
-    borderWidth: 1,
-    borderRadius: 12,
-    paddingHorizontal: 16,
-    backgroundColor: '#f9f9f9',
-    fontSize: 18,
-  },
+  
+  // Camera integration
   cameraButton: {
     marginLeft: 10,
     padding: 8,
@@ -309,6 +489,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  
+  // Welcome and user onboarding
   welcomeText: {
     fontSize: 26,
     fontWeight: '600',
@@ -344,6 +526,8 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 16,
   },
+  
+  // Section organization
   divider: {
     height: 1,
     backgroundColor: '#ddd',
@@ -358,6 +542,8 @@ const styles = StyleSheet.create({
   horizontalScroll: {
     marginBottom: 16,
   },
+  
+  // Collections display
   collectionItem: {
     alignItems: 'center',
     marginRight: 22,
@@ -383,6 +569,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '600',
   },
+  
+  // Recently scanned books
   recentItem: {
     alignItems: 'center',
     marginRight: 22,
@@ -410,6 +598,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '500',
   },
+  
+  // Onboarding states
   noScansContainer: {
     alignItems: 'center',
     justifyContent: 'center',

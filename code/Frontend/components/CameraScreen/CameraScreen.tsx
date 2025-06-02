@@ -1,3 +1,32 @@
+/**
+ * Camera Screen Component
+ * 
+ * Main camera interface for book scanning with visual recognition.
+ * Provides real-time book identification through image capture and AI matching.
+ * 
+ * Key Features:
+ * - Camera integration with permission handling
+ * - AI-powered book matching with accuracy scores
+ * - Alternative book suggestions for mismatches
+ * - User scan tracking and history recording
+ * - Swipe gestures for alternative results navigation
+ * - Auto-scan functionality on screen focus
+ * - Manual re-scanning capabilities
+ * - ISBN extraction and book details navigation
+ * 
+ * Navigation Flow:
+ * - Triggered from tab navigation or home screen
+ * - Auto-scan when accessed with autoScan parameter
+ * - Navigates to book details upon successful match
+ * - Fallback to manual ISBN scanner for edge cases
+ * 
+ * Technical Notes:
+ * - Uses Expo ImagePicker for camera access
+ * - Integrates with backend AI matching service
+ * - Implements PanResponder for gesture handling
+ * - Records user scanning activity for analytics
+ */
+
 import React, { useState, useRef } from 'react'
 import {
   View,
@@ -21,18 +50,73 @@ import { colors, spacing } from '../ISBNScanner/styles'
 import { useRouter, useLocalSearchParams } from 'expo-router'
 import { API_BASE_URL } from '../../config/api'
 
+// ============================================================================
+// TYPE DEFINITIONS
+// ============================================================================
+
+/**
+ * Book match result from AI recognition service
+ */
+interface BookMatch {
+  title: string;
+  authors: string;
+  score: number;
+  coverUrl: string;
+  isbn: string;
+  filename: string;
+  alternatives?: AlternativeMatch[];
+}
+
+/**
+ * Alternative book match suggestion
+ */
+interface AlternativeMatch {
+  title: string;
+  authors: string[];
+  score: number;
+  cover_url: string;
+  filename: string;
+}
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+
 export default function CameraScreen() {
-  const [image, setImage] = useState<string | null>(null)
-  const [match, setMatch] = useState<any>(null)
-  const [loading, setLoading] = useState(false)
-  const [altIndex, setAltIndex] = useState(0)
-  const [username, setUsername] = useState<string>("")
-  const [showAlternatives, setShowAlternatives] = useState(false)
-  const altListScrollRef = useRef<ScrollView>(null);
+  // ----------------------------------------------------------------------------
+  // NAVIGATION AND PARAMS
+  // ----------------------------------------------------------------------------
+  
   const router = useRouter();
   const params = useLocalSearchParams();
 
-  // PanResponder for swipe right gesture on alternatives
+  // ----------------------------------------------------------------------------
+  // STATE MANAGEMENT
+  // ----------------------------------------------------------------------------
+  
+  // Image and scanning state
+  const [image, setImage] = useState<string | null>(null);
+  const [match, setMatch] = useState<BookMatch | null>(null);
+  const [loading, setLoading] = useState(false);
+  
+  // Alternative results state
+  const [altIndex, setAltIndex] = useState(0);
+  const [showAlternatives, setShowAlternatives] = useState(false);
+  
+  // User state
+  const [username, setUsername] = useState<string>("");
+  
+  // Refs for UI interactions
+  const altListScrollRef = useRef<ScrollView>(null);
+
+  // ----------------------------------------------------------------------------
+  // GESTURE HANDLING
+  // ----------------------------------------------------------------------------
+
+  /**
+   * PanResponder for swipe gestures on alternative results.
+   * Enables intuitive swipe-right to close alternatives view.
+   */
   const panResponder = React.useMemo(() =>
     PanResponder.create({
       onMoveShouldSetPanResponder: (_, gestureState) => {
@@ -47,6 +131,14 @@ export default function CameraScreen() {
     }), [showAlternatives]
   );
 
+  // ----------------------------------------------------------------------------
+  // CAMERA AND IMAGE HANDLING
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Handle image capture from camera with permission checks.
+   * Automatically processes the captured image for book matching.
+   */
   const pickImage = async () => {
     try {
       // Get username from AsyncStorage before scanning
@@ -55,15 +147,20 @@ export default function CameraScreen() {
         storedUsername = await AsyncStorage.getItem('ridizi_username') || "";
         setUsername(storedUsername);
       }
+      
+      // Request camera permissions
       const { status } = await ImagePicker.requestCameraPermissionsAsync();
       if (status !== 'granted') {
         Alert.alert("Permission refusée", "La permission d'accéder à la caméra est requise.");
         return;
       }
+      
+      // Launch camera
       const result = await ImagePicker.launchCameraAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.images,
-        quality: 0.7,
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        quality: 0.7, // Balanced quality for faster processing
       });
+      
       if (!result.canceled && result.assets?.length > 0) {
         const selectedImage = result.assets[0].uri;
         setImage(selectedImage);
@@ -73,54 +170,71 @@ export default function CameraScreen() {
         await sendImage(selectedImage, storedUsername);
       }
     } catch (err) {
+      console.error('Error capturing image:', err);
       Alert.alert("Erreur", "Une erreur est survenue lors de la prise de photo.");
     }
   };
 
+  /**
+   * Send captured image to AI matching service.
+   * Processes response and records user scan activity.
+   */
   const sendImage = async (uri: string, usedUsername?: string) => {
-    setLoading(true)
-    const formData = new FormData()
+    setLoading(true);
+    
+    // Prepare form data for multipart upload
+    const formData = new FormData();
     formData.append('image', {
       uri,
       name: 'photo.jpg',
       type: 'image/jpeg',
-    } as any)
+    } as any);
+    
     try {
+      // Send image to AI matching service
       const response = await axios.post(`${API_BASE_URL}/match`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
-      })
-      console.log("CameraScreen /match API response:", response.data); // <-- Debug log
+      });
+      
+      console.log("CameraScreen /match API response:", response.data); // Debug log
+      
+      // Process and format match result
+      const matchData = response.data;
       setMatch({
-        ...response.data,
-        authors: response.data.authors.join(', '),
-        coverUrl: `${API_BASE_URL}${response.data.cover_url}`,
-        isbn: response.data.filename ? response.data.filename.replace(/\.[^/.]+$/, "") : "", // Extract ISBN from filename
-      })
-      // Record the scan for the user if username is provided
+        ...matchData,
+        authors: matchData.authors.join(', '),
+        coverUrl: `${API_BASE_URL}${matchData.cover_url}`,
+        isbn: matchData.filename ? matchData.filename.replace(/\.[^/.]+$/, "") : "", // Extract ISBN from filename
+      });
+      
+      // Record the scan for user analytics
       const uname = usedUsername ?? username;
-      if (uname.trim() && response.data.filename) {
+      if (uname.trim() && matchData.filename) {
         try {
           await axios.post(`${API_BASE_URL}/admin/api/user_scans`, {
             username: uname.trim(),
-            isbn: response.data.filename.replace(/\.[^/.]+$/, ""), // remove extension
-          })
+            isbn: matchData.filename.replace(/\.[^/.]+$/, ""), // Remove file extension
+          });
         } catch (err) {
-          console.warn("Erreur lors de l'enregistrement du scan utilisateur :", err)
+          console.warn("Erreur lors de l'enregistrement du scan utilisateur :", err);
         }
       }
     } catch (err: any) {
-      Alert.alert('Erreur', err.message || 'Erreur lors de la requête')
+      console.error('Error processing image:', err);
+      Alert.alert('Erreur', err.message || 'Erreur lors de la requête');
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
-
-  // Helper to compute accuracy from score
-  const getAccuracy = (score: number | undefined) => {
-    if (typeof score !== 'number') return '-';
-    return `${Math.round((1 - score) * 100)}%`;
   };
 
+  // ----------------------------------------------------------------------------
+  // LIFECYCLE HOOKS
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Handle auto-scan functionality when screen loads.
+   * Triggered by autoScan parameter from navigation.
+   */
   React.useEffect(() => {
     if (params.autoScan === '1') {
       pickImage();
@@ -128,9 +242,118 @@ export default function CameraScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.autoScan]);
 
+  // ----------------------------------------------------------------------------
+  // HELPER FUNCTIONS
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Calculate and format accuracy percentage from AI confidence score.
+   * Higher scores indicate lower confidence, so we invert the calculation.
+   */
+  const getAccuracy = (score: number | undefined): string => {
+    if (typeof score !== 'number') return '-';
+    return `${Math.round((1 - score) * 100)}%`;
+  };
+
+  /**
+   * Navigate to book details screen with extracted ISBN.
+   * Handles validation and error cases.
+   */
+  const navigateToBookDetails = (isbn: string, bookTitle?: string) => {
+    console.log("Navigating to bookdetails with ISBN:", isbn);
+    if (isbn && typeof isbn === "string" && isbn.trim() !== "") {
+      router.push({ 
+        pathname: '/(tabs)/bookdetails', 
+        params: { isbn: isbn.trim() } 
+      });
+    } else {
+      Alert.alert("No ISBN found for this book.");
+    }
+  };
+
+  // ----------------------------------------------------------------------------
+  // RENDER HELPERS
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Render the main book match result with cover and metadata
+   */
+  const renderMainResult = () => (
+    <View style={styles.resultContainer}>
+      <Image source={{ uri: match!.coverUrl }} style={styles.cover} />
+      <Text style={styles.accuracyText}>Accuracy: {getAccuracy(match!.score)}</Text>
+      <Text style={styles.title}>{match!.title}</Text>
+      <Text style={styles.authors}>{match!.authors}</Text>
+      <TouchableOpacity onPress={() => navigateToBookDetails(match!.isbn, match!.title)}>
+        <Text style={styles.seeMore}>See more</Text>
+      </TouchableOpacity>
+    </View>
+  );
+
+  /**
+   * Render alternative book suggestions list
+   */
+  const renderAlternativesList = () => (
+    <View style={styles.altListContainer} {...panResponder.panHandlers}>
+      {/* Back to main result button */}
+      <TouchableOpacity style={styles.backButton} onPress={() => setShowAlternatives(false)}>
+        <Text style={styles.backButtonText}>← Back to main result</Text>
+      </TouchableOpacity>
+      
+      <Text style={styles.notGoodBookHeader}>Similar results:</Text>
+      
+      <ScrollView style={styles.altListBox}>
+        {match!.alternatives && match!.alternatives.slice(0, 5).map((alt: AlternativeMatch, idx: number) => {
+          const altIsbn = alt.filename ? alt.filename.replace(/\.[^/.]+$/, "") : "";
+          return (
+            <TouchableOpacity
+              key={idx}
+              style={styles.altListRow}
+              onPress={() => navigateToBookDetails(altIsbn, alt.title)}
+            >
+              <Image
+                source={{ uri: `${API_BASE_URL}${alt.cover_url}` }}
+                style={styles.altListImage}
+              />
+              <View style={styles.altListInfo}>
+                <Text style={styles.altListTitle}>{alt.title}</Text>
+                <Text style={styles.altListAuthors}>{alt.authors.join(', ')}</Text>
+                <Text style={styles.altListAccuracy}>Accuracy: {getAccuracy(alt.score)}</Text>
+              </View>
+              <ChevronRight size={28} color="#888" />
+            </TouchableOpacity>
+          );
+        })}
+      </ScrollView>
+    </View>
+  );
+
+  /**
+   * Render loading state with spinner and message
+   */
+  const renderLoadingState = () => (
+    <View style={styles.centeredContent}>
+      <ActivityIndicator size="large" color={colors.primary} />
+      <Text style={styles.loadingText}>Please Wait...</Text>
+    </View>
+  );
+
+  /**
+   * Render empty state before scanning
+   */
+  const renderEmptyState = () => (
+    <View style={styles.centeredContent}>
+      {/* The scan button is fixed at bottom, so nothing here */}
+    </View>
+  );
+
+  // ----------------------------------------------------------------------------
+  // MAIN RENDER
+  // ----------------------------------------------------------------------------
+
   return (
     <View style={styles.container}>
-      {/* Fixed Logo at the top */}
+      {/* Fixed App Logo at Top */}
       <View style={styles.fixedLogoContainer}>
         <Image
           source={require('../../assets/images/logo.png')}
@@ -139,106 +362,28 @@ export default function CameraScreen() {
         />
       </View>
 
-      <View
-        style={{ paddingBottom: 120, paddingTop: 110 }}
-      >
-        {/* Before scanning */}
-        {!image && !match && !loading && (
-          <View style={styles.centeredContent}>
-            {/* The scan button is now fixed, so nothing here */}
-          </View>
-        )}
-
-        {/* Loading indicator */}
-        {loading && (
-          <View style={styles.centeredContent}>
-            <ActivityIndicator size="large" color={colors.primary} />
-            <Text style={styles.loadingText}>Please Wait...</Text>
-          </View>
-        )}
-
-        {/* After scanning - show main result or alternatives */}
+      {/* Main Content Area */}
+      <View style={{ paddingBottom: 120, paddingTop: 110 }}>
+        {/* Conditional Content Based on State */}
+        {!image && !match && !loading && renderEmptyState()}
+        {loading && renderLoadingState()}
         {match && !loading && (
-          !showAlternatives ? (
-            <View style={styles.resultContainer}>
-              <Image source={{ uri: match.coverUrl }} style={styles.cover} />
-              <Text style={styles.accuracyText}>Accuracy: {getAccuracy(match.score)}</Text>
-              <Text style={styles.title}>{match.title}</Text>
-              <Text style={styles.authors}>{match.authors}</Text>
-              <TouchableOpacity
-                onPress={() => {
-                  const isbnToSend = match.isbn;
-                  console.log("Navigating to bookdetails with ISBN:", isbnToSend);
-                  if (isbnToSend && typeof isbnToSend === "string" && isbnToSend.trim() !== "") {
-                    router.push({ 
-                      pathname: '/(tabs)/bookdetails', 
-                      params: { 
-                        isbn: isbnToSend
-                      } 
-                    });
-                  } else {
-                    Alert.alert("No ISBN found for this book.");
-                  }
-                }}
-              >
-                <Text style={styles.seeMore}>See more</Text>
-              </TouchableOpacity>
-            </View>
-          ) : (
-            <View style={styles.altListContainer} {...panResponder.panHandlers}>
-              {/* Back to main result button */}
-              <TouchableOpacity style={styles.backButton} onPress={() => setShowAlternatives(false)}>
-                <Text style={styles.backButtonText}>← Back to main result</Text>
-              </TouchableOpacity>
-              <Text style={styles.notGoodBookHeader}>Similar results:</Text>
-              <ScrollView style={styles.altListBox}>
-                {match.alternatives && match.alternatives.slice(0, 5).map((alt: any, idx: number) => {
-                  const altIsbn = alt.filename ? alt.filename.replace(/\.[^/.]+$/, "") : "";
-                  return (
-                    <TouchableOpacity
-                      key={idx}
-                      style={styles.altListRow}
-                      onPress={() => {
-                        if (altIsbn) {
-                          router.push({ 
-                            pathname: '/(tabs)/bookdetails', 
-                            params: { 
-                              isbn: altIsbn
-                            } 
-                          });
-                        } else {
-                          Alert.alert("No ISBN found for this book.");
-                        }
-                      }}
-                    >
-                      <Image
-                        source={{ uri: `${API_BASE_URL}${alt.cover_url}` }}
-                        style={styles.altListImage}
-                      />
-                      <View style={styles.altListInfo}>
-                        <Text style={styles.altListTitle}>{alt.title}</Text>
-                        <Text style={styles.altListAuthors}>{alt.authors.join(', ')}</Text>
-                        <Text style={styles.altListAccuracy}>Accuracy: {getAccuracy(alt.score)}</Text>
-                      </View>
-                      <ChevronRight size={28} color="#888" />
-                    </TouchableOpacity>
-                  );
-                })}
-              </ScrollView>
-            </View>
-          )
+          !showAlternatives ? renderMainResult() : renderAlternativesList()
         )}
       </View>
 
-      {/* Fixed scan button and related texts */}
+      {/* Fixed Bottom Controls */}
       <View style={styles.fixedBottom}>
+        {/* Alternative Results Toggle */}
         {match && !loading && (
           <>
             <TouchableOpacity onPress={() => setShowAlternatives(!showAlternatives)}>
-              {!showAlternatives ? (
+              {!showAlternatives && (
                 <Text style={styles.notGoodBookFixed}>Not the good book?</Text>
-              ) : null}
+              )}
             </TouchableOpacity>
+            
+            {/* Manual ISBN Scanner Link */}
             {showAlternatives && (
               <TouchableOpacity
                 style={styles.addBookTextContainer}
@@ -249,17 +394,28 @@ export default function CameraScreen() {
             )}
           </>
         )}
-        <TouchableOpacity style={styles.scanButton} onPress={() => {
-          if (showAlternatives) setShowAlternatives(false);
-          pickImage();
-        }}>
+        
+        {/* Main Scan Button */}
+        <TouchableOpacity 
+          style={styles.scanButton} 
+          onPress={() => {
+            if (showAlternatives) setShowAlternatives(false);
+            pickImage();
+          }}
+        >
           <Camera size={28} color="white" />
-          <Text style={styles.scanButtonText}>{match ? "Scan again" : "Click here to scan"}</Text>
+          <Text style={styles.scanButtonText}>
+            {match ? "Scan again" : "Click here to scan"}
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
-  )
+  );
 }
+
+// ============================================================================
+// STYLES
+// ============================================================================
 
 const styles = StyleSheet.create({
   container: {

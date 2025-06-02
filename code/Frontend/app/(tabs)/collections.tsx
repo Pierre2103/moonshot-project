@@ -1,3 +1,25 @@
+/**
+ * Collections Screen
+ * 
+ * Central hub for managing book collections. Allows users to create, edit,
+ * delete, and navigate to their book collections with intuitive organization.
+ * 
+ * Key Features:
+ * - Grid display of user collections with custom icons and names
+ * - Create new collections with emoji selection and custom names
+ * - Edit existing collections (name and icon modification)
+ * - Delete collections with confirmation dialogs
+ * - Long-press context menus for collection actions
+ * - Real-time data synchronization across screens
+ * - Empty state onboarding for new users
+ * - Responsive emoji picker with suggested and custom options
+ * 
+ * Navigation Sources:
+ * - Main tab navigation
+ * - Home screen collections section
+ * - Book details add-to-collection flow
+ */
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, ActivityIndicator, ActionSheetIOS, Alert, Platform, Modal, TextInput, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -9,20 +31,68 @@ import { API_BASE_URL } from '../../config/api';
 import { useFocusEffect } from '@react-navigation/native';
 import BackButton from '../../components/common/BackButton';
 
+// ============================================================================
+// CONSTANTS
+// ============================================================================
+
+/**
+ * Predefined emoji options for quick collection icon selection
+ */
 const SUGGESTED_EMOJIS = [
   "📚", "📖", "🎨", "🎵", "🎬", "🎮", "🧠", "🌍", "🌟", "🔥", "❤️", "👑", "🧙‍♂️", "🧚‍♀️", "🚀"
 ];
 
+// ============================================================================
+// TYPE DEFINITIONS
+// ============================================================================
+
+/**
+ * Collection data structure from API
+ */
+interface Collection {
+  id: number;
+  name: string;
+  icon: string;
+  book_count?: number;
+  created_at?: string;
+}
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+
 export default function Collections() {
+  // ----------------------------------------------------------------------------
+  // NAVIGATION AND ROUTING
+  // ----------------------------------------------------------------------------
+  
   const router = useRouter();
-  const [collections, setCollections] = useState<any[]>([]);
+
+  // ----------------------------------------------------------------------------
+  // STATE MANAGEMENT
+  // ----------------------------------------------------------------------------
+  
+  // Collections data state
+  const [collections, setCollections] = useState<Collection[]>([]);
   const [loading, setLoading] = useState(true);
+  
+  // Modal state for create/edit functionality
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
-  const [selectedCollection, setSelectedCollection] = useState<any>(null);
+  const [selectedCollection, setSelectedCollection] = useState<Collection | null>(null);
+  
+  // Form state for collection creation/editing
   const [newName, setNewName] = useState('');
   const [newIcon, setNewIcon] = useState('📚');
 
+  // ----------------------------------------------------------------------------
+  // DATA FETCHING
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Load all collections for the current user from API.
+   * Fetches complete collection metadata including book counts.
+   */
   const loadCollections = useCallback(async () => {
     const username = await AsyncStorage.getItem('ridizi_username');
     console.log('Collections page - Username:', username); // Debug log
@@ -43,14 +113,23 @@ export default function Collections() {
     setLoading(false);
   }, []);
 
-  // Use useFocusEffect to reload data when page is focused
+  // ----------------------------------------------------------------------------
+  // LIFECYCLE HOOKS
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Reload collections when screen comes into focus.
+   * Ensures fresh data when navigating back from other screens.
+   */
   useFocusEffect(
     useCallback(() => {
       loadCollections();
     }, [loadCollections])
   );
 
-  // Reset modal state when opening
+  /**
+   * Reset create modal form when opening
+   */
   useEffect(() => {
     if (showCreateModal) {
       setNewName('');
@@ -58,6 +137,9 @@ export default function Collections() {
     }
   }, [showCreateModal]);
 
+  /**
+   * Reset edit modal form when closing
+   */
   useEffect(() => {
     if (!showEditModal) {
       setSelectedCollection(null);
@@ -66,6 +148,14 @@ export default function Collections() {
     }
   }, [showEditModal]);
 
+  // ----------------------------------------------------------------------------
+  // EVENT HANDLERS - COLLECTION MANAGEMENT
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Handle collection creation with validation.
+   * Creates new collection via API and refreshes list.
+   */
   const handleCreateCollection = async () => {
     if (!newName.trim()) {
       Alert.alert('Error', 'Please enter a collection name');
@@ -83,10 +173,15 @@ export default function Collections() {
       setShowCreateModal(false);
       loadCollections(); // Reload collections after creating
     } catch (error) {
+      console.error('Error creating collection:', error);
       Alert.alert('Error', 'Could not create collection');
     }
   };
 
+  /**
+   * Handle collection editing with validation.
+   * Updates existing collection via API and refreshes list.
+   */
   const handleEditCollection = async () => {
     if (!newName.trim() || !selectedCollection) {
       Alert.alert('Error', 'Please enter a collection name');
@@ -104,11 +199,16 @@ export default function Collections() {
       setShowEditModal(false);
       loadCollections(); // Reload collections after editing
     } catch (error) {
+      console.error('Error updating collection:', error);
       Alert.alert('Error', 'Could not update collection');
     }
   };
 
-  const handleDeleteCollection = async (collection: any) => {
+  /**
+   * Handle collection deletion with confirmation.
+   * Permanently removes collection and all its book associations.
+   */
+  const handleDeleteCollection = async (collection: Collection) => {
     const username = await AsyncStorage.getItem('ridizi_username');
     if (!username) return;
 
@@ -125,6 +225,7 @@ export default function Collections() {
               await axios.delete(`${API_BASE_URL}/api/collections/${username}/${collection.id}`);
               loadCollections(); // Reload collections after deleting
             } catch (error) {
+              console.error('Error deleting collection:', error);
               Alert.alert('Error', 'Could not delete collection');
             }
           }
@@ -133,7 +234,15 @@ export default function Collections() {
     );
   };
 
-  const handleLongPress = (collection: any) => {
+  // ----------------------------------------------------------------------------
+  // EVENT HANDLERS - USER INTERACTIONS
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Handle long press on collection item.
+   * Shows platform-appropriate action sheet for edit/delete options.
+   */
+  const handleLongPress = (collection: Collection) => {
     if (Platform.OS === 'ios') {
       ActionSheetIOS.showActionSheetWithOptions(
         {
@@ -143,11 +252,13 @@ export default function Collections() {
         },
         (buttonIndex) => {
           if (buttonIndex === 1) {
+            // Edit collection
             setSelectedCollection(collection);
             setNewName(collection.name);
             setNewIcon(collection.icon);
             setShowEditModal(true);
           } else if (buttonIndex === 2) {
+            // Delete collection
             handleDeleteCollection(collection);
           }
         }
@@ -170,10 +281,60 @@ export default function Collections() {
     }
   };
 
+  /**
+   * Generate random emoji for collection icon
+   */
   const handleRandomEmoji = () => setNewIcon(getRandomEmoji());
+
+  // ----------------------------------------------------------------------------
+  // RENDER HELPERS
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Render emoji selection scroll view for modals
+   */
+  const renderEmojiSelector = () => (
+    <ScrollView
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={styles.emojiScroll}
+    >
+      {SUGGESTED_EMOJIS.map((e, i) => (
+        <TouchableOpacity
+          key={i}
+          onPress={() => setNewIcon(e)}
+          style={[
+            styles.suggestedEmojiContainer,
+            newIcon === e && styles.selectedEmoji,
+          ]}
+        >
+          <Text style={styles.suggestedEmoji}>{e}</Text>
+        </TouchableOpacity>
+      ))}
+      <View style={styles.emojiInputContainer}>
+        <TouchableOpacity onPress={handleRandomEmoji}>
+          <TextInput
+            style={styles.emojiInput}
+            value={newIcon}
+            onChangeText={setNewIcon}
+            maxLength={2}
+            autoCorrect={false}
+            autoCapitalize="none"
+            textAlign="center"
+          />
+        </TouchableOpacity>
+        <Text style={styles.emojiInputLabel}>Custom</Text>
+      </View>
+    </ScrollView>
+  );
+
+  // ----------------------------------------------------------------------------
+  // MAIN RENDER
+  // ----------------------------------------------------------------------------
 
   return (
     <View style={styles.container}>
+      {/* App Logo */}
       <View style={styles.logoContainer}>
         <Image
           source={require('../../assets/images/logo.png')}
@@ -182,8 +343,10 @@ export default function Collections() {
         />
       </View>
 
+      {/* Back Navigation */}
       <BackButton />
 
+      {/* Header with Title and Add Button */}
       <View style={styles.headerRow}>
         <Text style={styles.title}>Collections</Text>
         <TouchableOpacity onPress={() => setShowCreateModal(true)}>
@@ -191,6 +354,7 @@ export default function Collections() {
         </TouchableOpacity>
       </View>
 
+      {/* Content Area - Loading, Empty State, or Collections List */}
       {loading ? (
         <View style={styles.centered}>
           <ActivityIndicator size="large" color="#007AFF" />
@@ -234,38 +398,7 @@ export default function Collections() {
             
             <Text style={styles.header}>Create new collection</Text>
             
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={styles.emojiScroll}
-            >
-              {SUGGESTED_EMOJIS.map((e, i) => (
-                <TouchableOpacity
-                  key={i}
-                  onPress={() => setNewIcon(e)}
-                  style={[
-                    styles.suggestedEmojiContainer,
-                    newIcon === e && styles.selectedEmoji,
-                  ]}
-                >
-                  <Text style={styles.suggestedEmoji}>{e}</Text>
-                </TouchableOpacity>
-              ))}
-              <View style={styles.emojiInputContainer}>
-                <TouchableOpacity onPress={handleRandomEmoji}>
-                  <TextInput
-                    style={styles.emojiInput}
-                    value={newIcon}
-                    onChangeText={setNewIcon}
-                    maxLength={2}
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    textAlign="center"
-                  />
-                </TouchableOpacity>
-                <Text style={styles.emojiInputLabel}>Custom</Text>
-              </View>
-            </ScrollView>
+            {renderEmojiSelector()}
             
             <TextInput
               style={styles.input}
@@ -292,38 +425,7 @@ export default function Collections() {
             
             <Text style={styles.header}>Edit collection</Text>
             
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={styles.emojiScroll}
-            >
-              {SUGGESTED_EMOJIS.map((e, i) => (
-                <TouchableOpacity
-                  key={i}
-                  onPress={() => setNewIcon(e)}
-                  style={[
-                    styles.suggestedEmojiContainer,
-                    newIcon === e && styles.selectedEmoji,
-                  ]}
-                >
-                  <Text style={styles.suggestedEmoji}>{e}</Text>
-                </TouchableOpacity>
-              ))}
-              <View style={styles.emojiInputContainer}>
-                <TouchableOpacity onPress={handleRandomEmoji}>
-                  <TextInput
-                    style={styles.emojiInput}
-                    value={newIcon}
-                    onChangeText={setNewIcon}
-                    maxLength={2}
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    textAlign="center"
-                  />
-                </TouchableOpacity>
-                <Text style={styles.emojiInputLabel}>Custom</Text>
-              </View>
-            </ScrollView>
+            {renderEmojiSelector()}
             
             <TextInput
               style={styles.input}
@@ -342,6 +444,10 @@ export default function Collections() {
     </View>
   );
 }
+
+// ============================================================================
+// STYLES
+// ============================================================================
 
 const styles = StyleSheet.create({
   container: {

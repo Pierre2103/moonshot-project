@@ -1,3 +1,25 @@
+/**
+ * Collection Details Screen
+ * 
+ * Displays books within a specific collection with multiple layout options
+ * and comprehensive book management capabilities.
+ * 
+ * Key Features:
+ * - Multiple view layouts (list, 2x2 grid, 3x3 grid) with user preference storage
+ * - Book cover display with fallback image handling
+ * - Book management actions (move to other collections, remove from collection)
+ * - Long-press context menus for book actions
+ * - Real-time collection data synchronization
+ * - Move books between collections with confirmation
+ * - Responsive layout that adapts to screen size
+ * - Empty state handling for collections without books
+ * 
+ * Navigation Sources:
+ * - Collections list screen
+ * - Home screen collections section
+ * - Search results (when adding to collections)
+ */
+
 import React, { useEffect, useState, useCallback } from "react";
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, ActivityIndicator, Dimensions, ActionSheetIOS, Alert, Platform, Modal } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -8,58 +30,102 @@ import { API_BASE_URL } from "../../config/api";
 import BackButton from "../../components/common/BackButton";
 import { useFocusEffect } from "@react-navigation/native";
 
+// ============================================================================
+// CONSTANTS
+// ============================================================================
+
+/**
+ * Storage key for user's preferred layout setting
+ */
 const LAYOUT_KEY = "collection_layout_preference";
 
+// ============================================================================
+// TYPE DEFINITIONS
+// ============================================================================
+
+/**
+ * Available layout options for displaying books
+ */
+type LayoutType = "list" | "grid2" | "grid3";
+
+/**
+ * Book data structure within collections
+ */
+interface CollectionBook {
+  isbn: string;
+  title: string;
+  authors: string | string[];
+  cover_url?: string;
+  added_at?: string;
+}
+
+/**
+ * Collection data for move functionality
+ */
+interface Collection {
+  id: number;
+  name: string;
+  icon: string;
+}
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+
 export default function CollectionDetails() {
+  // ----------------------------------------------------------------------------
+  // NAVIGATION AND PARAMS
+  // ----------------------------------------------------------------------------
+  
   const router = useRouter();
   const params = useLocalSearchParams();
   const collectionId = params.collectionId;
   const collectionName = params.collectionName as string;
-  const [books, setBooks] = useState<any[]>([]);
+
+  // ----------------------------------------------------------------------------
+  // STATE MANAGEMENT
+  // ----------------------------------------------------------------------------
+  
+  // Book data state
+  const [books, setBooks] = useState<CollectionBook[]>([]);
   const [loading, setLoading] = useState(true);
-  const [layout, setLayout] = useState<"list" | "grid2" | "grid3">("grid2");
+  
+  // Layout preference state
+  const [layout, setLayout] = useState<LayoutType>("grid2");
+  
+  // Move functionality state
   const [showMoveModal, setShowMoveModal] = useState(false);
-  const [selectedBook, setSelectedBook] = useState<any>(null);
-  const [collections, setCollections] = useState<any[]>([]);
+  const [selectedBook, setSelectedBook] = useState<CollectionBook | null>(null);
+  const [collections, setCollections] = useState<Collection[]>([]);
   const [moving, setMoving] = useState(false);
+  
+  // UI state for image error handling
   const [imageErrors, setImageErrors] = useState<{[key: string]: boolean}>({});
 
+  // ----------------------------------------------------------------------------
+  // LAYOUT MANAGEMENT
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Load user's preferred layout setting from storage
+   */
   useEffect(() => {
     AsyncStorage.getItem(LAYOUT_KEY).then(val => {
       if (val === "list" || val === "grid2" || val === "grid3") setLayout(val);
     });
   }, []);
 
-  // Helper to reload books
-  const reloadBooks = useCallback(() => {
-    if (!collectionId) return;
-    setLoading(true);
-    axios.get(`${API_BASE_URL}/api/collections/${collectionId}/books`)
-      .then(res => setBooks(res.data))
-      .catch(() => setBooks([]))
-      .finally(() => setLoading(false));
-  }, [collectionId]);
-
-  useEffect(() => {
-    reloadBooks();
-  }, [reloadBooks]);
-
-  // Fetch collections for move modal
-  useEffect(() => {
-    if (!showMoveModal) return;
-    AsyncStorage.getItem('ridizi_username').then(username => {
-      if (!username) return;
-      axios.get(`${API_BASE_URL}/api/collections/${username}`)
-        .then(res => setCollections(res.data.filter((c: any) => c.id != collectionId)))
-        .catch(() => setCollections([]));
-    });
-  }, [showMoveModal, collectionId]);
-
-  const handleLayoutChange = (newLayout: "list" | "grid2" | "grid3") => {
+  /**
+   * Handle layout change and persist preference to storage
+   */
+  const handleLayoutChange = (newLayout: LayoutType) => {
     setLayout(newLayout);
     AsyncStorage.setItem(LAYOUT_KEY, newLayout);
   };
 
+  /**
+   * Calculate grid columns and item width based on current layout
+   */
   const numColumns = layout === "list" ? 1 : layout === "grid2" ? 2 : 3;
   const itemWidth = () => {
     const screenWidth = Dimensions.get("window").width - 40;
@@ -68,38 +134,122 @@ export default function CollectionDetails() {
     return (screenWidth - 24) / 3;
   };
 
-  // Remove book from collection
-  const handleRemove = async (book: any) => {
+  // ----------------------------------------------------------------------------
+  // DATA FETCHING
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Reload books in the collection from API.
+   * Fetches complete book metadata for display.
+   */
+  const reloadBooks = useCallback(() => {
+    if (!collectionId) return;
+    setLoading(true);
+    axios.get(`${API_BASE_URL}/api/collections/${collectionId}/books`)
+      .then(res => setBooks(res.data))
+      .catch(error => {
+        console.error('Error loading collection books:', error);
+        setBooks([]);
+      })
+      .finally(() => setLoading(false));
+  }, [collectionId]);
+
+  /**
+   * Load books on component mount
+   */
+  useEffect(() => {
+    reloadBooks();
+  }, [reloadBooks]);
+
+  /**
+   * Fetch available collections for move functionality.
+   * Excludes current collection from the list.
+   */
+  useEffect(() => {
+    if (!showMoveModal) return;
+    AsyncStorage.getItem('ridizi_username').then(username => {
+      if (!username) return;
+      axios.get(`${API_BASE_URL}/api/collections/${username}`)
+        .then(res => setCollections(res.data.filter((c: Collection) => c.id != collectionId)))
+        .catch(error => {
+          console.error('Error loading collections for move:', error);
+          setCollections([]);
+        });
+    });
+  }, [showMoveModal, collectionId]);
+
+  // ----------------------------------------------------------------------------
+  // LIFECYCLE HOOKS
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Reload books when screen comes into focus.
+   * Ensures fresh data when navigating back from book details.
+   */
+  useFocusEffect(
+    useCallback(() => {
+      reloadBooks();
+    }, [reloadBooks])
+  );
+
+  // ----------------------------------------------------------------------------
+  // EVENT HANDLERS - BOOK MANAGEMENT
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Remove book from current collection.
+   * Shows loading state during API call.
+   */
+  const handleRemove = async (book: CollectionBook) => {
     setLoading(true);
     try {
       await axios.delete(`${API_BASE_URL}/api/collections/${collectionId}/books/${book.isbn}`);
       reloadBooks();
-    } catch {
+    } catch (error) {
+      console.error('Error removing book from collection:', error);
       Alert.alert("Error", "Could not remove book.");
       setLoading(false);
     }
   };
 
-  // Move book to another collection
+  /**
+   * Move book to another collection.
+   * Performs add to target collection and remove from current collection.
+   */
   const handleMove = async (targetCollectionId: number) => {
     if (!selectedBook) return;
     setMoving(true);
     try {
       const username = await AsyncStorage.getItem('ridizi_username');
       if (!username) throw new Error("No username found");
-      await axios.post(`${API_BASE_URL}/api/collections/${username}/${targetCollectionId}/add`, { isbn: selectedBook.isbn });
+      
+      // Add to target collection
+      await axios.post(`${API_BASE_URL}/api/collections/${username}/${targetCollectionId}/add`, { 
+        isbn: selectedBook.isbn 
+      });
+      
+      // Remove from current collection
       await axios.delete(`${API_BASE_URL}/api/collections/${collectionId}/books/${selectedBook.isbn}`);
+      
       setShowMoveModal(false);
       setSelectedBook(null);
       reloadBooks();
-    } catch {
+    } catch (error) {
+      console.error('Error moving book:', error);
       Alert.alert("Error", "Could not move book.");
     }
     setMoving(false);
   };
 
-  // Show action sheet on long press
-  const handleLongPress = (book: any) => {
+  // ----------------------------------------------------------------------------
+  // EVENT HANDLERS - USER INTERACTIONS
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Handle long press on book item.
+   * Shows platform-appropriate action sheet for book management.
+   */
+  const handleLongPress = (book: CollectionBook) => {
     if (Platform.OS === "ios") {
       ActionSheetIOS.showActionSheetWithOptions(
         {
@@ -109,9 +259,11 @@ export default function CollectionDetails() {
         },
         (buttonIndex) => {
           if (buttonIndex === 1) {
+            // Move to another collection
             setSelectedBook(book);
             setShowMoveModal(true);
           } else if (buttonIndex === 2) {
+            // Remove from collection
             handleRemove(book);
           }
         }
@@ -121,7 +273,10 @@ export default function CollectionDetails() {
         "Book actions",
         book.title,
         [
-          { text: "Move to another collection", onPress: () => { setSelectedBook(book); setShowMoveModal(true); } },
+          { text: "Move to another collection", onPress: () => { 
+            setSelectedBook(book); 
+            setShowMoveModal(true); 
+          }},
           { text: "Remove from this collection", style: "destructive", onPress: () => handleRemove(book) },
           { text: "Cancel", style: "cancel" }
         ]
@@ -129,18 +284,48 @@ export default function CollectionDetails() {
     }
   };
 
+  /**
+   * Handle image loading errors for book covers.
+   * Enables fallback to alternative image sources.
+   */
   const handleImageError = (isbn: string) => {
     setImageErrors(prev => ({ ...prev, [isbn]: true }));
   };
 
-  useFocusEffect(
-    useCallback(() => {
-      reloadBooks();
-    }, [reloadBooks])
-  );
+  // ----------------------------------------------------------------------------
+  // RENDER HELPERS
+  // ----------------------------------------------------------------------------
+
+  /**
+   * Format authors for display.
+   * Handles both string and array formats from API.
+   */
+  const formatAuthors = (authors: string | string[]): string => {
+    if (Array.isArray(authors)) {
+      return authors.join(", ");
+    }
+    return authors || 'Unknown Author';
+  };
+
+  /**
+   * Determine which cover image to display.
+   * Uses fallback logic for image sources.
+   */
+  const getCoverImageSource = (item: CollectionBook) => {
+    if (imageErrors[item.isbn] && item.cover_url && 
+        item.cover_url.trim() && item.cover_url.startsWith("http")) {
+      return { uri: item.cover_url };
+    }
+    return { uri: `${API_BASE_URL}/cover/${item.isbn}.jpg` };
+  };
+
+  // ----------------------------------------------------------------------------
+  // MAIN RENDER
+  // ----------------------------------------------------------------------------
 
   return (
     <View style={styles.container}>
+      {/* App Logo */}
       <View style={styles.logoContainer}>
         <Image
           source={require('../../assets/images/logo.png')}
@@ -149,9 +334,10 @@ export default function CollectionDetails() {
         />
       </View>
       
+      {/* Back Navigation */}
       <BackButton />
 
-      {/* Title and layout buttons */}
+      {/* Header with Collection Name and Layout Controls */}
       <View style={styles.headerRow}>
         <Text style={styles.title}>{collectionName || "Collection"}</Text>
         <View style={styles.layoutBtns}>
@@ -166,6 +352,8 @@ export default function CollectionDetails() {
           </TouchableOpacity>
         </View>
       </View>
+
+      {/* Content Area - Loading, Empty State, or Books List */}
       {loading ? (
         <View style={styles.centered}>
           <ActivityIndicator size="large" color="#007AFF" />
@@ -177,7 +365,7 @@ export default function CollectionDetails() {
       ) : (
         <FlatList
           data={books}
-          key={layout + numColumns}
+          key={layout + numColumns} // Force re-render when layout changes
           numColumns={numColumns}
           keyExtractor={item => item.isbn}
           contentContainerStyle={{ paddingBottom: 192, paddingTop: 8 }}
@@ -193,11 +381,7 @@ export default function CollectionDetails() {
               delayLongPress={350}
             >
               <Image
-                source={{ 
-                  uri: imageErrors[item.isbn] && item.cover_url && item.cover_url.trim() && item.cover_url.startsWith("http")
-                    ? item.cover_url 
-                    : `${API_BASE_URL}/cover/${item.isbn}.jpg`
-                }}
+                source={getCoverImageSource(item)}
                 style={layout === "list" ? styles.bookImageList : styles.bookImageGrid}
                 resizeMode="cover"
                 onError={() => handleImageError(item.isbn)}
@@ -206,7 +390,7 @@ export default function CollectionDetails() {
                 <Text style={styles.bookTitle} numberOfLines={2}>{item.title}</Text>
                 {item.authors && (
                   <Text style={styles.bookAuthors} numberOfLines={1}>
-                    {Array.isArray(item.authors) ? item.authors.join(", ") : item.authors}
+                    {formatAuthors(item.authors)}
                   </Text>
                 )}
               </View>
@@ -215,7 +399,7 @@ export default function CollectionDetails() {
         />
       )}
 
-      {/* Move Modal */}
+      {/* Move to Collection Modal */}
       <Modal visible={showMoveModal} transparent animationType="slide" onRequestClose={() => setShowMoveModal(false)}>
         <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.2)", justifyContent: "center", alignItems: "center" }}>
           <View style={{ backgroundColor: "#fff", borderRadius: 16, padding: 20, width: 320 }}>
@@ -223,7 +407,7 @@ export default function CollectionDetails() {
             {collections.length === 0 ? (
               <Text style={{ color: "#888" }}>No other collections available.</Text>
             ) : (
-              collections.map((col: any) => (
+              collections.map((col: Collection) => (
                 <TouchableOpacity
                   key={col.id}
                   style={{ flexDirection: "row", alignItems: "center", paddingVertical: 10 }}
@@ -244,6 +428,10 @@ export default function CollectionDetails() {
     </View>
   );
 }
+
+// ============================================================================
+// STYLES
+// ============================================================================
 
 const styles = StyleSheet.create({
   container: { 
