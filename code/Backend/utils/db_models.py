@@ -1,3 +1,18 @@
+"""
+Database Models and Utilities
+
+This module defines all SQLAlchemy models for the book scanning application:
+- Book: Core book metadata and information
+- PendingBook: Queue for books awaiting processing
+- User: User accounts and management
+- Collection: User-created book collections  
+- ScanLog: Tracking of all scan operations
+- AppLog: Application event logging
+- DailyStats: Aggregated daily analytics
+
+Also provides utilities for logging and statistics calculation.
+"""
+
 from sqlalchemy import create_engine, Column, Integer, String, Text, Float, JSON, Boolean, DateTime, ForeignKey, Date
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -7,13 +22,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# === CONFIG ===
+# Database connection configuration
 DB_USER = os.getenv("DB_USER")
-DB_PASS = os.getenv("DB_PASS")
+DB_PASS = os.getenv("DB_PASS") 
 DB_HOST = os.getenv("DB_HOST")
 DB_PORT = os.getenv("DB_PORT")
 DB_NAME = os.getenv("DB_NAME")
-
 
 DATABASE_URL = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
@@ -21,130 +35,218 @@ engine = create_engine(DATABASE_URL, echo=False, future=True)
 SessionLocal = sessionmaker(bind=engine)
 Base = declarative_base()
 
-# === TABLE books ===
+
 class Book(Base):
+    """
+    Core book metadata and information.
+    
+    Stores complete book details fetched from external APIs like Google Books.
+    The isbn field (ISBN-10) is the primary key used for cover files and indexing.
+    """
     __tablename__ = "books"
 
-    isbn = Column(String(20), primary_key=True, index=True)
+    isbn = Column(String(20), primary_key=True, index=True)  # ISBN-10, used for covers
     title = Column(String(512), nullable=False)
-    authors = Column(JSON)  # liste de strings
-    isbn13 = Column(String(20))
+    authors = Column(JSON)  # List of author names
+    isbn13 = Column(String(20))  # 13-digit ISBN for API lookups
     pages = Column(Integer)
-    publication_date = Column(String(20))
+    publication_date = Column(String(20))  # Flexible format from APIs
     publisher = Column(String(128))
-    language_code = Column(String(10))
-    cover_url = Column(String(512))
-    external_links = Column(JSON)  # dictionnaire {goodreads, amazon, bookshop}
-    description = Column(Text)
-    genres = Column(JSON)  # liste de strings
-    average_rating = Column(Float)
-    ratings_count = Column(Integer)
-    date_added = Column(DateTime, default=datetime.utcnow, nullable=True)  # New column
+    language_code = Column(String(10))  # ISO language code
+    cover_url = Column(String(512))  # Original cover URL from API
+    external_links = Column(JSON)  # List of related URLs
+    description = Column(Text)  # Book summary/description
+    genres = Column(JSON)  # List of genre/category strings
+    average_rating = Column(Float)  # Average user rating
+    ratings_count = Column(Integer)  # Number of ratings
+    date_added = Column(DateTime, default=datetime.utcnow, nullable=True)  # When added to our DB
 
-# === TABLE pending_books ===
+
 class PendingBook(Base):
+    """
+    Queue for books awaiting processing by worker.
+    
+    When a barcode is scanned, the ISBN is added here for background processing.
+    Books marked as 'stucked' failed processing and need manual review.
+    """
     __tablename__ = "pending_books"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    isbn = Column(String(20), unique=True, nullable=False)
-    stucked = Column(Boolean, default=False)
+    isbn = Column(String(20), unique=True, nullable=False)  # ISBN to process
+    stucked = Column(Boolean, default=False)  # True if processing failed
 
-# === TABLE scan_logs ===
+
 class ScanLog(Base):
+    """
+    Tracking log for all scan operations (barcode and image matching).
+    
+    Used for analytics, debugging, and user activity tracking.
+    Status values: 'success', 'error', 'not_found', 'pending'
+    """
     __tablename__ = "scan_logs"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     timestamp = Column(DateTime, default=datetime.utcnow, nullable=False)
-    isbn = Column(String(20), nullable=True)
-    status = Column(String(32), nullable=False)  # ex: "success", "error"
-    message = Column(Text, nullable=True)
-    extra = Column(JSON, nullable=True)  # pour stocker des infos additionnelles
+    isbn = Column(String(20), nullable=True)  # May be null for failed scans
+    status = Column(String(32), nullable=False)  # Processing result
+    message = Column(Text, nullable=True)  # Human-readable description
+    extra = Column(JSON, nullable=True)  # Additional context (scan type, user, etc.)
 
-# === TABLE app_logs ===
+
 class AppLog(Base):
+    """
+    Application event logging for debugging and monitoring.
+    
+    Captures system events, errors, and important operations.
+    Levels: 'INFO', 'WARNING', 'ERROR', 'SUCCESS'
+    """
     __tablename__ = "app_logs"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     timestamp = Column(DateTime, default=datetime.utcnow, nullable=False)
-    level = Column(String(16), nullable=False)  # ex: "INFO", "WARNING", "ERROR"
-    message = Column(Text, nullable=False)
-    context = Column(JSON, nullable=True)  # infos additionnelles (user, endpoint, etc.)
+    level = Column(String(16), nullable=False)  # Log severity level
+    message = Column(Text, nullable=False)  # Event description
+    context = Column(JSON, nullable=True)  # Additional structured data
 
-# === TABLE users ===
+
 class User(Base):
+    """
+    User accounts for the application.
+    
+    Simple user model with just username. Users are created automatically
+    when they first scan a book or create a collection.
+    """
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     username = Column(String(255), unique=True, nullable=False)
 
-# === TABLE collections ===
+
 class Collection(Base):
+    """
+    User-created book collections.
+    
+    Users can organize their scanned books into named collections with icons.
+    Each collection belongs to a specific user (owner).
+    """
     __tablename__ = "collections"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(255), nullable=False)
-    owner = Column(Integer, ForeignKey("users.id"), nullable=False)
-    icon = Column(String(255))
+    name = Column(String(255), nullable=False)  # Collection display name
+    owner = Column(Integer, ForeignKey("users.id"), nullable=False)  # Owning user ID
+    icon = Column(String(255))  # Icon identifier for UI
 
-# === TABLE collection_books ===
+
 class CollectionBook(Base):
+    """
+    Many-to-many relationship between collections and books.
+    
+    Tracks which books are in which collections.
+    Uses composite primary key of collection_id and isbn.
+    """
     __tablename__ = "collection_books"
 
     collection_id = Column(Integer, ForeignKey("collections.id"), primary_key=True)
     isbn = Column(String(20), ForeignKey("books.isbn"), primary_key=True)
 
-# === TABLE user_scans ===
+
 class UserScan(Base):
+    """
+    Tracking table for user scan history.
+    
+    Records when users scan books for recent activity and analytics.
+    Uses composite primary key to allow multiple scans of same book by same user.
+    """
     __tablename__ = "user_scans"
 
     user_id = Column(Integer, ForeignKey("users.id"), primary_key=True)
     isbn = Column(String(20), ForeignKey("books.isbn"), primary_key=True)
     timestamp = Column(DateTime, primary_key=True, default=datetime.utcnow, nullable=False)
 
-# === TABLE user_added_books ===
+
 class UserAddedBook(Base):
+    """
+    Tracking table for books added by users.
+    
+    Records when users add new books to the system (via barcode scanning).
+    """
     __tablename__ = "user_added_books"
 
     user_id = Column(Integer, ForeignKey("users.id"), primary_key=True)
     isbn = Column(String(20), ForeignKey("books.isbn"), primary_key=True)
     timestamp = Column(DateTime, primary_key=True, default=datetime.utcnow, nullable=False)
 
-# === TABLE daily_stats ===
+
 class DailyStats(Base):
+    """
+    Aggregated daily statistics for analytics dashboard.
+    
+    Pre-calculated metrics updated daily to avoid expensive real-time queries.
+    Includes cumulative totals and daily activity counts.
+    """
     __tablename__ = "daily_stats"
 
     date = Column(Date, primary_key=True)
+    
+    # Cumulative totals (all time)
     total_books = Column(Integer, default=0)
     total_users = Column(Integer, default=0)
     total_collections = Column(Integer, default=0)
-    books_added_today = Column(Integer, default=0)
-    users_added_today = Column(Integer, default=0)
-    collections_added_today = Column(Integer, default=0)
-    barcode_scans_today = Column(Integer, default=0)
-    image_scans_today = Column(Integer, default=0)
-    successful_scans_today = Column(Integer, default=0)
-    failed_scans_today = Column(Integer, default=0)
-    pending_books_today = Column(Integer, default=0)
-    worker_errors_today = Column(Integer, default=0)
-    active_users_today = Column(Integer, default=0)  # users who scanned something today
+    
+    # Daily activity counts
+    books_added_today = Column(Integer, default=0)  # New books added to database
+    users_added_today = Column(Integer, default=0)  # New user registrations
+    collections_added_today = Column(Integer, default=0)  # New collections created
+    
+    # Scan activity breakdown
+    barcode_scans_today = Column(Integer, default=0)  # Barcode scan attempts
+    image_scans_today = Column(Integer, default=0)  # Image matching attempts
+    successful_scans_today = Column(Integer, default=0)  # Scans that found matches
+    failed_scans_today = Column(Integer, default=0)  # Scans with errors/no matches
+    pending_books_today = Column(Integer, default=0)  # Books added to processing queue
+    
+    # System health
+    worker_errors_today = Column(Integer, default=0)  # Worker processing errors
+    active_users_today = Column(Integer, default=0)  # Users who performed scans
 
-# === Fonction utilitaire de log ===
-def log_app(level, message, context=None):
+
+def log_app(level: str, message: str, context: dict = None) -> None:
+    """
+    Utility function to log application events.
+    
+    Args:
+        level: Log level (INFO, WARNING, ERROR, SUCCESS)
+        message: Human-readable log message
+        context: Optional additional context data
+    """
     session = SessionLocal()
     app_log = AppLog(level=level, message=message, context=context)
     session.add(app_log)
     session.commit()
     session.close()
 
-# === Fonction utilitaire pour calculer les stats quotidiennes ===
-def calculate_daily_stats(target_date=None):
-    """Calculate and store daily statistics for a given date (default: today)
+
+def calculate_daily_stats(target_date: date = None) -> DailyStats:
+    """
+    Calculate and store daily statistics for a given date.
     
-    Statistics explanation:
-    - Successful scans: Scans that found a book (status="success")
-    - Failed scans: Scans that failed to find a match or had errors (status="error" or "not_found") 
-    - Pending: Books added to processing queue (status="pending")
-    - Success rate: Percentage of successful scans vs total scans
+    This function computes comprehensive daily metrics including:
+    - Total counts (books, users, collections)
+    - Daily activity (scans, additions, errors)
+    - Scan success/failure rates
+    - Active user counts
+    
+    Args:
+        target_date: Date to calculate stats for (defaults to today)
+        
+    Returns:
+        DailyStats object with calculated metrics, or None if calculation failed
+        
+    Note:
+        Statistics explanation:
+        - Successful scans: Scans that found a book (status="success")
+        - Failed scans: Scans that failed to find a match (status="error" or "not_found") 
+        - Pending: Books added to processing queue (status="pending")
     """
     if target_date is None:
         target_date = date.today()
@@ -155,7 +257,7 @@ def calculate_daily_stats(target_date=None):
     try:
         from sqlalchemy import func, and_
         
-        # Total counts (cumulative)
+        # Calculate cumulative totals
         total_books = session.query(Book).count()
         total_users = session.query(User).count()
         total_collections = session.query(Collection).count()
@@ -164,7 +266,7 @@ def calculate_daily_stats(target_date=None):
         start_datetime = datetime.combine(target_date, datetime.min.time())
         end_datetime = datetime.combine(target_date + timedelta(days=1), datetime.min.time())
         
-        # All scans today (both barcode and image scans)
+        # Base query for all scans today
         all_scans_today = session.query(ScanLog).filter(
             and_(
                 ScanLog.timestamp >= start_datetime,
@@ -172,22 +274,12 @@ def calculate_daily_stats(target_date=None):
             )
         )
         
-        # SUCCESSFUL SCANS: Scans that successfully found/matched a book
-        successful_scans_today = all_scans_today.filter(
-            ScanLog.status == "success"
-        ).count()
+        # Count scans by status
+        successful_scans_today = all_scans_today.filter(ScanLog.status == "success").count()
+        failed_scans_today = all_scans_today.filter(ScanLog.status.in_(["error", "not_found"])).count()
+        pending_books_today = all_scans_today.filter(ScanLog.status == "pending").count()
         
-        # FAILED SCANS: Scans that failed to find a match or had errors
-        failed_scans_today = all_scans_today.filter(
-            ScanLog.status.in_(["error", "not_found"])
-        ).count()
-        
-        # PENDING: Books added to processing queue (barcode scans that need worker processing)
-        pending_books_today = all_scans_today.filter(
-            ScanLog.status == "pending"
-        ).count()
-        
-        # Count barcode vs image scans by checking the extra field
+        # Count scans by type (check extra field for scan method)
         barcode_scans_today = session.query(ScanLog).filter(
             and_(
                 ScanLog.timestamp >= start_datetime,
@@ -204,13 +296,12 @@ def calculate_daily_stats(target_date=None):
             )
         ).count()
         
-        # If we can't detect types, count all scans as barcode (since that's more common)
+        # Fallback: if scan types can't be detected, assume all are barcode
         total_scans_count = all_scans_today.count()
         if barcode_scans_today + image_scans_today == 0 and total_scans_count > 0:
             barcode_scans_today = total_scans_count
         
-        # BOOKS ADDED: Count books that were actually added to the database today
-        # Use the new date_added column for accurate counting
+        # Count books actually added to database today (using date_added column)
         books_added_today = session.query(Book).filter(
             and_(
                 Book.date_added >= start_datetime,
@@ -218,10 +309,7 @@ def calculate_daily_stats(target_date=None):
             )
         ).count()
         
-        # Users and collections added today
-        users_added_today = 0  # Would need created_at field on users table
-        
-        # Collections added today - count from app logs
+        # Count collections created today (from app logs)
         collections_added_today = session.query(AppLog).filter(
             and_(
                 AppLog.timestamp >= start_datetime,
@@ -231,6 +319,7 @@ def calculate_daily_stats(target_date=None):
             )
         ).count()
         
+        # Count worker errors
         worker_errors_today = session.query(AppLog).filter(
             and_(
                 AppLog.timestamp >= start_datetime,
@@ -240,7 +329,7 @@ def calculate_daily_stats(target_date=None):
             )
         ).count()
 
-        # Active users today (users who made scans)
+        # Count unique active users (users who made scans today)
         active_users_today = session.query(UserScan.user_id).filter(
             and_(
                 UserScan.timestamp >= start_datetime,
@@ -248,17 +337,18 @@ def calculate_daily_stats(target_date=None):
             )
         ).distinct().count()
         
-        # Create or update daily stats
+        # Create or update daily stats record
         daily_stat = session.query(DailyStats).filter_by(date=target_date).first()
         if not daily_stat:
             daily_stat = DailyStats(date=target_date)
             session.add(daily_stat)
         
+        # Update all calculated values
         daily_stat.total_books = total_books
         daily_stat.total_users = total_users
         daily_stat.total_collections = total_collections
         daily_stat.books_added_today = books_added_today
-        daily_stat.users_added_today = users_added_today
+        daily_stat.users_added_today = 0  # Would need created_at field on users
         daily_stat.collections_added_today = collections_added_today
         daily_stat.barcode_scans_today = barcode_scans_today
         daily_stat.image_scans_today = image_scans_today
@@ -271,6 +361,7 @@ def calculate_daily_stats(target_date=None):
         session.commit()
         session.refresh(daily_stat)
         
+        # Log summary of calculated stats
         print(f"✅ Daily stats calculated for {target_date}:")
         print(f"   📊 Total scans: {total_scans_count} (Barcode: {barcode_scans_today}, Image: {image_scans_today})")
         print(f"   ✅ Successful: {successful_scans_today}")
@@ -285,17 +376,26 @@ def calculate_daily_stats(target_date=None):
         print(f"Error calculating daily stats: {e}")
         return None
     finally:
-        # Don't close session here since we're returning the object
+        # Keep session open since we're returning the object
         pass
 
-def initialize_historical_stats(days_back=7):
-    """Initialize daily stats for the past N days"""
+
+def initialize_historical_stats(days_back: int = 7) -> None:
+    """
+    Initialize daily stats for the past N days.
+    
+    Useful for populating historical data when first setting up analytics.
+    
+    Args:
+        days_back: Number of days to calculate backwards from today
+    """
     today = date.today()
     for i in range(days_back):
         target_date = today - timedelta(days=i)
         print(f"Calculating stats for {target_date}...")
         daily_stat = calculate_daily_stats(target_date)
-        # Close the session properly after each calculation
+        
+        # Properly save the stats with a new session
         if daily_stat:
             session = SessionLocal()
             try:
@@ -303,16 +403,19 @@ def initialize_historical_stats(days_back=7):
                 session.commit()
             finally:
                 session.close()
+                
     print(f"✅ Initialized {days_back} days of historical stats")
 
-# === Création des tables ===
-def init_db():
+
+def init_db() -> None:
+    """Initialize database by creating all tables."""
     Base.metadata.create_all(bind=engine)
+
 
 if __name__ == "__main__":
     init_db()
     print("✅ Database initialized successfully.")
     
-    # Initialize some historical stats
+    # Initialize some historical stats for analytics
     print("📊 Initializing historical statistics...")
     initialize_historical_stats(7)

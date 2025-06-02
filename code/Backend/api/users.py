@@ -1,3 +1,18 @@
+"""
+User Management and Scan History API
+
+Manages user accounts and tracks their book scanning activity.
+Includes robust error handling with database retry mechanisms for
+high-concurrency scenarios.
+
+Key features:
+- User creation and management
+- Scan history tracking with timestamps
+- Recently scanned books retrieval
+- Database timeout handling with exponential backoff
+- Debug endpoints for troubleshooting
+"""
+
 from flask import Blueprint, request, jsonify
 from sqlalchemy.exc import IntegrityError, OperationalError, TimeoutError
 from sqlalchemy import desc
@@ -9,29 +24,63 @@ from urllib.parse import unquote
 
 users_api = Blueprint("users_api", __name__)
 
-def retry_db_operation(operation, max_retries=3, base_delay=0.1):
-    """Retry database operations with exponential backoff"""
+
+def retry_db_operation(operation, max_retries: int = 3, base_delay: float = 0.1):
+    """
+    Retry database operations with exponential backoff.
+    
+    Handles transient database issues like connection timeouts and lock waits
+    that can occur under high load or concurrent access.
+    
+    Args:
+        operation: Function to execute (should return result dict)
+        max_retries: Maximum number of retry attempts
+        base_delay: Base delay in seconds (doubles each retry)
+        
+    Returns:
+        Result from operation function
+        
+    Raises:
+        OperationalError/TimeoutError: If all retries are exhausted
+    """
     for attempt in range(max_retries):
         try:
             return operation()
         except (OperationalError, TimeoutError) as e:
             if attempt == max_retries - 1:
+                # Final attempt failed, re-raise the exception
                 raise e
-            # Exponential backoff with jitter
+            
+            # Calculate delay with exponential backoff + jitter to avoid thundering herd
             delay = base_delay * (2 ** attempt) + random.uniform(0, 0.1)
             time.sleep(delay)
+    
     return None
+
 
 @users_api.route("/api/users", methods=["POST"])
 def create_user():
+    """
+    Create a new user account.
+    
+    Expected JSON payload:
+        {"username": "john_doe"}
+        
+    Returns:
+        201: User created successfully with id and username
+        400: Missing or empty username
+        409: Username already exists
+    """
     data = request.get_json()
     username = data.get("username")
+    
     if not username or not username.strip():
         return jsonify({"error": "Username is required"}), 400
 
     session = SessionLocal()
     user = User(username=username.strip())
     session.add(user)
+    
     try:
         session.commit()
         return jsonify({"id": user.id, "username": user.username}), 201
@@ -41,41 +90,69 @@ def create_user():
     finally:
         session.close()
 
+
 @users_api.route("/api/users", methods=["GET"])
 def list_users():
+    """
+    Get all users in the system.
+    
+    Returns:
+        200: List of users with id and username
+    """
     session = SessionLocal()
     users = session.query(User).all()
     result = [{"id": u.id, "username": u.username} for u in users]
     session.close()
     return jsonify(result)
 
+
 @users_api.route("/api/user_scans", methods=["POST"])
 def add_user_scan():
+    """
+    Record a book scan by a user.
+    
+    Auto-creates the user if they don't exist. Uses retry mechanism
+    to handle database contention during high-traffic periods.
+    
+    Expected JSON payload:
+        {"username": "john_doe", "isbn": "1234567890"}
+        
+    Returns:
+        201: Scan recorded successfully
+        409: Scan already exists for this user/book combination
+        503: Database timeout after retries
+        500: Unexpected error
+    """
     data = request.get_json()
     username = data.get("username")
     isbn = data.get("isbn")
+    
     if not username or not isbn:
         return jsonify({"error": "username and isbn are required"}), 400
 
     def db_operation():
+        """Database operation with proper error handling and session management."""
         session = SessionLocal()
         try:
+            # Get or create user
             user = session.query(User).filter_by(username=username).first()
             if not user:
-                # Auto-create user if it doesn't exist
                 user = User(username=username)
                 session.add(user)
                 session.commit()
 
+            # Create scan record
             scan = UserScan(user_id=user.id, isbn=isbn, timestamp=datetime.utcnow())
             session.add(scan)
             session.commit()
             return {"success": True, "status": 201}
+            
         except IntegrityError:
             session.rollback()
             return {"error": "Scan already exists", "status": 409}
         except (OperationalError, TimeoutError) as e:
             session.rollback()
+            # Check if it's a timeout/lock wait issue that should be retried
             if "Lock wait timeout" in str(e) or "timeout" in str(e).lower():
                 raise e  # Let retry mechanism handle it
             return {"error": f"Database error: {str(e)}", "status": 500}
@@ -93,10 +170,22 @@ def add_user_scan():
     except Exception as e:
         return jsonify({"error": f"Unexpected error: {str(e)}"}), 500
 
+
 @users_api.route("/api/user_scans/<username>", methods=["DELETE"])
 def delete_user_scans(username):
+    """
+    Delete all scan history for a user.
+    
+    Args:
+        username: URL-encoded username
+        
+    Returns:
+        200: All scans deleted successfully
+        404: User not found
+    """
     username = unquote(username)
     session = SessionLocal()
+    
     user = session.query(User).filter_by(username=username).first()
     if not user:
         session.close()
@@ -108,9 +197,23 @@ def delete_user_scans(username):
     session.close()
     return jsonify({"message": "All scan history deleted"}), 200
 
+
 @users_api.route("/api/recently_scanned/<username>", methods=["GET"])
 def get_recently_scanned(username):
-    # URL decode the username to handle spaces and special characters
+    """
+    Get recently scanned books for a user, ordered by timestamp.
+    
+    Returns all scanned books even if the book details are no longer
+    in the database, showing "Unknown" for missing information.
+    
+    Args:
+        username: URL-encoded username
+        
+    Returns:
+        200: List of recently scanned books with details and timestamps
+        200: Empty array if user not found or has no scans
+        500: Database error
+    """
     username = unquote(username)
     print(f"[DEBUG] get_recently_scanned called with username: '{username}'")
     
@@ -129,22 +232,7 @@ def get_recently_scanned(username):
 
         print(f"[DEBUG] User '{username}' found with ID: {user.id}")
 
-        # Debug: Check what's in the UserScan table for this user
-        all_scans = session.query(UserScan).filter(UserScan.user_id == user.id).all()
-        print(f"[DEBUG] Found {len(all_scans)} total scans for user {user.id}")
-        for scan in all_scans:
-            print(f"[DEBUG] Scan - ISBN: {scan.isbn}, timestamp: {scan.timestamp}")
-
-        # If no scans found, check if there are any scans in the database at all
-        if len(all_scans) == 0:
-            total_scans = session.query(UserScan).count()
-            print(f"[DEBUG] No scans for user, but {total_scans} total scans exist in database")
-            
-            # Check if user was just created
-            all_users = session.query(User).all()
-            print(f"[DEBUG] Users in database: {[(u.id, u.username) for u in all_users]}")
-
-        # First, get all user scans regardless of book existence
+        # Get all user scans ordered by most recent first
         user_scans = session.query(UserScan).filter(
             UserScan.user_id == user.id
         ).order_by(desc(UserScan.timestamp)).all()
@@ -160,7 +248,7 @@ def get_recently_scanned(username):
         for scan in user_scans:
             print(f"[DEBUG] Processing scan: ISBN={scan.isbn}, timestamp={scan.timestamp}")
             
-            # Try to find the book
+            # Try to find the book details
             book = session.query(Book).filter_by(isbn=scan.isbn).first()
             
             if book:
@@ -173,7 +261,7 @@ def get_recently_scanned(username):
                 })
                 print(f"[DEBUG] Added book: {book.title}")
             else:
-                # Book not found in database, but we still want to show the scan
+                # Book not found in database, but still show the scan
                 result.append({
                     "isbn": scan.isbn,
                     "title": f"Book {scan.isbn}",
@@ -186,6 +274,7 @@ def get_recently_scanned(username):
         print(f"[DEBUG] Returning {len(result)} results")
         session.close()
         return jsonify(result), 200
+        
     except Exception as e:
         print(f"[DEBUG] Error in get_recently_scanned: {e}")
         print(f"[DEBUG] Exception type: {type(e)}")
@@ -193,9 +282,22 @@ def get_recently_scanned(username):
         session.close()
         return jsonify({"error": str(e)}), 500
 
+
 @users_api.route("/api/debug/user/<username>", methods=["GET"])
 def debug_user_info(username):
-    """Debug endpoint to check user and scan information"""
+    """
+    Debug endpoint to inspect user and scan information.
+    
+    Provides detailed information about a user's scan history and
+    overall database statistics for troubleshooting.
+    
+    Args:
+        username: URL-encoded username
+        
+    Returns:
+        200: Debug information including user details, scans, and system stats
+        500: Database error
+    """
     username = unquote(username)
     print(f"[DEBUG] debug_user_info called with username: '{username}'")
     
@@ -206,7 +308,7 @@ def debug_user_info(username):
         return jsonify({"error": "Database connection failed"}), 500
     
     try:
-        # Check user
+        # Check user existence and details
         user = session.query(User).filter_by(username=username).first()
         user_info = {"exists": False, "id": None, "scans": []}
         
@@ -224,7 +326,7 @@ def debug_user_info(username):
                 for scan in scans
             ]
         
-        # Get total counts
+        # Get system statistics
         total_users = session.query(User).count()
         total_scans = session.query(UserScan).count()
         
@@ -243,10 +345,27 @@ def debug_user_info(username):
         session.close()
         return jsonify({"error": str(e)}), 500
 
+
 @users_api.route("/api/users/<username>", methods=["DELETE"])
 def delete_user(username):
+    """
+    Delete a user and all associated data.
+    
+    Cascades to delete:
+    - All user's collections and their books
+    - All user's scan history
+    - The user account itself
+    
+    Args:
+        username: URL-encoded username
+        
+    Returns:
+        200: User deleted successfully
+        404: User not found
+    """
     username = unquote(username)
     session = SessionLocal()
+    
     user = session.query(User).filter_by(username=username).first()
     if not user:
         session.close()
@@ -262,8 +381,10 @@ def delete_user(username):
 
     # Delete user scans
     session.query(UserScan).filter_by(user_id=user.id).delete()
-    # Delete user
+    
+    # Delete user account
     session.delete(user)
     session.commit()
     session.close()
+    
     return jsonify({"message": f"User '{username}' deleted."}), 200
