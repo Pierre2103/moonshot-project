@@ -162,12 +162,12 @@ export default function HomeScreen() {
       )}
 
       {/* Divider */}
-      {username && (collections.length > 0 || uniqueRecentlyScanned.length > 0) && <View style={styles.divider} />}
+      {username && uniqueRecentlyScanned.length > 0 && <View style={styles.divider} />}
 
       {/* Collections */}
-      {username && (collections.length > 0 || uniqueRecentlyScanned.length > 0) ? (
+      {username && uniqueRecentlyScanned.length > 0 && (
         <>
-          {collections.length > 0 && <Text style={styles.sectionTitle}>Your collections:</Text>}
+          <Text style={styles.sectionTitle}>Your collections:</Text>
           <ScrollView 
             horizontal 
             showsHorizontalScrollIndicator={false} 
@@ -207,9 +207,13 @@ export default function HomeScreen() {
           </ScrollView>
           {/* Divider */}
           <View style={styles.divider} />
+        </>
+      )}
 
-          {/* Recently Scanned */}
-          {uniqueRecentlyScanned.length > 0 && <Text style={styles.sectionTitle}>Recently Scanned:</Text>}
+      {/* Recently Scanned */}
+      {username && (
+        <>
+          <Text style={styles.sectionTitle}>Recently Scanned:</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalScroll}>
             {uniqueRecentlyScanned.length === 0 ? (
               <View style={styles.noScansContainer}>
@@ -250,7 +254,7 @@ export default function HomeScreen() {
             )}
           </ScrollView>
         </>
-      ) : null}
+      )}
 
       {/* Add Collection Modal */}
       <AddModal

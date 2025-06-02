@@ -3,6 +3,7 @@ from utils.db_models import SessionLocal, User, Collection, CollectionBook, User
 from sqlalchemy.exc import IntegrityError
 import random
 from datetime import datetime
+from urllib.parse import unquote
 
 collections_api = Blueprint("collections", __name__)
 
@@ -19,11 +20,12 @@ def log_app(level, message, context=None):
 
 @collections_api.route("/api/collections/<username>", methods=["GET"])
 def get_collections(username):
+    username = unquote(username)
     session = SessionLocal()
     user = session.query(User).filter_by(username=username).first()
     if not user:
         session.close()
-        return jsonify({"error": "User not found"}), 404
+        return jsonify([]), 200  # Return empty array instead of 404
     collections = session.query(Collection).filter_by(owner=user.id).all()
     result = [
         {"id": c.id, "name": c.name, "icon": c.icon}
@@ -34,6 +36,7 @@ def get_collections(username):
 
 @collections_api.route("/api/collections/<username>", methods=["POST"])
 def create_collection(username):
+    username = unquote(username)
     data = request.json
     name = data.get("name")
     icon = data.get("icon")
@@ -42,8 +45,10 @@ def create_collection(username):
     session = SessionLocal()
     user = session.query(User).filter_by(username=username).first()
     if not user:
-        session.close()
-        return jsonify({"error": "User not found"}), 404
+        # Auto-create user if it doesn't exist
+        user = User(username=username)
+        session.add(user)
+        session.commit()
     
     collection = Collection(name=name, owner=user.id, icon=icon)
     session.add(collection)
@@ -64,6 +69,7 @@ def create_collection(username):
 
 @collections_api.route("/api/collections/<username>/<int:collection_id>/add", methods=["POST"])
 def add_book_to_collection(username, collection_id):
+    username = unquote(username)
     data = request.json
     isbn = data.get("isbn")
     if not isbn:
@@ -89,33 +95,6 @@ def add_book_to_collection(username, collection_id):
         session.rollback()
         session.close()
         return jsonify({"error": "Book does not exist in database"}), 400
-
-@collections_api.route("/api/recently_scanned/<username>", methods=["GET"])
-def get_recently_scanned(username):
-    session = SessionLocal()
-    user = session.query(User).filter_by(username=username).first()
-    if not user:
-        session.close()
-        return jsonify({"error": "User not found"}), 404
-    scans = (
-        session.query(UserScan)
-        .filter_by(user_id=user.id)
-        .order_by(UserScan.timestamp.desc())
-        .limit(10)
-        .all()
-    )
-    books = []
-    for scan in scans:
-        book = session.query(Book).filter_by(isbn=scan.isbn).first()
-        if book:
-            books.append({
-                "isbn": book.isbn,
-                "title": book.title,
-                "cover_url": book.cover_url,
-                "authors": book.authors,
-            })
-    session.close()
-    return jsonify(books)
 
 @collections_api.route("/api/collections/<int:collection_id>/books", methods=["GET"])
 def get_books_in_collection(collection_id):
@@ -152,6 +131,7 @@ def remove_book_from_collection(collection_id, isbn):
 
 @collections_api.route("/api/collections/<username>/<int:collection_id>", methods=["PUT"])
 def update_collection(username, collection_id):
+    username = unquote(username)
     data = request.json
     name = data.get("name")
     icon = data.get("icon")
@@ -178,6 +158,7 @@ def update_collection(username, collection_id):
 
 @collections_api.route("/api/collections/<username>/<int:collection_id>", methods=["DELETE"])
 def delete_collection(username, collection_id):
+    username = unquote(username)
     session = SessionLocal()
     user = session.query(User).filter_by(username=username).first()
     if not user:

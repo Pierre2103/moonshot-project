@@ -7,7 +7,10 @@ import torch
 import os
 import faiss
 import json
+import time
+import random
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import OperationalError, TimeoutError
 from utils.db_models import SessionLocal, Book, ScanLog, AppLog
 
 # Utilise toujours les chemins absolus
@@ -17,19 +20,50 @@ INDEX_PATH = os.path.abspath(os.path.join(BASE_DIR, "..", "data", "index.faiss")
 NAMES_PATH = os.path.abspath(os.path.join(BASE_DIR, "..", "data", "image_names.json"))
 print(f"match.py: COVERS_DIR={COVERS_DIR}")
 
+def retry_db_operation(operation, max_retries=3, base_delay=0.1):
+    """Retry database operations with exponential backoff"""
+    for attempt in range(max_retries):
+        try:
+            return operation()
+        except (OperationalError, TimeoutError) as e:
+            if attempt == max_retries - 1:
+                raise e
+            # Exponential backoff with jitter
+            delay = base_delay * (2 ** attempt) + random.uniform(0, 0.1)
+            time.sleep(delay)
+    return None
+
 def log_app(level, message, context=None):
-    session = SessionLocal()
-    app_log = AppLog(level=level, message=message, context=context)
-    session.add(app_log)
-    session.commit()
-    session.close()
+    def db_operation():
+        session = SessionLocal()
+        try:
+            app_log = AppLog(level=level, message=message, context=context)
+            session.add(app_log)
+            session.commit()
+        finally:
+            session.close()
+    
+    try:
+        retry_db_operation(db_operation, max_retries=2)
+    except Exception:
+        # If logging fails, don't crash the main operation
+        pass
 
 def log_scan(isbn, status, message, extra=None):
-    session = SessionLocal()
-    scan_log = ScanLog(isbn=isbn, status=status, message=message, extra=extra)
-    session.add(scan_log)
-    session.commit()
-    session.close()
+    def db_operation():
+        session = SessionLocal()
+        try:
+            scan_log = ScanLog(isbn=isbn, status=status, message=message, extra=extra)
+            session.add(scan_log)
+            session.commit()
+        finally:
+            session.close()
+    
+    try:
+        retry_db_operation(db_operation, max_retries=2)
+    except Exception:
+        # If logging fails, don't crash the main operation
+        pass
 
 def create_match_api(model, processor, device, index_path=INDEX_PATH, names_path=NAMES_PATH, metadata=None):
     match_api = Blueprint("match_api", __name__)
@@ -75,23 +109,31 @@ def create_match_api(model, processor, device, index_path=INDEX_PATH, names_path
             indices = I[0]
             distances = D[0]
 
-            session: Session = SessionLocal()
-            suggestions = []
+            def get_book_suggestions():
+                session: Session = SessionLocal()
+                try:
+                    suggestions = []
+                    for idx, score in zip(indices, distances):
+                        filename = image_names[idx]
+                        isbn = os.path.splitext(filename)[0]
+                        book = session.query(Book).filter_by(isbn=isbn).first()
+                        if book:
+                            suggestions.append({
+                                "filename": filename,
+                                "score": float(score),
+                                "title": book.title,
+                                "authors": book.authors,
+                                "cover_url": f"/cover/{filename}"
+                            })
+                    return suggestions
+                finally:
+                    session.close()
 
-            for idx, score in zip(indices, distances):
-                filename = image_names[idx]
-                isbn = os.path.splitext(filename)[0]
-                book = session.query(Book).filter_by(isbn=isbn).first()
-                if book:
-                    suggestions.append({
-                        "filename": filename,
-                        "score": float(score),
-                        "title": book.title,
-                        "authors": book.authors,
-                        "cover_url": f"/cover/{filename}"
-                    })
-
-            session.close()
+            try:
+                suggestions = retry_db_operation(get_book_suggestions, max_retries=3)
+            except (OperationalError, TimeoutError) as e:
+                log_app("ERROR", f"Database timeout getting book suggestions: {str(e)}")
+                return jsonify({"error": "Database timeout, please try again"}), 503
 
             if not suggestions:
                 log_app("WARNING", "Aucun livre trouvé pour ce scan de couverture")

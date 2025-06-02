@@ -7,6 +7,7 @@ import subprocess
 import random
 import glob
 from datetime import date, timedelta
+from urllib.parse import unquote
 
 admin_api = Blueprint("admin_api", __name__)
 
@@ -863,6 +864,7 @@ def admin_list_users():
 @admin_api.route("/admin/api/users/<username>", methods=["DELETE"])
 def admin_delete_user(username):
     """Admin endpoint to delete users"""
+    username = unquote(username)
     session = SessionLocal()
     try:
         user = session.query(User).filter_by(username=username).first()
@@ -896,27 +898,44 @@ def admin_add_user_scan():
     if not username or not isbn:
         return jsonify({"error": "username and isbn are required"}), 400
 
+    print(f"Admin API: Adding scan for username='{username}', isbn='{isbn}'")
+    
     session = SessionLocal()
     try:
         user = session.query(User).filter_by(username=username).first()
         if not user:
-            return jsonify({"error": "User not found"}), 404
+            print(f"Admin API: User '{username}' not found, auto-creating user")
+            # Auto-create user if it doesn't exist
+            user = User(username=username)
+            session.add(user)
+            session.commit()
+            print(f"Admin API: Created user '{username}' with ID: {user.id}")
+
+        print(f"Admin API: User '{username}' found with ID: {user.id}")
 
         # Check if scan already exists
         existing_scan = session.query(UserScan).filter_by(user_id=user.id, isbn=isbn).first()
         if existing_scan:
+            print(f"Admin API: Scan already exists for user {user.id}, isbn {isbn}")
             return jsonify({"error": "Scan already exists"}), 409
 
         scan = UserScan(user_id=user.id, isbn=isbn, timestamp=datetime.datetime.utcnow())
         session.add(scan)
         session.commit()
+        
+        print(f"Admin API: Successfully added scan for user {user.id}, isbn {isbn}")
         return jsonify({"success": True}), 201
+    except Exception as e:
+        session.rollback()
+        print(f"Admin API: Error adding scan: {e}")
+        return jsonify({"error": str(e)}), 500
     finally:
         session.close()
 
 @admin_api.route("/admin/api/user_scans/<username>", methods=["DELETE"])
 def admin_delete_user_scans(username):
     """Admin endpoint to delete all scans for a user"""
+    username = unquote(username)
     session = SessionLocal()
     try:
         user = session.query(User).filter_by(username=username).first()
@@ -933,6 +952,7 @@ def admin_delete_user_scans(username):
 @admin_api.route("/admin/api/recently_scanned/<username>", methods=["GET"])
 def admin_get_recently_scanned(username):
     """Admin endpoint to get recently scanned books for a user"""
+    username = unquote(username)
     session = SessionLocal()
     try:
         user = session.query(User).filter_by(username=username).first()

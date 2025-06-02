@@ -63,7 +63,7 @@ log_app("INFO", "Registering blueprints")
 app.register_blueprint(create_match_api(model, processor, device, INDEX_FILE, NAMES_FILE, metadata))
 app.register_blueprint(barcode_api)
 app.register_blueprint(admin_api)
-app.register_blueprint(users_api, url_prefix="/admin/api")
+app.register_blueprint(users_api)  # Make sure this line exists
 app.register_blueprint(book_api)
 app.register_blueprint(collections_api)
 app.register_blueprint(workers_api)
