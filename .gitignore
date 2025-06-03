@@ -1,6 +1,6 @@
 .vscode/
 
-code/Backend/admin-ui/node_modules/
+code/Backend/admin_ui/node_modules/
 code/Backend/data/covers/
 code/Frontend/node_modules/
 code/VirtualEnv/
