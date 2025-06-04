@@ -163,7 +163,7 @@ const Testing: React.FC = () => {
     setBarcodeUrl("");
     setBarcodeLabel("");
     try {
-      const res = await axios.get(`${API_BASE_URL}/admin/api/testing/random_isbn13`);
+      const res = await axios.get(`http://${API_BASE_URL}:5001/admin/api/testing/random_isbn13`);
       setBarcodeUrl(res.data.url);
       setBarcodeLabel(res.data.isbn);
     } catch {
@@ -179,7 +179,7 @@ const Testing: React.FC = () => {
     setBarcodeUrl("");
     setBarcodeLabel("");
     try {
-      const res = await axios.get(`${API_BASE_URL}/admin/api/testing/random_isbn13_unknown`);
+      const res = await axios.get(`http://${API_BASE_URL}:5001/admin/api/testing/random_isbn13_unknown`);
       setBarcodeUrl(res.data.url);
       setBarcodeLabel(res.data.isbn);
     } catch {
@@ -195,7 +195,7 @@ const Testing: React.FC = () => {
     setCoverUrl("");
     setCoverLabel("");
     try {
-      const res = await axios.get(`${API_BASE_URL}/admin/api/testing/random_cover`);
+      const res = await axios.get(`http://${API_BASE_URL}:5001/admin/api/testing/random_cover`);
       setCoverUrl(res.data.url);
       setCoverLabel(res.data.isbn);
     } catch {
@@ -215,7 +215,7 @@ const Testing: React.FC = () => {
       return;
     }
     try {
-      const url = `${API_BASE_URL}/admin/api/testing/barcode/${manualIsbn}`;
+      const url = `http://${API_BASE_URL}:5001/admin/api/testing/barcode/${manualIsbn}`;
       setBarcodeUrl(url);
       setBarcodeLabel(manualIsbn);
     } catch {

@@ -271,7 +271,7 @@ const Analytics: React.FC = () => {
   // UI state
   const [authorLimit, setAuthorLimit] = useState(DEFAULT_AUTHOR_LIMIT);
   const [publisherLimit, setPublisherLimit] = useState(DEFAULT_PUBLISHER_LIMIT);
-  const [selectedView, setSelectedView] = useState<'overview' | 'content' | 'temporal'>('overview');
+  const [selectedView, setSelectedView] = useState<'overview' | 'content'>('overview');
 
   // ----------------------------------------------------------------------------
   // DATA FETCHING
@@ -308,15 +308,15 @@ const Analytics: React.FC = () => {
         genresRes,
         heatmapRes
       ] = await Promise.all([
-        axios.get(`${API_BASE_URL}/admin/api/analytics/overview`),
-        axios.get(`${API_BASE_URL}/admin/api/analytics/timeline`),
-        axios.get(`${API_BASE_URL}/admin/api/analytics/authors?limit=${authorLimit}`),
-        axios.get(`${API_BASE_URL}/admin/api/analytics/languages`),
-        axios.get(`${API_BASE_URL}/admin/api/analytics/publishers?limit=${publisherLimit}`),
-        axios.get(`${API_BASE_URL}/admin/api/analytics/pages`),
-        axios.get(`${API_BASE_URL}/admin/api/analytics/metadata-coverage`),
-        axios.get(`${API_BASE_URL}/admin/api/analytics/genres`),
-        axios.get(`${API_BASE_URL}/admin/api/analytics/publication-heatmap`)
+        axios.get(`http://${API_BASE_URL}:5001/admin/api/analytics/overview`),
+        axios.get(`http://${API_BASE_URL}:5001/admin/api/analytics/timeline`),
+        axios.get(`http://${API_BASE_URL}:5001/admin/api/analytics/authors?limit=${authorLimit}`),
+        axios.get(`http://${API_BASE_URL}:5001/admin/api/analytics/languages`),
+        axios.get(`http://${API_BASE_URL}:5001/admin/api/analytics/publishers?limit=${publisherLimit}`),
+        axios.get(`http://${API_BASE_URL}:5001/admin/api/analytics/pages`),
+        axios.get(`http://${API_BASE_URL}:5001/admin/api/analytics/metadata-coverage`),
+        axios.get(`http://${API_BASE_URL}:5001/admin/api/analytics/genres`),
+        axios.get(`http://${API_BASE_URL}:5001/admin/api/analytics/publication-heatmap`)
       ]);
 
       // Update all state with fetched data
@@ -354,7 +354,7 @@ const Analytics: React.FC = () => {
    */
   const handleCalculateAnalytics = async (): Promise<void> => {
     try {
-      await axios.post(`${API_BASE_URL}/admin/api/analytics/calculate`);
+      await axios.post(`http://${API_BASE_URL}:5001/admin/api/analytics/calculate`);
       message.success("Analytics calculation triggered");
       // Refresh data after calculation
       setTimeout(() => fetchAnalyticsData(true), 2000);
@@ -387,6 +387,14 @@ const Analytics: React.FC = () => {
       fetchAnalyticsData();
     }
   }, [authorLimit, publisherLimit]);
+
+  // Debug: Log heatmapData to verify API response
+  useEffect(() => {
+    if (!loading) {
+      // eslint-disable-next-line no-console
+      console.log("Heatmap Data:", heatmapData);
+    }
+  }, [heatmapData, loading]);
 
   // ----------------------------------------------------------------------------
   // RENDER HELPERS
@@ -433,7 +441,6 @@ const Analytics: React.FC = () => {
             >
               <Option value="overview">Overview</Option>
               <Option value="content">Content Analysis</Option>
-              <Option value="temporal">Temporal Patterns</Option>
             </Select>
             <Button
               icon={<SettingOutlined />}
@@ -860,48 +867,6 @@ const Analytics: React.FC = () => {
                   </div>
                 ) : (
                   <Empty description="No genre data available" style={{ marginTop: 100 }} />
-                )}
-              </Card>
-            </Col>
-          </Row>
-        </>
-      )}
-
-      {selectedView === 'temporal' && (
-        <>
-          {/* Publication Heatmap and Timeline Trends */}
-          <Row gutter={[24, 24]}>
-            <Col xs={24}>
-              <Card
-                title={
-                  <Space>
-                    <CalendarOutlined style={{ color: "#fa8c16" }} />
-                    <span>Publication Calendar Heatmap</span>
-                  </Space>
-                }
-                bordered={false}
-                style={{ borderRadius: 12, height: 600 }}
-              >
-                {heatmapData.length > 0 ? (
-                  <div style={{ height: 520, padding: 20 }}>
-                    <Text type="secondary" style={{ display: 'block', marginBottom: 16 }}>
-                      Publications by year and month (darker colors indicate more publications)
-                    </Text>
-                    {/* Custom heatmap visualization would go here */}
-                    <div style={{ 
-                      display: "grid", 
-                      gridTemplateColumns: "repeat(12, 1fr)", 
-                      gap: 2,
-                      height: 400
-                    }}>
-                      {/* Heatmap implementation placeholder */}
-                      <Text type="secondary" style={{ gridColumn: "1 / -1", textAlign: "center", marginTop: 180 }}>
-                        Interactive heatmap visualization coming soon
-                      </Text>
-                    </div>
-                  </div>
-                ) : (
-                  <Empty description="No temporal data available" style={{ marginTop: 200 }} />
                 )}
               </Card>
             </Col>

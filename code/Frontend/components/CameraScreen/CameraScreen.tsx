@@ -105,6 +105,7 @@ export default function CameraScreen() {
   
   // User state
   const [username, setUsername] = useState<string>("");
+
   
   // Refs for UI interactions
   const altListScrollRef = useRef<ScrollView>(null);
@@ -142,11 +143,8 @@ export default function CameraScreen() {
   const pickImage = async () => {
     try {
       // Get username from AsyncStorage before scanning
-      let storedUsername = username;
-      if (!storedUsername) {
-        storedUsername = await AsyncStorage.getItem('ridizi_username') || "";
-        setUsername(storedUsername);
-      }
+      var storedUsername = await AsyncStorage.getItem('ridizi_username') || "";
+      setUsername(storedUsername);
       
       // Request camera permissions
       const { status } = await ImagePicker.requestCameraPermissionsAsync();
@@ -192,7 +190,7 @@ export default function CameraScreen() {
     
     try {
       // Send image to AI matching service
-      const response = await axios.post(`${API_BASE_URL}/match`, formData, {
+      const response = await axios.post(`http://${API_BASE_URL}:5001/match`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       
@@ -203,7 +201,7 @@ export default function CameraScreen() {
       setMatch({
         ...matchData,
         authors: matchData.authors.join(', '),
-        coverUrl: `${API_BASE_URL}${matchData.cover_url}`,
+        coverUrl: `http://${API_BASE_URL}:5001${matchData.cover_url}`,
         isbn: matchData.filename ? matchData.filename.replace(/\.[^/.]+$/, "") : "", // Extract ISBN from filename
       });
       
@@ -211,7 +209,7 @@ export default function CameraScreen() {
       const uname = usedUsername ?? username;
       if (uname.trim() && matchData.filename) {
         try {
-          await axios.post(`${API_BASE_URL}/admin/api/user_scans`, {
+          await axios.post(`http://${API_BASE_URL}:5001/admin/api/user_scans`, {
             username: uname.trim(),
             isbn: matchData.filename.replace(/\.[^/.]+$/, ""), // Remove file extension
           });
@@ -312,7 +310,7 @@ export default function CameraScreen() {
               onPress={() => navigateToBookDetails(altIsbn, alt.title)}
             >
               <Image
-                source={{ uri: `${API_BASE_URL}${alt.cover_url}` }}
+                source={{ uri: `http://${API_BASE_URL}:5001${alt.cover_url}` }}
                 style={styles.altListImage}
               />
               <View style={styles.altListInfo}>

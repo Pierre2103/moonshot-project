@@ -20,9 +20,9 @@ const App: React.FC = () => (
           <Menu.Item key="analytics">
             <Link to="/analytics">Analytics</Link>
           </Menu.Item>
-          <Menu.Item key="tools">
+          {/* <Menu.Item key="tools">
             <Link to="/tools">Outils</Link>
-          </Menu.Item>
+          </Menu.Item> */}
           <Menu.Item key="testing">
             <Link to="/testing">Testing</Link>
           </Menu.Item>

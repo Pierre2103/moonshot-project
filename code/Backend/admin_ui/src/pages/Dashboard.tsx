@@ -24,7 +24,7 @@
  * - Error handling with retry mechanisms
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { 
   Row, Col, Card, Statistic, Typography, List, Avatar, Progress, 
   Button, Space, Tag, Divider, message, Spin, Empty 
@@ -218,6 +218,10 @@ const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
+  // Track last log for change detection
+  const lastLogRef = useRef<string | null>(null);
+  const initialLogsFetched = useRef(false);
+
   // ----------------------------------------------------------------------------
   // DATA FETCHING
   // ----------------------------------------------------------------------------
@@ -244,10 +248,10 @@ const Dashboard: React.FC = () => {
 
       // Execute all API calls concurrently for better performance
       const [statsRes, activityRes, logsRes, todayRes] = await Promise.all([
-        axios.get(`${API_BASE_URL}/admin/api/stats`),
-        axios.get(`${API_BASE_URL}/admin/api/activity`),
-        axios.get(`${API_BASE_URL}/admin/api/logs?limit=10`),
-        axios.get(`${API_BASE_URL}/admin/api/today-details`)
+        axios.get(`http://${API_BASE_URL}:5001/admin/api/stats`),
+        axios.get(`http://${API_BASE_URL}:5001/admin/api/activity`),
+        axios.get(`http://${API_BASE_URL}:5001/admin/api/logs?limit=30`),
+        axios.get(`http://${API_BASE_URL}:5001/admin/api/today-details`)
       ]);
 
       // Update state with fetched data
@@ -297,6 +301,43 @@ const Dashboard: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Poll logs every 2 seconds and refresh dashboard if new log appears
+  useEffect(() => {
+    let isMounted = true;
+    const pollLogs = async () => {
+      if (!API_BASE_URL) return;
+      try {
+        const res = await axios.get(`http://${API_BASE_URL}:5001/admin/api/logs?limit=30`);
+        if (!isMounted) return;
+        const newLogs: string[] = res.data || [];
+        // On first fetch, just set logs
+        if (!initialLogsFetched.current) {
+          setLogs(newLogs);
+          lastLogRef.current = newLogs[0] || null;
+          initialLogsFetched.current = true;
+        } else {
+          // If new log detected, refresh dashboard
+          if (newLogs[0] && newLogs[0] !== lastLogRef.current) {
+            lastLogRef.current = newLogs[0];
+            setLogs(newLogs);
+            fetchData(true);
+          } else {
+            setLogs(newLogs);
+          }
+        }
+      } catch (e) {
+        // Ignore errors
+      }
+    };
+    const pollInterval = setInterval(pollLogs, 2000);
+    // Initial poll
+    pollLogs();
+    return () => {
+      isMounted = false;
+      clearInterval(pollInterval);
+    };
+  }, [API_BASE_URL]);
+
   // ----------------------------------------------------------------------------
   // COMPUTED VALUES
   // ----------------------------------------------------------------------------
@@ -327,6 +368,48 @@ const Dashboard: React.FC = () => {
   // ----------------------------------------------------------------------------
   // MAIN RENDER
   // ----------------------------------------------------------------------------
+
+  const isTestUser = (username: string) => {
+    return username && username.toLowerCase().includes("testuser_");
+  };
+
+  // Filter out test users from today's details
+  const filteredActiveUsers = todayDetails.active_users.filter(
+    (user) => !isTestUser(user.username)
+  );
+  const filteredCollections = todayDetails.collections.filter(
+    (col) => !isTestUser(col.username)
+  );
+  const filteredAddedBooks = todayDetails.added_books; // No username info, can't filter
+  // For scanned_books, try to match with filteredActiveUsers by username if possible
+  // If scanned_books don't have username, show all
+  let filteredScannedBooks = todayDetails.scanned_books;
+  if (
+    todayDetails.scanned_books.length > 0 &&
+    (todayDetails.scanned_books[0] as any).username
+  ) {
+    filteredScannedBooks = todayDetails.scanned_books.filter((book: any) =>
+      filteredActiveUsers.some((user) => user.username === book.username)
+    );
+  }
+
+  // For "Today's Scans", count unique non-test users who scanned books
+  // Use filteredActiveUsers for coherence
+  const uniqueScanners = filteredActiveUsers.map((user) => user.username);
+
+  // Patch today's activity in the chart to match filteredActiveUsers and their scan counts
+  const filteredActivity = activity.map((day) => {
+    // If today, override users and scans with filteredActiveUsers
+    const todayStr = new Date().toISOString().slice(0, 10);
+    if (day.date === todayStr) {
+      return {
+        ...day,
+        users: filteredActiveUsers.length,
+        scans: filteredActiveUsers.reduce((sum, user) => sum + user.scan_count, 0),
+      };
+    }
+    return day;
+  });
 
   return (
     <div style={{ padding: 24, background: "#f0f2f5", minHeight: "100vh" }}>
@@ -442,7 +525,7 @@ const Dashboard: React.FC = () => {
             bodyStyle={{ padding: "16px 24px" }}
           >
             <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={activity}>
+              <LineChart data={filteredActivity}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                 <XAxis 
                   dataKey="date" 
@@ -507,11 +590,11 @@ const Dashboard: React.FC = () => {
             bodyStyle={{ padding: "16px 24px", display: "flex", flexDirection: "column" }}
           >
             <div style={{ flex: 1, overflow: "hidden" }}>
-              <div style={{ height: 340, overflowY: "auto" }}>
+              <div style={{ height: "320px", overflowY: "auto" }}>
                 {logs.length > 0 ? (
                   <List
                     size="small"
-                    dataSource={logs.slice(0, 8)}
+                    dataSource={logs}
                     renderItem={log => {
                       const parsed = parseLogEntry(log);
                       return (
@@ -564,10 +647,10 @@ const Dashboard: React.FC = () => {
             bodyStyle={{ padding: "16px 24px" }}
           >
             <div style={{ height: 280, overflowY: "auto" }}>
-              {todayDetails.scanned_books.length > 0 ? (
+              {filteredScannedBooks.length > 0 ? (
                 <List
                   size="small"
-                  dataSource={todayDetails.scanned_books.slice(0, 8)}
+                  dataSource={filteredScannedBooks}
                   renderItem={book => (
                     <List.Item style={{ padding: "8px 0" }}>
                       <List.Item.Meta
@@ -625,10 +708,10 @@ const Dashboard: React.FC = () => {
             bodyStyle={{ padding: "16px 24px" }}
           >
             <div style={{ height: 280, overflowY: "auto" }}>
-              {todayDetails.added_books.length > 0 ? (
+              {filteredAddedBooks.length > 0 ? (
                 <List
                   size="small"
-                  dataSource={todayDetails.added_books.slice(0, 8)}
+                  dataSource={filteredAddedBooks}
                   renderItem={book => (
                     <List.Item style={{ padding: "8px 0" }}>
                       <List.Item.Meta
@@ -686,10 +769,10 @@ const Dashboard: React.FC = () => {
             bodyStyle={{ padding: "16px 24px" }}
           >
             <div style={{ height: 280, overflowY: "auto" }}>
-              {todayDetails.active_users.length > 0 ? (
+              {filteredActiveUsers.length > 0 ? (
                 <List
                   size="small"
-                  dataSource={todayDetails.active_users}
+                  dataSource={filteredActiveUsers}
                   renderItem={user => (
                     <List.Item style={{ padding: "12px 0" }}>
                       <List.Item.Meta
@@ -739,10 +822,10 @@ const Dashboard: React.FC = () => {
             bodyStyle={{ padding: "16px 24px" }}
           >
             <div style={{ height: 280, overflowY: "auto" }}>
-              {todayDetails.collections.length > 0 ? (
+              {filteredCollections.length > 0 ? (
                 <List
                   size="small"
-                  dataSource={todayDetails.collections}
+                  dataSource={filteredCollections}
                   renderItem={collection => (
                     <List.Item style={{ padding: "12px 0" }}>
                       <List.Item.Meta

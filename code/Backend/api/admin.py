@@ -1003,42 +1003,70 @@ def analytics_genres():
 def analytics_publication_heatmap():
     """
     Get publication date heatmap data for calendar visualization.
-    
     Returns:
         200: Array of year/month/count objects for heatmap rendering
     """
     session = SessionLocal()
     try:
-        # Extract year and month from publication dates
+        # Get all publication_date values for debugging
+        debug_dates = session.query(Book.publication_date).filter(Book.publication_date.isnot(None)).limit(50).all()
+        print("DEBUG: Sample publication_date values:", [d[0] for d in debug_dates])
+
+        # Get min and max year in the DB (robustly extract 4-digit years)
+        min_year_row = session.execute(text("""
+            SELECT MIN(CAST(SUBSTRING(publication_date, 1, 4) AS UNSIGNED)) FROM books
+            WHERE publication_date IS NOT NULL AND SUBSTRING(publication_date, 1, 4) REGEXP '^[0-9]{4}$'
+        """)).fetchone()
+        max_year_row = session.execute(text("""
+            SELECT MAX(CAST(SUBSTRING(publication_date, 1, 4) AS UNSIGNED)) FROM books
+            WHERE publication_date IS NOT NULL AND SUBSTRING(publication_date, 1, 4) REGEXP '^[0-9]{4}$'
+        """)).fetchone()
+        min_year = min_year_row[0]
+        max_year = max_year_row[0]
+        if min_year is None or max_year is None:
+            return jsonify([])
+
+        # Get counts for each year/month, including books with only a year (month=NULL)
         heatmap_data = session.execute(text("""
             SELECT 
-                SUBSTRING(publication_date, -4) as year,
-                CASE 
-                    WHEN publication_date REGEXP '^[0-9]{4}-[0-9]{2}' THEN 
+                CAST(SUBSTRING(publication_date, 1, 4) AS UNSIGNED) as year,
+                CASE
+                    WHEN LENGTH(publication_date) >= 7 AND SUBSTRING(publication_date, 5, 1) = '-' THEN
                         CAST(SUBSTRING(publication_date, 6, 2) AS UNSIGNED)
                     ELSE NULL
                 END as month,
                 COUNT(*) as count
-            FROM books 
-            WHERE publication_date IS NOT NULL 
-            AND publication_date REGEXP '[0-9]{4}$'
-            AND publication_date REGEXP '^[0-9]{4}'
+            FROM books
+            WHERE publication_date IS NOT NULL
+            AND SUBSTRING(publication_date, 1, 4) REGEXP '^[0-9]{4}$'
             GROUP BY year, month
-            HAVING year IS NOT NULL AND month IS NOT NULL
+            HAVING year IS NOT NULL
             ORDER BY year, month
         """)).fetchall()
-        
-        # Transform data for heatmap visualization
-        result = []
+
+        # Debug: print the raw SQL result
+        print("DEBUG: Raw heatmap_data:", heatmap_data)
+
+        # Build a lookup for (year, month) -> count
+        count_map = {}
         for row in heatmap_data:
             year, month, count = row
             if year and month and 1 <= month <= 12:
+                count_map[(int(year), int(month)-1)] = count
+            elif year and (month is None):
+                # Use month index 12 for "no month"
+                count_map[(int(year), 12)] = count
+
+        # Build full grid for all years and months, including "no month" (month=12)
+        result = []
+        for month in range(13):  # 0-11 = Jan-Dec, 12 = "No Month"
+            for year in range(min_year, max_year + 1):
+                count = count_map.get((year, month), 0)
                 result.append({
-                    "year": int(year),
-                    "month": int(month) - 1,  # 0-indexed for JavaScript Date
+                    "year": year,
+                    "month": month,
                     "count": count
                 })
-        
         return jsonify(result)
     finally:
         session.close()
@@ -1213,6 +1241,8 @@ def admin_add_user_scan():
     
     session = SessionLocal()
     try:
+        session.execute(text("SET innodb_lock_wait_timeout=5"))
+
         # Get or create user
         user = session.query(User).filter_by(username=username).first()
         if not user:

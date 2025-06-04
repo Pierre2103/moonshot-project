@@ -119,7 +119,7 @@ export default function BookDetails() {
     if (!isbn) return;
     
     setLoading(true);
-    fetch(`${API_BASE_URL}/api/book/${isbn}`)
+    fetch(`http://${API_BASE_URL}:5001/api/book/${isbn}`)
       .then(res => res.json())
       .then(data => setBook(data))
       .catch(error => {
@@ -148,7 +148,7 @@ export default function BookDetails() {
       
       try {
         // Get all user collections
-        const res = await axios.get(`${API_BASE_URL}/api/collections/${username}`);
+        const res = await axios.get(`http://${API_BASE_URL}:5001/api/collections/${username}`);
         const allCollections = res.data || [];
         
         // Find the "Like" collection (case-insensitive)
@@ -160,7 +160,7 @@ export default function BookDetails() {
           setLikeCollectionId(likeCol.id);
           
           // Check if current book is in Like collection
-          const booksRes = await axios.get(`${API_BASE_URL}/api/collections/${likeCol.id}/books`);
+          const booksRes = await axios.get(`http://${API_BASE_URL}:5001/api/collections/${likeCol.id}/books`);
           const isLiked = booksRes.data.some((b: any) => b.isbn === isbn);
           setLiked(isLiked);
         } else {
@@ -185,7 +185,7 @@ export default function BookDetails() {
     
     setCollectionsLoading(true);
     try {
-      const res = await axios.get(`${API_BASE_URL}/api/collections/${username}`);
+      const res = await axios.get(`http://${API_BASE_URL}:5001/api/collections/${username}`);
       setCollections(res.data || []);
     } catch (error) {
       console.error('Error fetching collections:', error);
@@ -214,7 +214,7 @@ export default function BookDetails() {
     setAdding(true);
     try {
       await axios.post(
-        `${API_BASE_URL}/api/collections/${username}/${collection.id}/add`, 
+        `http://${API_BASE_URL}:5001/api/collections/${username}/${collection.id}/add`, 
         { isbn }
       );
       
@@ -234,7 +234,7 @@ export default function BookDetails() {
   const handleCreateCollection = async (name: string, icon: string): Promise<void> => {
     setAdding(true);
     try {
-      const res = await axios.post(`${API_BASE_URL}/api/collections/${username}`, { 
+      const res = await axios.post(`http://${API_BASE_URL}:5001/api/collections/${username}`, { 
         name, 
         icon 
       });
@@ -277,13 +277,13 @@ export default function BookDetails() {
       if (liked && likeCollectionId) {
         // Remove from Like collection
         await axios.delete(
-          `${API_BASE_URL}/api/collections/${likeCollectionId}/books/${isbn}`
+          `http://${API_BASE_URL}:5001/api/collections/${likeCollectionId}/books/${isbn}`
         );
         setLiked(false);
         globalEvents.emit('reloadHome');
       } else {
         // Add to Like collection (create if needed)
-        const res = await axios.get(`${API_BASE_URL}/api/collections/${username}`);
+        const res = await axios.get(`http://${API_BASE_URL}:5001/api/collections/${username}`);
         const allCollections = res.data || [];
         
         let likeCol = allCollections.find(
@@ -293,7 +293,7 @@ export default function BookDetails() {
         if (!likeCol) {
           // Create Like collection
           const createRes = await axios.post(
-            `${API_BASE_URL}/api/collections/${username}`, 
+            `http://${API_BASE_URL}:5001/api/collections/${username}`, 
             { name: "Like", icon: "❤️" }
           );
           likeCol = createRes.data;
@@ -301,7 +301,7 @@ export default function BookDetails() {
         
         // Add book to Like collection
         await axios.post(
-          `${API_BASE_URL}/api/collections/${username}/${likeCol.id}/add`, 
+          `http://${API_BASE_URL}:5001/api/collections/${username}/${likeCol.id}/add`, 
           { isbn }
         );
         
@@ -364,7 +364,7 @@ export default function BookDetails() {
         book.cover_url.trim() && book.cover_url.startsWith('http')) {
       return { uri: book.cover_url };
     }
-    return { uri: `${API_BASE_URL}/cover/${book?.isbn}.jpg` };
+    return { uri: `http://${API_BASE_URL}:5001/cover/${book?.isbn}.jpg` };
   };
 
   // ----------------------------------------------------------------------------

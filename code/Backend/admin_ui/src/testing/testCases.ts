@@ -48,7 +48,7 @@ function randomString(length = 8): string {
  */
 async function getOrCreateTestUser(): Promise<string> {
   const username = "testuser_" + randomString();
-  await axios.post(`${API_BASE_URL}/admin/api/users`, { username });
+  await axios.post(`http://${API_BASE_URL}:5001/admin/api/users`, { username });
   return username;
 }
 
@@ -59,7 +59,7 @@ async function getOrCreateTestUser(): Promise<string> {
  */
 async function deleteTestUser(username: string): Promise<void> {
   try {
-    await axios.delete(`${API_BASE_URL}/admin/api/users/${username}`);
+    await axios.delete(`http://${API_BASE_URL}:5001/admin/api/users/${username}`);
   } catch {
     // Ignore cleanup errors to prevent test failures
   }
@@ -71,7 +71,7 @@ async function deleteTestUser(username: string): Promise<void> {
  * @returns Promise resolving to a valid ISBN13 string
  */
 async function getRandomExistingIsbn13(): Promise<string> {
-  const res = await axios.get(`${API_BASE_URL}/admin/api/testing/random_isbn13`);
+  const res = await axios.get(`http://${API_BASE_URL}:5001/admin/api/testing/random_isbn13`);
   return res.data.isbn;
 }
 
@@ -82,7 +82,7 @@ async function getRandomExistingIsbn13(): Promise<string> {
  * @returns Promise resolving to an unknown ISBN13 string
  */
 async function getRandomUnknownIsbn13(): Promise<string> {
-  const res = await axios.get(`${API_BASE_URL}/admin/api/testing/random_isbn13_unknown`);
+  const res = await axios.get(`http://${API_BASE_URL}:5001/admin/api/testing/random_isbn13_unknown`);
   return res.data.isbn;
 }
 
@@ -92,7 +92,7 @@ async function getRandomUnknownIsbn13(): Promise<string> {
  * @returns Promise resolving to a valid ISBN10 string
  */
 async function getRandomExistingIsbn10(): Promise<string> {
-  const res = await axios.get(`${API_BASE_URL}/admin/api/testing/random_cover`);
+  const res = await axios.get(`http://${API_BASE_URL}:5001/admin/api/testing/random_cover`);
   return res.data.isbn;
 }
 
@@ -105,7 +105,7 @@ async function getRandomExistingIsbn10(): Promise<string> {
 async function getTestImages(): Promise<{ isbn: string; file: File }[]> {
   try {
     // Get a random cover from the API that actually exists
-    const coverRes = await axios.get(`${API_BASE_URL}/admin/api/testing/random_cover`);
+    const coverRes = await axios.get(`http://${API_BASE_URL}:5001/admin/api/testing/random_cover`);
     const isbn10 = coverRes.data.isbn;
     const coverUrl = coverRes.data.url;
     
@@ -172,7 +172,7 @@ async function uploadImageAndCheckMatch(isbn: string, file: File) {
   const formData = new FormData();
   formData.append("image", file, `${isbn}.jpg`);
   try {
-    const res = await axios.post(`${API_BASE_URL}/match`, formData, {
+    const res = await axios.post(`http://${API_BASE_URL}:5001/match`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
     if (res.data && res.data.filename && res.data.filename.startsWith(isbn)) {
@@ -196,7 +196,7 @@ const TEST_COLLECTION_IDS: Array<{ username: string, id: number }> = []; // Trac
  */
 async function createTestUserTracked(): Promise<string> {
   const username = "testuser_" + randomString();
-  await axios.post(`${API_BASE_URL}/admin/api/users`, { username });
+  await axios.post(`http://${API_BASE_URL}:5001/admin/api/users`, { username });
   TEST_USERS.push(username);
   return username;
 }
@@ -209,7 +209,7 @@ async function cleanupTestData(): Promise<void> {
   // Delete all collections for each user
   for (const { username, id } of TEST_COLLECTION_IDS) {
     try {
-      await axios.delete(`${API_BASE_URL}/api/collections/${username}/${id}`);
+      await axios.delete(`http://${API_BASE_URL}:5001/api/collections/${username}/${id}`);
     } catch {
       // Ignore cleanup errors
     }
@@ -218,7 +218,7 @@ async function cleanupTestData(): Promise<void> {
   // Delete all test users (cascades to their scans and collections)
   for (const username of TEST_USERS) {
     try {
-      await axios.delete(`${API_BASE_URL}/admin/api/users/${username}`);
+      await axios.delete(`http://${API_BASE_URL}:5001/admin/api/users/${username}`);
     } catch {
       // Ignore cleanup errors
     }
@@ -226,7 +226,7 @@ async function cleanupTestData(): Promise<void> {
   
   // Delete the test ISBN from books table if it exists
   try {
-    await axios.delete(`${API_BASE_URL}/admin/api/testing/delete_isbn/${TEST_ISBN}`);
+    await axios.delete(`http://${API_BASE_URL}:5001/admin/api/testing/delete_isbn/${TEST_ISBN}`);
   } catch {
     // Ignore cleanup errors
   }
@@ -237,7 +237,7 @@ async function cleanupTestData(): Promise<void> {
  */
 async function ensureTestIsbnExists(): Promise<void> {
   try {
-    await axios.post(`${API_BASE_URL}/admin/api/testing/add_isbn`, { isbn: TEST_ISBN });
+    await axios.post(`http://${API_BASE_URL}:5001/admin/api/testing/add_isbn`, { isbn: TEST_ISBN });
   } catch {
     // Ignore if already exists
   }
@@ -258,15 +258,15 @@ export const testCases: TestCase[] = [
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       const username = "testuser_" + Math.random().toString(36).slice(2, 10);
       try {
-        const res = await axios.post(`${API_BASE_URL}/admin/api/users`, { username });
+        const res = await axios.post(`http://${API_BASE_URL}:5001/admin/api/users`, { username });
         if (res.status === 201 && res.data.username === username) {
-          await axios.delete(`${API_BASE_URL}/admin/api/users/${username}`);
+          await axios.delete(`http://${API_BASE_URL}:5001/admin/api/users/${username}`);
           return { success: true, details: `User '${username}' created and deleted successfully.` };
         }
-        await axios.delete(`${API_BASE_URL}/admin/api/users/${username}`);
+        await axios.delete(`http://${API_BASE_URL}:5001/admin/api/users/${username}`);
         return { success: false, details: `Unexpected response: ${JSON.stringify(res.data)}` };
       } catch (e: any) {
-        await axios.delete(`${API_BASE_URL}/admin/api/users/${username}`).catch(() => {});
+        await axios.delete(`http://${API_BASE_URL}:5001/admin/api/users/${username}`).catch(() => {});
         return { success: false, details: `Error: ${e.message}` };
       }
     }
@@ -280,9 +280,9 @@ export const testCases: TestCase[] = [
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       const username = "testuser_dup_" + randomString();
       try {
-        await axios.post(`${API_BASE_URL}/admin/api/users`, { username });
+        await axios.post(`http://${API_BASE_URL}:5001/admin/api/users`, { username });
         try {
-          await axios.post(`${API_BASE_URL}/admin/api/users`, { username });
+          await axios.post(`http://${API_BASE_URL}:5001/admin/api/users`, { username });
           await deleteTestUser(username);
           return { success: false, details: "Duplicate user creation did not fail as expected." };
         } catch (e: any) {
@@ -306,8 +306,8 @@ export const testCases: TestCase[] = [
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       const username = "testuser_list_" + randomString();
       try {
-        await axios.post(`${API_BASE_URL}/admin/api/users`, { username });
-        const res = await axios.get(`${API_BASE_URL}/admin/api/users`);
+        await axios.post(`http://${API_BASE_URL}:5001/admin/api/users`, { username });
+        const res = await axios.get(`http://${API_BASE_URL}:5001/admin/api/users`);
         await deleteTestUser(username);
         if (Array.isArray(res.data) && res.data.some((u: any) => u.username === username)) {
           return { success: true, details: `User '${username}' found in user list.` };
@@ -329,20 +329,20 @@ export const testCases: TestCase[] = [
       try {
         // Use a unique ISBN to avoid conflicts
         const uniqueIsbn = "978" + Math.floor(Math.random() * 1e10).toString().padStart(10, "0");
-        await axios.post(`${API_BASE_URL}/admin/api/testing/add_isbn`, { isbn: uniqueIsbn }).catch(() => {});
-        await axios.post(`${API_BASE_URL}/admin/api/users`, { username });
+        await axios.post(`http://${API_BASE_URL}:5001/admin/api/testing/add_isbn`, { isbn: uniqueIsbn }).catch(() => {});
+        await axios.post(`http://${API_BASE_URL}:5001/admin/api/users`, { username });
         // Clean up any previous scan for this user (should not exist, but for safety)
-        await axios.delete(`${API_BASE_URL}/admin/api/user_scans/${username}`).catch(() => {});
+        await axios.delete(`http://${API_BASE_URL}:5001/admin/api/user_scans/${username}`).catch(() => {});
         
         // Use the ISBN10 format for the scan (last 10 digits)
-        const scanRes = await axios.post(`${API_BASE_URL}/admin/api/user_scans`, { username, isbn: uniqueIsbn.slice(-10) });
-        await axios.delete(`${API_BASE_URL}/admin/api/users/${username}`);
+        const scanRes = await axios.post(`http://${API_BASE_URL}:5001/admin/api/user_scans`, { username, isbn: uniqueIsbn.slice(-10) });
+        await axios.delete(`http://${API_BASE_URL}:5001/admin/api/users/${username}`);
         if (scanRes.status === 201 && scanRes.data.success) {
           return { success: true, details: `Scan added for user '${username}' and ISBN '${uniqueIsbn}'.` };
         }
         return { success: false, details: `Unexpected response: ${JSON.stringify(scanRes.data)}` };
       } catch (e: any) {
-        await axios.delete(`${API_BASE_URL}/admin/api/users/${username}`).catch(() => {});
+        await axios.delete(`http://${API_BASE_URL}:5001/admin/api/users/${username}`).catch(() => {});
         return { success: false, details: `Error: ${e.message}` };
       }
     }
@@ -358,21 +358,21 @@ export const testCases: TestCase[] = [
       try {
         // Use a unique ISBN to avoid conflicts
         const uniqueIsbn = "978" + Math.floor(Math.random() * 1e10).toString().padStart(10, "0");
-        await axios.post(`${API_BASE_URL}/admin/api/testing/add_isbn`, { isbn: uniqueIsbn }).catch(() => {});
-        await axios.post(`${API_BASE_URL}/admin/api/users`, { username });
+        await axios.post(`http://${API_BASE_URL}:5001/admin/api/testing/add_isbn`, { isbn: uniqueIsbn }).catch(() => {});
+        await axios.post(`http://${API_BASE_URL}:5001/admin/api/users`, { username });
         // Clean up any previous scan for this user (should not exist, but for safety)
-        await axios.delete(`${API_BASE_URL}/admin/api/user_scans/${username}`).catch(() => {});
+        await axios.delete(`http://${API_BASE_URL}:5001/admin/api/user_scans/${username}`).catch(() => {});
         
         // Use the ISBN10 format for the scan
-        await axios.post(`${API_BASE_URL}/admin/api/user_scans`, { username, isbn: uniqueIsbn.slice(-10) });
-        const res = await axios.get(`${API_BASE_URL}/admin/api/recently_scanned/${username}`);
-        await axios.delete(`${API_BASE_URL}/admin/api/users/${username}`);
+        await axios.post(`http://${API_BASE_URL}:5001/admin/api/user_scans`, { username, isbn: uniqueIsbn.slice(-10) });
+        const res = await axios.get(`http://${API_BASE_URL}:5001/admin/api/recently_scanned/${username}`);
+        await axios.delete(`http://${API_BASE_URL}:5001/admin/api/users/${username}`);
         if (Array.isArray(res.data) && res.data.some((b: any) => b.isbn === uniqueIsbn.slice(-10))) {
           return { success: true, details: `Recently scanned books retrieved for user '${username}'.` };
         }
         return { success: false, details: `Book '${uniqueIsbn}' not found in recently scanned.` };
       } catch (e: any) {
-        await axios.delete(`${API_BASE_URL}/admin/api/users/${username}`).catch(() => {});
+        await axios.delete(`http://${API_BASE_URL}:5001/admin/api/users/${username}`).catch(() => {});
         return { success: false, details: `Error: ${e.message}` };
       }
     }
@@ -390,7 +390,7 @@ export const testCases: TestCase[] = [
       const name = "Test Collection " + randomString(4);
       const icon = "📚";
       try {
-        const res = await axios.post(`${API_BASE_URL}/api/collections/${username}`, { name, icon });
+        const res = await axios.post(`http://${API_BASE_URL}:5001/api/collections/${username}`, { name, icon });
         if (res.status === 201 && res.data.name === name) {
           TEST_COLLECTION_IDS.push({ username, id: res.data.id });
           return { success: true, details: `Collection '${name}' created for user '${username}'.` };
@@ -412,11 +412,11 @@ export const testCases: TestCase[] = [
       const username = await createTestUserTracked();
       const name = "Test Collection " + randomString(4);
       const icon = "📚";
-      const colRes = await axios.post(`${API_BASE_URL}/api/collections/${username}`, { name, icon });
+      const colRes = await axios.post(`http://${API_BASE_URL}:5001/api/collections/${username}`, { name, icon });
       const collectionId = colRes.data.id;
       TEST_COLLECTION_IDS.push({ username, id: collectionId });
       try {
-        const res = await axios.post(`${API_BASE_URL}/api/collections/${username}/${collectionId}/add`, { isbn: TEST_ISBN.slice(-10) });
+        const res = await axios.post(`http://${API_BASE_URL}:5001/api/collections/${username}/${collectionId}/add`, { isbn: TEST_ISBN.slice(-10) });
         if (res.status === 201 && res.data.message) {
           return { success: true, details: `Book '${TEST_ISBN}' added to collection '${name}'.` };
         }
@@ -437,12 +437,12 @@ export const testCases: TestCase[] = [
       const username = await createTestUserTracked();
       const name = "Test Collection " + randomString(4);
       const icon = "📚";
-      const colRes = await axios.post(`${API_BASE_URL}/api/collections/${username}`, { name, icon });
+      const colRes = await axios.post(`http://${API_BASE_URL}:5001/api/collections/${username}`, { name, icon });
       const collectionId = colRes.data.id;
       TEST_COLLECTION_IDS.push({ username, id: collectionId });
-      await axios.post(`${API_BASE_URL}/api/collections/${username}/${collectionId}/add`, { isbn: TEST_ISBN.slice(-10) });
+      await axios.post(`http://${API_BASE_URL}:5001/api/collections/${username}/${collectionId}/add`, { isbn: TEST_ISBN.slice(-10) });
       try {
-        const res = await axios.get(`${API_BASE_URL}/api/collections/${collectionId}/books`);
+        const res = await axios.get(`http://${API_BASE_URL}:5001/api/collections/${collectionId}/books`);
         if (Array.isArray(res.data) && res.data.some((b: any) => b.isbn === TEST_ISBN.slice(-10))) {
           return { success: true, details: `Book '${TEST_ISBN}' found in collection '${name}'.` };
         }
@@ -463,12 +463,12 @@ export const testCases: TestCase[] = [
       const username = await createTestUserTracked();
       const name = "Test Collection " + randomString(4);
       const icon = "📚";
-      const colRes = await axios.post(`${API_BASE_URL}/api/collections/${username}`, { name, icon });
+      const colRes = await axios.post(`http://${API_BASE_URL}:5001/api/collections/${username}`, { name, icon });
       const collectionId = colRes.data.id;
       TEST_COLLECTION_IDS.push({ username, id: collectionId });
-      await axios.post(`${API_BASE_URL}/api/collections/${username}/${collectionId}/add`, { isbn: TEST_ISBN.slice(-10) });
+      await axios.post(`http://${API_BASE_URL}:5001/api/collections/${username}/${collectionId}/add`, { isbn: TEST_ISBN.slice(-10) });
       try {
-        const res = await axios.delete(`${API_BASE_URL}/api/collections/${collectionId}/books/${TEST_ISBN.slice(-10)}`);
+        const res = await axios.delete(`http://${API_BASE_URL}:5001/api/collections/${collectionId}/books/${TEST_ISBN.slice(-10)}`);
         if (res.status === 200 && res.data.message) {
           return { success: true, details: `Book '${TEST_ISBN}' removed from collection '${name}'.` };
         }
@@ -488,12 +488,12 @@ export const testCases: TestCase[] = [
       const username = await createTestUserTracked();
       const name = "Test Collection " + randomString(4);
       const icon = "📚";
-      const colRes = await axios.post(`${API_BASE_URL}/api/collections/${username}`, { name, icon });
+      const colRes = await axios.post(`http://${API_BASE_URL}:5001/api/collections/${username}`, { name, icon });
       const collectionId = colRes.data.id;
       const newName = name + "_updated";
       const newIcon = "📖";
       try {
-        const res = await axios.put(`${API_BASE_URL}/api/collections/${username}/${collectionId}`, { name: newName, icon: newIcon });
+        const res = await axios.put(`http://${API_BASE_URL}:5001/api/collections/${username}/${collectionId}`, { name: newName, icon: newIcon });
         await deleteTestUser(username);
         if (res.status === 200 && res.data.name === newName && res.data.icon === newIcon) {
           return { success: true, details: `Collection updated to '${newName}' with icon '${newIcon}'.` };
@@ -515,10 +515,10 @@ export const testCases: TestCase[] = [
       const username = await createTestUserTracked();
       const name = "Test Collection " + randomString(4);
       const icon = "📚";
-      const colRes = await axios.post(`${API_BASE_URL}/api/collections/${username}`, { name, icon });
+      const colRes = await axios.post(`http://${API_BASE_URL}:5001/api/collections/${username}`, { name, icon });
       const collectionId = colRes.data.id;
       try {
-        const res = await axios.delete(`${API_BASE_URL}/api/collections/${username}/${collectionId}`);
+        const res = await axios.delete(`http://${API_BASE_URL}:5001/api/collections/${username}/${collectionId}`);
         await deleteTestUser(username);
         if (res.status === 200 && res.data.message) {
           return { success: true, details: `Collection '${name}' deleted successfully.` };
@@ -541,7 +541,7 @@ export const testCases: TestCase[] = [
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       // Use a common word to maximize hit chance
       try {
-        const res = await axios.get(`${API_BASE_URL}/api/search?q=the`);
+        const res = await axios.get(`http://${API_BASE_URL}:5001/api/search?q=the`);
         if (Array.isArray(res.data) && res.data.length > 0) {
           return { success: true, details: `Found ${res.data.length} books with 'the' in title/author/isbn.` };
         }
@@ -560,7 +560,7 @@ export const testCases: TestCase[] = [
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       const isbn = await getRandomExistingIsbn13();
       try {
-        const res = await axios.get(`${API_BASE_URL}/api/search?q=${isbn}`);
+        const res = await axios.get(`http://${API_BASE_URL}:5001/api/search?q=${isbn}`);
         if (Array.isArray(res.data) && res.data.some((b: any) => b.isbn13 === isbn)) {
           return { success: true, details: `Book with ISBN '${isbn}' found in search results.` };
         }
@@ -579,7 +579,7 @@ export const testCases: TestCase[] = [
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       // Use a common author name
       try {
-        const res = await axios.get(`${API_BASE_URL}/api/search?q=Rowling`);
+        const res = await axios.get(`http://${API_BASE_URL}:5001/api/search?q=Rowling`);
         if (Array.isArray(res.data) && res.data.length > 0) {
           return { success: true, details: `Found ${res.data.length} books by author 'Rowling'.` };
         }
@@ -598,7 +598,7 @@ export const testCases: TestCase[] = [
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       // Use a common genre
       try {
-        const res = await axios.get(`${API_BASE_URL}/api/search?q=fiction`);
+        const res = await axios.get(`http://${API_BASE_URL}:5001/api/search?q=fiction`);
         if (Array.isArray(res.data) && res.data.length > 0) {
           return { success: true, details: `Found ${res.data.length} books in genre 'fiction'.` };
         }
@@ -618,9 +618,9 @@ export const testCases: TestCase[] = [
     run: async () => {
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       try {
-        const res = await axios.get(`${API_BASE_URL}/admin/api/testing/random_isbn13`);
+        const res = await axios.get(`http://${API_BASE_URL}:5001/admin/api/testing/random_isbn13`);
         const isbn = res.data.isbn;
-        const scanRes = await axios.post(`${API_BASE_URL}/barcode`, { isbn });
+        const scanRes = await axios.post(`http://${API_BASE_URL}:5001/barcode`, { isbn });
         if (scanRes.data.already_in_dataset === true) {
           return { success: true, details: `Scan for existing ISBN '${isbn}' correctly detected as already in dataset.` };
         }
@@ -638,9 +638,9 @@ export const testCases: TestCase[] = [
     run: async () => {
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       try {
-        const res = await axios.get(`${API_BASE_URL}/admin/api/testing/random_isbn13_unknown`);
+        const res = await axios.get(`http://${API_BASE_URL}:5001/admin/api/testing/random_isbn13_unknown`);
         const isbn = res.data.isbn;
-        const scanRes = await axios.post(`${API_BASE_URL}/barcode`, { isbn });
+        const scanRes = await axios.post(`http://${API_BASE_URL}:5001/barcode`, { isbn });
         if (scanRes.data.already_in_dataset === false) {
           return { success: true, details: `Scan for unknown ISBN '${isbn}' correctly queued for processing.` };
         }
@@ -659,7 +659,7 @@ export const testCases: TestCase[] = [
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       const isbn = "978" + Math.floor(Math.random() * 1e10).toString().padStart(10, "0");
       try {
-        const url = `${API_BASE_URL}/admin/api/testing/barcode/${isbn}`;
+        const url = `http://${API_BASE_URL}:5001/admin/api/testing/barcode/${isbn}`;
         // Check if the image is returned with correct content type
         const res = await axios.get(url, { responseType: "arraybuffer" });
         if (res.status === 200 && res.headers["content-type"] === "image/png") {
@@ -690,7 +690,7 @@ export const testCases: TestCase[] = [
         
         const formData = new FormData();
         formData.append("image", file, `${isbn}.jpg`);
-        const res = await axios.post(`${API_BASE_URL}/match`, formData, {
+        const res = await axios.post(`http://${API_BASE_URL}:5001/match`, formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
         if (res.data && res.data.filename && res.data.filename.startsWith(isbn)) {
@@ -721,7 +721,7 @@ export const testCases: TestCase[] = [
           
           const formData = new FormData();
           formData.append("image", file, `${isbn}.jpg`);
-          const res = await axios.post(`${API_BASE_URL}/match`, formData, {
+          const res = await axios.post(`http://${API_BASE_URL}:5001/match`, formData, {
             headers: { "Content-Type": "multipart/form-data" },
           });
           if (!(res.data && res.data.filename && res.data.filename.startsWith(isbn))) {
@@ -745,7 +745,7 @@ export const testCases: TestCase[] = [
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       const isbn = await getRandomExistingIsbn13();
       try {
-        const res = await axios.get(`${API_BASE_URL}/api/book/${isbn}`);
+        const res = await axios.get(`http://${API_BASE_URL}:5001/api/book/${isbn}`);
         if (res.status === 200 && res.data.isbn13 === isbn) {
           return { success: true, details: `Book details for ISBN '${isbn}' retrieved successfully.` };
         }
@@ -764,7 +764,7 @@ export const testCases: TestCase[] = [
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       const isbn = "9999999999999";
       try {
-        await axios.get(`${API_BASE_URL}/api/book/${isbn}`);
+        await axios.get(`http://${API_BASE_URL}:5001/api/book/${isbn}`);
         return { success: false, details: "Book details for invalid ISBN did not fail as expected." };
       } catch (e: any) {
         if (e.response && e.response.status === 404) {
@@ -784,7 +784,7 @@ export const testCases: TestCase[] = [
     run: async () => {
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       try {
-        const res = await axios.get(`${API_BASE_URL}/admin/api/analytics/overview`);
+        const res = await axios.get(`http://${API_BASE_URL}:5001/admin/api/analytics/overview`);
         if (res.status === 200 && typeof res.data.total_books === "number") {
           return { success: true, details: "Analytics overview retrieved successfully.", data: res.data };
         }
@@ -802,7 +802,7 @@ export const testCases: TestCase[] = [
     run: async () => {
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       try {
-        const res = await axios.get(`${API_BASE_URL}/admin/api/analytics/timeline`);
+        const res = await axios.get(`http://${API_BASE_URL}:5001/admin/api/analytics/timeline`);
         if (res.status === 200 && Array.isArray(res.data)) {
           return { success: true, details: "Analytics timeline retrieved successfully.", data: res.data };
         }
@@ -820,7 +820,7 @@ export const testCases: TestCase[] = [
     run: async () => {
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       try {
-        const res = await axios.get(`${API_BASE_URL}/admin/api/analytics/authors?limit=10`);
+        const res = await axios.get(`http://${API_BASE_URL}:5001/admin/api/analytics/authors?limit=10`);
         if (res.status === 200 && Array.isArray(res.data)) {
           return { success: true, details: "Top authors retrieved successfully.", data: res.data };
         }
@@ -838,7 +838,7 @@ export const testCases: TestCase[] = [
     run: async () => {
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       try {
-        const res = await axios.get(`${API_BASE_URL}/admin/api/analytics/publishers?limit=10`);
+        const res = await axios.get(`http://${API_BASE_URL}:5001/admin/api/analytics/publishers?limit=10`);
         if (res.status === 200 && Array.isArray(res.data)) {
           return { success: true, details: "Top publishers retrieved successfully.", data: res.data };
         }
@@ -856,7 +856,7 @@ export const testCases: TestCase[] = [
     run: async () => {
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       try {
-        const res = await axios.get(`${API_BASE_URL}/admin/api/analytics/languages`);
+        const res = await axios.get(`http://${API_BASE_URL}:5001/admin/api/analytics/languages`);
         if (res.status === 200 && Array.isArray(res.data)) {
           return { success: true, details: "Language distribution retrieved successfully.", data: res.data };
         }
@@ -874,7 +874,7 @@ export const testCases: TestCase[] = [
     run: async () => {
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       try {
-        const res = await axios.get(`${API_BASE_URL}/admin/api/analytics/pages`);
+        const res = await axios.get(`http://${API_BASE_URL}:5001/admin/api/analytics/pages`);
         if (res.status === 200 && res.data.stats) {
           return { success: true, details: "Page distribution retrieved successfully.", data: res.data };
         }
@@ -892,7 +892,7 @@ export const testCases: TestCase[] = [
     run: async () => {
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       try {
-        const res = await axios.get(`${API_BASE_URL}/admin/api/analytics/metadata-coverage`);
+        const res = await axios.get(`http://${API_BASE_URL}:5001/admin/api/analytics/metadata-coverage`);
         if (res.status === 200 && res.data.coverage_counts) {
           return { success: true, details: "Metadata coverage retrieved successfully.", data: res.data };
         }
@@ -910,7 +910,7 @@ export const testCases: TestCase[] = [
     run: async () => {
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       try {
-        const res = await axios.get(`${API_BASE_URL}/admin/api/analytics/genres`);
+        const res = await axios.get(`http://${API_BASE_URL}:5001/admin/api/analytics/genres`);
         if (res.status === 200 && Array.isArray(res.data)) {
           return { success: true, details: "Genre distribution retrieved successfully.", data: res.data };
         }
@@ -930,7 +930,7 @@ export const testCases: TestCase[] = [
     run: async () => {
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       try {
-        const res = await axios.post(`${API_BASE_URL}/admin/api/workers/book_worker/start`);
+        const res = await axios.post(`http://${API_BASE_URL}:5001/admin/api/workers/book_worker/start`);
         if (res.status === 200 && (res.data.status === "started" || res.data.message === "Started")) {
           return { success: true, details: "Worker started successfully." };
         }
@@ -948,7 +948,7 @@ export const testCases: TestCase[] = [
     run: async () => {
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       try {
-        const res = await axios.post(`${API_BASE_URL}/admin/api/workers/book_worker/stop`);
+        const res = await axios.post(`http://${API_BASE_URL}:5001/admin/api/workers/book_worker/stop`);
         if (res.status === 200 && (res.data.status === "stopped" || res.data.message === "Stopped")) {
           return { success: true, details: "Worker stopped successfully." };
         }
@@ -966,7 +966,7 @@ export const testCases: TestCase[] = [
     run: async () => {
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       try {
-        const res = await axios.get(`${API_BASE_URL}/admin/api/workers/status`);
+        const res = await axios.get(`http://${API_BASE_URL}:5001/admin/api/workers/status`);
         if (res.status === 200 && typeof res.data === "object") {
           return { success: true, details: "Worker status retrieved successfully.", data: res.data };
         }
@@ -986,7 +986,7 @@ export const testCases: TestCase[] = [
     run: async () => {
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       try {
-        await axios.post(`${API_BASE_URL}/admin/api/users`, { username: "" });
+        await axios.post(`http://${API_BASE_URL}:5001/admin/api/users`, { username: "" });
         return { success: false, details: "User creation with empty username did not fail as expected." };
       } catch (e: any) {
         if (e.response && e.response.status === 400) {
@@ -1006,7 +1006,7 @@ export const testCases: TestCase[] = [
       const username = "nonexistent_" + randomString();
       const isbn = await getRandomExistingIsbn13();
       try {
-        await axios.post(`${API_BASE_URL}/admin/api/user_scans`, { username, isbn });
+        await axios.post(`http://${API_BASE_URL}:5001/admin/api/user_scans`, { username, isbn });
         return { success: false, details: "Scan for invalid user did not fail as expected." };
       } catch (e: any) {
         if (e.response && e.response.status === 404) {
@@ -1027,7 +1027,7 @@ export const testCases: TestCase[] = [
       const isbn = await getRandomExistingIsbn13();
       const invalidCollectionId = 9999999;
       try {
-        await axios.post(`${API_BASE_URL}/api/collections/${username}/${invalidCollectionId}/add`, { isbn });
+        await axios.post(`http://${API_BASE_URL}:5001/api/collections/${username}/${invalidCollectionId}/add`, { isbn });
         return { success: false, details: "Add book to invalid collection did not fail as expected." };
       } catch (e: any) {
         if (e.response && e.response.status === 404) {
@@ -1045,7 +1045,7 @@ export const testCases: TestCase[] = [
     run: async () => {
       if (!API_BASE_URL) return { success: false, details: "API_BASE_URL not set" };
       try {
-        await axios.post(`${API_BASE_URL}/barcode`, {});
+        await axios.post(`http://${API_BASE_URL}:5001/barcode`, {});
         return { success: false, details: "Scan without ISBN did not fail as expected." };
       } catch (e: any) {
         if (e.response && e.response.status === 400) {
@@ -1068,7 +1068,7 @@ export const testCases: TestCase[] = [
         const file = new File([blob], "not_an_image.txt", { type: "text/plain" });
         const formData = new FormData();
         formData.append("image", file);
-        await axios.post(`${API_BASE_URL}/match`, formData, {
+        await axios.post(`http://${API_BASE_URL}:5001/match`, formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
         return { success: false, details: "Invalid image upload did not fail as expected." };
@@ -1090,13 +1090,13 @@ export const testCases: TestCase[] = [
       const username = "testuser_delete_" + randomString();
       try {
         // Create user
-        await axios.post(`${API_BASE_URL}/admin/api/users`, { username });
+        await axios.post(`http://${API_BASE_URL}:5001/admin/api/users`, { username });
         // Delete user
-        const res = await axios.delete(`${API_BASE_URL}/admin/api/users/${username}`);
+        const res = await axios.delete(`http://${API_BASE_URL}:5001/admin/api/users/${username}`);
         if (res.status === 200 && res.data.message && res.data.message.includes(username)) {
           // Try to get user, should not exist
           try {
-            await axios.get(`${API_BASE_URL}/admin/api/users/${username}`);
+            await axios.get(`http://${API_BASE_URL}:5001/admin/api/users/${username}`);
             return { success: false, details: "User still exists after deletion." };
           } catch (e: any) {
             if (e.response && e.response.status === 404) {

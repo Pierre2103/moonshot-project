@@ -108,8 +108,8 @@ export default function HomeScreen() {
         
         // Fetch user data concurrently
         const [colRes, scanRes] = await Promise.all([
-          axios.get(`${API_BASE_URL}/api/collections/${name}`),
-          axios.get(`${API_BASE_URL}/api/recently_scanned/${name}`)
+          axios.get(`http://${API_BASE_URL}:5001/api/collections/${name}`),
+          axios.get(`http://${API_BASE_URL}:5001/api/recently_scanned/${name}`)
         ]);
         
         setCollections(colRes.data || []);
@@ -187,7 +187,7 @@ export default function HomeScreen() {
     
     try {
       // Attempt to create user (409 if already exists, which is fine)
-      await axios.post(`${API_BASE_URL}/admin/api/users`, { username: uname })
+      await axios.post(`http://${API_BASE_URL}:5001/admin/api/users`, { username: uname })
         .catch(err => {
           if (!(err.response && err.response.status === 409)) throw err;
         });
@@ -224,7 +224,7 @@ export default function HomeScreen() {
     
     setAddModalLoading(true);
     try {
-      await axios.post(`${API_BASE_URL}/api/collections/${username}`, {
+      await axios.post(`http://${API_BASE_URL}:5001/api/collections/${username}`, {
         name: name,
         icon: icon
       });
@@ -383,7 +383,7 @@ export default function HomeScreen() {
                       uri: imageErrors[book.isbn] && book.cover_url && 
                            book.cover_url.trim() && book.cover_url.startsWith('http')
                         ? book.cover_url 
-                        : `${API_BASE_URL}/cover/${book.isbn}.jpg`
+                        : `http://${API_BASE_URL}:5001/cover/${book.isbn}.jpg`
                     }}
                     style={styles.recentImage}
                     resizeMode="cover"

@@ -49,7 +49,7 @@ const Tools: React.FC = () => {
     }
     setLoading(true);
     try {
-      const res = await axios.get(`${API_BASE_URL}/admin/api/workers/status`);
+      const res = await axios.get(`http://${API_BASE_URL}:5001/admin/api/workers/status`);
       setStatuses(res.data);
     } catch {
       message.error("Unable to retrieve worker status");
@@ -70,7 +70,7 @@ const Tools: React.FC = () => {
     }
     setLoading(true);
     try {
-      await axios.post(`${API_BASE_URL}/admin/api/workers/${id}/${action}`);
+      await axios.post(`http://${API_BASE_URL}:5001/admin/api/workers/${id}/${action}`);
       message.success(`Worker ${action === "start" ? "started" : "stopped"} successfully!`);
       fetchStatus(); // Refresh status after action
     } catch {

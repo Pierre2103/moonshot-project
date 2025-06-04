@@ -79,7 +79,7 @@ export default function ScanHistory() {
     
     setLoading(true);
     try {
-      const response = await axios.get(`${API_BASE_URL}/api/recently_scanned/${username}`);
+      const response = await axios.get(`http://${API_BASE_URL}:5001/api/recently_scanned/${username}`);
       setBooks(response.data);
     } catch (error) {
       console.error('Error loading scan history:', error);
@@ -131,7 +131,7 @@ export default function ScanHistory() {
             if (!username) return;
             
             try {
-              await axios.delete(`${API_BASE_URL}/api/user_scans/${username}`);
+              await axios.delete(`http://${API_BASE_URL}:5001/api/user_scans/${username}`);
               setBooks([]);
             } catch (error) {
               console.error('Error clearing history:', error);
@@ -198,7 +198,7 @@ export default function ScanHistory() {
         item.cover_url.trim() && item.cover_url.startsWith("http")) {
       return { uri: item.cover_url };
     }
-    return { uri: `${API_BASE_URL}/cover/${item.isbn}.jpg` };
+    return { uri: `http://${API_BASE_URL}:5001/cover/${item.isbn}.jpg` };
   };
 
   // ----------------------------------------------------------------------------

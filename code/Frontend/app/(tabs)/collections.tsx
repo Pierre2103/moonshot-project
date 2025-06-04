@@ -103,7 +103,7 @@ export default function Collections() {
     
     setLoading(true);
     try {
-      const response = await axios.get(`${API_BASE_URL}/api/collections/${username}`);
+      const response = await axios.get(`http://${API_BASE_URL}:5001/api/collections/${username}`);
       console.log('Collections page - API response:', response.data); // Debug log
       setCollections(response.data || []);
     } catch (error) {
@@ -166,7 +166,7 @@ export default function Collections() {
     if (!username) return;
 
     try {
-      await axios.post(`${API_BASE_URL}/api/collections/${username}`, {
+      await axios.post(`http://${API_BASE_URL}:5001/api/collections/${username}`, {
         name: newName.trim(),
         icon: newIcon
       });
@@ -192,7 +192,7 @@ export default function Collections() {
     if (!username) return;
 
     try {
-      await axios.put(`${API_BASE_URL}/api/collections/${username}/${selectedCollection.id}`, {
+      await axios.put(`http://${API_BASE_URL}:5001/api/collections/${username}/${selectedCollection.id}`, {
         name: newName.trim(),
         icon: newIcon
       });
@@ -222,7 +222,7 @@ export default function Collections() {
           style: 'destructive',
           onPress: async () => {
             try {
-              await axios.delete(`${API_BASE_URL}/api/collections/${username}/${collection.id}`);
+              await axios.delete(`http://${API_BASE_URL}:5001/api/collections/${username}/${collection.id}`);
               loadCollections(); // Reload collections after deleting
             } catch (error) {
               console.error('Error deleting collection:', error);

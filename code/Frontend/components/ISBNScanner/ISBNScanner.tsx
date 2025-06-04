@@ -118,7 +118,7 @@ export default function ISBNScanner() {
 
     try {
       // Submit ISBN to backend processing queue
-      const response = await fetch(`${API_BASE_URL}/barcode`, {
+      const response = await fetch(`http://${API_BASE_URL}:5001/barcode`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ isbn: data }),
@@ -175,7 +175,7 @@ export default function ISBNScanner() {
      */
     const checkWorkerErrors = async (): Promise<void> => {
       try {
-        const response = await fetch(`${API_BASE_URL}/worker-errors`);
+        const response = await fetch(`http://${API_BASE_URL}:5001/worker-errors`);
         if (response.ok) {
           const data = await response.json();
           if (data.errors && data.errors.length > 0) {

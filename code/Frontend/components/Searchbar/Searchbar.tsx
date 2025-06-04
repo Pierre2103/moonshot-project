@@ -144,7 +144,7 @@ export default function Searchbar({ cameraButton, setBlockScroll }: SearchbarPro
     const searchTimeout = setTimeout(async () => {
       try {
         const response = await axios.get(
-          `${API_BASE_URL}/api/search?q=${encodeURIComponent(query.trim())}&limit=${MAX_SEARCH_RESULTS}`
+          `http://${API_BASE_URL}:5001/api/search?q=${encodeURIComponent(query.trim())}&limit=${MAX_SEARCH_RESULTS}`
         );
         setResults(response.data || []);
       } catch (error) {
@@ -289,7 +289,7 @@ export default function Searchbar({ cameraButton, setBlockScroll }: SearchbarPro
     if (imageErrors[book.isbn] && book.cover_url && book.cover_url.startsWith("http")) {
       return { uri: book.cover_url };
     }
-    return { uri: `${API_BASE_URL}/cover/${book.isbn}.jpg` };
+    return { uri: `http://${API_BASE_URL}:5001/cover/${book.isbn}.jpg` };
   };
 
   /**

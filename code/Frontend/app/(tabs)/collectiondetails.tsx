@@ -145,7 +145,7 @@ export default function CollectionDetails() {
   const reloadBooks = useCallback(() => {
     if (!collectionId) return;
     setLoading(true);
-    axios.get(`${API_BASE_URL}/api/collections/${collectionId}/books`)
+    axios.get(`http://${API_BASE_URL}:5001/api/collections/${collectionId}/books`)
       .then(res => setBooks(res.data))
       .catch(error => {
         console.error('Error loading collection books:', error);
@@ -169,7 +169,7 @@ export default function CollectionDetails() {
     if (!showMoveModal) return;
     AsyncStorage.getItem('ridizi_username').then(username => {
       if (!username) return;
-      axios.get(`${API_BASE_URL}/api/collections/${username}`)
+      axios.get(`http://${API_BASE_URL}:5001/api/collections/${username}`)
         .then(res => setCollections(res.data.filter((c: Collection) => c.id != collectionId)))
         .catch(error => {
           console.error('Error loading collections for move:', error);
@@ -203,7 +203,7 @@ export default function CollectionDetails() {
   const handleRemove = async (book: CollectionBook) => {
     setLoading(true);
     try {
-      await axios.delete(`${API_BASE_URL}/api/collections/${collectionId}/books/${book.isbn}`);
+      await axios.delete(`http://${API_BASE_URL}:5001/api/collections/${collectionId}/books/${book.isbn}`);
       reloadBooks();
     } catch (error) {
       console.error('Error removing book from collection:', error);
@@ -224,12 +224,12 @@ export default function CollectionDetails() {
       if (!username) throw new Error("No username found");
       
       // Add to target collection
-      await axios.post(`${API_BASE_URL}/api/collections/${username}/${targetCollectionId}/add`, { 
+      await axios.post(`http://${API_BASE_URL}:5001/api/collections/${username}/${targetCollectionId}/add`, { 
         isbn: selectedBook.isbn 
       });
       
       // Remove from current collection
-      await axios.delete(`${API_BASE_URL}/api/collections/${collectionId}/books/${selectedBook.isbn}`);
+      await axios.delete(`http://${API_BASE_URL}:5001/api/collections/${collectionId}/books/${selectedBook.isbn}`);
       
       setShowMoveModal(false);
       setSelectedBook(null);
@@ -316,7 +316,7 @@ export default function CollectionDetails() {
         item.cover_url.trim() && item.cover_url.startsWith("http")) {
       return { uri: item.cover_url };
     }
-    return { uri: `${API_BASE_URL}/cover/${item.isbn}.jpg` };
+    return { uri: `http://${API_BASE_URL}:5001/cover/${item.isbn}.jpg` };
   };
 
   // ----------------------------------------------------------------------------
