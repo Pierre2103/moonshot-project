@@ -69,7 +69,7 @@ That pivot became Ridizi—a similar visual recognition concept, but applied to 
 
 The idea is simple: users scan a book cover with their phone, and Ridizi displays all the relevant information instantly—author, title, summary, genre, price, publication date, and more. No need to type anything. No need to search. Just point, scan, and explore.
 
-This new direction also connects to something more personal. Seven years ago, I built my first website to catalog my comic book collection. Back then, I had to manually input every single detail. In contrast, Ridizi is the tool I wish I had at the time—an app that automates the entire process, from recognition to metadata display.
+This new direction also connects to something more personal. Nine years ago, I built my first website to catalog my comic book collection. Back then, I had to manually input every single detail. In contrast, Ridizi is the tool I wish I had at the time—an app that automates the entire process, from recognition to metadata display.
 
 ## 1.3. Motivation and Objectives
 
@@ -80,7 +80,7 @@ The project’s core objectives are:
 - To allow users to build a personal, visual library with no manual entry required.
 - To let users contribute new books if a title is not found in the system, using the book's barcode.
 
-An internal admin dashboard exists solely for monitoring technical processes (e.g., ingestion queues, background jobs). It plays no role in managing content or user-facing features.
+An internal admin dashboard exists solely for monitoring processes. It plays no role in managing content or user-facing features.
 
 # 2. Functional Specifications
 
