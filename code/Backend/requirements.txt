@@ -1,7 +1,11 @@
 flask
-faiss-cpu
+flask_cors
+transformers
+pillow
 torch
-sentence-transformers
-torchvision
-Pillow
-tqdm
+faiss-cpu
+sqlalchemy
+dotenv
+pymysql
+python-barcode
+

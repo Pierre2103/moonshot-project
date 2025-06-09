@@ -131,17 +131,17 @@ export default function ISBNScanner() {
         if (res.already_in_dataset) {
           setToast({ 
             color: '#FF3B30', 
-            message: `livre ${data} déjà présent dans le dataset.` 
+            message: `Book with ISBN ${data} already exists in the dataset.`
           });
         } else if (res.already_in_queue) {
           setToast({ 
             color: '#FFA500', 
-            message: `livre ${data} déjà dans la liste d'attente` 
+            message: `Book with ISBN ${data} is already in the queue.`
           });
         } else {
           setToast({ 
             color: '#4BB543', 
-            message: `livre ${data} ajouté a la liste d'attente` 
+            message: `Book with ISBN ${data} added to the queue.`
           });
         }
         

@@ -33,7 +33,7 @@ EOF
 
 # 4) Launch each service in its own window
 BACKEND_PATH="$PROJECT_ROOT/code/Backend"
-open_in_new_terminal "cd '$BACKEND_PATH' && source ../VirtualEnv/bin/activate && python app.py"
+# open_in_new_terminal "cd '$BACKEND_PATH' && source ../VirtualEnv/bin/activate && pip install -r requirements.txt && python3 app.py"
 
 ADMIN_UI_PATH="$PROJECT_ROOT/code/Backend/admin_ui"
 open_in_new_terminal "cd '$ADMIN_UI_PATH' && npm install --legacy-peer-deps && npm start"

@@ -12,6 +12,9 @@ The application provides:
 The app loads CLIP model on startup and registers all API blueprints.
 """
 
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+
 from flask import Flask
 from flask_cors import CORS
 from transformers import CLIPProcessor, CLIPModel
@@ -23,7 +26,6 @@ from api.book import bp as book_api
 from api.collections import collections_api
 from api.workers import register_worker, workers_api
 from api.search import search_api
-import os
 import json
 from utils.db_models import SessionLocal, AppLog, calculate_daily_stats
 import threading

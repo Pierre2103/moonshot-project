@@ -89,35 +89,35 @@ This functional specification describes all required behaviors, features, and us
 
 #### 1.2.1 Purpose
 
-The purpose of Ridizi is to provide a seamless, AI-driven book recognition and organization experience. By combining cover recognition with barcode scanning, users can add physical books to their digital collections in just a few taps.
+The purpose of Ridizi is to provide a seamless, AI-driven experience for book recognition and organization. By combining cover recognition with barcode scanning, users can add physical books to their digital collections in just a few taps.
 
 #### 1.2.2 Scope
 
-| Feature                                    | Description                                                                      | In scope | Out of scope |
-| ------------------------------------------ | -------------------------------------------------------------------------------- | -------- | ------------ |
-| Cover Scanning (AI Service Integration)    | Capture a book‐cover image, send to AI service (CLIP + FAISS), retrieve metadata | ✅        |              |
-| Barcode Book Adding (ISBN13)               | Add a book by entering or scanning its ISBN‐13 code                              | ✅        |              |
-| API‐First Design (REST)                    | Expose all functionality via REST endpoints                                      | ✅        |              |
-| Mobile & Web UI (Responsive, Mobile‐First) | Responsive design prioritizing mobile, also works on web                         | ✅        |              |
-| Admin Analytics Dashboard                  | Dashboard with scan counts, popular genres, active users, service health         | ✅        |              |
-| Error Handling                             | Log and handle errors gracefully (AI failure, API failures, etc.)                | ✅        |              |
-| Simple User Authentication                 | Only username, no password or email (MVP)                                        | ✅        |              |
-| Collections CRUD                           | Create, read, update, delete collections; assign books                           | ✅        |              |
-| Book Search (Title, Author, Genre, ISBN)   | Search within the collection or public index                                     | ✅        |              |
-| Book Details Display (Metadata + Notes)    | Show all metadata and allow user notes                                           | ✅        |              |
-| User Registration & Authentication         | Full registration with email and password                                        |          | ❌            |
-| Manual Metadata Entry                      | Allow manual entry of book details                                               |          | ❌            |
-| Notifications (In‐App or Email)            | Send real‐time notifications to users                                            |          | ❌            |
-| Offline Mode                               | Allow the app to function without internet connectivity                          |          | ❌            |
+| Feature                                    | Description                                                                              | In scope | Out of scope |
+| ------------------------------------------ | ---------------------------------------------------------------------------------------- | -------- | ------------ |
+| Cover Scanning (AI Service Integration)    | Capture a book‐cover image, send it to AI service (CLIP + FAISS), and retrieve metadata. | ✅        |              |
+| Barcode Book Adding (ISBN13)               | Add a book by entering or scanning its ISBN‐13 code.                                     | ✅        |              |
+| API‐First Design (REST)                    | Expose all functionality via REST endpoints.                                             | ✅        |              |
+| Mobile & Web UI (Responsive, Mobile‐First) | Responsive design, prioritizing mobile, also works on the web.                           | ✅        |              |
+| Admin Analytics Dashboard                  | Dashboard with scan counts, popular genres, active users, and service health.            | ✅        |              |
+| Error Handling                             | Log and handle errors gracefully (AI failure, API failures, etc.).                       | ✅        |              |
+| Simple User Authentication                 | Only username, no password or email (MVP).                                               | ✅        |              |
+| Collections CRUD                           | Create, read, update, and delete collections; assign books.                              | ✅        |              |
+| Book Search (Title, Author, Genre, ISBN)   | Search within the collection or public index.                                            | ✅        |              |
+| Book Details Display (Metadata + Notes)    | Show all metadata and allow user notes.                                                  | ✅        |              |
+| User Registration & Authentication         | Complete registration with email and password.                                           |          | ❌            |
+| Manual Metadata Entry                      | Allow manual entry of book details.                                                      |          | ❌            |
+| Notifications (In‐App or Email)            | Send real‐time notifications to users.                                                   |          | ❌            |
+| Offline Mode                               | Allow the app to function without internet connectivity.                                 |          | ❌            |
 
 #### 1.2.3 Deliverables
 
-| Deliverable                               | Link to Document / Directory                                                            |
-| ----------------------------------------- | --------------------------------------------------------------------------------------------- |
-| Functional Specifications (this document) | —                                                                                             |
-| Technical Specifications                  | [🔗 TechnicalSpecifications.md](./TechnicalSpecifications.md)                                  |
-| Test Plan                                 | [🔗 TestPlan.md](./TestPlan.md)                                                                |
-| Test Cases                                | [🔗 TestCases.md](./TestCases.md)                                                              |
+| Deliverable                               | Link to Document / Directory                                                                 |
+| ----------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Functional Specifications (this document) | —                                                                                            |
+| Technical Specifications                  | [🔗 TechnicalSpecifications.md](./TechnicalSpecifications.md)                                 |
+| Test Plan                                 | [🔗 TestPlan.md](./TestPlan.md)                                                               |
+| Test Cases                                | [🔗 TestCases.md](./TestCases.md)                                                             |
 | Mobile App (iOS/Android/Web)              | [🔗 Frontend Directory](https://github.com/Pierre2103/moonshot-project/code/Frontend/)        |
 | Backend API & AI Service Code             | [🔗 Backend Directory](https://github.com/Pierre2103/moonshot-project/code/Backend/api)       |
 | Admin Dashboard Code                      | [🔗 Admin UI Directory](https://github.com/Pierre2103/moonshot-project/code/Backend/ui_admin) |
@@ -127,8 +127,6 @@ The purpose of Ridizi is to provide a seamless, AI-driven book recognition and o
 ---
 
 ### 1.3 Project Plan
-
-A high‐level view of the Ridizi project schedule is presented below. Key milestones focus on specification completion, development phases, QA cycles, and final deployment.
 
 #### 1.3.1 Milestones
 
@@ -151,7 +149,7 @@ A high‐level view of the Ridizi project schedule is presented below. Key miles
   * MariaDB for the database.
   * CLIP + FAISS for cover recognition.
   * Postman for API testing.
-  * Custom script for automated tests.
+  * A custom script for automated tests.
 
 ---
 
@@ -159,7 +157,7 @@ A high‐level view of the Ridizi project schedule is presented below. Key miles
 
 **Assumptions:**
 
-* Users have smartphones with camera access and stable internet.
+* Users have smartphones with camera access and a stable internet connection.
 * Third-party book metadata APIs (e.g., Open Library, Google Books) remain available.
 * AI model (CLIP + FAISS) will maintain ≥ 90% accuracy on cover recognition.
 * The system will run on a local network for the MVP.
@@ -167,9 +165,9 @@ A high‐level view of the Ridizi project schedule is presented below. Key miles
 **Constraints:**
 
 * Must comply with GDPR for user data management (no PII stored beyond necessity).
-* Initial version limited to ISBN‐13 barcodes (no proprietary barcodes).
+* The initial version is limited to ISBN‐13 barcodes (no proprietary barcodes).
 * Mobile apps will require internet connectivity for cover recognition and metadata fetch.
-* Admin dashboard accessible only to authorized roles (RBAC enforced).
+* The admin dashboard is accessible only to authorized roles.
 * Performance target: cover recognition inference < 2 seconds per image.
 
 ---
@@ -185,7 +183,7 @@ A high‐level view of the Ridizi project schedule is presented below. Key miles
 | **Tech Savviness:** ⭐⭐⭐⭐                                                                                                                                                                                                                                                   | **Tech Savviness:** ⭐⭐⭐                                                                                                                                                                                                                                        | **Tech Savviness:** ⭐⭐⭐                                                                                                                                                                                                                    |
 | **Background:** Alex owns a personal library of over 500 books. He frequently acquires secondhand books at thrift stores and wants an easy way to catalog and organize them.                                                                                               | **Background:** Sofia manages a small community library. She oversees the acquisition, classification, and tracking of new donations and periodically updates catalogs.                                                                                        | **Background:** Jade enjoys reading bestsellers and often lends books to friends. She wants a simple mobile app to keep track of which books she owns, which ones are loaned out, and basic reading stats.                                 |
 | **Goals:** <br> 1️⃣ Quickly add new books by simply snapping a photo of the cover or scanning the barcode. <br> 2️⃣ Organize books into thematic collections (e.g., “Art History,” “Graphic Novels”). <br> 3️⃣ Track reading progress and add personal notes to each book entry. | **Goals:** <br> 1️⃣ Use Ridizi’s batch scan feature (worker processes) to process large donations overnight. <br> 2️⃣ Monitor scan success/failure rates and reprocess items via the admin dashboard. <br> 3️⃣ Generate simple reports showing new entries by genre. | **Goals:** <br> 1️⃣ Add newly purchased bestsellers by scanning barcodes at the bookstore. <br> 2️⃣ Quickly search her “To Read” and “Already Read” collections. <br> 3️⃣ Get book recommendations based on her collection’s genre distribution. |
-| **Pain Points:** <br> 1️⃣ Manual entry of book metadata is time‐consuming. <br> 2️⃣ Lost or incomplete metadata when buying used books without dust jackets.                                                                                                                   | **Pain Points:** <br> 1️⃣ Manual post-processing of scanned books can create backlogs. <br> 2️⃣ Occasional AI misidentification of cover art leads to incorrect metadata.                                                                                          | **Pain Points:** <br> 1️⃣ Overwhelmed by complex UIs—prefers a clean, straightforward experience. <br> 2️⃣ Doesn’t need admin features; just basic scanning and searching.                                                                     |
+| **Pain Points:** <br> 1️⃣ Manual entry of book metadata is time‐consuming. <br> 2️⃣ Lost or incomplete metadata when buying used books without dust jackets.                                                                                                                   | **Pain Points:** <br> 1️⃣ Manual post-processing of scanned books can create backlogs. <br> 2️⃣ Occasional AI misidentification of cover art leads to incorrect metadata.                                                                                          | **Pain Points:** <br> 1️⃣ Overwhelmed by complex UIs—prefers a clean, straightforward experience. <br> 2️⃣ Doesn’t need admin features, just basic scanning and searching.                                                                     |
 
 _Images Generated Using [ChatGPT](https://chat.openai.com/)._
 
@@ -613,14 +611,7 @@ When critical errors occur in any subsystem (AI service, external metadata API, 
 
   * **Python 3.9+** + **Flask** (RESTful API).
   * **Flask-JWT-Extended** – JWT authentication.
-  * **SQLAlchemy** – ORM for MySQL/MariaDB.
-  * **Celery** – For background worker tasks (cover indexing, email).
-  * **Redis/RabbitMQ** – Message broker for Celery.
-* **Deployment:**
-
-  * **Docker** – Containerize services.
-  * **Kubernetes** (or equivalent) – Orchestrate containers.
-  * **Nginx** – Reverse proxy and load balancer.
+  * **React** – For admin dashboard.
 
 ---
 
