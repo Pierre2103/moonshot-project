@@ -22,11 +22,12 @@ Ridizi lets you:
 
 ## 📑 Documentation Quick Access
 
-| 📄 Document                | 🔗 Link                                                                 | 📝 Description                       |
-|----------------------------|-------------------------------------------------------------------------|--------------------------------------|
-| Functional Specifications  | [FunctionalSpecifications.md](./documents/FunctionalSpecifications.md)  | Features, user journeys, UI overview |
-| Technical Specifications   | [TechnicalSpecifications.md](./documents/TechnicalSpecifications.md)    | Architecture, stack, APIs, AI        |
-| Test Plan                  | [TestPlan.md](./documents/TestPlan.md)                                  | Testing strategy & coverage          |
-| Test Cases                 | [TestCases.md](./documents/TestCases.md)                                | Automated & manual test scenarios    |
+| 📄 Document                | 🔗 Link                                                                                           | 📝 Description                        |
+| ------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------ |
+| Final Project Report      | [FinalReport.md](./documents/FinalReport.md) <br> [FinalReport.pdf](./documents/FinalReport.pdf) | Project overview                     |
+| Functional Specifications | [FunctionalSpecifications.md](./documents/FunctionalSpecifications.md)                           | Features, user journeys, UI overview |
+| Technical Specifications  | [TechnicalSpecifications.md](./documents/TechnicalSpecifications.md)                             | Architecture, stack, APIs, AI        |
+| Test Plan                 | [TestPlan.md](./documents/TestPlan.md)                                                           | Testing strategy & coverage          |
+| Test Cases                | [TestCases.md](./documents/TestCases.md)                                                         | Automated & manual test scenarios    |
 
 ---
